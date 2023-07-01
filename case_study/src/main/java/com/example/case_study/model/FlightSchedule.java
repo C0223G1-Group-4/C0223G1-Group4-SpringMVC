@@ -1,5 +1,7 @@
 package com.example.case_study.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +15,8 @@ public class FlightSchedule {
     private LocalDateTime departure;
     private LocalDateTime arrival;
     private boolean flag;
-    @OneToMany(mappedBy = "flight_schedule_aircraft")
+    @OneToMany(mappedBy = "flightSchedule")
+    @JsonBackReference
     private List<FlightScheduleAirCraft> flightScheduleAirCrafts;
 
 
