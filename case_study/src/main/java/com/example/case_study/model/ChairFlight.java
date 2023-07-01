@@ -9,16 +9,17 @@ public class ChairFlight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idChairFlight;
     private boolean statusChair;
-    @OneToMany
-    private List<Chair> chairList;
+    @ManyToOne
+    @JoinColumn(name = "id_chair")
+    private Chair chair;
 
-    public ChairFlight() {
-    }
-
-    public ChairFlight(int idChairFlight, boolean statusChair, List<Chair> chairList) {
+    public ChairFlight(int idChairFlight, boolean statusChair, Chair chair) {
         this.idChairFlight = idChairFlight;
         this.statusChair = statusChair;
-        this.chairList = chairList;
+        this.chair = chair;
+    }
+
+    public ChairFlight() {
     }
 
     public int getIdChairFlight() {
@@ -37,11 +38,11 @@ public class ChairFlight {
         this.statusChair = statusChair;
     }
 
-    public List<Chair> getChairList() {
-        return chairList;
+    public Chair getChair() {
+        return chair;
     }
 
-    public void setChairList(List<Chair> chairList) {
-        this.chairList = chairList;
+    public void setChair(Chair chair) {
+        this.chair = chair;
     }
 }
