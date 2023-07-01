@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ControllerTest {
     @GetMapping("")
     public String show(){
-        return "index";
+        return "login";
     }
 }
