@@ -1,6 +1,5 @@
 package com.example.case_study.model;
 
-import jdk.internal.dynalink.linker.LinkerServices;
 
 import javax.persistence.*;
 

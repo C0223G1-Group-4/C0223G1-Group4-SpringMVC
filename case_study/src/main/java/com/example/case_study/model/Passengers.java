@@ -11,7 +11,7 @@ public class Passengers {
     private String name;
     private String address;
     private String phoneNumber;
-    private Integer age;
+    private String age;
     private String nationality;
     @ManyToOne
     private AccountUser accountUser;
@@ -21,7 +21,7 @@ public class Passengers {
     public Passengers() {
     }
 
-    public Passengers(Integer id, String citizenId, String name, String address, String phoneNumber, Integer age, String nationality, AccountUser accountUser, boolean flagDelete) {
+    public Passengers(Integer id, String citizenId, String name, String address, String phoneNumber, String age, String nationality, AccountUser accountUser, boolean flagDelete) {
         this.id = id;
         this.citizenId = citizenId;
         this.name = name;
@@ -31,6 +31,17 @@ public class Passengers {
         this.nationality = nationality;
         this.accountUser = accountUser;
         this.flagDelete = flagDelete;
+    }
+
+    public Passengers(Integer id, String citizenId, String name, String address, String phoneNumber, String age, String nationality, AccountUser accountUser) {
+        this.id = id;
+        this.citizenId = citizenId;
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.age = age;
+        this.nationality = nationality;
+        this.accountUser = accountUser;
     }
 
     public Integer getId() {
@@ -73,11 +84,11 @@ public class Passengers {
         this.phoneNumber = phoneNumber;
     }
 
-    public Integer getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
