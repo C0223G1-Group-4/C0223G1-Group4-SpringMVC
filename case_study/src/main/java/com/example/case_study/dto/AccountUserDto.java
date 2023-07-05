@@ -14,12 +14,17 @@ public class AccountUserDto {
     @Email
     private String email;
     @NotBlank
-    @Pattern(regexp = "^[\\w]+$",message = "Password does not contain special characters")
+    @Pattern(regexp = "^[\\\\w]+$",message = "Password does not contain special characters")
     private String passwords;
     private RoleUser roleUser;
     private boolean flagDelete;
 
     public AccountUserDto() {
+    }
+
+    public AccountUserDto(String email, String passwords) {
+        this.email = email;
+        this.passwords = passwords;
     }
 
     public AccountUserDto(Integer id, String email, String passwords, RoleUser roleUser, boolean flagDelete) {

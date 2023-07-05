@@ -3,12 +3,12 @@ package com.example.case_study.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-
 @Entity
 public class AccountUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+//    @Column(nullable = false)
     private String email;
     @JsonIgnore
     private String passwords;
@@ -25,14 +25,6 @@ public class AccountUser {
         this.email = email;
         this.passwords = passwords;
         this.roleUser = roleUser;
-        this.flagDelete = flagDelete;
-    }
-
-    public boolean isFlagDelete() {
-        return flagDelete;
-    }
-
-    public void setFlagDelete(boolean flagDelete) {
         this.flagDelete = flagDelete;
     }
 
@@ -67,4 +59,12 @@ public class AccountUser {
     public void setRoleUser(RoleUser roleUser) {
         this.roleUser = roleUser;
     }
+    public boolean isFlagDelete() {
+        return flagDelete;
+    }
+
+    public void setFlagDelete(boolean flagDelete) {
+        this.flagDelete = flagDelete;
+    }
+
 }
