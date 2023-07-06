@@ -2,15 +2,36 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Air Craft</title>
+    <link rel="stylesheet" href="/css/form-create-edit.css">
+
 </head>
 <body>
-<form th:action="@{/air-craft/create}" th:object="${airCraftDto}" th:method="post">
-    Số lượng người
-    <input type="text" th:field="*{capacity}">
-    Số lượng máy bay
-    <input type="text" th:field="*{numberAirCraft}">
-    <button type="submit">Thêm</button>
-</form>
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <h3>Register Today</h3>
+                    <p>Fill in the data below.</p>
+                    <form th:action="@{/air-craft/create}" th:object="${airCraftDto}" th:method="post">
+                        <div class="col-md-12">
+                            <input type="number" th:field="*{capacity}" class="form-control" required placeholder="Capacity">
+                            <p style="color: red" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></p>
+                        </div>
+
+                        <div class="col-md-12">
+                            <input class="form-control" type="text" th:field="*{numberAirCraft}" placeholder="Number Air Craft" required>
+                            <p style="color: red" th:if="${#fields.hasErrors('numberAirCraft')}" th:errors="*{numberAirCraft}"></p>
+                        </div>
+                        <div class="form-button mt-3">
+                            <button id="submit" type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

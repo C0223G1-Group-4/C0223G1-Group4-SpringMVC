@@ -2,16 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit Air Craft</title>
 </head>
 <body>
 <form th:object="${airCraft}" th:action="@{/air-craft/edit}" th:method="post">
     <input type="hidden" th:field="*{id}">
     Số lượng người
     <input type="text" th:field="*{capacity}">
+    <span style="color: red" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></span>
     Số lượng máy bay
     <input type="text" th:field="*{numberAirCraft}">
-
+    <span style="color: red" th:if="${#fields.hasErrors('numberAirCraft')}" th:errors="*{numberAirCraft}"></span>
     <button type="submit">Sửa</button>
 </form>
 </body>

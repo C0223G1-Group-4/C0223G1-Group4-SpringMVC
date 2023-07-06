@@ -35,13 +35,13 @@ public class FlightScheduleAirCraftController {
     private IRouteService iRouteService;
     @Autowired
     private IFlightScheduleService iFlightScheduleService;
-
+// Tài
     @GetMapping("")
     public String getList(@PageableDefault(value = 6) Pageable pageable, Model model) {
         model.addAttribute("flightScheduleAirCraft", iFlightScheduleAirCraftService.getAllList(pageable));
         return "flight-schedule-air-craft/view";
     }
-
+    // Tài
     @GetMapping("create")
     public String create(Model model) {
         model.addAttribute("flightScheduleAirCraft", new FlightScheduleAirCraft());
@@ -50,7 +50,7 @@ public class FlightScheduleAirCraftController {
         model.addAttribute("flightScheduleList", iFlightScheduleService.checkAllListFlightSchedule());
         return "flight-schedule-air-craft/create";
     }
-
+    // Tài
     @PostMapping("create")
     public String create(@ModelAttribute FlightScheduleAirCraft flightScheduleAirCraft, @RequestParam int idRoute, RedirectAttributes redirectAttributes) {
             int count = 0;
@@ -79,7 +79,7 @@ public class FlightScheduleAirCraftController {
         }
         return "redirect:/flight-schedule-air-craft";
     }
-
+    // Tài
     @GetMapping("edit/{id}")
     public String edit(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
         if (this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(id) != null) {
@@ -93,6 +93,7 @@ public class FlightScheduleAirCraftController {
         redirectAttributes.addFlashAttribute("msg", "Không tìm thấy đối tượng này");
         return "redirect:/flight-schedule";
     }
+    // Tài
 @PostMapping("edit")
     public String edit(@ModelAttribute FlightScheduleAirCraft flightScheduleAirCraft,@RequestParam int idRoute,Model model,RedirectAttributes redirectAttributes){
     int count = 0;

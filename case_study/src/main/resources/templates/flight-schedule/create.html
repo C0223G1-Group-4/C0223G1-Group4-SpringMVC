@@ -2,19 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Flight Schedule</title>
+    <link rel="stylesheet" href="/css/form-create-edit.css">
 </head>
 <body>
 <form th:action="@{/flight-schedule/create}" th:method="post" th:object="${flightScheduleDto}">
-    Lịch bay
-    <input type="datetime-local" th:field="*{dateFlightSchedule}">
     Mã lịch bay
     <input type="text" th:field="*{codeFlightSchedule}">
+    <span style="color: red" th:if="${#fields.hasErrors('codeFlightSchedule')}" th:errors="*{codeFlightSchedule}"></span>
     Ngày bay
     <input type="datetime-local" th:field="*{departure}">
+    <span style="color: red" th:if="${#fields.hasErrors('departure')}" th:errors="*{departure}"></span>
     Ngày đến
     <input type="datetime-local" th:field="*{arrival}">
-
+    <span style="color: red" th:if="${#fields.hasErrors('arrival')}" th:errors="*{arrival}"></span>
     <button type="submit">Thêm</button>
 </form>
 </body>

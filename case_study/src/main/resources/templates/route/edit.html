@@ -2,19 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit Route</title>
 </head>
 <body>
 <form th:object="${route}" th:action="@{/route/edit}" th:method="post">
     <input type="hidden" th:field="*{id}">
     Điểm đi
     <input type="text" th:field="*{airPort}">
+    <span style="color: red" th:if="${#fields.hasErrors('airPort')}" th:errors="*{airPort}"></span>
+
     Điểm đến
      <input type="text" th:field="*{destination}">
+    <span style="color: red" th:if="${#fields.hasErrors('destination')}" th:errors="*{destination}"></span>
+
     Mã lộ trình
     <input type="text" th:field="*{codeRoute}">
+    <span style="color: red" th:if="${#fields.hasErrors('codeRoute')}" th:errors="*{codeRoute}"></span>
+
     Tiền
     <input type="text" th:field="*{fare}">
+    <span style="color: red" th:if="${#fields.hasErrors('fare')}" th:errors="*{fare}"></span>
+
     <button type="submit">Sửa</button>
 </form>
 </body>

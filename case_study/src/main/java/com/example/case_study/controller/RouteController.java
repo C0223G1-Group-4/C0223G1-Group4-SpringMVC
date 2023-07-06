@@ -24,17 +24,20 @@ public class RouteController {
     private IRouteService iRouteService;
     @Autowired
     private IAirCraftService iAirCraftService;
+    // Tài
     @GetMapping("")
     public String getListRoute(@PageableDefault(value = 4) Pageable pageable,Model model ){
         model.addAttribute("listRoute",iRouteService.getAllListRoute(pageable));
         return "route/view";
     }
+    // Tài
     @GetMapping("create")
     public String create(Model model){
         model.addAttribute("routeDto",new RouteDto());
         model.addAttribute("listAirCraft",this.iAirCraftService.checkAllListAirCraft());
         return "route/create";
     }
+    // Tài
     @PostMapping("create")
     public String create(@Valid @ModelAttribute RouteDto routeDto, BindingResult bindingResult, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
@@ -49,6 +52,7 @@ public class RouteController {
         }
         return "redirect:/route";
     }
+    // Tài
     @GetMapping("edit/{id}")
     public String edit(@PathVariable int id, Model model,RedirectAttributes redirectAttributes){
           if (this.iRouteService.findByIdRoute(id)!=null){
@@ -59,6 +63,7 @@ public class RouteController {
               return "redirect:/route";
           }
     }
+    // Tài
     @PostMapping("edit")
     public String edit(@Valid @ModelAttribute RouteDto routeDto,BindingResult bindingResult,RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
@@ -73,6 +78,7 @@ public class RouteController {
         }
         return "redirect:/route";
     }
+    // Tài
     @GetMapping("delete")
     public String delete(@RequestParam int deleteId,RedirectAttributes redirectAttributes){
         if (this.iRouteService.findByIdRoute(deleteId)!=null){
