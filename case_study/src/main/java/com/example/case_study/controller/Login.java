@@ -1,7 +1,10 @@
 package com.example.case_study.controller;
 
 import com.example.case_study.dto.AccountUserDto;
+import com.example.case_study.dto.PassengerDto;
 import com.example.case_study.model.AccountUser;
+import com.example.case_study.model.Passengers;
+import com.example.case_study.model.RoleUser;
 import com.example.case_study.service.account.IAccountService;
 import com.example.case_study.service.employees_service.IEmployeesService;
 import com.example.case_study.service.passengers_service.IPassengersService;
@@ -14,9 +17,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.util.Calendar;
+import java.util.Date;
 
 @Controller
 public class Login {
@@ -26,17 +35,20 @@ public class Login {
     private IPassengersService passengersService;
     @Autowired
     private IEmployeesService employeesService;
+
     @GetMapping("/")
     public String home(Model model) {
         return "index";
     }
+
     @GetMapping("/login")
     public String formLogin(Model model) {
-            model.addAttribute("accountDto", new AccountUserDto());
-            return "loginPage";
+        model.addAttribute("accountDto", new AccountUserDto());
+        return "loginPage";
     }
+
     @GetMapping("/logoutSuccessful")
-    public String logout(Model model){
+    public String logout(Model model) {
         return "index";
     }
 
@@ -45,11 +57,12 @@ public class Login {
         // Sau khi user login thanh cong se co principal
         String userName = principal.getName();
         AccountUser accountUser = accountService.findByEmail(principal.getName());
-        model.addAttribute("acc",accountUser);
-        if (passengersService.findByIdAccount(accountUser.getId()) !=null){
-            model.addAttribute("information",passengersService.findByIdAccount(accountUser.getId()));
-        }if (employeesService.findByIdAccount(accountUser.getId()) != null){
-            model.addAttribute("info",employeesService.findByIdAccount(accountUser.getId()));
+        model.addAttribute("acc", accountUser);
+        if (passengersService.findByIdAccount(accountUser.getId()) != null) {
+            model.addAttribute("information", passengersService.findByIdAccount(accountUser.getId()));
+        }
+        if (employeesService.findByIdAccount(accountUser.getId()) != null) {
+            model.addAttribute("info", employeesService.findByIdAccount(accountUser.getId()));
         }
         System.out.println("User Name: " + userName);
         return "index";
@@ -67,4 +80,53 @@ public class Login {
         }
         return "400Page";
     }
+
+    @GetMapping("/signup")
+    public String signup(Model model) {
+        model.addAttribute("passengerDto", new PassengerDto());
+        return "loginPage";
+    }
+
+    @PostMapping("/signup")
+    public String signup(@Valid @ModelAttribute PassengerDto passengerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes,HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+        if (bindingResult.hasErrors()) {
+            return "loginPage";
+        }
+        if(passengersService.findByEmail(passengerDto.getAccountUserDto().getEmail())!=null){
+            redirectAttributes.addFlashAttribute("msg","This email already exists");
+        }else{
+            passengerDto.setExpiryDate(calculateExpiryDate());
+            RoleUser roleUser =accountService.findRoleById(3);
+            AccountUser accountUser=new AccountUser();
+            BeanUtils.copyProperties(passengerDto.getAccountUserDto(),accountUser);
+            accountUser.setRoleUser(roleUser);
+            accountService.createAccount(accountUser);
+            Passengers passengers=new Passengers();
+            BeanUtils.copyProperties(passengerDto, passengers);
+            passengers.setAccountUser(accountUser);
+            passengersService.create(passengers);
+            String siteURL = getSiteURL(request);
+            passengersService.sendVerificationEmail(passengers, siteURL);
+            redirectAttributes.addFlashAttribute("msg","You have signed up successfully! Please check your email to verify your account.");
+        }
+        return "redirect:/loginPage";
+    }
+
+
+
+
+
+    private Date calculateExpiryDate() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.MINUTE, 1);
+        return new Date(cal.getTime().getTime());
+    }
+
+    private String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "");
+    }
+
+
 }

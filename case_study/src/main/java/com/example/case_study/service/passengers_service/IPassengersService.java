@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
 public interface IPassengersService {
@@ -14,5 +16,9 @@ public interface IPassengersService {
     void update(Passengers passengers);
     void delete(Integer id);
     Passengers findByIdAccount(Integer id);
+
+    Passengers findByEmail(String email);
+    void sendVerificationEmail(Passengers passengers, String siteURL) throws MessagingException, UnsupportedEncodingException;
+
 
 }

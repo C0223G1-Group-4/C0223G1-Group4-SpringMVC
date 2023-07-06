@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
@@ -14,6 +15,7 @@ public class AccountUserDto {
     @Email
     private String email;
     @NotBlank
+    @Min(value = 6,message = "Password must be at least 6 characters")
     @Pattern(regexp = "^[\\\\w]+$",message = "Password does not contain special characters")
     private String passwords;
     private RoleUser roleUser;

@@ -29,6 +29,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
+	implementation group: 'org.springframework.security', name: 'spring-security-config', version: '3.0.5.RELEASE'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.7.13'
+
 
 }
 
