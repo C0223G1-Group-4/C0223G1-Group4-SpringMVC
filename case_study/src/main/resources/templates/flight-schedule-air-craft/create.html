@@ -2,26 +2,51 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Flight Schedule Air Craft</title>
+    <link rel="stylesheet" href="/css/form-create-edit.css">
 </head>
 <div th:if="${msg!=null}">
     <p th:text="${msg}"></p>
 </div>
 <body>
-<form th:action="@{/flight-schedule-air-craft/create}" th:method="post" th:object="${flightScheduleAirCraft}">
-    Mã máy bay
-    <select th:field="*{idAirCraft}">
-        <option th:each="airCraft :${airCraftList}"  th:text="${airCraft.numberAirCraft}" th:value="${airCraft.id}"></option>
-    </select>
-    Mã lịch bay
-    <select th:field="*{flightSchedule}">
-        <option th:each="flightSchedule :${flightScheduleList}"  th:text="${flightSchedule.codeFlightSchedule}" th:value="${flightSchedule.id}"></option>
-    </select>
-    Mã tuyến bay
-    <select th:name="idRoute">
-        <option th:each="route :${routeList}" th:value="${route.id}" th:text="${route.codeRoute}"></option>
-    </select>
-    <button type="submit">Thêm</button>
-</form>
+
 </body>
 </html>
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <h3>Register Today</h3>
+                    <p>Fill in the data below.</p>
+                    <form th:action="@{/flight-schedule-air-craft/create}" th:method="post"
+                          th:object="${flightScheduleAirCraft}">
+                        <div class="col-md-12">
+                            <select th:field="*{idAirCraft}" class="form-select mt-3" required>
+                                <option selected disabled value="">Id Air Craft</option>
+                                <option th:each="airCraft :${airCraftList}" th:text="${airCraft.numberAirCraft}"
+                                        th:value="${airCraft.id}"></option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <select th:field="*{flightSchedule}" class="form-select mt-3" required>
+                                <option th:each="flightSchedule :${flightScheduleList}"
+                                        th:text="${flightSchedule.codeFlightSchedule}"
+                                        th:value="${flightSchedule.id}"></option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <select th:name="idRoute" class="form-select mt-3" required>
+                                <option th:each="route :${routeList}" th:value="${route.id}"
+                                        th:text="${route.codeRoute}"></option>
+                            </select>
+                        </div>
+                        <div class="form-button mt-3">
+                            <button id="submit" type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

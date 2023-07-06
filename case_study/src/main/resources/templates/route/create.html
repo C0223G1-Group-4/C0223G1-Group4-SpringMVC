@@ -2,19 +2,26 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Route</title>
+    <link rel="stylesheet" href="/css/form-create-edit.css">
 </head>
 <body>
 <form th:object="${routeDto}" th:action="@{/route/create}" th:method="post">
-
     Điểm đi
     <input type="text" th:field="*{airPort}">
+    <span style="color: red" th:if="${#fields.hasErrors('airPort')}" th:errors="*{airPort}"></span>
+
     Điểm đến
     <input type="text" th:field="*{destination}">
+    <span style="color: red" th:if="${#fields.hasErrors('destination')}" th:errors="*{destination}"></span>
+
     Mã lộ trình
     <input type="text" th:field="*{codeRoute}">
-     Tiền
+    <span style="color: red" th:if="${#fields.hasErrors('codeRoute')}" th:errors="*{codeRoute}"></span>
+
+    Tiền
     <input type="text" th:field="*{fare}">
+    <span style="color: red" th:if="${#fields.hasErrors('fare')}" th:errors="*{fare}"></span>
     <button type="submit">Thêm</button>
 </form>
 </body>

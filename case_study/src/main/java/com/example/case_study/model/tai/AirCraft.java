@@ -30,16 +30,6 @@ public class AirCraft {
         this.flag = flag;
         this.routes = routes;
     }
-
-//    public AirCraft(Integer idAirCraft, String numberAirCraft, Integer capacity, boolean flag, List<Route> routes, List<FlightScheduleAirCraft> flightScheduleAirCrafts) {
-//        this.idAirCraft = idAirCraft;
-//        this.numberAirCraft = numberAirCraft;
-//        this.capacity = capacity;
-//        this.flag = flag;
-//        this.routes = routes;
-//        this.flightScheduleAirCrafts = flightScheduleAirCrafts;
-//    }
-
     public Integer getId() {
         return id;
     }
@@ -79,12 +69,4 @@ public class AirCraft {
     public void setRoutes(List<Route> routes) {
         this.routes = routes;
     }
-
-//    public List<FlightScheduleAirCraft> getFlightScheduleAirCrafts() {
-//        return flightScheduleAirCrafts;
-//    }
-//
-//    public void setFlightScheduleAirCrafts(List<FlightScheduleAirCraft> flightScheduleAirCrafts) {
-//        this.flightScheduleAirCrafts = flightScheduleAirCrafts;
-//    }
 }

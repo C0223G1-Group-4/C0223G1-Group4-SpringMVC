@@ -3,14 +3,16 @@ package com.example.case_study.dto;
 import com.example.case_study.model.tai.Route;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 
 public class AirCraftDto {
 
     private Integer id;
+    @Pattern(regexp = "^(AC-)[0-9]{1,5}$",message = "Number Air Craft Format AC- and 1 to 5 number")
     private String numberAirCraft;
-    @Min(value = 1)
+    @Min(value = 1,message = "Capacity need greater than 1")
     private Integer capacity;
 
     private List<Route> routes;
