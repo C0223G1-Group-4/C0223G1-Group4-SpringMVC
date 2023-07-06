@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/flight-schedule/create}" th:method="post" th:object="${flightScheduleDto}">
+    Lịch bay
+    <input type="datetime-local" th:field="*{dateFlightSchedule}">
+    Mã lịch bay
+    <input type="text" th:field="*{codeFlightSchedule}">
+    Ngày bay
+    <input type="datetime-local" th:field="*{departure}">
+    Ngày đến
+    <input type="datetime-local" th:field="*{arrival}">
+
+    <button type="submit">Thêm</button>
+</form>
+</body>
+</html>

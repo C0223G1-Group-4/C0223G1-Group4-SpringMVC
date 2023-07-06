@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<div th:if="${msg!=null}">
+    <p th:text="${msg}"></p>
+</div>
+<body>
+<form th:action="@{/flight-schedule-air-craft/create}" th:method="post" th:object="${flightScheduleAirCraft}">
+    Mã máy bay
+    <select th:field="*{idAirCraft}">
+        <option th:each="airCraft :${airCraftList}"  th:text="${airCraft.numberAirCraft}" th:value="${airCraft.id}"></option>
+    </select>
+    Mã lịch bay
+    <select th:field="*{flightSchedule}">
+        <option th:each="flightSchedule :${flightScheduleList}"  th:text="${flightSchedule.codeFlightSchedule}" th:value="${flightSchedule.id}"></option>
+    </select>
+    Mã tuyến bay
+    <select th:name="idRoute">
+        <option th:each="route :${routeList}" th:value="${route.id}" th:text="${route.codeRoute}"></option>
+    </select>
+    <button type="submit">Thêm</button>
+</form>
+</body>
+</html>
