@@ -78,7 +78,7 @@ html ,body{
     font-size: 17px;
     font-weight: 300;
     line-height: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 
@@ -87,7 +87,7 @@ html ,body{
 }
 
 .form-content input[type=text],input[type=number], .form-content input[type=password], .form-content input[type=email], .form-content select {
-    width: 100%;
+    width: 90%;
     padding: 9px 20px;
     text-align: left;
     border: 0;
@@ -100,6 +100,7 @@ html ,body{
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
     margin-top: 16px;
+    margin-bottom: 20px;
 }
 
 
