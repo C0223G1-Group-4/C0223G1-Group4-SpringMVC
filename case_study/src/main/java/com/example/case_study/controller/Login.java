@@ -35,16 +35,14 @@ public class Login {
     private IPassengersService passengersService;
     @Autowired
     private IEmployeesService employeesService;
-
     @GetMapping("/")
     public String home(Model model) {
         return "index";
     }
-
     @GetMapping("/login")
     public String formLogin(Model model) {
         model.addAttribute("accountDto", new AccountUserDto());
-        return "loginPage";
+        return "loginPage1";
     }
 
     @GetMapping("/logoutSuccessful")
@@ -53,19 +51,23 @@ public class Login {
     }
 
     @GetMapping(value = "/userInfo")
-    public String userInfo(Model model, Principal principal) {
+    public String userInfo(Model model, Principal principal ) {
         // Sau khi user login thanh cong se co principal
         String userName = principal.getName();
         AccountUser accountUser = accountService.findByEmail(principal.getName());
-        model.addAttribute("acc", accountUser);
-        if (passengersService.findByIdAccount(accountUser.getId()) != null) {
-            model.addAttribute("information", passengersService.findByIdAccount(accountUser.getId()));
+        model.addAttribute("acc",accountUser);
+        if (accountUser.getRoleUser().getName().equals("ROLE_Customer")){
+            model.addAttribute("info",passengersService.findByIdAccount(accountUser.getId()));
+            return "index";
+        } else if(accountUser.getRoleUser().getName().equals("ROLE_Employee")){
+//            model.addAttribute("info",employeesService.findByIdAccount(accountUser.getId()));
+            return "redirect:/passenger";
+        }else {
+            System.out.println("User Name: " + userName);
+//            model.addAttribute("info",employeesService.findByIdAccount(accountUser.getId()));
+            return "redirect:/employee";
         }
-        if (employeesService.findByIdAccount(accountUser.getId()) != null) {
-            model.addAttribute("info", employeesService.findByIdAccount(accountUser.getId()));
-        }
-        System.out.println("User Name: " + userName);
-        return "index";
+
     }
 
     @GetMapping("/400")

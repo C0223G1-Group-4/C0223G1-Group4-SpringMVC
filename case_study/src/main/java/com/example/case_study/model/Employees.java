@@ -2,6 +2,7 @@ package com.example.case_study.model;
 
 import javax.persistence.*;
 
+
 @Entity
 public class Employees {
     @Id
@@ -61,6 +62,14 @@ public class Employees {
 
     public void setNameEmployee(String nameEmployee) {
         this.nameEmployee = nameEmployee;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 
     public String getAddress() {

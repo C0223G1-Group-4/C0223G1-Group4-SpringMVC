@@ -9,6 +9,7 @@ public class Passengers {
     @GeneratedValue
     private Integer id;
     private String citizenId;
+    @Column(name = "name_passengers")
     private String name;
     private String address;
     private String phoneNumber;

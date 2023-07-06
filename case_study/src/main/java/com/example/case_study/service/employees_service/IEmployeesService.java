@@ -4,9 +4,11 @@ import com.example.case_study.model.Employees;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IEmployeesService {
+    List<Employees> findAll();
     Page<Employees> findAll(String name, Pageable pageable);
     void create(Employees employees);
     void update(Employees employees);

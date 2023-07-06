@@ -1,8 +1,11 @@
-package com.example.case_study.dto;
+package com.example.case_study.model.tai;
 
+import javax.persistence.*;
 
-public class FlightScheduleDto {
-
+@Entity
+public class FlightSchedule {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String codeFlightSchedule;
     private String dateFlightSchedule;
@@ -11,10 +14,10 @@ public class FlightScheduleDto {
     private boolean flag;
 
 
-    public FlightScheduleDto() {
+    public FlightSchedule() {
     }
 
-    public FlightScheduleDto(Integer id, String dateFlightSchedule, String departure, String arrival, boolean flag) {
+    public FlightSchedule(Integer id, String dateFlightSchedule, String departure, String arrival, boolean flag) {
         this.id = id;
         this.dateFlightSchedule = dateFlightSchedule;
         this.departure = departure;
@@ -23,7 +26,7 @@ public class FlightScheduleDto {
 
     }
 
-    public FlightScheduleDto(Integer id, String codeFlightSchedule, String dateFlightSchedule, String departure, String arrival, boolean flag) {
+    public FlightSchedule(Integer id, String codeFlightSchedule, String dateFlightSchedule, String departure, String arrival, boolean flag) {
         this.id = id;
         this.codeFlightSchedule = codeFlightSchedule;
         this.dateFlightSchedule = dateFlightSchedule;
@@ -32,7 +35,7 @@ public class FlightScheduleDto {
         this.flag = flag;
     }
 
-    public FlightScheduleDto(String dateFlightSchedule, String departure, String arrival, boolean flag) {
+    public FlightSchedule(String dateFlightSchedule, String departure, String arrival, boolean flag) {
         this.dateFlightSchedule = dateFlightSchedule;
         this.departure = departure;
         this.arrival = arrival;
@@ -43,8 +46,8 @@ public class FlightScheduleDto {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer idFlightSchedule) {
+        this.id = idFlightSchedule;
     }
 
     public String getDateFlightSchedule() {

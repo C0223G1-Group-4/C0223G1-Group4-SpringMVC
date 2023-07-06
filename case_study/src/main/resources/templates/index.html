@@ -100,10 +100,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="contact.html">Contact</a></li>
                             <li th:if="${acc == null}"><a href="/login">Log in</a></li>
                             <li th:if="${acc != null}" class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-hover="Pages" data-toggle="dropdown"
-                                   role="button" aria-haspopup="true" aria-expanded="false" th:text="${info.nameEmployee}"th:if="${info.nameEmployee != null}"></a>
-                                <a href="#" class="dropdown-toggle" data-hover="Pages" data-toggle="dropdown"
-                                   role="button" aria-haspopup="true" aria-expanded="false" th:text="${information.name}"th:if="${information.name != null}"></a>
+                                <a href="#" class="dropdown-toggle" data-hover="" data-toggle="dropdown"
+                                   role="button" aria-haspopup="true" aria-expanded="false" th:text="${info.name}"th:if="${info.name != null}"></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/passenger/update">Update personal info</a></li>
                                     <li><a href="/logout">Logout</a></li>

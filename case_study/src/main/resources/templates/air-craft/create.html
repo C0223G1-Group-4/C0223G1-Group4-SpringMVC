@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/air-craft/create}" th:object="${airCraftDto}" th:method="post">
+    Số lượng người
+    <input type="text" th:field="*{capacity}">
+    Số lượng máy bay
+    <input type="text" th:field="*{numberAirCraft}">
+    <button type="submit">Thêm</button>
+</form>
+</body>
+</html>
