@@ -1,33 +1,42 @@
 package com.example.case_study.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class ChairFlight {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idChairFlight;
+    private int id;
     private boolean statusChair;
     @ManyToOne
     @JoinColumn(name = "id_chair")
     private Chair chair;
 
-    public ChairFlight(int idChairFlight, boolean statusChair, Chair chair) {
-        this.idChairFlight = idChairFlight;
+    @ManyToOne
+    @JoinColumn(name ="id_flight_schedule_aircraft")
+    private FlightScheduleAirCraft flightScheduleAirCraft;
+
+    @ManyToOne
+    @JoinColumn(name = "id_bk")
+    private BookingTicket bookingTicket;
+
+    public ChairFlight(int id, boolean statusChair, Chair chair,
+                       FlightScheduleAirCraft flightScheduleAirCraft) {
+        this.id = id;
         this.statusChair = statusChair;
         this.chair = chair;
+        this.flightScheduleAirCraft = flightScheduleAirCraft;
     }
 
     public ChairFlight() {
     }
 
-    public int getIdChairFlight() {
-        return idChairFlight;
+    public int getId() {
+        return id;
     }
 
-    public void setIdChairFlight(int idChairFlight) {
-        this.idChairFlight = idChairFlight;
+    public void setId(int idChairFlight) {
+        this.id = idChairFlight;
     }
 
     public boolean isStatusChair() {
@@ -44,5 +53,13 @@ public class ChairFlight {
 
     public void setChair(Chair chair) {
         this.chair = chair;
+    }
+
+    public FlightScheduleAirCraft getFlightScheduleAirCraft() {
+        return flightScheduleAirCraft;
+    }
+
+    public void setFlightScheduleAirCraft(FlightScheduleAirCraft flightScheduleAirCraft) {
+        this.flightScheduleAirCraft = flightScheduleAirCraft;
     }
 }
