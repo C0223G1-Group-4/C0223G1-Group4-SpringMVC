@@ -48,7 +48,7 @@ public class PassengerController {
         Passengers passengers = new Passengers();
         BeanUtils.copyProperties(passengerDto, passengers);
         iPassengersService.create(passengers);
-        redirectAttributes.addFlashAttribute("msg2","Add passengerDto new success!");
+        redirectAttributes.addFlashAttribute("msg1","Add passengerDto new success!");
         return "redirect:/passenger";
     }
     @GetMapping("/info/{id}")
@@ -74,7 +74,13 @@ public class PassengerController {
         Passengers passengers = new Passengers();
         BeanUtils.copyProperties(passengerDto, passengers);
         iPassengersService.update(passengers);
-        redirectAttributes.addFlashAttribute("msg3", "Update passenger new success!");
+        redirectAttributes.addFlashAttribute("msg2", "Update passenger new success!");
+        return "redirect:/passenger";
+    }
+    @GetMapping("/delete")
+    public String deleteEmployee(@RequestParam(value = "idDelete") Integer id, RedirectAttributes redirectAttributes) {
+        iPassengersService.delete(id);
+        redirectAttributes.addFlashAttribute("msg3","Delete employee new success!");
         return "redirect:/passenger";
     }
 }
