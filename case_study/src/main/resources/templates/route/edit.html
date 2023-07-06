@@ -5,7 +5,7 @@
     <title>Edit Route</title>
 </head>
 <body>
-<form th:object="${route}" th:action="@{/route/edit}" th:method="post">
+<form th:object="${route}" th:action="@{route/edit}" th:method="post">
     <input type="hidden" th:field="*{id}">
     Điểm đi
     <input type="text" th:field="*{airPort}">

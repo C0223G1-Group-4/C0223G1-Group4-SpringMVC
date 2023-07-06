@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("air-craft")
+@RequestMapping("/air-craft")
 public class AirCraftController {
     @Autowired
     private IAirCraftService iAirCraftService;
@@ -55,7 +55,7 @@ public class AirCraftController {
 //        airCraft1.setRoutes(routes);
         this.iAirCraftService.createAirCraft(airCraft1);
         redirectAttributes.addFlashAttribute("msg", "Thêm mới thành công");
-        return "redirect:/aircraft";
+        return "redirect:/air-craft";
     }
     // Tài
     @GetMapping("edit/{id}")
@@ -65,7 +65,7 @@ public class AirCraftController {
             return "air-craft/edit";
         } else {
             redirectAttributes.addAttribute("msg", "Không tìm thấy đối tượng này");
-            return "redirect:/aircraft";
+            return "redirect:/air-craft";
         }
     }
     // Tài
@@ -86,7 +86,7 @@ public class AirCraftController {
             redirectAttributes.addFlashAttribute("msg","Không tìm thấy đối tượng này");
         }
 
-        return "redirect:/aircraft";
+        return "redirect:/air-craft";
     }
     // Tài
     @GetMapping("delete/{id}")
@@ -99,6 +99,6 @@ public class AirCraftController {
                 redirectAttributes.addFlashAttribute("msg","Không tồn tại đối tượng này");
             }
 
-        return "redirect:/aircraft";
+        return "redirect:/air-craft";
     }
 }

@@ -8,10 +8,17 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-html, body {
-    height: 100%;
-    background-color: #152733;
-    overflow: hidden;
+html ,body{
+    background-size: cover;
+    background: url("https://giupban.com.vn/wp-content/uploads/Hinh-nen-may-bay-dep-full-hd-Ohaylam.com-14.jpg") no-repeat center center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Montserrat", sans-serif;
+    height: 100vh;
+    margin: 10px 0 50px;
+    width: 100%;
 }
 
 
@@ -66,7 +73,7 @@ html, body {
 }
 
 .form-content p {
-    color: #fff;
+    color: #000000;
     text-align: left;
     font-size: 17px;
     font-weight: 300;
@@ -76,7 +83,7 @@ html, body {
 
 
 .form-content label, .was-validated .form-check-input:invalid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label{
-    color: #fff;
+    color: #000000;
 }
 
 .form-content input[type=text],input[type=number], .form-content input[type=password], .form-content input[type=email], .form-content select {
