@@ -13,4 +13,6 @@ public interface IPassengersService {
     void create(Passengers passengers);
     void update(Passengers passengers);
     void delete(Integer id);
+    Passengers findByIdAccount(Integer id);
+
 }

@@ -4,5 +4,5 @@ import com.example.case_study.model.AccountUser;
 
 public interface IAccountService {
 
-    AccountUser findByEmail(AccountUser accountUser);
+    AccountUser findByEmail(String email);
 }

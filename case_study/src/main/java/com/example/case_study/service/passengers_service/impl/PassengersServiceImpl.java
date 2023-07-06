@@ -38,4 +38,9 @@ public class PassengersServiceImpl implements IPassengersService {
     public void delete(Integer id) {
         iPassengerRepository.deleteById(id);
     }
+
+    @Override
+    public Passengers findByIdAccount(Integer id) {
+        return iPassengerRepository.findPassengersByAccountUser_Id(id);
+    }
 }

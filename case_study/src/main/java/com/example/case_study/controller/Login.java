@@ -2,8 +2,12 @@ package com.example.case_study.controller;
 
 import com.example.case_study.dto.AccountUserDto;
 import com.example.case_study.model.AccountUser;
+import com.example.case_study.service.account.IAccountService;
+import com.example.case_study.service.employees_service.IEmployeesService;
+import com.example.case_study.service.passengers_service.IPassengersService;
 import com.example.case_study.util.WebUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -16,6 +20,12 @@ import java.security.Principal;
 
 @Controller
 public class Login {
+    @Autowired
+    private IAccountService accountService;
+    @Autowired
+    private IPassengersService passengersService;
+    @Autowired
+    private IEmployeesService employeesService;
     @GetMapping("/")
     public String home(Model model) {
         return "index";
@@ -25,16 +35,23 @@ public class Login {
             model.addAttribute("accountDto", new AccountUserDto());
             return "loginPage";
     }
-
+    @GetMapping("/logoutSuccessful")
+    public String logout(Model model){
+        return "index";
+    }
 
     @GetMapping(value = "/userInfo")
     public String userInfo(Model model, Principal principal) {
-
         // Sau khi user login thanh cong se co principal
         String userName = principal.getName();
-
+        AccountUser accountUser = accountService.findByEmail(principal.getName());
+        model.addAttribute("acc",accountUser);
+        if (passengersService.findByIdAccount(accountUser.getId()) !=null){
+            model.addAttribute("information",passengersService.findByIdAccount(accountUser.getId()));
+        }if (employeesService.findByIdAccount(accountUser.getId()) != null){
+            model.addAttribute("info",employeesService.findByIdAccount(accountUser.getId()));
+        }
         System.out.println("User Name: " + userName);
-
         return "index";
     }
 

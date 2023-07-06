@@ -12,4 +12,5 @@ public interface IEmployeesService {
     void update(Employees employees);
     void delete(Integer id);
     Optional<Employees> findByIdEmployee(Integer id);
+    Employees findByIdAccount(Integer id);
 }

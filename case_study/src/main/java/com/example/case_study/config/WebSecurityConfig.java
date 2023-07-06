@@ -33,8 +33,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
     @Autowired
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.authorizeRequests().antMatchers("/", "/login").permitAll();
-        http.authorizeRequests().antMatchers("/").access("hasAnyRole('Employee','Customer','Admin')");
+        http.authorizeRequests().antMatchers( "/","/login").permitAll();
+        http.authorizeRequests().antMatchers("/admin").access("hasAnyRole('Employee','Customer','Admin')");
         http.authorizeRequests().antMatchers("/admin").access("hasRole('Admin')");
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/400");
         http.authorizeRequests().and().formLogin()
@@ -45,7 +45,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
                 .usernameParameter("email")//
                 .passwordParameter("passwords")
                 // Cấu hình cho Logout Page.
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
+                .and().logout().logoutUrl("/logout")
+                .logoutSuccessUrl("/logoutSuccessful");
         // Cấu hình Remember Me.
         http.authorizeRequests().and() //
                 .rememberMe().tokenRepository(this.persistentTokenRepository()) //

@@ -13,10 +13,11 @@ public class AccountServiceImpl implements IAccountService {
     private IAccountRepository accountRepository;
 
     @Override
-    public AccountUser findByEmail(AccountUser accountUser) {
-        if (accountRepository.findAccountUserByEmail(accountUser.getEmail()) == accountUser ){
-           return accountRepository.findAccountUserByEmail(accountUser.getEmail());
+    public AccountUser findByEmail(String email) {
+        if (accountRepository.findAccountUserByEmail(email) == null ){
+            return null;
         }
-        return null;
+        return accountRepository.findAccountUserByEmail(email);
+
     }
 }

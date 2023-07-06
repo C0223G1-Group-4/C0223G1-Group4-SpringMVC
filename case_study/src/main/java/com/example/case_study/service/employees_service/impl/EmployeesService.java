@@ -38,4 +38,9 @@ public class EmployeesService implements IEmployeesService {
     public Optional<Employees> findByIdEmployee(Integer id) {
         return iEmployeeRepository.findById(id);
     }
+
+    @Override
+    public Employees findByIdAccount(Integer id) {
+        return iEmployeeRepository.findEmployeesByAccountUser_Id(id);
+    }
 }
