@@ -1,5 +1,7 @@
 package com.example.case_study.model;
 
+import com.example.case_study.model.tai.FlightScheduleAirCraft;
+
 import javax.persistence.*;
 
 @Entity
