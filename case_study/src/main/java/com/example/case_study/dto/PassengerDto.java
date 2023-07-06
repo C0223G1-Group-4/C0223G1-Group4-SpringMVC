@@ -16,7 +16,7 @@ import java.time.format.DateTimeParseException;
 public class PassengerDto implements Validator {
     private Integer id;
     @NotBlank(message = "Citizen ID cannot be left blank!")
-    @Pattern(regexp = "^[0-9]{12}$")
+//    @Pattern(regexp = "^[0-9]{12}$")
     private String citizenId;
     @NotBlank(message = "Customer name cannot be blank, minimum length is 2 and maximum is 45!")
     @Size(min = 2 , max = 45)
