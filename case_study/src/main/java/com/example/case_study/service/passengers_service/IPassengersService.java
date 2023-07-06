@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface IPassengersService {
     Page<Passengers> findByPassengers(String name, Pageable pageable);
-    Optional<Passengers> findByIdPassengers(Integer id);
+    Passengers findByIdPassengers(Integer id);
     void create(Passengers passengers);
     void update(Passengers passengers);
     void delete(Integer id);

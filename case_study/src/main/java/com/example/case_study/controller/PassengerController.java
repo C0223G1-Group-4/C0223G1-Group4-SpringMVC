@@ -13,6 +13,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -48,6 +49,32 @@ public class PassengerController {
         BeanUtils.copyProperties(passengerDto, passengers);
         iPassengersService.create(passengers);
         redirectAttributes.addFlashAttribute("msg2","Add passengerDto new success!");
+        return "redirect:/passenger";
+    }
+    @GetMapping("/info/{id}")
+    public String detailPassenger(@PathVariable Integer id, Model model){
+        model.addAttribute("passenger",iPassengersService.findByIdPassengers(id));
+        return "/detail_passenger";
+    }
+    @GetMapping("/edit/{id}")
+    public String formUpdate(@PathVariable Integer id, Model model) {
+        Passengers passengers = iPassengersService.findByIdPassengers(id);
+        PassengerDto passengerDto = new PassengerDto();
+        BeanUtils.copyProperties(passengers, passengerDto);
+        model.addAttribute("passengerDto", passengerDto);
+        return "/update_passenger";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute @Validated PassengerDto passengerDto,
+                         BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        if (bindingResult.hasFieldErrors()) {
+            return "/update_passenger";
+        }
+        Passengers passengers = new Passengers();
+        BeanUtils.copyProperties(passengerDto, passengers);
+        iPassengersService.update(passengers);
+        redirectAttributes.addFlashAttribute("msg3", "Update passenger new success!");
         return "redirect:/passenger";
     }
 }

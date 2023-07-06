@@ -20,8 +20,8 @@ public class PassengersServiceImpl implements IPassengersService {
     }
 
     @Override
-    public Optional<Passengers> findByIdPassengers(Integer id) {
-        return iPassengerRepository.findById(id);
+    public Passengers findByIdPassengers(Integer id) {
+        return iPassengerRepository.findById(id).get();
     }
 
     @Override
