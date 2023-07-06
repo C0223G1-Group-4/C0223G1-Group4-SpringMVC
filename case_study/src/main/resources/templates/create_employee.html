@@ -31,7 +31,7 @@
             <div class="form-outline mb-4">
                 <label class="form-label" for="form4Example7">Age<span
                         style="color: red">*</span></label>
-                <input type="text" id="form4Example7" class="form-control form-control-lg"
+                <input type="date" id="form4Example7" class="form-control form-control-lg"
                        th:field="*{age}"/>
                 <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"
                       style="color: red"></span>

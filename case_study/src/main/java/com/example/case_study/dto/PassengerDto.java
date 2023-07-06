@@ -1,9 +1,11 @@
 package com.example.case_study.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -18,15 +20,16 @@ public class PassengerDto implements Validator {
     private String citizenId;
     @NotBlank(message = "Customer name cannot be blank, minimum length is 2 and maximum is 45!")
     @Size(min = 2 , max = 45)
-    @Pattern(regexp = "^[\\\\p{Lu}][\\\\p{Ll}]*([\\\\s][\\\\p{Lu}][\\\\p{Ll}]*)*$")
+//    @Pattern(regexp = "^[\\\\p{Lu}][\\\\p{Ll}]*([\\\\s][\\\\p{Lu}][\\\\p{Ll}]*)*$", message = "Sai định dạng")
     private String name;
     @NotBlank(message = "Address cannot be empty!")
     private String address;
     @NotBlank(message = "Phone number cannot be blank, minimum length is 10 and maximum is 12!")
     @Size(min = 10, max = 12)
-    @Pattern(regexp = "^0\\\\d{10,12}$")
+//    @Pattern(regexp = "^0\\\\d{10,12}$")
     private String phoneNumber;
-    @NotBlank(message = "Age cannot be empty!")
+    @NotNull(message = "Age cannot be empty!")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String age;
     @NotBlank(message = "Nationality cannot be blank!")
     private String nationality;
@@ -118,7 +121,7 @@ public class PassengerDto implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         PassengerDto passengersDto = (PassengerDto) target;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
             LocalDate dOB = LocalDate.parse(passengersDto.getAge(), formatter);
             LocalDate now = LocalDate.now();
