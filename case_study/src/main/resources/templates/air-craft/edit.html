@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:object="${airCraft}" th:action="@{/air-craft/edit}" th:method="post">
+    <input type="hidden" th:field="*{id}">
+    Số lượng người
+    <input type="text" th:field="*{capacity}">
+    Số lượng máy bay
+    <input type="text" th:field="*{numberAirCraft}">
+
+    <button type="submit">Sửa</button>
+</form>
+</body>
+</html>

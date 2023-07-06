@@ -1,31 +1,42 @@
-package com.example.case_study.dto;
+package com.example.case_study.model.tai;
 
-public class RouteDto {
+import javax.persistence.*;
+import java.util.List;
 
+@Entity
+@Table(name = "route")
+public class Route {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String airPort;
     private String destination;
     private String codeRoute;
     private Float fare;
+    private boolean flag;
 
-    public RouteDto() {
+    @ManyToMany(mappedBy = "routes")
+    private List<AirCraft> airCrafts;
+
+    public Route() {
     }
 
-    public RouteDto(Integer id, String airPort, String destination, String codeRoute, Float fare) {
+    public Route(Integer id, String airPort, String destination, String codeRoute, Float fare, boolean flag, List<AirCraft> airCrafts) {
         this.id = id;
         this.airPort = airPort;
         this.destination = destination;
         this.codeRoute = codeRoute;
         this.fare = fare;
-
+        this.flag = flag;
+        this.airCrafts = airCrafts;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer idRoute) {
+        this.id = idRoute;
     }
 
     public String getAirPort() {
@@ -60,5 +71,19 @@ public class RouteDto {
         this.fare = fare;
     }
 
+    public boolean isFlag() {
+        return flag;
+    }
 
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
+    public List<AirCraft> getAirCrafts() {
+        return airCrafts;
+    }
+
+    public void setAirCrafts(List<AirCraft> airCrafts) {
+        this.airCrafts = airCrafts;
+    }
 }
