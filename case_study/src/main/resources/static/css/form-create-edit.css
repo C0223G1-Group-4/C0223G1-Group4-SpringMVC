@@ -16,8 +16,8 @@ html ,body{
     align-items: center;
     flex-direction: column;
     font-family: "Montserrat", sans-serif;
-    height: 100vh;
-    margin: 10px 0 50px;
+    height: 85vh;
+    /*margin: 10px 0 50px;*/
     width: 100%;
 }
 

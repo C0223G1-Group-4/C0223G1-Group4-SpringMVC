@@ -14,21 +14,21 @@
         <div class="form-holder">
             <div class="form-content">
                 <div class="form-items">
-
+                    <center><h2>Create flight schedule</h2></center>
                     <form th:action="@{/flight-schedule/create}" th:method="post" th:object="${flightScheduleDto}">
                         <div class="col-md-12">
                             <p>Code Flight Schedule</p>
-                            <input type="number" th:field="*{codeFlightSchedule}" class="form-control" required placeholder="Capacity">
+                            <input type="text" th:field="*{codeFlightSchedule}" class="form-control" required placeholder="Code Flight Schedule">
                             <p style="color: red" th:if="${#fields.hasErrors('codeFlightSchedule')}" th:errors="*{codeFlightSchedule}"></p>
                         </div>
                         <div class="col-md-12">
                             <p>Departure</p>
-                            <input class="form-control" type="text" th:field="*{departure}" placeholder="Number Air Craft" required>
+                            <input class="form-control" type="text" th:field="*{departure}" placeholder="Departure" required>
                             <p style="color: red" th:if="${#fields.hasErrors('departure')}" th:errors="*{departure}"></p>
                         </div>
                           <div class="col-md-12">
                             <p>Arrival</p>
-                            <input class="form-control" type="text" th:field="*{arrival}" placeholder="Number Air Craft" required>
+                            <input class="form-control" type="text" th:field="*{arrival}" placeholder="Arrival" required>
                             <p style="color: red" th:if="${#fields.hasErrors('arrival')}" th:errors="*{arrival}"></p>
                         </div>
                         <center>
