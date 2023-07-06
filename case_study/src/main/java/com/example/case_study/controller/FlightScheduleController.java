@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("flight-schedule")
+@RequestMapping("/flight-schedule")
 public class FlightScheduleController {
     @Autowired
     private IFlightScheduleService iFlightScheduleService;

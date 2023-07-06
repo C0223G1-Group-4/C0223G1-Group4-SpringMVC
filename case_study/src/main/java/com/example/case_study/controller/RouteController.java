@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("route")
+@RequestMapping("/route")
 public class RouteController {
     @Autowired
     private IRouteService iRouteService;

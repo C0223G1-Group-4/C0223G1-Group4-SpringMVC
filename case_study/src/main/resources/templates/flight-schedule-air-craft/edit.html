@@ -5,7 +5,7 @@
     <title>Edit Flight Schedule Air Craft</title>
 </head>
 <body>
-<form th:action="@{/flight-schedule-air-craft/edit}" th:method="post" th:object="${flightScheduleAirCraft}">
+<form th:action="@{flight-schedule-air-craft/edit}" th:method="post" th:object="${flightScheduleAirCraft}">
     <input type="hidden" th:field="*{id}">
     <select  th:field="*{idAirCraft}">
         <option th:text="${flightScheduleAirCraft.idAirCraft.numberAirCraft}" th:value="${flightScheduleAirCraft.idAirCraft.id}"></option>
