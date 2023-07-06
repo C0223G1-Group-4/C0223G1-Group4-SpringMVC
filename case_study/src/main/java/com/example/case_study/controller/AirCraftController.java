@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("air-craft")
+@RequestMapping("/air-craft")
 public class AirCraftController {
     @Autowired
     private IAirCraftService iAirCraftService;

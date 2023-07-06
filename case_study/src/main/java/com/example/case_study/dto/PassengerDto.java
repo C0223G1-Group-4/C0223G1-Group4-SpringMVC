@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 public class PassengerDto implements Validator {
     private Integer id;
@@ -34,6 +36,17 @@ public class PassengerDto implements Validator {
     @NotBlank(message = "Nationality cannot be blank!")
     private String nationality;
 
+    @Column(name = "verification_code", length = 64)
+    private String verificationCode;
+
+    private boolean enabled;
+
+    private Date expiryDate;
+
+    private AccountUserDto accountUserDto;
+
+
+
     public PassengerDto() {
     }
 
@@ -54,6 +67,20 @@ public class PassengerDto implements Validator {
         this.phoneNumber = phoneNumber;
         this.age = age;
         this.nationality = nationality;
+    }
+
+    public PassengerDto(Integer id, String citizenId, String name, String address, String phoneNumber, String age, String nationality, String verificationCode, boolean enabled, Date expiryDate, AccountUserDto accountUserDto) {
+        this.id = id;
+        this.citizenId = citizenId;
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.age = age;
+        this.nationality = nationality;
+        this.verificationCode = verificationCode;
+        this.enabled = enabled;
+        this.expiryDate = expiryDate;
+        this.accountUserDto = accountUserDto;
     }
 
     public Integer getId() {
@@ -112,6 +139,37 @@ public class PassengerDto implements Validator {
         this.nationality = nationality;
     }
 
+    public AccountUserDto getAccountUserDto() {
+        return accountUserDto;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Date getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
+    public void setAccountUserDto(AccountUserDto accountUserDto) {
+        this.accountUserDto = accountUserDto;
+    }
 
     @Override
     public boolean supports(Class<?> clazz) {

@@ -12,5 +12,7 @@ public interface IEmployeeRepository extends JpaRepository<Employees, Integer> {
     @Query(value = "select * from Employees where name_employee like %:name% ", nativeQuery = true)
     Page<Employees> findByEmployees(@Param("name") String name, Pageable pageable);
     Optional<Employees> findById(Integer id);
+    Employees findEmployeesByAccountUser_Id(Integer id);
+
 
 }

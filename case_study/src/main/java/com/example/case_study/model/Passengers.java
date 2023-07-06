@@ -1,6 +1,7 @@
 package com.example.case_study.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Passengers {
@@ -16,10 +17,32 @@ public class Passengers {
     private String nationality;
     @ManyToOne
     private AccountUser accountUser;
+
+    @Column(name = "verification_code", length = 64)
+    private String verificationCode;
+
+    private boolean enabled;
+
+    private Date expiryDate;
     @Column(columnDefinition = "bit default 0")
     private boolean flagDelete;
 
     public Passengers() {
+    }
+
+    public Passengers(Integer id, String citizenId, String name, String address, String phoneNumber, String age, String nationality, AccountUser accountUser, String verificationCode, boolean enabled, Date expiryDate, boolean flagDelete) {
+        this.id = id;
+        this.citizenId = citizenId;
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.age = age;
+        this.nationality = nationality;
+        this.accountUser = accountUser;
+        this.verificationCode = verificationCode;
+        this.enabled = enabled;
+        this.expiryDate = expiryDate;
+        this.flagDelete = flagDelete;
     }
 
     public Passengers(Integer id, String citizenId, String name, String address, String phoneNumber, String age, String nationality, AccountUser accountUser, boolean flagDelete) {
@@ -43,6 +66,30 @@ public class Passengers {
         this.age = age;
         this.nationality = nationality;
         this.accountUser = accountUser;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Date getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
     }
 
     public Integer getId() {

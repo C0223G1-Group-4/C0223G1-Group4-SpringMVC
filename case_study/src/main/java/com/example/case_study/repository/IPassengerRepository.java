@@ -12,4 +12,7 @@ public interface IPassengerRepository extends JpaRepository<Passengers, Integer>
     @Query(value = "select * from Passengers where name_passengers like %:name% ", nativeQuery = true)
     Page<Passengers> findByPassengers(@Param("name") String name, Pageable pageable);
     Optional<Passengers> findById(Integer id);
+    Passengers findPassengersByAccountUser_Id(Integer id);
+
+    Passengers findByAccountUser_Email(String email);
 }
