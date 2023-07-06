@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/style-of-tai.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+</head>
+<body>
+<a href="flight-schedule-air-craft/create">Create</a>
+<div th:if="${msg!=null}">
+    <p th:text="${msg}"></p>
+</div>
+<section>
+    <!--for demo wrap-->
+    <h1>Management Flight Schedule Air Craft</h1>
+    <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã máy bay</th>
+                <th>Mã tuyến bay</th>
+                <th>Số lượng người</th>
+                <th>Ngày bay</th>
+                <th>Ngày đến</th>
+                <th>Code Route</th>
+                <th></th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr th:each="flightScheduleAirCraftLoop,loop :${flightScheduleAirCraft}">
+                <td th:text="${loop.count}"></td>
+                <td th:text="${flightScheduleAirCraftLoop.idAirCraft.numberAirCraft}"></td>
+                <td th:text="${flightScheduleAirCraftLoop.flightSchedule.codeFlightSchedule}"></td>
+                <td th:text="${flightScheduleAirCraftLoop.idAirCraft.capacity}"></td>
+                <td th:text="${flightScheduleAirCraftLoop.flightSchedule.departure}"></td>
+                <td th:text="${flightScheduleAirCraftLoop.flightSchedule.arrival}"></td>
+                <td th:text="${flightScheduleAirCraftLoop.idAirCraft.routes.get(0).codeRoute}"></td>
+                <td>
+                    <a th:href="@{flight-schedule-air-craft/edit/{id}(id=${flightScheduleAirCraftLoop.id})}"><span style="font-size: 20px;color: whitesmoke"><i
+                            class="fa-solid fa-pen-to-square"></i></span></a>
+<!--                    <a th:attr="onclick=|deleteFlightSchedule('${flight.id}','${flight.dateFlightSchedule}'-->
+<!--                    ,'${flight.departure}','${flight.arrival}')|" href="#"-->
+<!--                       data-bs-toggle="modal" data-bs-target="#exampleModal"> <span-->
+<!--                            style="font-size: 20px;padding-left: 20px;color: whitesmoke"><i-->
+<!--                            class="fa-solid fa-trash-can"></i></span></a>-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<a th:if="${flightScheduleAirCraft.hasPrevious()}" th:href="@{/app(page=${flightScheduleAirCraft.number -1})}">Trước</a>
+<a th:if="${flightScheduleAirCraft.hasNext()}" th:href="@{/app(page=${flightScheduleAirCraft.number +1})}">Sau</a>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script>
+    function deleteFlightSchedule(id, dateFlightSchedule, departure,arrival) {
+       document.getElementById("deleteId").value=id;
+       document.getElementById("dateFlightSchedule").innerText=dateFlightSchedule;
+       document.getElementById("departure").innerText=departure;
+       document.getElementById("arrival").innerText=arrival;
+
+    }
+</script>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <center>
+                    <span style="font-size: 120px"><i class="fa-solid fa-trash-can"></i></span>
+                    <div>
+                        <p style="color: red">Bạn có muốn xóa lịch bay có </p>
+                        Date Flight Schedule: <span id="dateFlightSchedule"></span><br>
+                        Departure: <span id="departure"></span><br>
+                        Arrival: <span id="arrival"></span><br>
+                    </div>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form th:action="@{/flight-schedule/delete}">
+                    <input type="hidden" id="deleteId" name="deleteId">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

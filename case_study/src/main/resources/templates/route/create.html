@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:object="${routeDto}" th:action="@{/route/create}" th:method="post">
+
+    Điểm đi
+    <input type="text" th:field="*{airPort}">
+    Điểm đến
+    <input type="text" th:field="*{destination}">
+    Mã lộ trình
+    <input type="text" th:field="*{codeRoute}">
+     Tiền
+    <input type="text" th:field="*{fare}">
+    <button type="submit">Thêm</button>
+</form>
+</body>
+</html>
