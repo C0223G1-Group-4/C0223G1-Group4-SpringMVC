@@ -124,7 +124,7 @@ public class PassengerDto implements Validator {
             LocalDate now = LocalDate.now();
             int yearOld = Period.between(dOB,now).getYears();
             if (yearOld >= 80){
-                errors.rejectValue("dOB", "Over the age limit to join the flight, the specified age is less than 80 years old!");
+                errors.rejectValue("dOB", "","Over the age limit to join the flight, the specified age is less than 80 years old!");
             }
         }catch (DateTimeParseException e){
             errors.rejectValue("dOB","dOB", "Wrong date format!");
