@@ -42,7 +42,8 @@ public class Login {
     @GetMapping("/login")
     public String formLogin(Model model) {
         model.addAttribute("accountDto", new AccountUserDto());
-        return "loginPage1";
+        model.addAttribute("passengerDto", new PassengerDto());
+        return "loginPage";
     }
 
     @GetMapping("/logoutSuccessful")
@@ -83,11 +84,11 @@ public class Login {
         return "400Page";
     }
 
-    @GetMapping("/signup")
-    public String signup(Model model) {
-        model.addAttribute("passengerDto", new PassengerDto());
-        return "loginPage";
-    }
+//    @GetMapping("/signup")
+//    public String signup(Model model) {
+//
+//        return "loginPage";
+//    }
 
     @PostMapping("/signup")
     public String signup(@Valid @ModelAttribute PassengerDto passengerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes,HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
@@ -111,12 +112,8 @@ public class Login {
             passengersService.sendVerificationEmail(passengers, siteURL);
             redirectAttributes.addFlashAttribute("msg","You have signed up successfully! Please check your email to verify your account.");
         }
-        return "redirect:/loginPage";
+        return "redirect:/login";
     }
-
-
-
-
 
     private Date calculateExpiryDate() {
         Calendar cal = Calendar.getInstance();

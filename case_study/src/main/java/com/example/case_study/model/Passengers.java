@@ -6,7 +6,7 @@ import java.util.Date;
 @Entity
 public class Passengers {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String citizenId;
     @Column(name = "name_passengers")
