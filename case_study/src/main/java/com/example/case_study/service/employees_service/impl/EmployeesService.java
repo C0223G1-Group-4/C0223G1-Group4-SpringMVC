@@ -1,5 +1,6 @@
 package com.example.case_study.service.employees_service.impl;
 
+import com.example.case_study.model.AccountUser;
 import com.example.case_study.model.Employees;
 import com.example.case_study.repository.IEmployeeRepository;
 import com.example.case_study.service.employees_service.IEmployeesService;
@@ -16,10 +17,10 @@ public class EmployeesService implements IEmployeesService {
     @Autowired
     private IEmployeeRepository iEmployeeRepository;
 
-    @Override
-    public List<Employees> findAll() {
-        return iEmployeeRepository.findAll();
-    }
+//    @Override
+//    public List<Employees> findAll() {
+//        return iEmployeeRepository.findAll();
+//    }
 
     @Override
     public Page<Employees> findAll(String name, Pageable pageable) {
@@ -44,6 +45,11 @@ public class EmployeesService implements IEmployeesService {
     @Override
     public Employees findById(Integer id) {
         return iEmployeeRepository.findById(id).get();
+    }
+
+    @Override
+    public List<Employees> findByAccount(String email) {
+        return iEmployeeRepository.findByAccount(email);
     }
 
     @Override

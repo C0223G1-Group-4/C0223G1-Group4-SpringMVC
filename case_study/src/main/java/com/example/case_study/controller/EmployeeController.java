@@ -2,6 +2,7 @@ package com.example.case_study.controller;
 
 import com.example.case_study.dto.EmployeeDto;
 import com.example.case_study.model.Employees;
+import com.example.case_study.service.account.IAccountService;
 import com.example.case_study.service.employees_service.IEmployeesService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,8 @@ import javax.validation.Valid;
 public class EmployeeController {
     @Autowired
     private IEmployeesService iEmployeesService;
-
+    @Autowired
+    private IAccountService iAccountService;
 
     @GetMapping("")
     public String showListEmployee(@PageableDefault(value = 5, sort = "id", direction = Sort.Direction.DESC)
@@ -65,7 +67,7 @@ public class EmployeeController {
         Employees employees = iEmployeesService.findById(id);
         EmployeeDto employeeDto = new EmployeeDto();
         BeanUtils.copyProperties(employees, employeeDto);
-        model.addAttribute("emploueeDto", employeeDto);
+        model.addAttribute("employeeDto", employeeDto);
         return "/update_employee";
     }
 
@@ -85,7 +87,13 @@ public class EmployeeController {
     @GetMapping("/delete")
     public String deleteEmployee(@RequestParam(value = "idDelete") Integer id, RedirectAttributes redirectAttributes) {
         iEmployeesService.delete(id);
-        redirectAttributes.addFlashAttribute("msg3","Delete employee new success!");
+        redirectAttributes.addFlashAttribute("msg3", "Delete employee new success!");
         return "redirect:/employee";
+    }
+
+    @GetMapping("/search")
+    public String search(Model model, @RequestParam("email") String email) {
+        model.addAttribute("search", iEmployeesService.findByAccount(email));
+        return "/list_employee";
     }
 }

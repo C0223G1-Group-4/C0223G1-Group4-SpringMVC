@@ -1,5 +1,6 @@
 package com.example.case_study.service.employees_service;
 
+import com.example.case_study.model.AccountUser;
 import com.example.case_study.model.Employees;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +13,9 @@ public interface IEmployeesService {
     void create(Employees employees);
     void update(Employees employees);
     void delete(Integer id);
-    Optional<Employees> findByIdEmployee(Integer id);
+//    Optional<Employees> findByIdEmployee(Integer id);
     Employees findByIdAccount(Integer id);
     Employees findById(Integer id);
+    List<Employees> findByAccount(String email);
+
 }
