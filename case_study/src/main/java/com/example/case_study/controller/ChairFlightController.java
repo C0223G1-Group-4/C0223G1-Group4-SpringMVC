@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("chair_flight")
+@RequestMapping("/chair_flight")
 public class ChairFlightController {
     @Autowired
     private IChairFlightService chairFlightService;

@@ -44,7 +44,7 @@ public class FlightScheduleAirCraftController {
     }
 
     // Tài
-    @GetMapping("create")
+    @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("flightScheduleAirCraft", new FlightScheduleAirCraft());
         model.addAttribute("airCraftList", iAirCraftService.checkAllListAirCraft());
@@ -54,7 +54,7 @@ public class FlightScheduleAirCraftController {
     }
 
     // Tài
-    @PostMapping("create")
+    @PostMapping("/create")
     public String create(@ModelAttribute FlightScheduleAirCraft flightScheduleAirCraft, @RequestParam int idRoute, RedirectAttributes redirectAttributes) {
         int count = 0;
         LocalDate localDate = LocalDate.parse((flightScheduleAirCraft.getFlightSchedule().getDeparture()).substring(0, 10));
@@ -84,7 +84,7 @@ public class FlightScheduleAirCraftController {
     }
 
     // Tài
-    @GetMapping("edit/{id}")
+    @GetMapping("/edit/{id}")
     public String edit(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
         if (this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(id) != null) {
             model.addAttribute("flightScheduleAirCraft", this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(id));
@@ -99,7 +99,7 @@ public class FlightScheduleAirCraftController {
     }
 
     // Tài
-    @PostMapping("edit")
+    @PostMapping("/edit")
     public String edit(@ModelAttribute FlightScheduleAirCraft flightScheduleAirCraft, @RequestParam int idRoute, Model model, RedirectAttributes redirectAttributes) {
         int count = 0;
         LocalDate localDate = LocalDate.parse((flightScheduleAirCraft.getFlightSchedule().getDeparture()).substring(0, 10));
@@ -129,7 +129,7 @@ public class FlightScheduleAirCraftController {
         return "redirect:/flight-schedule-air-craft";
     }
 
-    @GetMapping("delete")
+    @GetMapping("/delete")
         public String delete(@RequestParam int deleteId , RedirectAttributes redirectAttributes){
         if (this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(deleteId)!=null){
             this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(deleteId).setFlag(true);
@@ -140,7 +140,7 @@ public class FlightScheduleAirCraftController {
         }
         return "redirect:/flight-schedule-air-craft";
     }
-    @GetMapping("search")
+    @GetMapping("/search")
     public String search(@RequestParam(defaultValue = "",required = false) String departure , @RequestParam(defaultValue = "",required = false) String arrival ,@RequestParam String destination,Model model,RedirectAttributes redirectAttributes){
        List<FlightScheduleAirCraft> flightScheduleAirCrafts=this.iFlightScheduleAirCraftService.searchTicket(departure,arrival,destination);
        if (flightScheduleAirCrafts.size()==0){

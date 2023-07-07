@@ -35,13 +35,13 @@ public class FlightScheduleController {
         return "flight-schedule/view";
     }
     // Tài
-    @GetMapping("create")
+    @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("flightScheduleDto", new FlightScheduleDto());
         return "flight-schedule/create";
     }
     // Tài
-    @PostMapping("create")
+    @PostMapping("/create")
     public String create(@Valid @ModelAttribute FlightScheduleDto flightScheduleDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "flight-schedule/create";
@@ -89,7 +89,7 @@ public class FlightScheduleController {
         return "redirect:/flight-schedule";
     }
     // Tài
-    @GetMapping("edit/{id}")
+    @GetMapping("/edit/{id}")
     public String edit(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
         if (this.iFlightScheduleService.findByIdFlightSchedule(id) != null) {
             model.addAttribute("flightSchedule", this.iFlightScheduleService.findByIdFlightSchedule(id));
@@ -99,7 +99,7 @@ public class FlightScheduleController {
         return "redirect:/flight-schedule";
     }
     // Tài
-    @PostMapping("edit")
+    @PostMapping("/edit")
     public String edit(@Valid @ModelAttribute FlightScheduleDto flightScheduleDto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) throws ParseException {
         if (bindingResult.hasErrors()) {
             return "flight-schedule/view";
@@ -148,7 +148,7 @@ public class FlightScheduleController {
         return "redirect:/flight-schedule";
     }
     // Tài
-    @GetMapping("delete")
+    @GetMapping("/delete")
     public String delete(@RequestParam int deleteId, RedirectAttributes redirectAttributes) {
         if (this.iFlightScheduleService.findByIdFlightSchedule(deleteId) != null) {
             this.iFlightScheduleService.findByIdFlightSchedule(deleteId).setFlag(true);

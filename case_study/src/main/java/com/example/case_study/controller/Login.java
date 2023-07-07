@@ -44,7 +44,7 @@ public class Login {
 
     @GetMapping("/logoutSuccessful")
     public String logout(Model model) {
-        return "index";
+        return "home/index";
     }
 
     @GetMapping(value = "/userInfo")
@@ -55,7 +55,7 @@ public class Login {
         model.addAttribute("acc",accountUser);
         if (accountUser.getRoleUser().getName().equals("ROLE_Customer")){
             model.addAttribute("info",passengersService.findByIdAccount(accountUser.getId()));
-            return "index";
+            return "home/index";
         } else if(accountUser.getRoleUser().getName().equals("ROLE_Employee")){
 //            model.addAttribute("info",employeesService.findByIdAccount(accountUser.getId()));
             return "redirect:/passenger";
@@ -81,12 +81,6 @@ public class Login {
         }
         return "400Page";
     }
-
-//    @GetMapping("/signup")
-//    public String signup(Model model) {
-//
-//        return "loginPage";
-//    }
 
     @PostMapping("/signup")
     public String signup(@Valid @ModelAttribute PassengerDto passengerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes,HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
