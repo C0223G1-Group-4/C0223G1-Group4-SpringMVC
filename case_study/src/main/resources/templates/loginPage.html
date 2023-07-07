@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>TianFight</title>
+  <style>
+    @keyframes slideInRight {
+      from{
+        opacity: 0;
+        transform: translateX(calc(100%) );
+      }
+      to{
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @keyframes fadeOut {
+      to{
+        opacity: 0;
+      }
+    }
+  </style>
+  <link rel="stylesheet"
+        href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" id="roboto-subset.css-css"
+        href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5"
+        type="text/css" media="all">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800">
+  <link rel="stylesheet" href="css/css_signup.css">
+  <!--  <link rel="stylesheet" href="../static/css_signup.css">-->
+  <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">-->
+  <style>
+    @keyframes slideInRight {
+      from{
+        opacity: 0;
+        transform: translateX(calc(100%) );
+      }
+      to{
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @keyframes fadeOut {
+      to{
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+<!--toast-->
+<div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${success != null}"
+     style="
+    position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 5s forwards; // thời gian msg trượt
+            transition: all linear 0.3s;z-index: 999999">
+  <div class="toast-header bg-success">
+    <strong class="me-auto">Notification</strong>
+    <small>1 second ago</small>
+    <!--    <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>-->
+  </div>
+  <div class="toast-body" th:text="${success}">
+  </div>
+</div>
+<div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${fail != null}"
+     style="
+    position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 5s forwards; // thời gian msg trượt
+            transition: all linear 0.3s;z-index: 999999">
+  <div class="toast-header bg-danger">
+    <strong class="me-auto">Notification</strong>
+    <small>1 second ago</small>
+    <!--    <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>-->
+  </div>
+  <div class="toast-body" th:text="${fail}">
+  </div>
+</div>
+
+
+
+<div class="container" id="container">zz
+  <div class="form-container sign-up-container">
+    <!--sign_up-->
+
+    <form action="/signup" method="post" th:object="${passengerDto}" >
+      <h1>Sign up</h1>
+      <div class="social-container">
+        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+
+      <div class="row" style=" height: 70px">
+        <div class="col-md-6 mb-2">
+          <div class="form-outline mb-4" style="height: 50px">
+            <input type="text" id="form2Example18"  th:field="*{name}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+            <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            <label class="form-label" for="form2Example18">Full Name</label>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="form-outline mb-4" style="height: 50px">
+            <input type="text" id="form2Example19"  th:field="*{citizenId}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+            <span style="color: red" th:if="${#fields.hasErrors('citizenId')}" th:errors="*{citizenId}"></span>
+            <label class="form-label" for="form2Example19">Citizen ID</label>
+          </div>
+        </div>
+      </div>
+      <div class="row" style=" height: 70px">
+        <div class="col-md-6 mb-2">
+          <div class="form-outline mb-4" style="height: 50px">
+            <input type="date" id="form2Example20"  th:field="*{age}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+            <span style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+            <label class="form-label" for="form2Example20">Day of Birth</label>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="form-outline mb-4" style="height: 50px">
+            <input type="text" id="form2Example2"  th:field="*{nationality}"  class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+            <span style="color: red" th:if="${#fields.hasErrors('nationality')}" th:errors="*{nationality}"></span>
+            <label class="form-label" for="form2Example2">Nationality</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-outline mb-4" style="height: 50px">
+        <input type="text" id="form2Example1"  th:field="*{address}" class="form-control form-control-lg"/>
+        <span style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+        <label class="form-label" for="form2Example1">Address</label>
+      </div>
+
+      <div class="form-outline mb-4" style="height: 50px">
+        <input type="text" id="form2Example3"  th:field="*{phoneNumber}" class="form-control form-control-lg"/>
+        <span style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+        <label class="form-label" for="form2Example3">Tel</label>
+      </div>
+      <div class="form-outline mb-4" style="height: 50px">
+        <input type="text" id="form2Example4"  th:field="*{accountUserDto.email}" class="form-control form-control-lg"/>
+        <span style="color: red" th:if="${#fields.hasErrors('accountUserDto.email')}" th:errors="*{accountUserDto.email}"></span>
+        <label class="form-label" for="form2Example4">Email</label>
+      </div>
+      <div class="row" style=" height: 70px">
+        <div class="col-md-6 mb-2">
+          <div class="form-outline mb-4" style="height: 50px">
+            <input type="password" id="form2Example5"  th:field="*{accountUserDto.passwords}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+            <span style="color: red" th:if="${#fields.hasErrors('accountUserDto.passwords')}" th:errors="*{accountUserDto.passwords}"></span>
+            <label class="form-label" for="form2Example5">Password</label>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="form-outline mb-4" style="height: 50px">
+            <input type="password" id="form2Example6"  onkeyup="checkRPW()" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+            <span style="color: red" id="message"></span>
+            <label class="form-label" for="form2Example6">Confirm Password</label>
+          </div>
+        </div>
+      </div>
+      <button id="button" type="submit">Sign Up</button>
+    </form>
+  </div>
+  <div class="form-container sign-in-container">
+    <form th:action="@{/j_spring_security_check}" method="post" th:object="${accountDto}">
+      <h1>Sign in</h1>
+      <div class="social-container">
+        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+
+      <!--      Sign in-->
+
+      <div class="form-outline mb-4" style="height: 50px;width: 70%">
+        <input type="text" id="form2Example8" th:field="*{email}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+        <label class="form-label" for="form2Example8">Email</label>
+      </div>
+      <div class="form-outline mb-4" style="height: 50px;width: 70%">
+        <input type="password" id="form2Example7"  th:field="*{passwords}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+        <label class="form-label" for="form2Example7">Password</label>
+      </div>
+      <a href="/email">Forgot your password?</a>
+      <button type="submit">Sign In</button>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us please log_in with your personal info</p>
+        <button class="ghost" id="signIn">Sign In</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1> Welcome to Tian Flight!</h1>
+        <p>Enter your personal details and start journey with us</p>
+        <button class="ghost" id="signUp">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script async="" src="https://www.clarity.ms/s/0.7.8/clarity.js"></script>
+<script async="" src="https://www.clarity.ms/tag/f1su1ssihh"></script>
+<script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script>
+<script type="text/javascript" async=""
+        src="https://www.googletagmanager.com/gtag/js?id=G-E9PS2EVWYS&amp;l=dataLayer&amp;cx=c"></script>
+<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script async="" src="//www.googletagmanager.com/gtm.js?id=GTM-W7MBMN"></script>
+<script type="text/javascript"
+        src="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/js/dist/mdb5/standard/core.min.js"></script>
+<script type="text/javascript"
+        src="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/js/dist/search/search.min.js"></script>
+<script src="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/js/dist/main.min.js"></script>
+<script>
+  const signUpButton = document.getElementById("signUp");
+  const signInButton = document.getElementById("signIn");
+  const container = document.getElementById("container");
+
+  signUpButton.addEventListener("click", () => {
+    container.classList.add("right-panel-active");
+  });
+
+  signInButton.addEventListener("click", () => {
+    container.classList.remove("right-panel-active");
+  });
+  function checkRPW(){
+    let pw=document.getElementById("form2Example5").value;
+    let rpw=document.getElementById("form2Example6").value;
+    let message=document.getElementById("message");
+    if(pw.length>=6){
+      if(pw===rpw){
+        message.textContent="";
+        document.getElementById('button').style.display='block';
+      }else{
+        message.textContent="Password not match.";
+        message.style.color="#C71010FF"
+        document.getElementById('button').style.display='none';
+      }
+    }else{
+      message.textContent="Password must be at least 6 characters";
+      message.style.color="#C71010FF";
+      document.getElementById('button').style.display='none';
+
+    }
+  }
+</script>
+</body>
+</html>
