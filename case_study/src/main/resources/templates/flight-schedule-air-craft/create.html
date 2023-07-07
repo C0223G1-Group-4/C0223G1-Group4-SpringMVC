@@ -2,22 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create Flight Schedule Air Craft</title>
-    <link rel="stylesheet" href="/home/css/form-create-edit.css">
+    <title>Create Booking Ticket</title>
+    <link rel="stylesheet" href="/css/form-create-edit.css">
 </head>
 <div th:if="${msg!=null}">
     <p th:text="${msg}"></p>
 </div>
 <body>
 
-</body>
-</html>
+
 <div class="form-body">
     <div class="row">
         <div class="form-holder">
             <div class="form-content">
                 <div class="form-items">
-                    <center><h2>Create flight schedule air craft</h2></center>
+                    <center><h2>Create Booking Ticket</h2></center>
                     <form th:action="@{/flight-schedule-air-craft/create}" th:method="post"
                           th:object="${flightScheduleAirCraft}">
                         <div class="col-md-12">
@@ -44,7 +43,7 @@
                         </div>
                         <center>
                         <div class="form-button mt-3" style="padding-top: 30px">
-                            <button id="submit" type="submit" style="width: 130px;height: 40px;background: #3893cc;color: black;border-radius: 30px" >Create</button>
+                            <button id="submit" type="submit" style="width: 130px;height: 40px;background: #3893cc;color: whitesmoke;border-radius: 30px" >Create</button>
                         </div>
                         </center>
                     </form>
@@ -53,3 +52,5 @@
         </div>
     </div>
 </div>
+</body>
+</html>

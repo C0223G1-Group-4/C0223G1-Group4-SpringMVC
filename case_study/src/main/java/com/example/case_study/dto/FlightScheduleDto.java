@@ -7,7 +7,7 @@ import javax.validation.constraints.Pattern;
 public class FlightScheduleDto {
 
     private Integer id;
-    @Pattern(regexp = "^(FS-)[0-9]{1,5}$",message = "Code Flight Schedule Format FS- and 1 to 5 number")
+//    @Pattern(regexp = "^(FS-)[0-9]{1,5}$",message = "Code Flight Schedule Format FS- and 1 to 5 number")
     private String codeFlightSchedule;
     @NotBlank(message = "Departure must not be left blank")
     private String departure;

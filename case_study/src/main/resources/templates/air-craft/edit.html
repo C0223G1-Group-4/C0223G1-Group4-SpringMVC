@@ -3,17 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Air Craft</title>
+    <link rel="stylesheet" href="/css/form-create-edit.css">
 </head>
 <body>
-<form th:object="${airCraft}" th:action="@{/air-craft/edit}" th:method="post">
-    <input type="hidden" th:field="*{id}">
-    Số lượng người
-    <input type="text" th:field="*{capacity}">
-    <span style="color: red" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></span>
-    Số lượng máy bay
-    <input type="text" th:field="*{numberAirCraft}">
-    <span style="color: red" th:if="${#fields.hasErrors('numberAirCraft')}" th:errors="*{numberAirCraft}"></span>
-    <button type="submit">Sửa</button>
-</form>
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <center><h2>Create air craft</h2></center>
+                    <form th:action="@{/air-craft/edit}" th:object="${airCraft}" th:method="post">
+                        <input type="hidden" th:field="*{id}">
+                        <div class="col-md-12">
+                            <p>Capacity</p>
+                            <input type="number" th:field="*{capacity}" class="form-control" required placeholder="Capacity">
+                            <p style="color: red" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></p>
+                        </div>
+                        <div class="col-md-12">
+                            <p>Code Air Craft</p>
+                            <input class="form-control" type="text" th:field="*{numberAirCraft}" placeholder="Number Air Craft" required>
+                            <p style="color: red" th:if="${#fields.hasErrors('numberAirCraft')}" th:errors="*{numberAirCraft}"></p>
+                        </div>
+                        <center>
+                            <div class="form-button mt-3" style="padding-top: 30px">
+                                <button id="submit" type="submit" style="width: 130px;height: 40px;background: #3893cc;border-radius: 30px;color: whitesmoke" >Edit</button>
+                            </div>
+                        </center>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

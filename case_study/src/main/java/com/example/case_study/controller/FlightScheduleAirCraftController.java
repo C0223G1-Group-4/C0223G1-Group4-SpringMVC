@@ -117,14 +117,14 @@ public class FlightScheduleAirCraftController {
             }
         }
         if (count != 0) {
-            redirectAttributes.addFlashAttribute("msg", "Lịch bay này đã có không thể sửa");
+            redirectAttributes.addFlashAttribute("msgErr", "Lịch bay này đã có không thể sửa");
         } else {
             List<Route> routeList = new ArrayList<>();
             routeList.add(this.iRouteService.findByIdRoute(idRoute));
             this.iFlightScheduleAirCraftService.editFlightScheduleAirCraft(flightScheduleAirCraft);
             this.iAirCraftService.findByIdAirCraft(flightScheduleAirCraft.getIdAirCraft().getId()).setRoutes(routeList);
             this.iAirCraftService.editAirCraft(this.iAirCraftService.findByIdAirCraft(flightScheduleAirCraft.getIdAirCraft().getId()));
-            redirectAttributes.addFlashAttribute("msg", "Sửa mới thành công");
+            redirectAttributes.addFlashAttribute("msg", "Edit Success");
         }
         return "redirect:/flight-schedule-air-craft";
     }
@@ -138,5 +138,14 @@ public class FlightScheduleAirCraftController {
             redirectAttributes.addFlashAttribute("msgErr","Delete Fail");
         }
         return "redirect:/flight-schedule-air-craft";
+    }
+    @GetMapping("search")
+    public String search(@RequestParam(defaultValue = "",required = false) String departure , @RequestParam(defaultValue = "",required = false) String arrival ,@RequestParam String destination,Model model,RedirectAttributes redirectAttributes){
+       List<FlightScheduleAirCraft> flightScheduleAirCrafts=this.iFlightScheduleAirCraftService.searchTicket(departure,arrival,destination);
+       if (flightScheduleAirCrafts.size()==0){
+           redirectAttributes.addFlashAttribute("msgErr","Not found ticket");
+       }
+       model.addAttribute("listTicket",flightScheduleAirCrafts);
+       return "booking";
     }
 }
