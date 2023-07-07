@@ -16,17 +16,19 @@ import java.util.Date;
 public class PassengerDto implements Validator {
     private Integer id;
     @NotBlank(message = "Citizen ID cannot be left blank!")
-    @Pattern(regexp = "^[0-9]{12}$")
+    @Size(min = 10,max = 12)
+//    @Pattern(regexp = "^[0-9]{12}$")
     private String citizenId;
+
     @NotBlank(message = "Customer name cannot be blank, minimum length is 2 and maximum is 45!")
     @Size(min = 2 , max = 45)
-    @Pattern(regexp = "^[\\\\p{Lu}][\\\\p{Ll}]*([\\\\s][\\\\p{Lu}][\\\\p{Ll}]*)*$")
+//    @Pattern(regexp = "^[\\\\p{Lu}][\\\\p{Ll}]*([\\\\s][\\\\p{Lu}][\\\\p{Ll}]*)*$")
     private String name;
     @NotBlank(message = "Address cannot be empty!")
     private String address;
     @NotBlank(message = "Phone number cannot be blank, minimum length is 10 and maximum is 12!")
     @Size(min = 10, max = 12)
-    @Pattern(regexp = "^0\\\\d{10,12}$")
+//    @Pattern(regexp = "^0\\\\d{9}$")
     private String phoneNumber;
     @NotBlank(message = "Age cannot be empty!")
     private String age;
@@ -182,7 +184,7 @@ public class PassengerDto implements Validator {
             LocalDate now = LocalDate.now();
             int yearOld = Period.between(dOB,now).getYears();
             if (yearOld >= 80){
-                errors.rejectValue("dOB", "Over the age limit to join the flight, the specified age is less than 80 years old!");
+                errors.rejectValue("dOB","", "Over the age limit to join the flight, the specified age is less than 80 years old!");
             }
         }catch (DateTimeParseException e){
             errors.rejectValue("dOB","dOB", "Wrong date format!");

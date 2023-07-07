@@ -3,6 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>TianFight</title>
+  <style>
+    @keyframes slideInRight {
+      from{
+        opacity: 0;
+        transform: translateX(calc(100%) );
+      }
+      to{
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @keyframes fadeOut {
+      to{
+        opacity: 0;
+      }
+    }
+  </style>
   <link rel="stylesheet"
         href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,12 +30,57 @@
   <link rel="stylesheet" href="css/css_signup.css">
   <!--  <link rel="stylesheet" href="../static/css_signup.css">-->
   <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">-->
-
+  <style>
+    @keyframes slideInRight {
+      from{
+        opacity: 0;
+        transform: translateX(calc(100%) );
+      }
+      to{
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @keyframes fadeOut {
+      to{
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 <body>
+<!--toast-->
+<div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${success != null}"
+     style="
+    position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 5s forwards; // thời gian msg trượt
+            transition: all linear 0.3s;z-index: 999999">
+  <div class="toast-header bg-success">
+    <strong class="me-auto">Notification</strong>
+    <small>1 second ago</small>
+<!--    <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>-->
+  </div>
+  <div class="toast-body" th:text="${success}">
+  </div>
+</div>
+<div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${fail != null}"
+     style="
+    position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 5s forwards; // thời gian msg trượt
+            transition: all linear 0.3s;z-index: 999999">
+  <div class="toast-header bg-danger">
+    <strong class="me-auto">Notification</strong>
+    <small>1 second ago</small>
+<!--    <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>-->
+  </div>
+  <div class="toast-body" th:text="${fail}">
+  </div>
+</div>
+
+
+
 <div class="container" id="container">zz
   <div class="form-container sign-up-container">
     <!--sign_up-->
+
     <form action="/signup" method="post" th:object="${passengerDto}" >
       <h1>Sign up</h1>
       <div class="social-container">
@@ -114,7 +176,7 @@
         <input type="password" id="form2Example7"  th:field="*{passwords}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
         <label class="form-label" for="form2Example7">Password</label>
       </div>
-      <a href="#">Forgot your password?</a>
+      <a href="/email">Forgot your password?</a>
       <button type="submit">Sign In</button>
     </form>
   </div>

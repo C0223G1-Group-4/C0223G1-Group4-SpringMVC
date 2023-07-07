@@ -15,4 +15,6 @@ public interface IPassengerRepository extends JpaRepository<Passengers, Integer>
     Passengers findPassengersByAccountUser_Id(Integer id);
 
     Passengers findByAccountUser_Email(String email);
+
+    Passengers findByVerificationCode(String code);
 }
