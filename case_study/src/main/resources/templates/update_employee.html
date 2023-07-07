@@ -14,7 +14,7 @@
 <a href="/employee">Back to home</a>
 
 <div>
-    <form th:action="@{/employee/update}" th:object="${emploueeDto}" method="post">
+    <form th:action="@{/employee/update}" th:object="${employeeDto}" method="post">
         <input type="hidden" th:field="*{id}" readonly/>
 
         <div class="form-group">

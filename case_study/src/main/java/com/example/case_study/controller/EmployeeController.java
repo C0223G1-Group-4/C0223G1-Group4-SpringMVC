@@ -64,7 +64,7 @@ public class EmployeeController {
         Employees employees = iEmployeesService.findById(id);
         EmployeeDto employeeDto = new EmployeeDto();
         BeanUtils.copyProperties(employees, employeeDto);
-        model.addAttribute("emploueeDto", employeeDto);
+        model.addAttribute("employeeDto", employeeDto);
         return "/update_employee";
     }
 

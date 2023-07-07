@@ -76,9 +76,11 @@ public class Login {
         if (principal != null) {
             User loginedUser = (User) ((Authentication) principal).getPrincipal();
             String userInfo = WebUtils.toString(loginedUser);
+            AccountUser accountUser = accountService.findByEmail(principal.getName());
             model.addAttribute("userInfo", userInfo);
             String message = "Hi " + principal.getName() //
-                    + "<br> You do not have permission to access this page!";
+                    + " You do not have permission to access this page!";
+            model.addAttribute("info",passengersService.findByIdAccount(accountUser.getId()));
             model.addAttribute("message", message);
         }
         return "400Page";

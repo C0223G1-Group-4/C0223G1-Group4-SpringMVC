@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<div class="container" id="container">zz
+<div class="container" id="container">
   <div class="form-container sign-up-container">
     <!--sign_up-->
     <form action="/signup" method="post" th:object="${passengerDto}" >
@@ -29,67 +29,66 @@
 
       <div class="row" style=" height: 70px">
         <div class="col-md-6 mb-2">
-          <div class="form-outline mb-4" style="height: 50px">
-            <input type="text" id="form2Example18"  th:field="*{name}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
-            <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+          <div class="form-outline mb-4 content">
+            <input type="text" id="form2Example18"  th:field="*{name}" class="form-control form-control-lg" style="padding-right: 6px;padding-left: 4px;margin-right: 67px"/>
             <label class="form-label" for="form2Example18">Full Name</label>
           </div>
+          <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
         </div>
-        <div class="col-md-6 mb-4">
-          <div class="form-outline mb-4" style="height: 50px">
-            <input type="text" id="form2Example19"  th:field="*{citizenId}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
-            <span style="color: red" th:if="${#fields.hasErrors('citizenId')}" th:errors="*{citizenId}"></span>
+        <div class="col-md-6 mb-2 content">
+          <div class="form-outline mb-4">
+            <input type="text" id="form2Example19"  th:field="*{citizenId}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px"/>
             <label class="form-label" for="form2Example19">Citizen ID</label>
           </div>
+          <span style="color: red" th:if="${#fields.hasErrors('citizenId')}" th:errors="*{citizenId}"></span>
         </div>
       </div>
       <div class="row" style=" height: 70px">
         <div class="col-md-6 mb-2">
           <div class="form-outline mb-4" style="height: 50px">
-            <input type="date" id="form2Example20"  th:field="*{age}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
-            <span style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+            <input type="date" id="form2Example20"  th:field="*{age}" class="form-control form-control-lg" style="padding-right: 100px;padding-left: 10px"/>
             <label class="form-label" for="form2Example20">Day of Birth</label>
           </div>
+          <span style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
         </div>
         <div class="col-md-6 mb-4">
           <div class="form-outline mb-4" style="height: 50px">
-            <input type="text" id="form2Example2"  th:field="*{nationality}"  class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
-            <span style="color: red" th:if="${#fields.hasErrors('nationality')}" th:errors="*{nationality}"></span>
+            <input type="text" id="form2Example2"  th:field="*{nationality}"  class="form-control form-control-lg"  style="padding-right: 10px;padding-left: 10px"/>
             <label class="form-label" for="form2Example2">Nationality</label>
           </div>
+          <span style="color: red" th:if="${#fields.hasErrors('nationality')}" th:errors="*{nationality}"></span>
         </div>
       </div>
 
       <div class="form-outline mb-4" style="height: 50px">
-        <input type="text" id="form2Example1"  th:field="*{address}" class="form-control form-control-lg"/>
-        <span style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+        <input type="text" id="form2Example1"  th:field="*{address}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 350px"/>
         <label class="form-label" for="form2Example1">Address</label>
       </div>
-
+      <span style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
       <div class="form-outline mb-4" style="height: 50px">
-        <input type="text" id="form2Example3"  th:field="*{phoneNumber}" class="form-control form-control-lg"/>
-        <span style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+        <input type="text" id="form2Example3"  th:field="*{phoneNumber}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 350px"/>
         <label class="form-label" for="form2Example3">Tel</label>
       </div>
+      <span style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
       <div class="form-outline mb-4" style="height: 50px">
-        <input type="text" id="form2Example4"  th:field="*{accountUserDto.email}" class="form-control form-control-lg"/>
-        <span style="color: red" th:if="${#fields.hasErrors('accountUserDto.email')}" th:errors="*{accountUserDto.email}"></span>
+        <input type="text" id="form2Example4"  th:field="*{accountUserDto.email}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 350px"/>
         <label class="form-label" for="form2Example4">Email</label>
       </div>
+      <span style="color: red" th:if="${#fields.hasErrors('accountUserDto.email')}" th:errors="*{accountUserDto.email}"></span>
       <div class="row" style=" height: 70px">
         <div class="col-md-6 mb-2">
           <div class="form-outline mb-4" style="height: 50px">
-            <input type="password" id="form2Example5"  th:field="*{accountUserDto.passwords}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
-            <span style="color: red" th:if="${#fields.hasErrors('accountUserDto.passwords')}" th:errors="*{accountUserDto.passwords}"></span>
+            <input type="password" id="form2Example5"  th:field="*{accountUserDto.passwords}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px"/>
             <label class="form-label" for="form2Example5">Password</label>
           </div>
+          <span style="color: red" th:if="${#fields.hasErrors('accountUserDto.passwords')}" th:errors="*{accountUserDto.passwords}"></span>
         </div>
         <div class="col-md-6 mb-4">
           <div class="form-outline mb-4" style="height: 50px">
-            <input type="password" id="form2Example6"  onkeyup="checkRPW()" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
-            <span style="color: red" id="message"></span>
+            <input type="password" id="form2Example6"  onkeyup="checkRPW()" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px"/>
             <label class="form-label" for="form2Example6">Confirm Password</label>
           </div>
+          <span style="color: red" id="message"></span>
         </div>
       </div>
       <button id="button" type="submit">Sign Up</button>
@@ -103,9 +102,7 @@
         <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
         <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
-
 <!--      Sign in-->
-
       <div class="form-outline mb-4" style="height: 50px;width: 70%">
         <input type="text" id="form2Example8" th:field="*{email}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
         <label class="form-label" for="form2Example8">Email</label>
