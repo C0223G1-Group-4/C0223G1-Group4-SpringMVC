@@ -46,7 +46,7 @@
      style="
     position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 2s forwards;
     transition: all linear 0.3s;">
-    <div class="toast-header bg-warning">
+    <div class="toast-header bg-danger">
         <strong class="me-auto">Notification</strong>
         <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>
     </div>
@@ -144,10 +144,9 @@
                 </center>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <form th:action="@{/flight-schedule/delete}">
                     <input type="hidden" id="deleteId" name="deleteId">
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Delete</button>
                 </form>
             </div>
         </div>

@@ -135,14 +135,6 @@ public class FlightScheduleController {
                 count++;
             }
         }
-//        SimpleDateFormat inputF=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-//        SimpleDateFormat onputF=new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-//        Date dateArr=inputF.parse(flightSchedule.getArrival());
-//        Date dateDe=inputF.parse(flightSchedule.getDeparture());
-//        String formatArr=onputF.format(dateArr);
-//        String formatDe=onputF.format(dateDe);
-//        flightSchedule.setDeparture(formatDe);
-//        flightSchedule.setArrival(formatArr);
         if (count==0){
             if (this.iFlightScheduleService.editFlightSchedule(flightSchedule)) {
                 redirectAttributes.addFlashAttribute("msg", "Sửa đối tượng thành công");
