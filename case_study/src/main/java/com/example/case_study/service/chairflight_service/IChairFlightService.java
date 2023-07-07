@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface IChairFlightService {
     List<ChairFlight> getList( int num);
+    void update(ChairFlight chairFlight);
 
 }

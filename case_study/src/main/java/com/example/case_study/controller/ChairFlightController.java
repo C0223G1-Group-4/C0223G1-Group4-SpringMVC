@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -22,4 +24,13 @@ public class ChairFlightController {
         return "chair_flight/chair_flight";
     }
 
+    @PostMapping("/create")
+    public String create(@RequestParam("chair") List<ChairFlight> chairFlightList ){
+        for (ChairFlight c: chairFlightList
+             ) {
+            c.setStatusChair(true);
+            this.chairFlightService.update(c);
+        }
+        return "redirect:/chair_flight";
+    }
 }

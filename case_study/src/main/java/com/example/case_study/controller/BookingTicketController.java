@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("")
-public class ControllerTest {
+@RequestMapping("/ticket")
+public class BookingTicketController {
+
     @GetMapping("")
-    public String show(){
-        return "home/index";
+    public String showTicket(){
+        return "information_ticket/information_ticket";
     }
 }

@@ -14,43 +14,56 @@
 <div class="container">
     <h1 style="text-align: center;margin-bottom: 20px">BOOKING TICKET</h1>
     <div class="row">
-    <div class="col-lg-6">
-        <div class="plane">
-            <div class="cockpit">
-                <h1>Vietnam Airline</h1>
-            </div>
-            <div class="exit exit--front fuselage">
+        <div class="col-lg-6">
+            <div class="plane">
+                <div class="cockpit">
+                    <h1>Vietnam Airline</h1>
+                </div>
+                <div class="exit exit--front fuselage">
 
-            </div>
-            <div class="row" >
-                <div class="col-2" th:each="l,loop:${list}" style="margin-bottom: 20px">
-                    <button type="button" class="btn btn-primary"
-                            th:text="${l.getChair().nameChair}" th:id="${l.id}">
-                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-2" th:each="l,loop:${list}" style="margin-bottom: 20px">
+                        <div th:if="${l.statusChair==true}">
+                            <button disabled type="button" class="btn btn-danger"
+                                    th:text="${l.getChair().nameChair}" th:id="${l.id}">
+                            </button>
+                        </div>
+                        <div th:if="${l.statusChair==false}">
+                            <button type="button" disabled class="btn btn-primary"
+                                    th:text="${l.getChair().nameChair}" th:id="${l.id}">
+                            </button>
+                        </div>
+
+                        <!--                    <li class="seat">-->
+                        <!--                        <input type="checkbox" th:id="${l.id}"/>-->
+                        <!--                        <label th:for="${l.id}" th:text="  ${l.getChair().nameChair}  "></label>-->
+                        <!--                    </li>-->
+                    </div>
+                </div>
+                <div class="exit exit--front fuselage">
+
                 </div>
             </div>
-            <div class="exit exit--front fuselage">
-
-            </div>
         </div>
-    </div>
-    <div class="col-lg-6">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Ticket Information</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td scope="row"></td>
-                <td></td>
-                <td></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="col-lg-6">
+            <form th:action="@{/chair_flight/create}" th:method="post">
+                    <h1>Danh sách ghế còn lại</h1>
+                <div class="row">
+                    <div class="col-2" th:each="l:${list}">
+            <span style="float: left" th:if="${l.statusChair==false}">
+                <input type="checkbox" th:value="${l.id}" name="chair"/>
+                <label th:for="${l.id}" th:text="${l.getChair().nameChair}"></label>
+            </span>
+                        <span style="float: left" th:if="${l.statusChair==true}">
+                <input disabled type="checkbox" th:value="${l.id}"/>
+                <label th:for="${l.id}" th:text="  ${l.getChair().nameChair}"></label>
+            </span>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">submit</button>
+            </form>
+        </div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -58,17 +71,6 @@
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-function changeColor(id){
-    if(document.getElementById(id).value==0){
-        document.getElementById(id).value=1
-        document.getElementById(id).style.backgroundColor="green";
-        return;
-    }
-    document.getElementById(id).style.backgroundColor="red";
-    document.getElementById(id).value=0;
-    return;
-
-}
 </script>
 </body>
 </html>

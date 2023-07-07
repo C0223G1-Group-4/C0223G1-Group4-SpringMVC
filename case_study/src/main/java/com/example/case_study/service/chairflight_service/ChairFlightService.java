@@ -16,4 +16,9 @@ public class ChairFlightService implements IChairFlightService{
     public List<ChairFlight> getList(int num) {
         return chairFlightRepository.getList(num);
     }
+
+    @Override
+    public void update(ChairFlight chairFlight) {
+        chairFlightRepository.save(chairFlight);
+    }
 }
