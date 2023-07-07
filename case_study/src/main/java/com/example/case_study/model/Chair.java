@@ -9,23 +9,23 @@ import javax.persistence.Id;
 public class Chair {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idChair;
+    private int id;
     private String nameChair;
 
     public Chair() {
     }
 
-    public Chair(int idChair, String nameChair) {
-        this.idChair = idChair;
+    public Chair(int id, String nameChair) {
+        this.id = id;
         this.nameChair = nameChair;
     }
 
-    public int getIdChair() {
-        return idChair;
+    public int getId() {
+        return id;
     }
 
-    public void setIdChair(int idChair) {
-        this.idChair = idChair;
+    public void setId(int idChair) {
+        this.id = idChair;
     }
 
     public String getNameChair() {

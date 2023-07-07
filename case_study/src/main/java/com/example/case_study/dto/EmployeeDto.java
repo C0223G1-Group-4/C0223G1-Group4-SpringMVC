@@ -1,12 +1,11 @@
 package com.example.case_study.dto;
 
-import com.example.case_study.model.AccountUser;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.Period;
@@ -18,17 +17,23 @@ public class EmployeeDto implements Validator {
     private Integer id;
     @NotBlank(message = "Employees name cannot be blank!")
     @Size(min = 2 , max = 45)
-    @Pattern(regexp = "^[\\\\p{Lu}][\\\\p{Ll}]*([\\\\s][\\\\p{Lu}][\\\\p{Ll}]*)*$")
+//    @Pattern(regexp = "^[\\\\p{Lu}][\\\\p{Ll}]*([\\\\s][\\\\p{Lu}][\\\\p{Ll}]*)*$")
     private String nameEmployee;
-    @NotBlank(message = "Age cannot be empty!")
+//    @NotBlank(message = "Age cannot be empty!")
+    @NotNull(message = "Age cannot be empty!")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String age;
     @NotBlank(message = "Address cannot be empty!")
     private String address;
     @NotBlank(message = "Phone number cannot be blank, minimum length is 10 and maximum is 12!")
     @Size(min = 10, max = 12)
-    @Pattern(regexp = "^0\\\\d{10,12}$")
+//    @Pattern(regexp = "^0\\\\d{10,12}$")
     private String telephone;
 //    private boolean flagDelete;
+
+
+    public EmployeeDto() {
+    }
 
     public EmployeeDto(Integer id, String nameEmployee, String age, String address, String telephone) {
         this.id = id;
@@ -94,16 +99,17 @@ public class EmployeeDto implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         EmployeeDto employeesDto = (EmployeeDto) target;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
-            LocalDate age = LocalDate.parse(employeesDto.getAge(), formatter);
+            LocalDate age = LocalDate.parse(employeesDto.age, formatter);
             LocalDate now = LocalDate.now();
             int yearOld = Period.between(age,now).getYears();
             if (yearOld >= 65 || yearOld < 18){
-                errors.rejectValue("age", "You are not old enough or over the required age of the employee!");
+                errors.rejectValue("age", "", "You are not old enough or over the required age of the employee!");
             }
-        }catch (DateTimeParseException e){
-            errors.rejectValue("age","age", "Wrong date format!");
+        }
+        catch (DateTimeParseException e){
+            errors.rejectValue("age","", "Wrong date format!");
         }
 
     }

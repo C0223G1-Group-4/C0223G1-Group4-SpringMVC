@@ -36,8 +36,8 @@ public class PassengersServiceImpl implements IPassengersService {
     }
 
     @Override
-    public Optional<Passengers> findByIdPassengers(Integer id) {
-        return iPassengerRepository.findById(id);
+    public Passengers findByIdPassengers(Integer id) {
+        return iPassengerRepository.findById(id).get();
     }
 
     @Override
@@ -62,7 +62,12 @@ public class PassengersServiceImpl implements IPassengersService {
 
     @Override
     public Passengers findByIdAccount(Integer id) {
-        return iPassengerRepository.findPassengersByAccountUser_Id(id);
+        if (iPassengerRepository.findPassengersByAccountUser_Id(id) != null){
+            return iPassengerRepository.findPassengersByAccountUser_Id(id);
+        }else {
+            return null;
+        }
+
     }
 
     @Override
