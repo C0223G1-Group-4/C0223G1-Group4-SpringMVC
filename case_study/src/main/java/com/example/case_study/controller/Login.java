@@ -44,7 +44,7 @@ public class Login {
 
     @GetMapping("/logoutSuccessful")
     public String logout(Model model) {
-        return "index";
+        return "home/index";
     }
 
     @GetMapping(value = "/userInfo")
