@@ -89,11 +89,11 @@ public class AirCraftController {
         return "redirect:/air-craft";
     }
     // Tài
-    @GetMapping("delete/{id}")
-    public String deleteAirCraft(@PathVariable int id,RedirectAttributes redirectAttributes){
-            if (this.iAirCraftService.findByIdAirCraft(id)!=null){
-                this.iAirCraftService.findByIdAirCraft(id).setFlag(true);
-                this.iAirCraftService.deleteAirCraft(this.iAirCraftService.findByIdAirCraft(id));
+    @GetMapping("delete")
+    public String deleteAirCraft(@RequestParam int deleteId,RedirectAttributes redirectAttributes){
+            if (this.iAirCraftService.findByIdAirCraft(deleteId)!=null){
+                this.iAirCraftService.findByIdAirCraft(deleteId).setFlag(true);
+                this.iAirCraftService.deleteAirCraft(this.iAirCraftService.findByIdAirCraft(deleteId));
                 redirectAttributes.addFlashAttribute("msg","Xóa thành công");
             }else {
                 redirectAttributes.addFlashAttribute("msg","Không tồn tại đối tượng này");

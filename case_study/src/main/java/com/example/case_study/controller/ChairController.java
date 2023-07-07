@@ -29,5 +29,4 @@ public class ChairController {
         model.addAttribute("list9",chairService.getList(9));
         return "chair/chair";
     }
-
 }
