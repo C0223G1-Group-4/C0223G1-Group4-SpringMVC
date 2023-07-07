@@ -35,10 +35,6 @@ public class Login {
     private IPassengersService passengersService;
     @Autowired
     private IEmployeesService employeesService;
-    @GetMapping("/")
-    public String home(Model model) {
-        return "index";
-    }
     @GetMapping("/login")
     public String formLogin(Model model) {
         model.addAttribute("accountDto", new AccountUserDto());

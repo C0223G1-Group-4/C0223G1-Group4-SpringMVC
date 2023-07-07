@@ -33,24 +33,24 @@ public class PassengerController {
         model.addAttribute("search", search);
         return "/list_passenger";
     }
-    @GetMapping("/create-form-passenger")
-    public String formCreatePassenger(Model model){
-        model.addAttribute("passengerDto", new PassengerDto());
-        return "/create_passenger";
-    }
-    @PostMapping("/add-passenger")
-    public String addPassenger(@Valid @ModelAttribute PassengerDto passengerDto, BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes){
-        new PassengerDto().validate(passengerDto,bindingResult);
-        if (bindingResult.hasFieldErrors()){
-            return "/create_passenger";
-        }
-        Passengers passengers = new Passengers();
-        BeanUtils.copyProperties(passengerDto, passengers);
-        iPassengersService.create(passengers);
-        redirectAttributes.addFlashAttribute("msg1","Add passengerDto new success!");
-        return "redirect:/passenger";
-    }
+//    @GetMapping("/create-form-passenger")
+//    public String formCreatePassenger(Model model){
+//        model.addAttribute("passengerDto", new PassengerDto());
+//        return "/create_passenger";
+//    }
+//    @PostMapping("/add-passenger")
+//    public String addPassenger(@Valid @ModelAttribute PassengerDto passengerDto, BindingResult bindingResult,
+//                               RedirectAttributes redirectAttributes){
+//        new PassengerDto().validate(passengerDto,bindingResult);
+//        if (bindingResult.hasFieldErrors()){
+//            return "/create_passenger";
+//        }
+//        Passengers passengers = new Passengers();
+//        BeanUtils.copyProperties(passengerDto, passengers);
+//        iPassengersService.create(passengers);
+//        redirectAttributes.addFlashAttribute("msg1","Add passengerDto new success!");
+//        return "redirect:/passenger";
+//    }
     @GetMapping("/info/{id}")
     public String detailPassenger(@PathVariable Integer id, Model model){
         model.addAttribute("passenger",iPassengersService.findByIdPassengers(id));
