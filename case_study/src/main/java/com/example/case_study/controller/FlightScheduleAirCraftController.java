@@ -132,6 +132,7 @@ public class FlightScheduleAirCraftController {
     @GetMapping("delete")
         public String delete(@RequestParam int deleteId , RedirectAttributes redirectAttributes){
         if (this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(deleteId)!=null){
+            this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(deleteId).setFlag(true);
             this.iFlightScheduleAirCraftService.deleteFlightScheduleAirCraft(this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(deleteId));
             redirectAttributes.addFlashAttribute("msg","Delete Success");
         }else {
