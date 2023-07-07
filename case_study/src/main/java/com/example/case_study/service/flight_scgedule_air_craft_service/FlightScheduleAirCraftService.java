@@ -43,4 +43,9 @@ public class FlightScheduleAirCraftService implements IFlightScheduleAirCraftSer
     public FlightScheduleAirCraft findByIdFlightScheduleAirCraft(int id) {
         return iFlightScheduleAirCraftRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public List<FlightScheduleAirCraft> searchTicket(String departure, String arrival, String destination) {
+        return this.iFlightScheduleAirCraftRepository.searchTicket(departure,arrival,destination);
+    }
 }

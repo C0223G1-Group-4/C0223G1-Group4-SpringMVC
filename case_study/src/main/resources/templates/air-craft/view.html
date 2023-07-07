@@ -2,14 +2,58 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="css/style-of-tai.css">
+    <title>List Air Craft</title>
+    <link rel="stylesheet" href="home/css/style-of-tai.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="home/css/button-of-tai.css">
+    <style>
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(calc(100%));
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        div p{
+            color: black;
+        }
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-<a href="aircraft/create">Create</a>
+<div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${msg != null}"
+     style="
+    position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 2s forwards; // thời gian msg trượt
+    transition: all linear 0.3s;">
+    <div class="toast-header bg-success">
+        <strong class="me-auto">Notification</strong>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>
+    </div>
+    <div class="toast-body" >
+        <p th:text="${msg}"></p>
+    </div>
+</div>
+<div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${msgErr != null}"
+     style="
+    position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 2s forwards;
+    transition: all linear 0.3s;">
+    <div class="toast-header bg-warning">
+        <strong class="me-auto">Notification</strong>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>
+    </div>
+    <div class="toast-body" >
+        <p th:text="${msgErr}"></p>
+    </div>
+</div>
 <section>
     <h1>Management AirCraft</h1>
     <div class="tbl-header">
@@ -18,10 +62,14 @@
             <tr>
                 <th>STT</th>
                 <th>Số lượng người</th>
-                <th>Mã máy bay</th>
                 <th>Mã chuyến bay</th>
-                <th>Sửa</th>
-                <th>Xóa</th>
+                <th>Mã máy bay</th>
+                <th><a href="air-craft/create">
+                    <button class="button">
+                        <span class="button-text" style="font-size: 25px"><i class="fa-solid fa-plane"></i></span>
+                        <div class="fill-container"></div>
+                    </button>
+                </a></th>
             </tr>
             </thead>
         </table>
@@ -40,7 +88,8 @@
                 </th:block>
                 <td th:text="${aircraft.numberAirCraft}"></td>
                 <td>
-                    <a th:href="@{aircraft/edit/{id}(id=${aircraft.id})}">Sửa</a>
+                    <a th:href="@{air-craft/edit/{id}(id=${aircraft.id})}"><span style="font-size: 20px;color: whitesmoke"><i
+                            class="fa-solid fa-pen-to-square"></i></span></a>
                     <a th:attr="onclick=|deleteFlightSchedule('${aircraft.id}','${aircraft.numberAirCraft}')|" href="#"
                        data-bs-toggle="modal" data-bs-target="#exampleModal"> <span
                             style="font-size: 20px;padding-left: 20px;color: whitesmoke"><i
@@ -51,9 +100,28 @@
         </table>
     </div>
 </section>
-<a th:if="${aircraftList.hasPrevious()}" th:href="@{/aircraft(page=${aircraftList.number -1})}">Trước</a>
-<a th:if="${aircraftList.hasNext()}" th:href="@{/aircraft(page=${aircraftList.number +1})}">Sau</a>
+
+<center>
+        <p th:text="${aircraftList.getNumber()+1}"></p>
+</center>
+<center>
+    <a th:if="${aircraftList.hasPrevious()}" th:href="@{air-craft(page=${aircraftList.number -1})}">
+        <button style="width: 80px;height: 40px;background: #3893cc;border-radius: 30px;border: whitesmoke">
+        <span style="color: whitesmoke">
+            <i class="fa-solid fa-angles-left"></i>
+        </span>
+        </button>
+    </a>
+    <a th:if="${aircraftList.hasNext()}" th:href="@{air-craft(page=${aircraftList.number +1})}">
+        <button style="width: 80px;height: 40px;background: #3893cc;border-radius: 30px;border: solid 1px whitesmoke">
+        <span style="color: whitesmoke">
+           <i class="fa-solid fa-angles-right"></i>
+        </span>
+        </button>
+    </a>
+</center>
 </body>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
@@ -73,10 +141,10 @@
             </div>
             <div class="modal-body">
                 <center>
-                    <span style="font-size: 120px"><i class="fa-solid fa-trash-can"></i></span>
+                    <span style="font-size: 120px;color: black"><i class="fa-solid fa-trash-can"></i></span>
                     <div>
                         <p style="color: red">Bạn có muốn xóa máy bay có mã </p>
-                        Number AirCraft: <span id="numberAirCraft"></span><br>
+                      <span style="color:black;">Number AirCraft:</span>   <span style="color:black;" id="numberAirCraft"></span><br>
                     </div>
                 </center>
             </div>

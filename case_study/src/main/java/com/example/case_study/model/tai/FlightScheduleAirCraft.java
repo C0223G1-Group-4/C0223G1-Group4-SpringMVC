@@ -10,7 +10,7 @@ import javax.persistence.*;
         private Integer id;
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "flightSchedule_id")
-        private FlightSchedule flightSchedule;
+         private FlightSchedule flightSchedule;
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "air_craft_id")
         private AirCraft idAirCraft;

@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("flight-schedule-air-craft")
+@RequestMapping("/flight-schedule-air-craft")
 public class FlightScheduleAirCraftController {
     @Autowired
     private IFlightScheduleAirCraftService iFlightScheduleAirCraftService;
@@ -36,12 +36,14 @@ public class FlightScheduleAirCraftController {
     @Autowired
     private IFlightScheduleService iFlightScheduleService;
 
+    // Tài
     @GetMapping("")
     public String getList(@PageableDefault(value = 6) Pageable pageable, Model model) {
         model.addAttribute("flightScheduleAirCraft", iFlightScheduleAirCraftService.getAllList(pageable));
         return "flight-schedule-air-craft/view";
     }
 
+    // Tài
     @GetMapping("create")
     public String create(Model model) {
         model.addAttribute("flightScheduleAirCraft", new FlightScheduleAirCraft());
@@ -51,14 +53,15 @@ public class FlightScheduleAirCraftController {
         return "flight-schedule-air-craft/create";
     }
 
+    // Tài
     @PostMapping("create")
     public String create(@ModelAttribute FlightScheduleAirCraft flightScheduleAirCraft, @RequestParam int idRoute, RedirectAttributes redirectAttributes) {
-            int count = 0;
-        LocalDate localDate = LocalDate.parse((flightScheduleAirCraft.getFlightSchedule().getDeparture()).substring(0,10));
+        int count = 0;
+        LocalDate localDate = LocalDate.parse((flightScheduleAirCraft.getFlightSchedule().getDeparture()).substring(0, 10));
         int dateCheck = localDate.getDayOfYear();
         List<FlightScheduleAirCraft> flightScheduleAirCraftList = this.iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft();
         for (FlightScheduleAirCraft f : flightScheduleAirCraftList) {
-            LocalDate localDateLoop = LocalDate.parse(f.getFlightSchedule().getDeparture().substring(0,10));
+            LocalDate localDateLoop = LocalDate.parse(f.getFlightSchedule().getDeparture().substring(0, 10));
             int dateLoop = localDateLoop.getDayOfYear();
             if (f.getFlightSchedule().getId() == flightScheduleAirCraft.getFlightSchedule().getId()
                     && f.getIdAirCraft().getRoutes().equals(flightScheduleAirCraft.getIdAirCraft().getRoutes())
@@ -80,11 +83,12 @@ public class FlightScheduleAirCraftController {
         return "redirect:/flight-schedule-air-craft";
     }
 
+    // Tài
     @GetMapping("edit/{id}")
     public String edit(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
         if (this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(id) != null) {
             model.addAttribute("flightScheduleAirCraft", this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(id));
-            model.addAttribute("route",this.iRouteService.findByIdRoute(this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(id).getIdAirCraft().getRoutes().get(0).getId()));
+            model.addAttribute("route", this.iRouteService.findByIdRoute(this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(id).getIdAirCraft().getRoutes().get(0).getId()));
             model.addAttribute("airCraftList", iAirCraftService.checkAllListAirCraft());
             model.addAttribute("routeList", iRouteService.checkAllListRoute());
             model.addAttribute("flightScheduleList", iFlightScheduleService.checkAllListFlightSchedule());
@@ -93,33 +97,55 @@ public class FlightScheduleAirCraftController {
         redirectAttributes.addFlashAttribute("msg", "Không tìm thấy đối tượng này");
         return "redirect:/flight-schedule";
     }
-@PostMapping("edit")
-    public String edit(@ModelAttribute FlightScheduleAirCraft flightScheduleAirCraft,@RequestParam int idRoute,Model model,RedirectAttributes redirectAttributes){
-    int count = 0;
-    LocalDate localDate = LocalDate.parse((flightScheduleAirCraft.getFlightSchedule().getDeparture()).substring(0,10));
-    int dateCheck = localDate.getDayOfYear();
-    List<FlightScheduleAirCraft> flightScheduleAirCraftList = this.iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft();
-    for (FlightScheduleAirCraft f : flightScheduleAirCraftList) {
-        LocalDate localDateLoop = LocalDate.parse(f.getFlightSchedule().getDeparture().substring(0,10));
-        int dateLoop = localDateLoop.getDayOfYear();
-        if (f.getFlightSchedule().getId() == flightScheduleAirCraft.getFlightSchedule().getId()
-                && f.getIdAirCraft().getRoutes().equals(flightScheduleAirCraft.getIdAirCraft().getRoutes())
-                && f.getIdAirCraft().equals(flightScheduleAirCraft.getIdAirCraft())
-                && dateCheck == dateLoop
-                &&!(f.getId().equals(flightScheduleAirCraft.getId()))){
-            count++;
+
+    // Tài
+    @PostMapping("edit")
+    public String edit(@ModelAttribute FlightScheduleAirCraft flightScheduleAirCraft, @RequestParam int idRoute, Model model, RedirectAttributes redirectAttributes) {
+        int count = 0;
+        LocalDate localDate = LocalDate.parse((flightScheduleAirCraft.getFlightSchedule().getDeparture()).substring(0, 10));
+        int dateCheck = localDate.getDayOfYear();
+        List<FlightScheduleAirCraft> flightScheduleAirCraftList = this.iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft();
+        for (FlightScheduleAirCraft f : flightScheduleAirCraftList) {
+            LocalDate localDateLoop = LocalDate.parse(f.getFlightSchedule().getDeparture().substring(0, 10));
+            int dateLoop = localDateLoop.getDayOfYear();
+            if (f.getFlightSchedule().getId() == flightScheduleAirCraft.getFlightSchedule().getId()
+                    && f.getIdAirCraft().getRoutes().equals(flightScheduleAirCraft.getIdAirCraft().getRoutes())
+                    && f.getIdAirCraft().equals(flightScheduleAirCraft.getIdAirCraft())
+                    && dateCheck == dateLoop
+                    && !(f.getId().equals(flightScheduleAirCraft.getId()))) {
+                count++;
+            }
         }
+        if (count != 0) {
+            redirectAttributes.addFlashAttribute("msgErr", "Lịch bay này đã có không thể sửa");
+        } else {
+            List<Route> routeList = new ArrayList<>();
+            routeList.add(this.iRouteService.findByIdRoute(idRoute));
+            this.iFlightScheduleAirCraftService.editFlightScheduleAirCraft(flightScheduleAirCraft);
+            this.iAirCraftService.findByIdAirCraft(flightScheduleAirCraft.getIdAirCraft().getId()).setRoutes(routeList);
+            this.iAirCraftService.editAirCraft(this.iAirCraftService.findByIdAirCraft(flightScheduleAirCraft.getIdAirCraft().getId()));
+            redirectAttributes.addFlashAttribute("msg", "Edit Success");
+        }
+        return "redirect:/flight-schedule-air-craft";
     }
-    if (count != 0) {
-        redirectAttributes.addFlashAttribute("msg", "Lịch bay này đã có không thể sửa");
-    } else {
-        List<Route> routeList = new ArrayList<>();
-        routeList.add(this.iRouteService.findByIdRoute(idRoute));
-        this.iFlightScheduleAirCraftService.editFlightScheduleAirCraft(flightScheduleAirCraft);
-        this.iAirCraftService.findByIdAirCraft(flightScheduleAirCraft.getIdAirCraft().getId()).setRoutes(routeList);
-        this.iAirCraftService.editAirCraft(this.iAirCraftService.findByIdAirCraft(flightScheduleAirCraft.getIdAirCraft().getId()));
-        redirectAttributes.addFlashAttribute("msg", "Sửa mới thành công");
+
+    @GetMapping("delete")
+        public String delete(@RequestParam int deleteId , RedirectAttributes redirectAttributes){
+        if (this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(deleteId)!=null){
+            this.iFlightScheduleAirCraftService.deleteFlightScheduleAirCraft(this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(deleteId));
+            redirectAttributes.addFlashAttribute("msg","Delete Success");
+        }else {
+            redirectAttributes.addFlashAttribute("msgErr","Delete Fail");
+        }
+        return "redirect:/flight-schedule-air-craft";
     }
-    return "redirect:/flight-schedule-air-craft";
-}
+    @GetMapping("search")
+    public String search(@RequestParam(defaultValue = "",required = false) String departure , @RequestParam(defaultValue = "",required = false) String arrival ,@RequestParam String destination,Model model,RedirectAttributes redirectAttributes){
+       List<FlightScheduleAirCraft> flightScheduleAirCrafts=this.iFlightScheduleAirCraftService.searchTicket(departure,arrival,destination);
+       if (flightScheduleAirCrafts.size()==0){
+           redirectAttributes.addFlashAttribute("msgErr","Not found ticket");
+       }
+       model.addAttribute("listTicket",flightScheduleAirCrafts);
+       return "booking";
+    }
 }

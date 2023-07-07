@@ -8,7 +8,7 @@ public class FlightSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String codeFlightSchedule;
-    private String dateFlightSchedule;
+
     private String departure;
     private String arrival;
     private boolean flag;
@@ -17,26 +17,17 @@ public class FlightSchedule {
     public FlightSchedule() {
     }
 
-    public FlightSchedule(Integer id, String dateFlightSchedule, String departure, String arrival, boolean flag) {
-        this.id = id;
-        this.dateFlightSchedule = dateFlightSchedule;
-        this.departure = departure;
-        this.arrival = arrival;
-        this.flag = flag;
 
-    }
-
-    public FlightSchedule(Integer id, String codeFlightSchedule, String dateFlightSchedule, String departure, String arrival, boolean flag) {
+    public FlightSchedule(Integer id, String codeFlightSchedule, String departure, String arrival, boolean flag) {
         this.id = id;
         this.codeFlightSchedule = codeFlightSchedule;
-        this.dateFlightSchedule = dateFlightSchedule;
         this.departure = departure;
         this.arrival = arrival;
         this.flag = flag;
     }
 
-    public FlightSchedule(String dateFlightSchedule, String departure, String arrival, boolean flag) {
-        this.dateFlightSchedule = dateFlightSchedule;
+    public FlightSchedule(String departure, String arrival, boolean flag) {
+
         this.departure = departure;
         this.arrival = arrival;
         this.flag = flag;
@@ -50,13 +41,6 @@ public class FlightSchedule {
         this.id = idFlightSchedule;
     }
 
-    public String getDateFlightSchedule() {
-        return dateFlightSchedule;
-    }
-
-    public void setDateFlightSchedule(String dateFlightSchedule) {
-        this.dateFlightSchedule = dateFlightSchedule;
-    }
 
     public String getDeparture() {
         return departure;

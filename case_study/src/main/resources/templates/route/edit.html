@@ -2,20 +2,59 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit Route</title>
+    <link rel="stylesheet" href="/home/css/form-create-edit.css">
 </head>
 <body>
-<form th:object="${route}" th:action="@{/route/edit}" th:method="post">
-    <input type="hidden" th:field="*{id}">
-    Điểm đi
-    <input type="text" th:field="*{airPort}">
-    Điểm đến
-     <input type="text" th:field="*{destination}">
-    Mã lộ trình
-    <input type="text" th:field="*{codeRoute}">
-    Tiền
-    <input type="text" th:field="*{fare}">
-    <button type="submit">Sửa</button>
-</form>
+
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <center><h2>Create Route</h2></center>
+                    <form th:object="${route}" th:action="@{/route/edit}" th:method="post">
+                        <input type="hidden" th:field="*{id}">
+                        <div class="col-md-12">
+                            <p> Air Port</p>
+                            <input class="form-control" type="text" th:field="*{airPort}" placeholder="Air Port"
+                                   required>
+                            <p style="color: red" th:if="${#fields.hasErrors('airPort')}" th:errors="*{airPort}"></p>
+                        </div>
+                        <div class="col-md-12">
+                            <p>Destination</p>
+                            <input class="form-control" type="text" th:field="*{destination}"
+                                   placeholder="Destination" required>
+                            <span style="color: red" th:if="${#fields.hasErrors('destination')}"
+                                  th:errors="*{destination}"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <p>Code Route</p>
+                            <input class="form-control" type="text" th:field="*{codeRoute}"
+                                   placeholder="Code Route" required>
+                            <span style="color: red" th:if="${#fields.hasErrors('codeRoute')}"
+                                  th:errors="*{codeRoute}"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <p>Fare</p>
+                            <input class="form-control" type="text" th:field="*{fare}"
+                                   placeholder="Fare" required>
+                            <span style="color: red" th:if="${#fields.hasErrors('fare')}"
+                                  th:errors="*{fare}"></span>
+                        </div>
+                        <center>
+                            <div class="form-button mt-3" style="padding-top: 30px">
+                                <button id="submit" type="submit"
+                                        style="width: 130px;height: 40px;background: #3893cc;color: whitesmoke;border-radius: 30px">
+                                    Create
+                                </button>
+                            </div>
+                        </center>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
