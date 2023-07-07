@@ -8,7 +8,6 @@ public class FlightSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String codeFlightSchedule;
-
     private String departure;
     private String arrival;
     private boolean flag;

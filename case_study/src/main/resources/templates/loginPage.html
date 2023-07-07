@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>TianFight</title>
+  <meta charset="UTF-8">
+  <title>TianFight</title>
   <style>
     @keyframes slideInRight {
       from{
@@ -57,7 +57,7 @@
   <div class="toast-header bg-success">
     <strong class="me-auto">Notification</strong>
     <small>1 second ago</small>
-<!--    <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>-->
+    <!--    <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>-->
   </div>
   <div class="toast-body" th:text="${success}">
   </div>
@@ -69,7 +69,7 @@
   <div class="toast-header bg-danger">
     <strong class="me-auto">Notification</strong>
     <small>1 second ago</small>
-<!--    <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>-->
+    <!--    <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>-->
   </div>
   <div class="toast-body" th:text="${fail}">
   </div>
@@ -80,6 +80,7 @@
 <div class="container" id="container">zz
   <div class="form-container sign-up-container">
     <!--sign_up-->
+
     <form action="/signup" method="post" th:object="${passengerDto}" >
       <h1>Sign up</h1>
       <div class="social-container">
@@ -158,14 +159,14 @@
   </div>
   <div class="form-container sign-in-container">
     <form th:action="@{/j_spring_security_check}" method="post" th:object="${accountDto}">
-    <h1>Sign in</h1>
+      <h1>Sign in</h1>
       <div class="social-container">
         <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
         <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
         <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
 
-<!--      Sign in-->
+      <!--      Sign in-->
 
       <div class="form-outline mb-4" style="height: 50px;width: 70%">
         <input type="text" id="form2Example8" th:field="*{email}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>

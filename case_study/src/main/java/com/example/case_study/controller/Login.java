@@ -55,7 +55,7 @@ public class Login {
         model.addAttribute("acc",accountUser);
         if (accountUser.getRoleUser().getName().equals("ROLE_Customer")){
             model.addAttribute("info",passengersService.findByIdAccount(accountUser.getId()));
-            return "index";
+            return "home/index";
         } else if(accountUser.getRoleUser().getName().equals("ROLE_Employee")){
 //            model.addAttribute("info",employeesService.findByIdAccount(accountUser.getId()));
             return "redirect:/passenger";
