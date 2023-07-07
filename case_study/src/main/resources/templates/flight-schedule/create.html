@@ -23,12 +23,12 @@
                         </div>
                         <div class="col-md-12">
                             <p>Departure</p>
-                            <input class="form-control" type="text" th:field="*{departure}" placeholder="Departure" required>
+                            <input class="form-control" type="datetime-local" th:field="*{departure}" placeholder="Departure" required>
                             <p style="color: red" th:if="${#fields.hasErrors('departure')}" th:errors="*{departure}"></p>
                         </div>
                           <div class="col-md-12">
                             <p>Arrival</p>
-                            <input class="form-control" type="text" th:field="*{arrival}" placeholder="Arrival" required>
+                            <input class="form-control" type="datetime-local" th:field="*{arrival}" placeholder="Arrival" required>
                             <p style="color: red" th:if="${#fields.hasErrors('arrival')}" th:errors="*{arrival}"></p>
                         </div>
                         <center>

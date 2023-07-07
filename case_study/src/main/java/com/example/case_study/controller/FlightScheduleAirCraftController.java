@@ -139,4 +139,13 @@ public class FlightScheduleAirCraftController {
         }
         return "redirect:/flight-schedule-air-craft";
     }
+    @GetMapping("search")
+    public String search(@RequestParam(defaultValue = "",required = false) String departure , @RequestParam(defaultValue = "",required = false) String arrival ,@RequestParam String destination,Model model,RedirectAttributes redirectAttributes){
+       List<FlightScheduleAirCraft> flightScheduleAirCrafts=this.iFlightScheduleAirCraftService.searchTicket(departure,arrival,destination);
+       if (flightScheduleAirCrafts.size()==0){
+           redirectAttributes.addFlashAttribute("msgErr","Not found ticket");
+       }
+       model.addAttribute("listTicket",flightScheduleAirCrafts);
+       return "booking";
+    }
 }

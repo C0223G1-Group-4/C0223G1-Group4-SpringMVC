@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create Flight Schedule Air Craft</title>
+    <title>Create Booking Ticket</title>
     <link rel="stylesheet" href="/css/form-create-edit.css">
 </head>
 <div th:if="${msg!=null}">
@@ -16,7 +16,7 @@
         <div class="form-holder">
             <div class="form-content">
                 <div class="form-items">
-                    <center><h2>Create flight schedule air craft</h2></center>
+                    <center><h2>Create Booking Ticket</h2></center>
                     <form th:action="@{/flight-schedule-air-craft/create}" th:method="post"
                           th:object="${flightScheduleAirCraft}">
                         <div class="col-md-12">

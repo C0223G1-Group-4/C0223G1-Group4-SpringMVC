@@ -3,23 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Flight Schedule</title>
+    <link rel="stylesheet" href="/css/form-create-edit.css">
+
 </head>
 <body>
-<form th:action="@{/flight-schedule/edit}" th:method="post" th:object="${flightSchedule}">
-    <input type="hidden" th:field="*{id}">
-    Mã lịch bay
-    <input type="text" th:field="*{codeFlightSchedule}">
-    <span style="color: red" th:if="${#fields.hasErrors('codeFlightSchedule')}" th:errors="*{codeFlightSchedule}"></span>
-
-    Ngày bay
-    <input type="text" th:field="*{departure}">
-    <span style="color: red" th:if="${#fields.hasErrors('departure')}" th:errors="*{departure}"></span>
-
-    Ngày đến
-    <input type="text" th:field="*{arrival}">
-    <span style="color: red" th:if="${#fields.hasErrors('arrival')}" th:errors="*{arrival}"></span>
-
-    <button type="submit">Sửa</button>
-</form>
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <center><h2>Create flight schedule</h2></center>
+                    <form th:action="@{/flight-schedule/edit}" th:method="post" th:object="${flightSchedule}">
+                        <input type="hidden" th:field="*{id}">
+                        <div class="col-md-12">
+                            <p>Code Flight Schedule</p>
+                            <input type="text" th:field="*{codeFlightSchedule}" class="form-control" required placeholder="Code Flight Schedule">
+                            <p style="color: red" th:if="${#fields.hasErrors('codeFlightSchedule')}" th:errors="*{codeFlightSchedule}"></p>
+                        </div>
+                        <div class="col-md-12">
+                            <p>Departure</p>
+                            <input class="form-control" type="text" th:field="*{departure}" placeholder="Departure" required>
+                            <p style="color: red" th:if="${#fields.hasErrors('departure')}" th:errors="*{departure}"></p>
+                        </div>
+                        <div class="col-md-12">
+                            <p>Arrival</p>
+                            <input class="form-control" type="text" th:field="*{arrival}" placeholder="Arrival" required>
+                            <p style="color: red" th:if="${#fields.hasErrors('arrival')}" th:errors="*{arrival}"></p>
+                        </div>
+                        <center>
+                            <div class="form-button mt-3" style="padding-top: 30px">
+                                <button id="submit" type="submit" style="width: 130px;height: 40px;background: #3893cc;border-radius: 30px;color: whitesmoke" >Create</button>
+                            </div>
+                        </center>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
+
+

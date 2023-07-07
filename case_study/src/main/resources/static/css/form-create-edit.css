@@ -86,8 +86,8 @@ html ,body{
     color: #000000;
 }
 
-.form-content input[type=text],input[type=number], .form-content input[type=password], .form-content input[type=email], .form-content select {
-    width: 90%;
+.form-content input[type=text],input[type=number],input[type=datetime-local], .form-content input[type=password], .form-content input[type=email], .form-content select {
+    width: 95%;
     padding: 9px 20px;
     text-align: left;
     border: 0;
