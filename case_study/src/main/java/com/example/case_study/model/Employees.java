@@ -40,6 +40,13 @@ public class Employees {
         this.accountUser = accountUser;
     }
 
+    public Employees(String nameEmployee, String age, String address, String telephone) {
+        this.nameEmployee = nameEmployee;
+        this.age = age;
+        this.address = address;
+        this.telephone = telephone;
+    }
+
     public boolean isFlagDelete() {
         return flagDelete;
     }
