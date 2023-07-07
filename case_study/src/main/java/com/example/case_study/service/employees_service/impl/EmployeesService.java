@@ -16,10 +16,10 @@ public class EmployeesService implements IEmployeesService {
     @Autowired
     private IEmployeeRepository iEmployeeRepository;
 
-    @Override
-    public List<Employees> findAll() {
-        return iEmployeeRepository.findAll();
-    }
+//    @Override
+//    public List<Employees> findAll() {
+//        return iEmployeeRepository.findAll();
+//    }
 
     @Override
     public Page<Employees> findAll(String name, Pageable pageable) {
@@ -46,5 +46,13 @@ public class EmployeesService implements IEmployeesService {
         return iEmployeeRepository.findById(id).get();
     }
 
+    @Override
+    public List<Employees> findByAccount(String email) {
+        return iEmployeeRepository.findByAccount(email);
+    }
 
+    @Override
+    public Employees findByIdAccount(Integer id) {
+        return iEmployeeRepository.findEmployeesByAccountUser_Id(id);
+    }
 }

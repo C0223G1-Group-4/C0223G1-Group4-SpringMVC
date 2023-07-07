@@ -8,10 +8,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IEmployeesService {
-    List<Employees> findAll();
     Page<Employees> findAll(String name, Pageable pageable);
     void create(Employees employees);
     void update(Employees employees);
     void delete(Integer id);
+//    Optional<Employees> findByIdEmployee(Integer id);
+    Employees findByIdAccount(Integer id);
     Employees findById(Integer id);
+    List<Employees> findByAccount(String email);
+
 }

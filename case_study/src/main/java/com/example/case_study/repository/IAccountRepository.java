@@ -8,4 +8,5 @@ import java.util.List;
 public interface IAccountRepository extends JpaRepository<AccountUser,Integer>{
     AccountUser findAccountUserByEmail(String email);
     List<AccountUser> findByEmail(String email);
+
 }
