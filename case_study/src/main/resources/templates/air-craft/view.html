@@ -64,12 +64,16 @@
                 <th>Số lượng người</th>
                 <th>Mã chuyến bay</th>
                 <th>Mã máy bay</th>
-                <th><a href="air-craft/create">
+                <th>
+                    <form th:action="@{/air-craft/create}" method="post">
+                    <a href="air-craft/create">
                     <button class="button">
                         <span class="button-text" style="font-size: 25px"><i class="fa-solid fa-plane"></i></span>
                         <div class="fill-container"></div>
                     </button>
-                </a></th>
+                </a>
+                    </form>
+                </th>
             </tr>
             </thead>
         </table>

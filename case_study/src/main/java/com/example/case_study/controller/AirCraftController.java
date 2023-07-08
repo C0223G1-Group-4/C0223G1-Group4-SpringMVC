@@ -36,29 +36,30 @@ public class AirCraftController {
         return "air-craft/view";
     }
     // Tài
-    @GetMapping("create")
-    public String createAirCraft(Model model) {
-        model.addAttribute("airCraftDto", new AirCraftDto());
-        model.addAttribute("routeList",this.iRouteService.checkAllListRoute());
-        return "air-craft/create";
-    }
+//    @GetMapping("/create")
+//    public String createAirCraft(Model model) {
+//        model.addAttribute("airCraftDto", new AirCraftDto());
+//        model.addAttribute("routeList",this.iRouteService.checkAllListRoute());
+//        return "air-craft/create";
+//    }
     // Tài
-    @PostMapping("create")
-    public String createAirCraft(@Valid @ModelAttribute AirCraftDto airCraftDto, BindingResult bindingResult,RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            return "air-craft/create";
-        }
-        AirCraft airCraft1 = new AirCraft();
-        BeanUtils.copyProperties(airCraftDto, airCraft1);
-//        List<Route> routes=new ArrayList<>();
-//        routes.add(this.iRouteService.findByIdRoute(idRoute));
-//        airCraft1.setRoutes(routes);
-        this.iAirCraftService.createAirCraft(airCraft1);
+    @PostMapping("/create")
+    public String createAirCraft(RedirectAttributes redirectAttributes) {
+        AirCraft airCraft=new AirCraft();
+       if (this.iAirCraftService.checkAllListAirCraft().size()==0){
+           airCraft.setNumberAirCraft("FS-"+1);
+           airCraft.setCapacity(60);
+       }else {
+           int numberAirCraft=this.iAirCraftService.checkAllListAirCraft().get(this.iAirCraftService.checkAllListAirCraft().size()-1).getId()+1;
+           airCraft.setNumberAirCraft("FS-"+(numberAirCraft));
+           airCraft.setCapacity(60);
+       }
+        this.iAirCraftService.createAirCraft(airCraft);
         redirectAttributes.addFlashAttribute("msg", "Thêm mới thành công");
         return "redirect:/air-craft";
     }
     // Tài
-    @GetMapping("edit/{id}")
+    @GetMapping("/edit/{id}")
     public String editAirCraft(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
         if (!this.iAirCraftService.findByIdAirCraft(id).isFlag()&& this.iAirCraftService.findByIdAirCraft(id)!= null) {
             model.addAttribute("airCraft", this.iAirCraftService.findByIdAirCraft(id));
@@ -69,7 +70,7 @@ public class AirCraftController {
         }
     }
     // Tài
-    @PostMapping("edit")
+    @PostMapping("/edit")
     public String editAirCraft(@Valid @ModelAttribute AirCraftDto airCraftDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "air-craft/edit";
@@ -89,7 +90,7 @@ public class AirCraftController {
         return "redirect:/air-craft";
     }
     // Tài
-    @GetMapping("delete")
+    @GetMapping("/delete")
     public String deleteAirCraft(@RequestParam int deleteId,RedirectAttributes redirectAttributes){
             if (this.iAirCraftService.findByIdAirCraft(deleteId)!=null){
                 this.iAirCraftService.findByIdAirCraft(deleteId).setFlag(true);

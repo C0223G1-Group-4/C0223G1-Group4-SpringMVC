@@ -2,6 +2,7 @@ package com.example.case_study.controller;
 
 import com.example.case_study.dto.FlightScheduleDto;
 import com.example.case_study.model.tai.FlightSchedule;
+import com.example.case_study.model.tai.FlightScheduleAirCraft;
 import com.example.case_study.model.tai.Route;
 import com.example.case_study.service.flight_schedule_service.IFlightScheduleService;
 import org.springframework.beans.BeanUtils;
@@ -19,9 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/flight-schedule")
@@ -30,18 +29,29 @@ public class FlightScheduleController {
     private IFlightScheduleService iFlightScheduleService;
     // Tài
     @GetMapping("")
-    public String getList(@PageableDefault(value = 4) Pageable pageable, Model model) {
+    public String getList(@PageableDefault(value = 4) Pageable pageable, Model model) throws ParseException {
+        Map<Integer,Date> dateMapDeparture=new HashMap<>();
+        Map<Integer,Date> dateMapArrival=new HashMap<>();
+        for (FlightSchedule f: iFlightScheduleService.checkAllListFlightSchedule()) {
+            SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date=format.parse(f.getDeparture());
+            Date date1=format.parse(f.getArrival());
+            dateMapDeparture.put(f.getId(),date);
+            dateMapArrival.put(f.getId(),date1);
+        }
+        model.addAttribute("dateMapDeparture",dateMapDeparture);
+        model.addAttribute("dateMapArrival",dateMapArrival);
         model.addAttribute("flightSchedule", iFlightScheduleService.getAllListFlightSchedule(pageable));
         return "flight-schedule/view";
     }
     // Tài
-    @GetMapping("create")
+    @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("flightScheduleDto", new FlightScheduleDto());
         return "flight-schedule/create";
     }
     // Tài
-    @PostMapping("create")
+    @PostMapping("/create")
     public String create(@Valid @ModelAttribute FlightScheduleDto flightScheduleDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "flight-schedule/create";
@@ -77,6 +87,14 @@ public class FlightScheduleController {
             }
         }
         if (count==0){
+            int codeFlightSchedule=0;
+            if (this.iFlightScheduleService.checkAllListFlightSchedule().size()==0){
+                codeFlightSchedule=1;
+            }else {
+             codeFlightSchedule =this.iFlightScheduleService.checkAllListFlightSchedule().get(this.iFlightScheduleService.checkAllListFlightSchedule().size()-1).getId()+1;
+            }
+
+            flightSchedule.setCodeFlightSchedule("FS-"+codeFlightSchedule);
             if (this.iFlightScheduleService.createFlightSchedule(flightSchedule)) {
                 redirectAttributes.addFlashAttribute("msg", "Thêm mới thành công");
             } else {
@@ -89,7 +107,7 @@ public class FlightScheduleController {
         return "redirect:/flight-schedule";
     }
     // Tài
-    @GetMapping("edit/{id}")
+    @GetMapping("/edit/{id}")
     public String edit(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
         if (this.iFlightScheduleService.findByIdFlightSchedule(id) != null) {
             model.addAttribute("flightSchedule", this.iFlightScheduleService.findByIdFlightSchedule(id));
@@ -99,7 +117,7 @@ public class FlightScheduleController {
         return "redirect:/flight-schedule";
     }
     // Tài
-    @PostMapping("edit")
+    @PostMapping("/edit")
     public String edit(@Valid @ModelAttribute FlightScheduleDto flightScheduleDto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) throws ParseException {
         if (bindingResult.hasErrors()) {
             return "flight-schedule/view";
@@ -148,7 +166,7 @@ public class FlightScheduleController {
         return "redirect:/flight-schedule";
     }
     // Tài
-    @GetMapping("delete")
+    @GetMapping("/delete")
     public String delete(@RequestParam int deleteId, RedirectAttributes redirectAttributes) {
         if (this.iFlightScheduleService.findByIdFlightSchedule(deleteId) != null) {
             this.iFlightScheduleService.findByIdFlightSchedule(deleteId).setFlag(true);

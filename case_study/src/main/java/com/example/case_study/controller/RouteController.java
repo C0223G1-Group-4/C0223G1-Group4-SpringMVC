@@ -31,20 +31,31 @@ public class RouteController {
         return "route/view";
     }
     // Tài
-    @GetMapping("create")
+    @GetMapping("/create")
     public String create(Model model){
-        model.addAttribute("routeDto",new RouteDto());
+        Route route=new Route();
+        route.setAirPort("Đà Nẵng");
+        model.addAttribute("routeDto",route);
         model.addAttribute("listAirCraft",this.iAirCraftService.checkAllListAirCraft());
         return "route/create";
     }
     // Tài
-    @PostMapping("create")
-    public String create(@Valid @ModelAttribute RouteDto routeDto, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    @PostMapping("/create")
+    public String create(@Valid @ModelAttribute RouteDto routeDto, BindingResult bindingResult,@RequestParam String destination, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
             return "route/view";
         }
         Route route=new Route();
         BeanUtils.copyProperties(routeDto,route);
+        int codeRoute=0;
+
+        if (this.iRouteService.checkAllListRoute().size()==0){
+            codeRoute=1;
+        }else {
+            codeRoute= this.iRouteService.checkAllListRoute().get(this.iRouteService.checkAllListRoute().size()-1).getId()+1;
+        }
+        route.setDestination(destination);
+        route.setCodeRoute("CR-"+codeRoute);
         if (this.iRouteService.createRoute(route)){
             redirectAttributes.addFlashAttribute("msg","Thêm mới thành công");
         }else {
@@ -53,7 +64,7 @@ public class RouteController {
         return "redirect:/route";
     }
     // Tài
-    @GetMapping("edit/{id}")
+    @GetMapping("/edit/{id}")
     public String edit(@PathVariable int id, Model model,RedirectAttributes redirectAttributes){
           if (this.iRouteService.findByIdRoute(id)!=null){
               model.addAttribute("route",this.iRouteService.findByIdRoute(id));
@@ -64,7 +75,7 @@ public class RouteController {
           }
     }
     // Tài
-    @PostMapping("edit")
+    @PostMapping("/edit")
     public String edit(@Valid @ModelAttribute RouteDto routeDto,BindingResult bindingResult,RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
             return "route/view";
@@ -79,7 +90,7 @@ public class RouteController {
         return "redirect:/route";
     }
     // Tài
-    @GetMapping("delete")
+    @GetMapping("/delete")
     public String delete(@RequestParam int deleteId,RedirectAttributes redirectAttributes){
         if (this.iRouteService.findByIdRoute(deleteId)!=null){
             this.iRouteService.findByIdRoute(deleteId).setFlag(true);

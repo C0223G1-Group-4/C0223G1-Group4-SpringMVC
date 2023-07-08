@@ -30,6 +30,7 @@ public class AirCraftDto {
         this.numberAirCraft = numberAirCraft;
         this.capacity = capacity;
         this.routes = routes;
+
     }
 
     public Integer getId() {

@@ -5,7 +5,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Travel Agency a Travel Agency Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
 <!-- custom-theme -->
@@ -26,18 +26,63 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <!-- font-awesome-icons -->
 <link href="home/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 <!-- //font-awesome-icons -->
 <!-- googlefonts -->
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,vietnamese" rel="stylesheet">
-<!-- //googlefonts -->
+	<link rel="stylesheet" href="home/css/search-ticket-booking.css">
+	<!-- //googlefonts -->
 
 </head>
 <body>
-		
+<a class="login-trigger" href="#" data-target="#login" data-toggle="modal" style="position: fixed"><span class="inline-danger"><i class="fa-solid fa-magnifying-glass"></i></span></a>
 <!-- banner -->
 
+<div id="login" class="modal fade" role="dialog">
+	<div class="modal-dialog">
 
+		<div class="modal-content">
+			<div class="modal-body">
+				<button data-dismiss="modal" class="close">&times;</button>
+				<h4>Search Ticket</h4>
+				<form th:action="@{/flight-schedule-air-craft/search}" th:method="get">
+						<div class="col-md-12">
+							<p>Destination</p>
+							<select name="destination" class="form-select mt-3" required>
+								<option
+										value="Sài Gòn">
+									Sài Gòn
+								</option>
+								<option
+										value="Huế">Huế
+								</option>
+								<option
+										value="Hà Nội">Hà Nội
+								</option>
+							</select>
+						</div>
+					<div class="col-md-12">
+						<p>Departure</p>
+						<input type="date" name="departure">
+					</div>
+					<div class="col-md-12">
+						<p>Arrival</p>
+						<input type="date" name="arrival">
+					</div>
+					<center>
+						<div class="form-button mt-3" style="padding-top: 30px">
+							<button id="submit" type="submit"
+									style="width: 130px;height: 40px;background: #3893cc;color: whitesmoke;border-radius: 30px">
+								<span class="inline-danger"><i class="fa-solid fa-magnifying-glass"></i></span>
+							</button>
+						</div>
+					</center>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 		<!-- Top-Bar -->
 				<div class="top">
 					<div class="container">
