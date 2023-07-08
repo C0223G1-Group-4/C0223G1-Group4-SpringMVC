@@ -102,6 +102,8 @@
         <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
         <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
+      <p style="color: #d90b0b" th:if="${msg!= null}" th:text="${msg}"></p>
+
 <!--      Sign in-->
       <div class="form-outline mb-4" style="height: 50px;width: 70%">
         <input type="text" id="form2Example8" th:field="*{email}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
