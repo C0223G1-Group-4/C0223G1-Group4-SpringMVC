@@ -86,7 +86,8 @@
                 <td th:text="${route.airPort}"></td>
                 <td th:text="${route.destination}"></td>
                 <td th:text="${route.codeRoute}"></td>
-                <td th:text="${route.fare}"></td>
+                <td> <span th:text="${#numbers.formatDecimal(route.fare, 2, 'COMMA', 0, 'POINT')}"></span> VNĐ</td>
+
                 <td>
                     <a th:href="@{route/edit/{id}(id=${route.id})}"><span style="font-size: 20px;color: whitesmoke"><i
                             class="fa-solid fa-pen-to-square"></i></span></a>

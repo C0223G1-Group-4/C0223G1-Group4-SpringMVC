@@ -33,18 +33,29 @@ public class RouteController {
     // Tài
     @GetMapping("/create")
     public String create(Model model){
-        model.addAttribute("routeDto",new RouteDto());
+        Route route=new Route();
+        route.setAirPort("Đà Nẵng");
+        model.addAttribute("routeDto",route);
         model.addAttribute("listAirCraft",this.iAirCraftService.checkAllListAirCraft());
         return "route/create";
     }
     // Tài
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute RouteDto routeDto, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String create(@Valid @ModelAttribute RouteDto routeDto, BindingResult bindingResult,@RequestParam String destination, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
             return "route/view";
         }
         Route route=new Route();
         BeanUtils.copyProperties(routeDto,route);
+        int codeRoute=0;
+
+        if (this.iRouteService.checkAllListRoute().size()==0){
+            codeRoute=1;
+        }else {
+            codeRoute= this.iRouteService.checkAllListRoute().get(this.iRouteService.checkAllListRoute().size()-1).getId()+1;
+        }
+        route.setDestination(destination);
+        route.setCodeRoute("CR-"+codeRoute);
         if (this.iRouteService.createRoute(route)){
             redirectAttributes.addFlashAttribute("msg","Thêm mới thành công");
         }else {

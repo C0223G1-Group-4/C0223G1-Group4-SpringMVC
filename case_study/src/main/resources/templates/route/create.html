@@ -6,55 +6,58 @@
     <link rel="stylesheet" href="/home/css/form-create-edit.css">
 </head>
 <body>
-<div class="form-body">
-    <div class="row">
-        <div class="form-holder">
-            <div class="form-content">
-                <div class="form-items">
-                    <center><h2>Create Route</h2></center>
-                    <form th:object="${routeDto}" th:action="@{/route/create}" th:method="post">
-                        <div class="col-md-12">
-                            <p> Air Port</p>
-                            <input class="form-control" type="text" th:field="*{airPort}" placeholder="Air Port"
-                                   required>
-                            <p style="color: red" th:if="${#fields.hasErrors('airPort')}" th:errors="*{airPort}"></p>
-                        </div>
-                        <div class="col-md-12">
-                            <p>Destination</p>
-                            <input class="form-control" type="text" th:field="*{destination}"
-                                   placeholder="Destination" required>
-                            <span style="color: red" th:if="${#fields.hasErrors('destination')}"
-                                  th:errors="*{destination}"></span>
-                        </div>
-                        <div class="col-md-12">
-                            <p>Code Route</p>
-                            <input class="form-control" type="text" th:field="*{codeRoute}"
-                                   placeholder="Code Route" required>
-                            <span style="color: red" th:if="${#fields.hasErrors('codeRoute')}"
-                                  th:errors="*{codeRoute}"></span>
-                        </div>
-                        <div class="col-md-12">
-                            <p>Fare</p>
-                            <input class="form-control" type="text" th:field="*{fare}"
-                                   placeholder="Fare" required>
-                            <span style="color: red" th:if="${#fields.hasErrors('fare')}"
-                                  th:errors="*{fare}"></span>
-                        </div>
-                        <center>
-                            <div class="form-button mt-3" style="padding-top: 30px">
-                                <button id="submit" type="submit"
-                                        style="width: 130px;height: 40px;background: #3893cc;color: whitesmoke;border-radius: 30px">
-                                    Create
-                                </button>
+<div class="container-fluid">
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <center><h2>Create Route</h2></center>
+                        <form th:object="${routeDto}" th:action="@{/route/create}" th:method="post">
+                            <div class="col-md-12">
+                                <p> Air Port</p>
+                                <input class="form-control" type="text" th:field="*{airPort}" placeholder="Đà Nẵng"
+                                       required readonly>
+                                <p style="color: red" th:if="${#fields.hasErrors('airPort')}"
+                                   th:errors="*{airPort}"></p>
                             </div>
-                        </center>
-                    </form>
+                            <div class="col-md-12">
+                                <p>Destination</p>
+                                <select name="destination" class="form-select mt-3" required>
+                                    <option
+                                            value="Sài Gòn">
+                                        Sài Gòn
+                                    </option>
+                                    <option
+                                            value="Huế">Huế
+                                    </option>
+                                    <option
+                                            value="Hà Nội">Hà Nội
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <p>Fare</p>
+                                <input class="form-control" type="text" th:field="*{fare}"
+                                       placeholder="Fare" required>
+                                <span style="color: red" th:if="${#fields.hasErrors('fare')}"
+                                      th:errors="*{fare}"></span>
+                            </div>
+                            <center>
+                                <div class="form-button mt-3" style="padding-top: 30px">
+                                    <button id="submit" type="submit"
+                                            style="width: 130px;height: 40px;background: #3893cc;color: whitesmoke;border-radius: 30px">
+                                        Create
+                                    </button>
+                                </div>
+                            </center>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 </form>
 </body>
 </html>

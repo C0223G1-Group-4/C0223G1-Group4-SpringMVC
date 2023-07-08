@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>List Flight Schedule Air Craft</title>
@@ -92,8 +92,8 @@
                                 <td th:text="${flightScheduleAirCraftLoop.idAirCraft.numberAirCraft}"></td>
                 <td th:text="${flightScheduleAirCraftLoop.flightSchedule.codeFlightSchedule}"></td>
                 <td th:text="${flightScheduleAirCraftLoop.idAirCraft.capacity}"></td>
-                <td th:text="${flightScheduleAirCraftLoop.flightSchedule.departure}"></td>
-                <td th:text="${flightScheduleAirCraftLoop.flightSchedule.arrival}"></td>
+                <td th:text="${#dates.format(dateMapDeparture.get(flightScheduleAirCraftLoop.id), 'dd-MM-yyyy HH:mm:ss')}"></td>
+                <td th:text="${#dates.format(dateMapArrival.get(flightScheduleAirCraftLoop.id), 'dd-MM-yyyy HH:mm:ss')}"></td>
                 <td th:text="${flightScheduleAirCraftLoop.idAirCraft.routes.get(0).codeRoute}"></td>
                 <td>
                     <a th:href="@{flight-schedule-air-craft/edit/{id}(id=${flightScheduleAirCraftLoop.id})}"><span

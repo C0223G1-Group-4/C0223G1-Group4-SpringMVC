@@ -17,7 +17,7 @@
                         <input type="hidden" th:field="*{id}">
                         <div class="col-md-12">
                             <p>Code Flight Schedule</p>
-                            <input type="text" th:field="*{codeFlightSchedule}" class="form-control" required placeholder="Code Flight Schedule">
+                            <input type="text" th:field="*{codeFlightSchedule}" class="form-control" required placeholder="Code Flight Schedule" readonly>
                             <p style="color: red" th:if="${#fields.hasErrors('codeFlightSchedule')}" th:errors="*{codeFlightSchedule}"></p>
                         </div>
                         <div class="col-md-12">

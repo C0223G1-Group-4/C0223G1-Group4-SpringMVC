@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/home/css/card-ticket-booking.css">
 </head>
 <body>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+<div id="container" th:each="ticket :${listTicket}">
+    <div class="product-details">
+        <h1>Tian Flight</h1>
+        <br>
+        <br>
+        <br>
+        Number AirCraft: <span class="information" th:text="${ticket.idAirCraft.numberAirCraft}"></span><br>
+        Air Port: <span class="information" th:text="${ticket.idAirCraft.routes.get(0).airPort}"></span><br>
+        Destination: <span class="information" th:text="${ticket.idAirCraft.routes.get(0).destination}"></span><br>
+        Arrival: <span class="information" th:text="${ticket.flightSchedule.arrival}"></span><br>
+        Departure: <span class="information" th:text="${ticket.flightSchedule.departure}"></span><br>
+        Capacity: <span class="information" th:text="${ticket.idAirCraft.capacity}"></span><br>
+        <div class="control">
+            <button class="btn">
+                <span class="price" th:text="${#numbers.formatDecimal(ticket.idAirCraft.routes.get(0).fare, 2, 'COMMA', 0, 'POINT')}"></span>
+                <span class="shopping-cart"><i class="fa fa-solid fa-ticket"></i></span>
+                <span class="buy">Booking now</span>
+            </button>
+        </div>
+    </div>
+    <div class="product-image">
+        <img src="/home/images/image (2).png"/>
+        <div class="info">
+            <h2> Description</h2>
+            <ul>
+                <li><strong>Height : </strong>5 Ft</li>
+                <li><strong>Shade : </strong>Olive green</li>
+                <li><strong>Decoration: </strong>balls and bells</li>
+                <li><strong>Material: </strong>Eco-Friendly</li>
+
+            </ul>
+        </div>
+    </div>
+</div>
 </body>
 </html>

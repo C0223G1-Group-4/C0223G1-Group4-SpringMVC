@@ -2,6 +2,7 @@ package com.example.case_study.controller;
 
 import com.example.case_study.dto.FlightScheduleDto;
 import com.example.case_study.model.tai.FlightSchedule;
+import com.example.case_study.model.tai.FlightScheduleAirCraft;
 import com.example.case_study.model.tai.Route;
 import com.example.case_study.service.flight_schedule_service.IFlightScheduleService;
 import org.springframework.beans.BeanUtils;
@@ -19,9 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/flight-schedule")
@@ -30,7 +29,20 @@ public class FlightScheduleController {
     private IFlightScheduleService iFlightScheduleService;
     // Tài
     @GetMapping("")
-    public String getList(@PageableDefault(value = 4) Pageable pageable, Model model) {
+    public String getList(@PageableDefault(value = 4) Pageable pageable, Model model) throws ParseException {
+        Map<Integer,Date> dateMapDeparture=new HashMap<>();
+        Map<Integer,Date> dateMapArrival=new HashMap<>();
+        if (iFlightScheduleService.checkAllListFlightSchedule().size()!=0){
+        for (FlightSchedule f: iFlightScheduleService.checkAllListFlightSchedule()) {
+                SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+                Date date=format.parse(f.getDeparture());
+                Date date1=format.parse(f.getArrival());
+                dateMapDeparture.put(f.getId(),date);
+                dateMapArrival.put(f.getId(),date1);
+            }
+        }
+        model.addAttribute("dateMapDeparture",dateMapDeparture);
+        model.addAttribute("dateMapArrival",dateMapArrival);
         model.addAttribute("flightSchedule", iFlightScheduleService.getAllListFlightSchedule(pageable));
         return "flight-schedule/view";
     }
@@ -77,6 +89,14 @@ public class FlightScheduleController {
             }
         }
         if (count==0){
+            int codeFlightSchedule=0;
+            if (this.iFlightScheduleService.checkAllListFlightSchedule().size()==0){
+                codeFlightSchedule=1;
+            }else {
+             codeFlightSchedule =this.iFlightScheduleService.checkAllListFlightSchedule().get(this.iFlightScheduleService.checkAllListFlightSchedule().size()-1).getId()+1;
+            }
+
+            flightSchedule.setCodeFlightSchedule("FS-"+codeFlightSchedule);
             if (this.iFlightScheduleService.createFlightSchedule(flightSchedule)) {
                 redirectAttributes.addFlashAttribute("msg", "Thêm mới thành công");
             } else {

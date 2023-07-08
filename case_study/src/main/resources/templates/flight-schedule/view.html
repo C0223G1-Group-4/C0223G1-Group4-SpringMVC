@@ -81,8 +81,10 @@
             <tr th:each="flight,loop :${flightSchedule}">
                 <td th:text="${loop.count}"></td>
                 <td th:text="${flight.codeFlightSchedule}"></td>
-                <td th:text="${flight.departure}"></td>
-                <td th:text="${flight.arrival}"></td>
+<!--                <td th:text="${#dates.format(dateMapDeparture.get(flightScheduleAirCraftLoop.id), 'dd-MM-yyyy HH:mm:ss')}"></td>-->
+
+                <td th:text="${#dates.format(dateMapDeparture.get(flight.id), 'dd-MM-yyyy HH:mm:ss')}"></td>
+                <td th:text="${#dates.format(dateMapArrival.get(flight.id), 'dd-MM-yyyy HH:mm:ss')}"></td>
                 <td>
                     <a th:href="@{flight-schedule/edit/{id}(id=${flight.id})}"><span style="font-size: 20px;color: whitesmoke"><i
                             class="fa-solid fa-pen-to-square"></i></span></a>

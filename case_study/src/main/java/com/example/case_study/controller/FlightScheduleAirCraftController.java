@@ -19,10 +19,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/flight-schedule-air-craft")
@@ -38,7 +39,20 @@ public class FlightScheduleAirCraftController {
 
     // Tài
     @GetMapping("")
-    public String getList(@PageableDefault(value = 6) Pageable pageable, Model model) {
+    public String getList(@PageableDefault(value = 6) Pageable pageable, Model model) throws ParseException {
+        Map<Integer,Date> dateMapDeparture=new HashMap<>();
+        Map<Integer,Date> dateMapArrival=new HashMap<>();
+        if (iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft().size()!=0){
+        for (FlightScheduleAirCraft f: iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft()) {
+                SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+                Date date=format.parse(f.getFlightSchedule().getDeparture());
+                Date date1=format.parse(f.getFlightSchedule().getArrival());
+                dateMapDeparture.put(f.getId(),date);
+                dateMapArrival.put(f.getId(),date1);
+            }
+        }
+        model.addAttribute("dateMapDeparture",dateMapDeparture);
+        model.addAttribute("dateMapArrival",dateMapArrival);
         model.addAttribute("flightScheduleAirCraft", iFlightScheduleAirCraftService.getAllList(pageable));
 //        this.iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft().get();
         return "flight-schedule-air-craft/view";
@@ -67,7 +81,10 @@ public class FlightScheduleAirCraftController {
             if (f.getFlightSchedule().getId() == flightScheduleAirCraft.getFlightSchedule().getId()
                     && f.getIdAirCraft().getRoutes().equals(flightScheduleAirCraft.getIdAirCraft().getRoutes())
                     && f.getIdAirCraft().equals(flightScheduleAirCraft.getIdAirCraft())
-                    && dateCheck == dateLoop) {
+                    && dateCheck == dateLoop
+                    &&flightScheduleAirCraft.getFlightSchedule().getArrival().substring(11,16).equals(f.getFlightSchedule().getArrival().substring(11,16))
+                    &&flightScheduleAirCraft.getFlightSchedule().getDeparture().substring(11,16).equals(f.getFlightSchedule().getDeparture().substring(11,16))
+                   ) {
                 count++;
             }
         }
@@ -113,6 +130,8 @@ public class FlightScheduleAirCraftController {
                     && f.getIdAirCraft().getRoutes().equals(flightScheduleAirCraft.getIdAirCraft().getRoutes())
                     && f.getIdAirCraft().equals(flightScheduleAirCraft.getIdAirCraft())
                     && dateCheck == dateLoop
+                    &&flightScheduleAirCraft.getFlightSchedule().getArrival().substring(11,16).equals(f.getFlightSchedule().getArrival().substring(11,16))
+                    &&flightScheduleAirCraft.getFlightSchedule().getDeparture().substring(11,16).equals(f.getFlightSchedule().getDeparture().substring(11,16))
                     && !(f.getId().equals(flightScheduleAirCraft.getId()))) {
                 count++;
             }
@@ -143,11 +162,18 @@ public class FlightScheduleAirCraftController {
     }
     @GetMapping("/search")
     public String search(@RequestParam(defaultValue = "",required = false) String departure , @RequestParam(defaultValue = "",required = false) String arrival ,@RequestParam String destination,Model model,RedirectAttributes redirectAttributes){
+//        if (!departure.equals("")){
+//            departure=  departure.substring(0,10);
+//        }
+//      if (!arrival.equals("")){
+//          arrival=  arrival.substring(0,10);
+//      }
+
        List<FlightScheduleAirCraft> flightScheduleAirCrafts=this.iFlightScheduleAirCraftService.searchTicket(departure,arrival,destination);
        if (flightScheduleAirCrafts.size()==0){
            redirectAttributes.addFlashAttribute("msgErr","Not found ticket");
        }
        model.addAttribute("listTicket",flightScheduleAirCrafts);
-       return "booking";
+       return "flight-schedule-air-craft/search";
     }
 }
