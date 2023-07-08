@@ -8,6 +8,7 @@ import com.example.case_study.model.RoleUser;
 import com.example.case_study.service.account.IAccountService;
 import com.example.case_study.service.employees_service.IEmployeesService;
 import com.example.case_study.service.passengers_service.IPassengersService;
+import com.example.case_study.service.post_service.IPostService;
 import com.example.case_study.util.WebUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
@@ -35,8 +37,13 @@ public class LoginController {
     private IPassengersService passengersService;
     @Autowired
     private IEmployeesService employeesService;
+    @Autowired
+    private IPostService postService;
     @GetMapping("/login")
-    public String formLogin(Model model) {
+    public String formLogin(@RequestParam(value = "error", required = false) boolean error, Model model) {
+        if (error){
+            model.addAttribute("msg","* Email or password error *");
+        }
         model.addAttribute("accountDto", new AccountUserDto());
         model.addAttribute("passengerDto", new PassengerDto());
         return "loginPage";
@@ -53,6 +60,7 @@ public class LoginController {
         String userName = principal.getName();
         AccountUser accountUser = accountService.findByEmail(principal.getName());
         model.addAttribute("acc",accountUser);
+        model.addAttribute("post",postService.findAll());
         if (accountUser.getRoleUser().getName().equals("ROLE_Customer")){
             model.addAttribute("info",passengersService.findByIdAccount(accountUser.getId()));
             return "home/index";
@@ -81,12 +89,6 @@ public class LoginController {
         }
         return "400Page";
     }
-
-//    @GetMapping("/signup")
-//    public String signup(Model model) {
-//
-//        return "loginPage";
-//    }
 
     @PostMapping("/signup")
     public String signup(@Valid @ModelAttribute PassengerDto passengerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {

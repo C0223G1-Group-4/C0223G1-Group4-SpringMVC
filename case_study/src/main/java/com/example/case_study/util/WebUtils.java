@@ -20,12 +20,9 @@ public class WebUtils {
                     first = false;
                 }else {
                     sb.append(", ").append(a.getAuthority());
-
                 }
-
             }
             sb.append(")");
-
         }
         return sb.toString();
     }

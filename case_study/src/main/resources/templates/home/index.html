@@ -117,42 +117,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!-- //Top-Bar -->
 <!-- w3-banner -->
-<div class="banner">
-    <div class="banner-dott1">
+<div class="banner" >
+    <div class="banner-dott1" >
         <div class="w3-banner">
-
             <div class="callbacks_container">
                 <ul class="rslides" id="slider3">
-                    <li>
-                        <div class="banner-text">
-
-                            <h3>Enjoy Your Dream Vacation</h3>
-                            <p>Located in SEC 24, TWP 58 N., 101 W., in Park County, WY.
-                                A part of Record of Survey # 2008-3512 in Cabinet J, Page 19, Park
-                                County Records.</p>
-                            <a href="#" class="read-agileits" data-toggle="modal" data-target="#myModal">View
-                                Details</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="banner-text">
-
-                            <h3>Find Travel Perfection</h3>
-                            <p>Located in SEC 24, TWP 58 N., 101 W., in Park County, WY.
-                                A part of Record of Survey # 2008-3512 in Cabinet J, Page 19, Park
-                                County Records.</p>
-                            <a href="#" class="read-agileits" data-toggle="modal" data-target="#myModal">View
-                                Details</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="banner-text">
-
-                            <h3>Safe Way To Travel</h3>
-                            <p>Located in SEC 24, TWP 58 N., 101 W., in Park County, WY.
-                                A part of Record of Survey # 2008-3512 in Cabinet J, Page 19, Park
-                                County Records.</p>
-                            <a href="#" class="read-agileits" data-toggle="modal" data-target="#myModal">View
+                    <li th:each="posts : ${post}">
+                        <div class="banner-text" >
+                            <h3 th:text="${posts.namePost}"></h3>
+                            <p th:text="${posts.employees.nameEmployee} "></p>
+                            <a th:href="@{/post/detail/{id}(id=${posts.id})}" class="read-agileits" data-toggle="modal" data-target="#myModal">View
                                 Details</a>
                         </div>
                     </li>
