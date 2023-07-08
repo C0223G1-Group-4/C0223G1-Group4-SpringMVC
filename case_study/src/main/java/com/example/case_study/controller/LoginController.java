@@ -28,7 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Controller
-public class Login {
+public class LoginController {
     @Autowired
     private IAccountService accountService;
     @Autowired
@@ -159,7 +159,7 @@ public class Login {
 //            redirectAttributes.addFlashAttribute("success", "Congratulations, your account has been verified.");
         } else {
             redirectAttributes.addFlashAttribute("fail", "Sorry, we could not verify account. It maybe already verified, or verification code is incorrect.");
-            return "redirect:/reset_pw";
+            return "redirect:/login";
         }
     }
 
