@@ -22,12 +22,12 @@ public class ChairFlight {
     @JoinColumn(name = "id_bk")
     private BookingTicket bookingTicket;
 
-    public ChairFlight(int id, boolean statusChair, Chair chair,
-                       FlightScheduleAirCraft flightScheduleAirCraft) {
+    public ChairFlight(int id, boolean statusChair, Chair chair, FlightScheduleAirCraft flightScheduleAirCraft, BookingTicket bookingTicket) {
         this.id = id;
         this.statusChair = statusChair;
         this.chair = chair;
         this.flightScheduleAirCraft = flightScheduleAirCraft;
+        this.bookingTicket = bookingTicket;
     }
 
     public ChairFlight() {
@@ -63,5 +63,13 @@ public class ChairFlight {
 
     public void setFlightScheduleAirCraft(FlightScheduleAirCraft flightScheduleAirCraft) {
         this.flightScheduleAirCraft = flightScheduleAirCraft;
+    }
+
+    public BookingTicket getBookingTicket() {
+        return bookingTicket;
+    }
+
+    public void setBookingTicket(BookingTicket bookingTicket) {
+        this.bookingTicket = bookingTicket;
     }
 }

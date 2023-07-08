@@ -12,7 +12,7 @@ public class BookingTicket {
     private String bookingDate;
 
     private int quantity;
-//trạng thái
+
     private boolean type;
 
     @ManyToOne

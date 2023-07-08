@@ -40,6 +40,7 @@ public class FlightScheduleAirCraftController {
     @GetMapping("")
     public String getList(@PageableDefault(value = 6) Pageable pageable, Model model) {
         model.addAttribute("flightScheduleAirCraft", iFlightScheduleAirCraftService.getAllList(pageable));
+//        this.iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft().get();
         return "flight-schedule-air-craft/view";
     }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Airline Booking Form a Responsive Widget Template :: w3layouts</title>
 	<!-- Meta tags -->
@@ -46,6 +46,7 @@
 			<div class="main-flex-w3ls-sectns">
 				<div class="field-agileinfo-spc form-w3-agile-text1">
 					<input type="text" readonly placeholder="From">
+					<input type="text" readonly >
 				</div>
 				<div class="field-agileinfo-spc form-w3-agile-text2">
 					<input type="text" readonly placeholder="To">
@@ -66,7 +67,7 @@
 					<input type="text" readonly placeholder="Airline Code">
 				</div>
 				<div class="field-agileinfo-spc form-w3-agile-text2">
-					<input type="text" readonly placeholder="Number Of Chair">
+					<input type="text" th:value="${quantity}">
 				</div>
 			</div>
 			<div class="triple-wthree">
@@ -80,16 +81,21 @@
 			<h3 class="sub-heading-agileits">Personal Details</h3>
 			<div class="main-flex-w3ls-sectns">
 				<div class="field-agileinfo-spc form-w3-agile-text1">
-					<input type="text" name="Name" placeholder="Full Name" required="">
+					<label>Full Name</label>
+<!--					<span th:text="${booking.getPassenger().name}"></span>-->
+					<input type="text" name="Name" required="" th:value="${booking.getPassenger().name}">
 				</div>
 				<div class="field-agileinfo-spc form-w3-agile-text2">
-					<input type="text" name="Phone no" placeholder="Phone Number" required="">
+					<label>Phone Number</label>
+<!--					<span th:text="${booking.getPassenger().phoneNumber}"></span>-->
+					<input type="text" name="Phone no" required="" th:value="${booking.getPassenger().phoneNumber}">
 				</div>
 			</div>
 			<div class="field-agileinfo-spc form-w3-agile-text">
-				<input type="email" name="Email" placeholder="Email" required="">
+				<label>Email</label>
+<!--				<span  th:text="${booking.getPassenger().getAccountUser().email}"></span>-->
+				<input type="email" name="Email" required="" th:value="${booking.getPassenger().getAccountUser().email}">
 			</div>
-
 			<div class="clear"></div>
 				<input style="border-radius: 10px" type="submit" value="Continue">
 			<div class="clear"></div>
