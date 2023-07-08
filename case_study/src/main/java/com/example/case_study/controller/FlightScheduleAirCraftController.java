@@ -42,12 +42,14 @@ public class FlightScheduleAirCraftController {
     public String getList(@PageableDefault(value = 6) Pageable pageable, Model model) throws ParseException {
         Map<Integer,Date> dateMapDeparture=new HashMap<>();
         Map<Integer,Date> dateMapArrival=new HashMap<>();
+        if (iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft().size()!=0){
         for (FlightScheduleAirCraft f: iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft()) {
-             SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-             Date date=format.parse(f.getFlightSchedule().getDeparture());
-             Date date1=format.parse(f.getFlightSchedule().getArrival());
-             dateMapDeparture.put(f.getId(),date);
-             dateMapArrival.put(f.getId(),date1);
+                SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+                Date date=format.parse(f.getFlightSchedule().getDeparture());
+                Date date1=format.parse(f.getFlightSchedule().getArrival());
+                dateMapDeparture.put(f.getId(),date);
+                dateMapArrival.put(f.getId(),date1);
+            }
         }
         model.addAttribute("dateMapDeparture",dateMapDeparture);
         model.addAttribute("dateMapArrival",dateMapArrival);
@@ -78,7 +80,10 @@ public class FlightScheduleAirCraftController {
             if (f.getFlightSchedule().getId() == flightScheduleAirCraft.getFlightSchedule().getId()
                     && f.getIdAirCraft().getRoutes().equals(flightScheduleAirCraft.getIdAirCraft().getRoutes())
                     && f.getIdAirCraft().equals(flightScheduleAirCraft.getIdAirCraft())
-                    && dateCheck == dateLoop) {
+                    && dateCheck == dateLoop
+                    &&flightScheduleAirCraft.getFlightSchedule().getArrival().substring(11,16).equals(f.getFlightSchedule().getArrival().substring(11,16))
+                    &&flightScheduleAirCraft.getFlightSchedule().getDeparture().substring(11,16).equals(f.getFlightSchedule().getDeparture().substring(11,16))
+                   ) {
                 count++;
             }
         }
@@ -124,6 +129,8 @@ public class FlightScheduleAirCraftController {
                     && f.getIdAirCraft().getRoutes().equals(flightScheduleAirCraft.getIdAirCraft().getRoutes())
                     && f.getIdAirCraft().equals(flightScheduleAirCraft.getIdAirCraft())
                     && dateCheck == dateLoop
+                    &&flightScheduleAirCraft.getFlightSchedule().getArrival().substring(11,16).equals(f.getFlightSchedule().getArrival().substring(11,16))
+                    &&flightScheduleAirCraft.getFlightSchedule().getDeparture().substring(11,16).equals(f.getFlightSchedule().getDeparture().substring(11,16))
                     && !(f.getId().equals(flightScheduleAirCraft.getId()))) {
                 count++;
             }

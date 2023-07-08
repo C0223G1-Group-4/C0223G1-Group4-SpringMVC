@@ -32,12 +32,14 @@ public class FlightScheduleController {
     public String getList(@PageableDefault(value = 4) Pageable pageable, Model model) throws ParseException {
         Map<Integer,Date> dateMapDeparture=new HashMap<>();
         Map<Integer,Date> dateMapArrival=new HashMap<>();
+        if (iFlightScheduleService.checkAllListFlightSchedule().size()!=0){
         for (FlightSchedule f: iFlightScheduleService.checkAllListFlightSchedule()) {
-            SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date=format.parse(f.getDeparture());
-            Date date1=format.parse(f.getArrival());
-            dateMapDeparture.put(f.getId(),date);
-            dateMapArrival.put(f.getId(),date1);
+                SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+                Date date=format.parse(f.getDeparture());
+                Date date1=format.parse(f.getArrival());
+                dateMapDeparture.put(f.getId(),date);
+                dateMapArrival.put(f.getId(),date1);
+            }
         }
         model.addAttribute("dateMapDeparture",dateMapDeparture);
         model.addAttribute("dateMapArrival",dateMapArrival);

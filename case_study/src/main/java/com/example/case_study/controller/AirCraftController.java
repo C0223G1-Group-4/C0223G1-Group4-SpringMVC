@@ -47,11 +47,11 @@ public class AirCraftController {
     public String createAirCraft(RedirectAttributes redirectAttributes) {
         AirCraft airCraft=new AirCraft();
        if (this.iAirCraftService.checkAllListAirCraft().size()==0){
-           airCraft.setNumberAirCraft("FS-"+1);
+           airCraft.setNumberAirCraft("AC-"+1);
            airCraft.setCapacity(60);
        }else {
            int numberAirCraft=this.iAirCraftService.checkAllListAirCraft().get(this.iAirCraftService.checkAllListAirCraft().size()-1).getId()+1;
-           airCraft.setNumberAirCraft("FS-"+(numberAirCraft));
+           airCraft.setNumberAirCraft("AC-"+(numberAirCraft));
            airCraft.setCapacity(60);
        }
         this.iAirCraftService.createAirCraft(airCraft);
