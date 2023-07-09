@@ -9,6 +9,7 @@ public class AirCraft {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String numberAirCraft;
     private Integer capacity;
     private boolean flag;
