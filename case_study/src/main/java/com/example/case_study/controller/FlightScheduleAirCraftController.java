@@ -159,27 +159,5 @@ public class FlightScheduleAirCraftController {
         return "redirect:/flight-schedule-air-craft";
     }
 
-    @GetMapping("/search")
-    public String search(@RequestParam(defaultValue = "", required = false) String departure, @RequestParam(defaultValue = "", required = false) String arrival, @RequestParam String destination, Model model, RedirectAttributes redirectAttributes) throws ParseException {
-        List<FlightScheduleAirCraft> flightScheduleAirCrafts = this.iFlightScheduleAirCraftService.searchTicket(departure, arrival, destination);
-        Map<Integer, Date> dateMapDeparture = new HashMap<>();
-        Map<Integer, Date> dateMapArrival = new HashMap<>();
-        if (flightScheduleAirCrafts.size() != 0) {
-            for (FlightScheduleAirCraft f : flightScheduleAirCrafts) {
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date date = format.parse(f.getFlightSchedule().getDeparture());
-                Date date1 = format.parse(f.getFlightSchedule().getArrival());
-                dateMapDeparture.put(f.getId(), date);
-                dateMapArrival.put(f.getId(), date1);
-            }
-        }
-        model.addAttribute("dateMapDeparture", dateMapDeparture);
-        model.addAttribute("dateMapArrival", dateMapArrival);
 
-        if (flightScheduleAirCrafts.size() == 0) {
-            redirectAttributes.addFlashAttribute("msgErr", "Not found ticket");
-        }
-        model.addAttribute("listTicket", flightScheduleAirCrafts);
-        return "flight-schedule-air-craft/search";
-    }
 }
