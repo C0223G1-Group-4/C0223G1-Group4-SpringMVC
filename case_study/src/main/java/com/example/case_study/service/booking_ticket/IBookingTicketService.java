@@ -5,4 +5,5 @@ import org.springframework.stereotype.Service;
 
 public interface IBookingTicketService {
     void createAuto(BookingTicket bookingTicket);
+    void save(BookingTicket bookingTicket);
 }

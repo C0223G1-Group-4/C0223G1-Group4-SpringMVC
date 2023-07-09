@@ -18,4 +18,9 @@ public class BookingTicketService implements IBookingTicketService{
     public void createAuto(BookingTicket bookingTicket) {
         iBookingTicketRepository.save(bookingTicket);
     }
+
+    @Override
+    public void save(BookingTicket bookingTicket) {
+        iBookingTicketRepository.save(bookingTicket);
+    }
 }

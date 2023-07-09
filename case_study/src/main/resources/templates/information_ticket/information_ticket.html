@@ -41,41 +41,48 @@
 	<h1>Airline Booking Form </h1>
 	<div class="booking-form-w3layouts">
 		<!-- Form starts here -->
-		<form action="#" method="post">
+		<form th:action="@{payment/create}" method="post">
 			<h2 class="sub-heading-agileits">Booking Details</h2>
 			<div class="main-flex-w3ls-sectns">
 				<div class="field-agileinfo-spc form-w3-agile-text1">
-					<input type="text" readonly placeholder="From">
-					<input type="text" readonly >
+					<label>From</label>
+					<input type="text" readonly th:value="${from}">
 				</div>
 				<div class="field-agileinfo-spc form-w3-agile-text2">
-					<input type="text" readonly placeholder="To">
+					<label>To</label>
+					<input type="text" readonly th:value="${to}">
 				</div>
 			</div>
 			<div class="main-flex-w3ls-sectns">
 				<div class="field-agileinfo-spc form-w3-agile-text1">
-					<input type="text" readonly placeholder="Departure Date">
+					<label>Departure Date</label>
+					<input type="text" readonly th:value="${departureDate}">
 				</div>
 				<div class="field-agileinfo-spc form-w3-agile-text2">
-					<input type="text" readonly placeholder="Arrival Date">
+					<label>Arrival Date</label>
+					<input type="text" readonly th:value="${arrivalDate}">
 				</div>
 
 			</div>
 
 			<div class="main-flex-w3ls-sectns">
 				<div class="field-agileinfo-spc form-w3-agile-text1">
-					<input type="text" readonly placeholder="Airline Code">
+					<label>Airline Code</label>
+					<input type="text" readonly th:value="${airlineCode}">
 				</div>
 				<div class="field-agileinfo-spc form-w3-agile-text2">
-					<input type="text" th:value="${quantity}">
+					<label>Quantity</label>
+					<input type="text" readonly th:value="${quantity}" id="quantity" name="quantity">
 				</div>
 			</div>
 			<div class="triple-wthree">
 				<div class="field-agileinfo-spc form-w3-agile-text1">
-					<input type="text" readonly placeholder="Price per one">
+					<label>Price</label>
+					<input type="text" readonly th:value="${price}" id="price">
 				</div>
 				<div class="field-agileinfo-spc form-w3-agile-text2">
-					<input type="text" readonly placeholder="Total">
+					<label>Total</label>
+					<input type="text" readonly id="total" name="total">
 				</div>
 			</div>
 			<h3 class="sub-heading-agileits">Personal Details</h3>
@@ -96,6 +103,7 @@
 <!--				<span  th:text="${booking.getPassenger().getAccountUser().email}"></span>-->
 				<input type="email" name="Email" required="" th:value="${booking.getPassenger().getAccountUser().email}">
 			</div>
+			<input type="hidden" name="idPassenger" th:value="${booking.getPassenger().getId()}">
 			<div class="clear"></div>
 				<input style="border-radius: 10px" type="submit" value="Continue">
 			<div class="clear"></div>
@@ -119,6 +127,13 @@
 		});
 	</script>
 	<!-- //Calendar Js -->
+<script>
+	let price = document.getElementById("price").value*1
+	let quantity = document.getElementById("quantity").value*1
+	let total = price+quantity
+	alert(total)
+	document.getElementById("total").value =total;
+</script>
 
 </body>
 

@@ -53,6 +53,7 @@ public class FlightScheduleAirCraftController {
         }
         model.addAttribute("dateMapDeparture",dateMapDeparture);
         model.addAttribute("dateMapArrival",dateMapArrival);
+        FlightScheduleAirCraft flightScheduleAirCraft=this.iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft().get(1);
         model.addAttribute("flightScheduleAirCraft", iFlightScheduleAirCraftService.getAllList(pageable));
 //        this.iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft().get();
         return "flight-schedule-air-craft/view";
@@ -93,9 +94,9 @@ public class FlightScheduleAirCraftController {
         } else {
             List<Route> routeList = new ArrayList<>();
             routeList.add(this.iRouteService.findByIdRoute(idRoute));
-            this.iFlightScheduleAirCraftService.createFlightScheduleAirCraft(flightScheduleAirCraft);
             this.iAirCraftService.findByIdAirCraft(flightScheduleAirCraft.getIdAirCraft().getId()).setRoutes(routeList);
             this.iAirCraftService.editAirCraft(this.iAirCraftService.findByIdAirCraft(flightScheduleAirCraft.getIdAirCraft().getId()));
+            this.iFlightScheduleAirCraftService.createFlightScheduleAirCraft(flightScheduleAirCraft);
             redirectAttributes.addFlashAttribute("msg", "Thêm mới thành công");
         }
         return "redirect:/flight-schedule-air-craft";
