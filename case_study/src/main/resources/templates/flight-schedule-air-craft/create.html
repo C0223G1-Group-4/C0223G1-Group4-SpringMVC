@@ -31,7 +31,7 @@
                                 <p>Flight Schedule</p>
                                 <select th:field="*{flightSchedule}" class="form-select mt-3" required>
                                     <option th:each="flightSchedule :${flightScheduleList}"
-                                            th:text="${'Code FS: ' +flightSchedule.codeFlightSchedule+', Departure: '+flightSchedule.departure+', '+ 'Arrival:' +flightSchedule.arrival+''}"
+                                            th:text="${'Code FS: ' +flightSchedule.codeFlightSchedule+', Departure: '+flightSchedule.departure+', '+ 'Arrival:' +flightSchedule.arrival}"
                                             th:value="${flightSchedule.id}"></option>
                                 </select>
                             </div>

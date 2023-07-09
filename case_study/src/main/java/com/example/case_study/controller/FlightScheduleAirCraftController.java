@@ -83,12 +83,13 @@ public class FlightScheduleAirCraftController {
                     && dateCheck == dateLoop
                     && flightScheduleAirCraft.getFlightSchedule().getArrival().substring(11, 16).equals(f.getFlightSchedule().getArrival().substring(11, 16))
                     && flightScheduleAirCraft.getFlightSchedule().getDeparture().substring(11, 16).equals(f.getFlightSchedule().getDeparture().substring(11, 16))
-            ) {
+                    && flightScheduleAirCraft.getIdAirCraft().getRoutes().get(0).getCodeRoute().equals(flightScheduleAirCraft.getIdAirCraft().getRoutes().get(0).getCodeRoute()))
+             {
                 count++;
             }
         }
         if (count != 0) {
-            redirectAttributes.addFlashAttribute("msgErr", "Have in list can't edit");
+            redirectAttributes.addFlashAttribute("msgErr", "Have in list can't create");
         } else {
             List<Route> routeList = new ArrayList<>();
             routeList.add(this.iRouteService.findByIdRoute(idRoute));
