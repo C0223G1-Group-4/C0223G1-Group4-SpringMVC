@@ -12,6 +12,8 @@ import com.example.case_study.service.post_service.IPostService;
 import com.example.case_study.util.WebUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -22,7 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
@@ -39,10 +40,11 @@ public class Login {
     private IEmployeesService employeesService;
     @Autowired
     private IPostService postService;
+
     @GetMapping("/login")
     public String formLogin(@RequestParam(value = "error", required = false) boolean error, Model model) {
-        if (error){
-            model.addAttribute("msg","* Email or password error *");
+        if (error) {
+            model.addAttribute("msg", "* Email or password error *");
         }
         model.addAttribute("accountDto", new AccountUserDto());
         model.addAttribute("passengerDto", new PassengerDto());
@@ -56,22 +58,22 @@ public class Login {
     }
 
     @GetMapping(value = "/userInfo")
-    public String userInfo(Model model, Principal principal ) {
+    public String userInfo(@PageableDefault(size = 8) Pageable pageable, Model model, Principal principal) {
         // Sau khi user login thanh cong se co principal
         String userName = principal.getName();
         AccountUser accountUser = accountService.findByEmail(principal.getName());
-        model.addAttribute("acc",accountUser);
-        model.addAttribute("post",postService.findAll());
-        if (accountUser.getRoleUser().getName().equals("ROLE_Customer")){
-            model.addAttribute("info",passengersService.findByIdAccount(accountUser.getId()));
+        model.addAttribute("acc", accountUser);
+        model.addAttribute("post", postService.findAll(pageable));
+        if (accountUser.getRoleUser().getName().equals("ROLE_Customer")) {
+            model.addAttribute("info", passengersService.findByIdAccount(accountUser.getId()));
             return "home/index";
-        } else if(accountUser.getRoleUser().getName().equals("ROLE_Employee")){
-//            model.addAttribute("info",employeesService.findByIdAccount(accountUser.getId()));
-            return "redirect:/passenger";
-        }else {
+        } else if (accountUser.getRoleUser().getName().equals("ROLE_Employee")) {
+            model.addAttribute("info", employeesService.findByIdAccount(accountUser.getId()));
+            return "home/index";
+        } else {
             System.out.println("User Name: " + userName);
-//            model.addAttribute("info",employeesService.findByIdAccount(accountUser.getId()));
-            return "redirect:/employee";
+            model.addAttribute("info", employeesService.findByIdAccount(accountUser.getId()));
+            return "home/index";
         }
 
     }
@@ -85,33 +87,33 @@ public class Login {
             model.addAttribute("userInfo", userInfo);
             String message = "Hi " + principal.getName() //
                     + " You do not have permission to access this page!";
-            model.addAttribute("info",passengersService.findByIdAccount(accountUser.getId()));
+            model.addAttribute("info", passengersService.findByIdAccount(accountUser.getId()));
             model.addAttribute("message", message);
         }
         return "400Page";
     }
 
     @PostMapping("/signup")
-    public String signup(@Valid @ModelAttribute PassengerDto passengerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes,HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+    public String signup(@Valid @ModelAttribute PassengerDto passengerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
         if (bindingResult.hasErrors()) {
             return "loginPage";
         }
-        if(passengersService.findByEmail(passengerDto.getAccountUserDto().getEmail())!=null){
-            redirectAttributes.addFlashAttribute("msg","This email already exists");
-        }else{
+        if (passengersService.findByEmail(passengerDto.getAccountUserDto().getEmail()) != null) {
+            redirectAttributes.addFlashAttribute("msg", "This email already exists");
+        } else {
             passengerDto.setExpiryDate(calculateExpiryDate());
-            RoleUser roleUser =accountService.findRoleById(3);
-            AccountUser accountUser=new AccountUser();
-            BeanUtils.copyProperties(passengerDto.getAccountUserDto(),accountUser);
+            RoleUser roleUser = accountService.findRoleById(3);
+            AccountUser accountUser = new AccountUser();
+            BeanUtils.copyProperties(passengerDto.getAccountUserDto(), accountUser);
             accountUser.setRoleUser(roleUser);
             accountService.createAccount(accountUser);
-            Passengers passengers=new Passengers();
+            Passengers passengers = new Passengers();
             BeanUtils.copyProperties(passengerDto, passengers);
             passengers.setAccountUser(accountUser);
             passengersService.create(passengers);
             String siteURL = getSiteURL(request);
             passengersService.sendVerificationEmail(passengers, siteURL);
-            redirectAttributes.addFlashAttribute("msg","You have signed up successfully! Please check your email to verify your account.");
+            redirectAttributes.addFlashAttribute("msg", "You have signed up successfully! Please check your email to verify your account.");
         }
         return "redirect:/login";
     }

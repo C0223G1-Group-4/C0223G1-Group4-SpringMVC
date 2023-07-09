@@ -89,7 +89,7 @@
             <tbody>
             <tr th:each="flightScheduleAirCraftLoop,loop :${flightScheduleAirCraft}">
                 <td th:text="${loop.count}"></td>
-                                <td th:text="${flightScheduleAirCraftLoop.idAirCraft.numberAirCraft}"></td>
+                <td th:text="${flightScheduleAirCraftLoop.idAirCraft.numberAirCraft}"></td>
                 <td th:text="${flightScheduleAirCraftLoop.flightSchedule.codeFlightSchedule}"></td>
                 <td th:text="${flightScheduleAirCraftLoop.idAirCraft.capacity}"></td>
                 <td th:text="${flightScheduleAirCraftLoop.flightSchedule.departure}"></td>

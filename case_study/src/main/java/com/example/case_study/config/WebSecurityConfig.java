@@ -34,11 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests().antMatchers( "/","/login").permitAll();
-        http.authorizeRequests().antMatchers("/passenger/edit/{id}","/passenger/update")
+        http.authorizeRequests().antMatchers("/passenger/edit/{id}","/passenger/update","/flight-schedule-air-craft/search","/post")
                 .access("hasAnyRole('ROLE_Employee','ROLE_Customer','ROLE_Admin')");
         http.authorizeRequests().antMatchers("/air-craft","/passenger","/passenger/*","/air-craft/*",
                         "/flight-schedule-air-craft","/flight-schedule-air-craft/*","/flight-schedule",
-                        "/flight-schedule/*","/route","/route/*")
+                        "/flight-schedule/*","/route","/route/*","/post/*")
                 .access("hasAnyRole('ROLE_Employee','ROLE_Admin')");
         http.authorizeRequests().antMatchers("/employee","/employee/*", "/passenger/delete")
                 .access("hasRole('ROLE_Admin')");
