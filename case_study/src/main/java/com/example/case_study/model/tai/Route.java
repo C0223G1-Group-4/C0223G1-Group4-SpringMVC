@@ -1,5 +1,7 @@
 package com.example.case_study.model.tai;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,8 +16,8 @@ public class Route {
     private String codeRoute;
     private Float fare;
     private boolean flag;
-
-    @ManyToMany(mappedBy = "routes")
+    @JsonBackReference
+    @ManyToMany(mappedBy = "routes",fetch = FetchType.LAZY)
     private List<AirCraft> airCrafts;
 
     public Route() {

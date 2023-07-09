@@ -134,7 +134,7 @@ public class FlightScheduleAirCraftController {
             }
         }
         if (count != 0) {
-            redirectAttributes.addFlashAttribute("msgErr", "Lịch bay này đã có không thể sửa");
+            redirectAttributes.addFlashAttribute("msgErr", "Already exists");
         } else {
             List<Route> routeList = new ArrayList<>();
             routeList.add(this.iRouteService.findByIdRoute(idRoute));

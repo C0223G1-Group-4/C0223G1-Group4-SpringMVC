@@ -54,7 +54,7 @@ public class AirCraftController {
            airCraft.setCapacity(60);
        }
         this.iAirCraftService.createAirCraft(airCraft);
-        redirectAttributes.addFlashAttribute("msg", "Thêm mới thành công");
+        redirectAttributes.addFlashAttribute("msg", "Create success");
         return "redirect:/air-craft";
     }
     // Tài
@@ -65,7 +65,7 @@ public class AirCraftController {
             model.addAttribute("airCraft", this.iAirCraftService.findByIdAirCraft(id));
             return "air-craft/edit";
         } else {
-            redirectAttributes.addAttribute("msg", "Không tìm thấy đối tượng này");
+            redirectAttributes.addAttribute("msg", "Not found");
             return "redirect:/air-craft";
         }
     }
@@ -94,9 +94,9 @@ public class AirCraftController {
             if (this.iAirCraftService.findByIdAirCraft(deleteId)!=null){
                 this.iAirCraftService.findByIdAirCraft(deleteId).setFlag(true);
                 this.iAirCraftService.deleteAirCraft(this.iAirCraftService.findByIdAirCraft(deleteId));
-                redirectAttributes.addFlashAttribute("msg","Xóa thành công");
+                redirectAttributes.addFlashAttribute("msg","Delete success");
             }else {
-                redirectAttributes.addFlashAttribute("msg","Không tồn tại đối tượng này");
+                redirectAttributes.addFlashAttribute("msg","Not found");
             }
 
         return "redirect:/air-craft";

@@ -100,12 +100,12 @@ public class FlightScheduleController {
           flightSchedule.setDeparture(flightSchedule.getDeparture().substring(0, 10).concat(" " +flightSchedule.getDeparture().substring(11, 16)));
           flightSchedule.setArrival(flightSchedule.getArrival().substring(0, 10).concat(" " +flightSchedule.getArrival().substring(11, 16)));
             if (this.iFlightScheduleService.createFlightSchedule(flightSchedule)) {
-                redirectAttributes.addFlashAttribute("msg", "Thêm mới thành công");
+                redirectAttributes.addFlashAttribute("msg", "Create success");
             } else {
-                redirectAttributes.addFlashAttribute("msg", "Không thể thêm mới đối tượng này");
+                redirectAttributes.addFlashAttribute("msg", "Not found");
             }
         }else {
-            redirectAttributes.addFlashAttribute("msg", "Đã có lịch này trong danh sách");
+            redirectAttributes.addFlashAttribute("msg", "Have in list can't create");
         }
 
         return "redirect:/flight-schedule";
@@ -118,7 +118,7 @@ public class FlightScheduleController {
             model.addAttribute("flightSchedule", this.iFlightScheduleService.findByIdFlightSchedule(id));
             return "flight-schedule/edit";
         }
-        redirectAttributes.addFlashAttribute("msg", "Không tìm thấy đối tượng này");
+        redirectAttributes.addFlashAttribute("msg", "Not found");
         return "redirect:/flight-schedule";
     }
     // Tài
