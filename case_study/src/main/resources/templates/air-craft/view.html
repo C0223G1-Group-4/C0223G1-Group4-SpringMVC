@@ -46,7 +46,7 @@
      style="
     position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 2s forwards;
     transition: all linear 0.3s;">
-    <div class="toast-header bg-warning">
+    <div class="toast-header bg-danger">
         <strong class="me-auto">Notification</strong>
         <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>
     </div>
@@ -65,7 +65,7 @@
                 <th>Mã chuyến bay</th>
                 <th>Mã máy bay</th>
                 <th>
-                    <form th:action="@{/air-craft/create}" method="post">
+                    <form th:action="@{/air-craft/create}" method="get">
                     <a href="air-craft/create">
                     <button class="button">
                         <span class="button-text" style="font-size: 25px"><i class="fa-solid fa-plane"></i></span>

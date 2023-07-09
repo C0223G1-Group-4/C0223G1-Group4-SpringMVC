@@ -43,7 +43,7 @@ public class RouteController {
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute RouteDto routeDto, BindingResult bindingResult,@RequestParam String destination, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
-            return "route/view";
+            return "route/create";
         }
         Route route=new Route();
         BeanUtils.copyProperties(routeDto,route);
@@ -67,6 +67,7 @@ public class RouteController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable int id, Model model,RedirectAttributes redirectAttributes){
           if (this.iRouteService.findByIdRoute(id)!=null){
+              model.addAttribute("number",this.iRouteService.findByIdRoute(id).getCodeRoute());
               model.addAttribute("route",this.iRouteService.findByIdRoute(id));
               return "route/edit";
           }else {
@@ -76,16 +77,22 @@ public class RouteController {
     }
     // Tài
     @PostMapping("/edit")
-    public String edit(@Valid @ModelAttribute RouteDto routeDto,BindingResult bindingResult,RedirectAttributes redirectAttributes){
+    public String edit(@Valid @ModelAttribute RouteDto routeDto,BindingResult bindingResult,@RequestParam String number,@RequestParam int id, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
-            return "route/view";
+            return "route/edit";
         }
         Route route=new Route();
         BeanUtils.copyProperties(routeDto,route);
+        for (Route r: this.iRouteService.checkAllListRoute()) {
+            if (r.getCodeRoute().equals(route.getCodeRoute())&&!r.getId().equals(id)&&!route.getCodeRoute().equals(number)){
+                redirectAttributes.addFlashAttribute("msgErr","Can't edit");
+                return "redirect:/route";
+            }
+        }
         if (this.iRouteService.editRoute(route)){
-            redirectAttributes.addFlashAttribute("msg","Sửa thành công");
+            redirectAttributes.addFlashAttribute("msg","Edit success");
         }else {
-            redirectAttributes.addFlashAttribute("msg","Không tồn tại đối tượng này");
+            redirectAttributes.addFlashAttribute("msgErr","Not found");
         }
         return "redirect:/route";
     }
@@ -97,7 +104,7 @@ public class RouteController {
             this.iRouteService.deleteRoute(this.iRouteService.findByIdRoute(deleteId));
             redirectAttributes.addFlashAttribute("msg","Xóa thành công");
         }else {
-            redirectAttributes.addFlashAttribute("msg","Không tìm thấy đối tượng này");
+            redirectAttributes.addFlashAttribute("msgErr","Không tìm thấy đối tượng này");
         }
         return "redirect:/route";
     }

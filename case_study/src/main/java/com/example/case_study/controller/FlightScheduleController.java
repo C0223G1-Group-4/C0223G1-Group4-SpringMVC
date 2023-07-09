@@ -34,7 +34,7 @@ public class FlightScheduleController {
         Map<Integer,Date> dateMapArrival=new HashMap<>();
         if (iFlightScheduleService.checkAllListFlightSchedule().size()!=0){
         for (FlightSchedule f: iFlightScheduleService.checkAllListFlightSchedule()) {
-                SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+                SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 Date date=format.parse(f.getDeparture());
                 Date date1=format.parse(f.getArrival());
                 dateMapDeparture.put(f.getId(),date);
@@ -97,6 +97,8 @@ public class FlightScheduleController {
             }
 
             flightSchedule.setCodeFlightSchedule("FS-"+codeFlightSchedule);
+          flightSchedule.setDeparture(flightSchedule.getDeparture().substring(0, 10).concat(" " +flightSchedule.getDeparture().substring(11, 16)));
+          flightSchedule.setArrival(flightSchedule.getArrival().substring(0, 10).concat(" " +flightSchedule.getArrival().substring(11, 16)));
             if (this.iFlightScheduleService.createFlightSchedule(flightSchedule)) {
                 redirectAttributes.addFlashAttribute("msg", "Thêm mới thành công");
             } else {
@@ -112,6 +114,7 @@ public class FlightScheduleController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
         if (this.iFlightScheduleService.findByIdFlightSchedule(id) != null) {
+            model.addAttribute("number",this.iFlightScheduleService.findByIdFlightSchedule(id).getCodeFlightSchedule());
             model.addAttribute("flightSchedule", this.iFlightScheduleService.findByIdFlightSchedule(id));
             return "flight-schedule/edit";
         }
@@ -120,9 +123,9 @@ public class FlightScheduleController {
     }
     // Tài
     @PostMapping("/edit")
-    public String edit(@Valid @ModelAttribute FlightScheduleDto flightScheduleDto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) throws ParseException {
+    public String edit(@Valid @ModelAttribute FlightScheduleDto flightScheduleDto, BindingResult bindingResult, @RequestParam String number,@RequestParam int id, RedirectAttributes redirectAttributes) throws ParseException {
         if (bindingResult.hasErrors()) {
-            return "flight-schedule/view";
+            return "flight-schedule/edit";
         }
         FlightSchedule flightSchedule = new FlightSchedule();
         BeanUtils.copyProperties(flightScheduleDto, flightSchedule);
@@ -155,14 +158,22 @@ public class FlightScheduleController {
                 count++;
             }
         }
+        flightSchedule.setDeparture(flightSchedule.getDeparture().substring(0, 10).concat(" " +flightSchedule.getDeparture().substring(11, 16)));
+        flightSchedule.setArrival(flightSchedule.getArrival().substring(0, 10).concat(" " +flightSchedule.getArrival().substring(11, 16)));
+        for (FlightSchedule f: this.iFlightScheduleService.checkAllListFlightSchedule()) {
+            if (f.getCodeFlightSchedule().equals(flightSchedule.getCodeFlightSchedule())&&!f.getId().equals(id)&&!flightSchedule.getCodeFlightSchedule().equals(number)){
+                redirectAttributes.addFlashAttribute("msgErr", "Can't edit");
+                return "redirect:/flight-schedule";
+            }
+        }
         if (count==0){
             if (this.iFlightScheduleService.editFlightSchedule(flightSchedule)) {
-                redirectAttributes.addFlashAttribute("msg", "Sửa đối tượng thành công");
+                redirectAttributes.addFlashAttribute("msg", "Edit success");
             } else {
-                redirectAttributes.addFlashAttribute("msgErr", "Không tìm thấy đối tượng này");
+                redirectAttributes.addFlashAttribute("msgErr", "Not found");
             }
         }else {
-            redirectAttributes.addFlashAttribute("msgErr", "Lịch này đã có trong danh sách không thể sửa");
+            redirectAttributes.addFlashAttribute("msgErr", "Have in list can't edit");
         }
 
         return "redirect:/flight-schedule";
@@ -173,9 +184,9 @@ public class FlightScheduleController {
         if (this.iFlightScheduleService.findByIdFlightSchedule(deleteId) != null) {
             this.iFlightScheduleService.findByIdFlightSchedule(deleteId).setFlag(true);
             this.iFlightScheduleService.deleteFlightSchedule(this.iFlightScheduleService.findByIdFlightSchedule(deleteId));
-            redirectAttributes.addFlashAttribute("msg", "Xóa thành công");
+            redirectAttributes.addFlashAttribute("msg", "Delete success");
         } else {
-            redirectAttributes.addFlashAttribute("msg", "Không tìm thấy đối tượng này");
+            redirectAttributes.addFlashAttribute("msgErr", "Not founf");
         }
         return "redirect:/flight-schedule";
     }
