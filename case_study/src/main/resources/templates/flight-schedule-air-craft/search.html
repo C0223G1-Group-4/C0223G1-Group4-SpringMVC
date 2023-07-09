@@ -9,28 +9,16 @@
     <link rel="stylesheet" href="/home/css/search-ticket-booking.css">
 </head>
 <body>
-
-
-
-
-
-
-
-
-<a class="login-trigger" href="#" data-target="#login" data-toggle="modal" style="position: fixed"><span class="inline-danger"><i class="fa-solid fa-magnifying-glass"></i></span></a>
-<!-- banner -->
-
-<div id="login" class="modal fade" role="dialog">
+<center>
+<div id="login" class="modal fade" role="dialog" style="width:90%;margin-top: 40px">
     <div class="modal-dialog">
-
         <div class="modal-content">
             <div class="modal-body">
-                <button data-dismiss="modal" class="close">&times;</button>
-                <h4>Search Ticket</h4>
+                <center>
+                <h2>Search Ticket</h2>
                 <form th:action="@{/search}" th:method="get">
-                    <div class="col-md-12">
-                        <p>Destination</p>
-                        <select name="destination" class="form-select mt-3" required>
+                        <span>Destination</span>
+                        <select name="destination" class="form-select mt-3" required style="width: 20%;height: 30px;border-radius: 20px">
                             <option
                                     value="Sài Gòn">
                                 Sài Gòn
@@ -42,15 +30,10 @@
                                     value="Hà Nội">Hà Nội
                             </option>
                         </select>
-                    </div>
-                    <div class="col-md-12">
-                        <p>Departure</p>
-                        <input type="date" name="departure">
-                    </div>
-                    <div class="col-md-12">
-                        <p>Arrival</p>
-                        <input type="date" name="arrival">
-                    </div>
+                        <span><i class="fa-solid fa-plane-departure"></i></span>
+                        <input type="date" name="departure"  style="width: 20%;height: 30px;border-radius: 20px">
+                        <span><i class="fa-solid fa-plane-arrival"></i></span>
+                        <input type="date" name="arrival"  style="width: 20%;height: 30px;border-radius: 20px">
                     <center>
                         <div class="form-button mt-3" style="padding-top: 30px">
                             <button id="submit" type="submit"
@@ -60,28 +43,27 @@
                         </div>
                     </center>
                 </form>
+                </center>
             </div>
         </div>
     </div>
 </div>
+    <center>
+    <div th:if="${msgErr!=null}">
+        <h2 style="color: red" th:text="${msgErr}"></h2>
+    </div>
+</center>
+</center>
 <div id="container" th:each="ticket :${listTicket}">
+
     <div class="product-details">
         <h1>Tian Flight</h1>
-        <br>
-        <br>
-        <br>
+        <span class="information" th:text="${ticket.idAirCraft.routes.get(0).airPort}"></span> <i class="fa-solid fa-arrow-right"></i> <span class="information" th:text="${ticket.idAirCraft.routes.get(0).destination}"></span><br>
+        <span class="information" th:text="${ticket.flightSchedule.departure.substring(11,16)}"></span><span> <i class="fa-solid fa-plane-departure"></i> </span>
+        <span class="information" th:text="${ticket.flightSchedule.arrival.substring(11,16)}"></span>  <span> <i class="fa-solid fa-plane-arrival"></i></span> <br>
         Number AirCraft: <span class="information" th:text="${ticket.idAirCraft.numberAirCraft}"></span><br>
-        Air Port: <span class="information" th:text="${ticket.idAirCraft.routes.get(0).airPort}"></span><br>
-        Destination: <span class="information" th:text="${ticket.idAirCraft.routes.get(0).destination}"></span><br>
-
-<!--        Departure: <span-->
-<!--            th:text="${#dates.format(dateMapDeparture.get(ticket.getFlightSchedule().id), 'dd-MM-yyyy HH:mm')}"></span>-->
-<!--        <br>-->
-<!--        Arrival: <span-->
-<!--            th:text="${#dates.format(dateMapArrival.get(ticket.getFlightSchedule().id), 'dd-MM-yyyy HH:mm')}"></span>-->
-<!--        <br>-->
-        Arrival: <span class="information" th:text="${ticket.flightSchedule.arrival}"></span><br>
-        Departure: <span class="information" th:text="${ticket.flightSchedule.departure}"></span><br>
+        Departure: <span class="information" th:text="${ticket.flightSchedule.departure.substring(0,10)}"></span><br>
+        Arrival: <span class="information" th:text="${ticket.flightSchedule.arrival.substring(0,10)}"></span><br>
         Capacity: <span class="information" th:text="${ticket.idAirCraft.capacity}"></span><br>
         <div class="control">
             <a th:href="@{/chair_flight/{id}(id=${ticket.id})}">

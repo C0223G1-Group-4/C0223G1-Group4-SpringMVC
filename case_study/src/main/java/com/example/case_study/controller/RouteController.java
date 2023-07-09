@@ -57,9 +57,9 @@ public class RouteController {
         route.setDestination(destination);
         route.setCodeRoute("CR-"+codeRoute);
         if (this.iRouteService.createRoute(route)){
-            redirectAttributes.addFlashAttribute("msg","Thêm mới thành công");
+            redirectAttributes.addFlashAttribute("msg","Create success");
         }else {
-            redirectAttributes.addFlashAttribute("msg","Đối tượng này đã tồn tại");
+            redirectAttributes.addFlashAttribute("msg","Already exists");
         }
         return "redirect:/route";
     }
@@ -71,7 +71,7 @@ public class RouteController {
               model.addAttribute("route",this.iRouteService.findByIdRoute(id));
               return "route/edit";
           }else {
-              redirectAttributes.addFlashAttribute("msg","Không tìm thấy đối tượng này");
+              redirectAttributes.addFlashAttribute("msg","Not found");
               return "redirect:/route";
           }
     }
@@ -102,9 +102,9 @@ public class RouteController {
         if (this.iRouteService.findByIdRoute(deleteId)!=null){
             this.iRouteService.findByIdRoute(deleteId).setFlag(true);
             this.iRouteService.deleteRoute(this.iRouteService.findByIdRoute(deleteId));
-            redirectAttributes.addFlashAttribute("msg","Xóa thành công");
+            redirectAttributes.addFlashAttribute("msg","Delete success");
         }else {
-            redirectAttributes.addFlashAttribute("msgErr","Không tìm thấy đối tượng này");
+            redirectAttributes.addFlashAttribute("msgErr","Not found");
         }
         return "redirect:/route";
     }

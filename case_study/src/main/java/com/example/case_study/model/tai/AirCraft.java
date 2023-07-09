@@ -1,5 +1,7 @@
 package com.example.case_study.model.tai;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class AirCraft {
             joinColumns = @JoinColumn(name = "air_craft_id"),
             inverseJoinColumns = @JoinColumn(name = "route_id")
     )
+    @JsonBackReference
     private List<Route> routes;
 
     public AirCraft() {

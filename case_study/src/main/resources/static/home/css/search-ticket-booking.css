@@ -4,7 +4,7 @@
     font-weight: bold;
     color: #fff;
     background: linear-gradient(to bottom right, #B05574, #F87E7B);
-    padding: 15px 30px;
+    padding: 15px 10px;
     border-radius: 30px;
     top: 50%;
     z-index: 9999999999;
@@ -21,7 +21,7 @@ h4 {
 }
 .modal-content {
     font-weight: bold;
-    background: linear-gradient(to bottom right, #3a6294, #376bb9);
+    background: linear-gradient(to bottom right, #6aa5ee, #5575ad);
 }
 .form-control {
     margin: 1em 0;
