@@ -23,7 +23,7 @@
                                 <p>Air Craft</p>
                                 <select th:field="*{idAirCraft}" class="form-select mt-3" required>
                                     <option th:each="airCraft :${airCraftList}"
-                                            th:text="${'Code AC: ' +airCraft.numberAirCraft+', capacity: '+airCraft.capacity}"
+                                            th:text="${'Code AC: ' +airCraft.numberAirCraft+', capacity: '+airCraft.capacity+', capacity: '+airCraft.routes.get(0).codeRoute}"
                                             th:value="${airCraft.id}"></option>
                                 </select>
                             </div>
@@ -33,13 +33,6 @@
                                     <option th:each="flightSchedule :${flightScheduleList}"
                                             th:text="${'Code FS: ' +flightSchedule.codeFlightSchedule+', Departure: '+flightSchedule.departure+', '+ 'Arrival:' +flightSchedule.arrival}"
                                             th:value="${flightSchedule.id}"></option>
-                                </select>
-                            </div>
-                            <div class="col-md-12">
-                                <p>Route</p>
-                                <select th:name="idRoute" class="form-select mt-3" required>
-                                    <option th:each="route :${routeList}" th:value="${route.id}"
-                                            th:text="${'Code Route: ' +route.codeRoute+', Air Port: '+route.airPort+', Destination: '+route.destination+', Fare: '+route.fare}"></option>
                                 </select>
                             </div>
                             <center>

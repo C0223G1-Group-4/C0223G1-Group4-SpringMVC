@@ -39,7 +39,7 @@ public class FlightScheduleAirCraftController {
 
     // Tài
     @GetMapping("")
-    public String getList(@PageableDefault(value = 6) Pageable pageable, Model model) throws ParseException {
+    public String getList(@PageableDefault(value = 4) Pageable pageable, Model model) throws ParseException {
         Map<Integer, Date> dateMapDeparture = new HashMap<>();
         Map<Integer, Date> dateMapArrival = new HashMap<>();
         if (iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft().size() != 0) {
@@ -69,7 +69,7 @@ public class FlightScheduleAirCraftController {
 
     // Tài
     @PostMapping("/create")
-    public String create(@ModelAttribute FlightScheduleAirCraft flightScheduleAirCraft, @RequestParam int idRoute, RedirectAttributes redirectAttributes) {
+    public String create(@ModelAttribute FlightScheduleAirCraft flightScheduleAirCraft, RedirectAttributes redirectAttributes) {
         int count = 0;
         LocalDate localDate = LocalDate.parse((flightScheduleAirCraft.getFlightSchedule().getDeparture()).substring(0, 10));
         int dateCheck = localDate.getDayOfYear();
@@ -77,25 +77,20 @@ public class FlightScheduleAirCraftController {
         for (FlightScheduleAirCraft f : flightScheduleAirCraftList) {
             LocalDate localDateLoop = LocalDate.parse(f.getFlightSchedule().getDeparture().substring(0, 10));
             int dateLoop = localDateLoop.getDayOfYear();
-            if (f.getFlightSchedule().getId() == flightScheduleAirCraft.getFlightSchedule().getId()
-                    && f.getIdAirCraft().getRoutes().equals(flightScheduleAirCraft.getIdAirCraft().getRoutes())
-                    && f.getIdAirCraft().equals(flightScheduleAirCraft.getIdAirCraft())
+            if (  f.getIdAirCraft().equals(flightScheduleAirCraft.getIdAirCraft())
                     && dateCheck == dateLoop
                     && flightScheduleAirCraft.getFlightSchedule().getArrival().substring(11, 16).equals(f.getFlightSchedule().getArrival().substring(11, 16))
                     && flightScheduleAirCraft.getFlightSchedule().getDeparture().substring(11, 16).equals(f.getFlightSchedule().getDeparture().substring(11, 16))
-                    && flightScheduleAirCraft.getIdAirCraft().getRoutes().get(0).getCodeRoute().equals(flightScheduleAirCraft.getIdAirCraft().getRoutes().get(0).getCodeRoute()))
+                    )
              {
                 count++;
             }
         }
         if (count != 0) {
             redirectAttributes.addFlashAttribute("msgErr", "Have in list can't create");
+            return "redirect:/flight-schedule-air-craft";
         } else {
-            List<Route> routeList = new ArrayList<>();
-            routeList.add(this.iRouteService.findByIdRoute(idRoute));
             this.iFlightScheduleAirCraftService.createFlightScheduleAirCraft(flightScheduleAirCraft);
-            this.iAirCraftService.findByIdAirCraft(flightScheduleAirCraft.getIdAirCraft().getId()).setRoutes(routeList);
-            this.iAirCraftService.editAirCraft(this.iAirCraftService.findByIdAirCraft(flightScheduleAirCraft.getIdAirCraft().getId()));
             redirectAttributes.addFlashAttribute("msg", "Create success");
         }
         return "redirect:/flight-schedule-air-craft";
