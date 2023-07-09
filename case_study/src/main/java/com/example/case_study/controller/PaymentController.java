@@ -3,18 +3,18 @@ package com.example.case_study.controller;
 import com.example.case_study.config.PaymentConfig;
 
 import com.example.case_study.model.BookingTicket;
+import com.example.case_study.model.ChairFlight;
 import com.example.case_study.model.Passengers;
 import com.example.case_study.service.booking_ticket.IBookingTicketService;
+import com.example.case_study.service.chairflight_service.IChairFlightService;
 import com.example.case_study.service.passengers_service.IPassengersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -25,12 +25,15 @@ import java.util.*;
 @Controller
 @RequestMapping("/payment")
 public class PaymentController {
-@Autowired
-private IPassengersService passengersService;
+    @Autowired
+    private IPassengersService passengersService;
+    @Autowired
+    private IChairFlightService chairFlightService;
     @Autowired
     private IBookingTicketService bookingTicketService;
+
     @PostMapping("/create")
-    public ModelAndView create(@RequestParam int quantity,@RequestParam int total,@RequestParam int idPassenger) throws UnsupportedEncodingException {
+    public ModelAndView create(@RequestParam int quantity, @RequestParam int total, @RequestParam int idPassenger) throws UnsupportedEncodingException {
         BookingTicket bookingTicket = new BookingTicket();
         Passengers passengers = passengersService.findByIdPassengers(idPassenger);
         bookingTicket.setPassenger(passengers);
@@ -42,7 +45,7 @@ private IPassengersService passengersService;
 //        String bankCode = req.getParameter("bankCode");
 
 
-        String amount = String.valueOf(total*100);
+        String amount = String.valueOf(total * 100);
         String vnp_TxnRef = PaymentConfig.getRandomNumber(8);
 //        String vnp_IpAddr = Config.getIpAddress(req);
         String vnp_TmnCode = PaymentConfig.vnp_TmnCode;
@@ -117,9 +120,19 @@ private IPassengersService passengersService;
 
     @GetMapping("/return")
     public String showReturn(@RequestParam String vnp_Amount,
-                             @RequestParam String vnp_TmnCode
-            , Model model){
-        model.addAttribute("amount",vnp_Amount);
+                             @RequestParam String vnp_TmnCode, @RequestParam String vnp_ResponseCode
+            , Model model, @SessionAttribute List<ChairFlight> listChair) {
+        if(vnp_ResponseCode.equals("00")){
+            for (ChairFlight c : listChair) {
+                c.setStatusChair(true);
+                this.chairFlightService.update(c);
+                model.addAttribute("message","Thanh toán thành công");
+            }
+        }else {
+            model.addAttribute("message","Thanh toán thất bại");
+        }
+        listChair.clear();
+//        model.addAttribute("amount", vnp_Amount);
         return "return";
     }
 }
