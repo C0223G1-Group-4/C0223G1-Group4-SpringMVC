@@ -63,15 +63,20 @@ public class LoginController {
     }
 
     @GetMapping(value = "/userInfo")
-    public String userInfo( Model model, Principal principal) {
+    public String userInfo( Model model, Principal principal,RedirectAttributes redirectAttributes) {
         // Sau khi user login thanh cong se co principal
         String userName = principal.getName();
         AccountUser accountUser = accountService.findByEmail(principal.getName());
         model.addAttribute("acc", accountUser);
         model.addAttribute("post", postService.findAll());
         if (accountUser.getRoleUser().getName().equals("ROLE_Customer")) {
-            model.addAttribute("info", passengersService.findByIdAccount(accountUser.getId()));
-            return "home/index";
+            if (!passengersService.findByEmail(accountUser.getEmail()).isEnabled()) {
+                redirectAttributes.addFlashAttribute("fail", "Sorry, we could not verify account. It maybe already verified, or verification code is incorrect.");
+                return "redirect:/login";
+            } else {
+                model.addAttribute("info", passengersService.findByIdAccount(accountUser.getId()));
+                return "home/index";
+            }
         } else if (accountUser.getRoleUser().getName().equals("ROLE_Employee")) {
             model.addAttribute("info", employeesService.findByIdAccount(accountUser.getId()));
             return "home/index";

@@ -1,9 +1,11 @@
 package com.example.case_study.dto;
 
+
 public class ReceiveBookingDto {
+
     private int id;
     private String passengerName;
-    private String total;
+    private int total;
     private String departure;
     private String arrival;
     private String numberAirCraft;
@@ -15,7 +17,20 @@ public class ReceiveBookingDto {
     private boolean status_receive;
 
 
-    public ReceiveBookingDto(int id, String passengerName, String total, String departure, String arrival, String numberAirCraft, String airport, String destination, int quantity, boolean status, boolean status_receive) {
+    public ReceiveBookingDto(int id, String passengerName, int total, String departure, String arrival, String numberAirCraft, String airport, String destination, int quantity, boolean status) {
+        this.id = id;
+        this.passengerName = passengerName;
+        this.total = total;
+        this.departure = departure;
+        this.arrival = arrival;
+        this.numberAirCraft = numberAirCraft;
+        this.airport = airport;
+        this.destination = destination;
+        this.quantity = quantity;
+        this.status = status;
+    }
+
+    public ReceiveBookingDto(int id, String passengerName, int total, String departure, String arrival, String numberAirCraft, String airport, String destination, int quantity, boolean status, boolean status_receive) {
         this.id = id;
         this.passengerName = passengerName;
         this.total = total;
@@ -27,6 +42,10 @@ public class ReceiveBookingDto {
         this.quantity = quantity;
         this.status = status;
         this.status_receive = status_receive;
+    }
+
+    public ReceiveBookingDto() {
+
     }
 
     public int getId() {
@@ -45,11 +64,11 @@ public class ReceiveBookingDto {
         this.passengerName = passengerName;
     }
 
-    public String getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 

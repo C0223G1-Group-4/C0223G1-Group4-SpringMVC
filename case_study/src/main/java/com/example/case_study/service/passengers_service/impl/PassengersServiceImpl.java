@@ -146,7 +146,15 @@ public class PassengersServiceImpl implements IPassengersService {
         String fromAddress = "lsyh31@gmail.com";
         String senderName = "Tian flight";
         String subject = "Confirm your email address";
-        String content = "<p>Dear "+passengers.getName() + ",</p><br>"
+        String content = "<body style=\"background-size: cover;\n" +
+                "background: url('https://giupban.com.vn/wp-content/uploads/Hinh-nen-may-bay-dep-full-hd-Ohaylam.com-14.jpg') no-repeat center center;\n" +
+                "display: flex;\n" +
+                "justify-content: center;\n" +
+                "align-items: center;\n" +
+                "flex-direction: column;\n" +
+                "font-family: 'Montserrat', sans-serif;\n" +
+                "height: 50vh;\n" +
+                "width: 100%;\"><p>Dear "+passengers.getName() + ",</p><br>"
                 + "We have received a request to reset the password associated with your account. In order to proceed with " +
                 "the password reset process, we need to confirm that the email address associated with your account is valid.<br>" +
                 "Please click on the following link to confirm your email address:<br>";
@@ -165,7 +173,7 @@ public class PassengersServiceImpl implements IPassengersService {
         content+= "<br><br>If you did not request a password reset, please disregard this message. " +
                 "If you believe that your account has been compromised, please contact our customer support team immediately.<br>" +
                 "Thank you,<br>" +
-                "TianFlight";
+                "TianFlight </body>";
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);

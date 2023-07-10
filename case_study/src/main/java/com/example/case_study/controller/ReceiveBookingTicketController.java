@@ -33,7 +33,7 @@ public class ReceiveBookingTicketController {
         } else {
             redirectAttributes.addFlashAttribute("fail", "This ticket code could not be found.");
         }
-        return "receive_booking/booking_list";
+        return "redirect:/receive_booking/booking_list";
     }
 
     @GetMapping("/pay/{id}")
@@ -44,13 +44,14 @@ public class ReceiveBookingTicketController {
         } else {
             redirectAttributes.addFlashAttribute("fail", "This ticket code could not be found.");
         }
-        return "receive_booking/booking_list";
+        return "redirect:/receive_booking/booking_list";
     }
 
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable int id,Model model) {
         if (receiveBookingService.findById(id) != null) {
            model.addAttribute("receive",receiveBookingService.findById(id));
+           model.addAttribute("seats",receiveBookingService.seats(id));
         }
         return "receive_booking/booking_list";
     }

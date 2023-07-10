@@ -100,6 +100,7 @@
     <div class="tbl-content">
         <table cellpadding="0" cellspacing="0" border="0">
             <tbody>
+<!--            <td th:object="${seats}"></td>-->
             <tr th:each="l,loop :${list}">
                 <td th:text="${loop.count}"></td>
                 <td th:text="${l.id}"></td>
@@ -120,8 +121,8 @@
                             style="font-size: 20px;color: whitesmoke " id="cancel"><i class="fa-solid fa-rectangle-list"></i></span></a>
                     <a th:href="@{/receive_booking/pay/{id}(id=${l.id})}"><span
                             style="font-size: 20px;color: whitesmoke"><i class="fa-solid fa-plane-slash"></i></span></a>
-                    <a th:attr="onclick=|deleteFlightSchedule('${flightScheduleAirCraftLoop.id}','${flightScheduleAirCraftLoop.flightSchedule.codeFlightSchedule}'
-                    ,'${flightScheduleAirCraftLoop.idAirCraft.routes.get(0).codeRoute}','${flightScheduleAirCraftLoop.idAirCraft.numberAirCraft}')|"
+                    <a th:attr="onclick=|detail('${l.id}','${l.passengerName}'
+                    ,'${l.departure}','${l.arrival}','${l.numberAirCraft}','${l.airport}','${l.destination}','${l.quantity}','${l.total}','${seats}')|"
                        href="#" id="m1-c"> <span
                             style="font-size: 20px;padding-left: 20px;color: whitesmoke"><i class="fa-solid fa-circle-check"></i></span></a>
                 </td>
@@ -131,7 +132,6 @@
         </table>
     </div>
 </section>
-
 
 
 <!--Modal-->
@@ -206,8 +206,6 @@
                             </div>
                         </div>
                     </div>
-                    <button id="button" type="submit">Sign Up</button>
-                </form>
             </div>
         </div>
     </div>
@@ -215,9 +213,12 @@
 
 
 
-
 <script>
-    function detail(){
+    function detail(id,name,departure,arrival,numberAirCraft,airport,destination,quantity,total,seats){
+        let  seat="";
+        for (const s of seats) {
+            seat+=s
+        }
 
     }
 </script>

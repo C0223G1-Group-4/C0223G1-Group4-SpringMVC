@@ -1,6 +1,8 @@
 package com.example.case_study.service.receive_booking_service;
 
 import com.example.case_study.dto.ReceiveBookingDto;
+import com.example.case_study.model.ChairFlight;
+import com.example.case_study.repository.IChairFlightRepository;
 import com.example.case_study.repository.IReceiveBookingRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +21,8 @@ public class ReceiveBookingService implements IReceiveBookingService {
     @Autowired
     private IReceiveBookingRepo receiveBookingRepo;
 
+    @Autowired
+    private IChairFlightRepository chairFlightRepository;
     @Override
     public Page<ReceiveBookingDto> getReceiveBookingTicketList(Pageable pageable) {
         cancelBookingStatus();
@@ -56,4 +60,11 @@ public class ReceiveBookingService implements IReceiveBookingService {
     public void confirm(int id) {
         receiveBookingRepo.findByIdBookingTicket(id).setStatus(true);
     }
+
+    @Override
+    public List<ChairFlight> seats(int id) {
+        return chairFlightRepository.findByBookingTicket_IdBookingTicket(id);
+    }
+
+
 }
