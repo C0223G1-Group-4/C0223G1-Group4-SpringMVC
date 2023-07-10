@@ -8,6 +8,7 @@ import javax.persistence.*;
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
+        private String codeBooking;
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "flightSchedule_id")
          private FlightSchedule flightSchedule;
@@ -26,6 +27,14 @@ import javax.persistence.*;
 
         public FlightScheduleAirCraft(Integer id, FlightSchedule flightSchedule, AirCraft idAirCraft, boolean flag) {
             this.id = id;
+            this.flightSchedule = flightSchedule;
+            this.idAirCraft = idAirCraft;
+            this.flag = flag;
+        }
+
+        public FlightScheduleAirCraft(Integer id, String codeBooking, FlightSchedule flightSchedule, AirCraft idAirCraft, boolean flag) {
+            this.id = id;
+            this.codeBooking = codeBooking;
             this.flightSchedule = flightSchedule;
             this.idAirCraft = idAirCraft;
             this.flag = flag;
@@ -61,5 +70,13 @@ import javax.persistence.*;
 
         public void setFlag(boolean flag) {
             this.flag = flag;
+        }
+
+        public String getCodeBooking() {
+            return codeBooking;
+        }
+
+        public void setCodeBooking(String codeBooking) {
+            this.codeBooking = codeBooking;
         }
     }

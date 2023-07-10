@@ -52,16 +52,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="modal-content">
             <div class="modal-body">
                 <button data-dismiss="modal" class="close">&times;</button>
-				<center>
-                <h3 style="margin-top: 10px;color: whitesmoke;font-size: 30px">Search Ticket</h3>
-				</center>
+                <center>
+                    <h3 style="margin-top: 10px;color: whitesmoke;font-size: 30px">Search Ticket</h3>
+                </center>
                 <form th:action="@{/search}" th:method="get">
                     <div class="col-md-12" style="margin-top: 20px">
-                        <p style="color:whitesmoke;">Destination</p>
-                        <select name="destination" class="form-select mt-3" required style="width: 100%;height: 30px;border-radius: 20px">
+                        <p style="color:whitesmoke;">Air Port</p>
+                        <select name="airPort" class="form-select mt-3"
+                                style="width: 100%;height: 30px;border-radius: 20px">
+                            <option value=""></option>
                             <option
                                     value="Sài Gòn">
                                 Sài Gòn
+                            </option>
+                            <option
+                                    value="Đà Nẵng">
+                                Đà Nẵng
+                            </option>
+                            <option
+                                    value="Huế">Huế
+                            </option>
+                            <option
+                                    value="Hà Nội">Hà Nội
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 20px">
+                        <p style="color:whitesmoke;height: 60px">Destination</p>
+                        <select name="destination" class="form-select mt-3"
+                                style="width: 100%;height: 30px;border-radius: 20px">
+                            <option value=""></option>
+                            <option
+                                    value="Sài Gòn">
+                                Sài Gòn
+                            </option>
+                            <option
+                                    value="Đà Nẵng">
+                                Đà Nẵng
                             </option>
                             <option
                                     value="Huế">Huế
@@ -72,11 +99,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </select>
                     </div>
                     <div class="col-md-12">
-                        <p style="color:whitesmoke;">Departure</p>
+                        <p style="color:whitesmoke;">From</p>
                         <input type="date" name="departure" style="width: 100%;border-radius: 20px">
                     </div>
                     <div class="col-md-12">
-                        <p style="color:whitesmoke;">Arrival</p>
+                        <p style="color:whitesmoke;">To</p>
                         <input type="date" name="arrival" style="width: 100%;border-radius: 20px">
                     </div>
                     <center>

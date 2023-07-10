@@ -17,12 +17,18 @@
                 <center>
                 <h2>Search Ticket</h2>
                 <form th:action="@{/search}" th:method="get">
-                        <span>Destination</span>
-                        <select name="destination" class="form-select mt-3" required style="width: 20%;height: 30px;border-radius: 20px">
+                        <span>Air Port</span>
+                        <select name="airPort" class="form-select mt-3"  style="width: 20%;height: 30px;border-radius: 20px">
+                            <option value=""></option>
                             <option
                                     value="Sài Gòn">
                                 Sài Gòn
                             </option>
+                            <option
+                                    value="Đà Nẵng">
+                                Đà Nẵng
+                            </option>
+
                             <option
                                     value="Huế">Huế
                             </option>
@@ -30,6 +36,24 @@
                                     value="Hà Nội">Hà Nội
                             </option>
                         </select>
+                    <span>Destination</span>
+                    <select name="destination" class="form-select mt-3"  style="width: 20%;height: 30px;border-radius: 20px">
+                        <option value=""></option>
+                        <option
+                                value="Sài Gòn">
+                            Sài Gòn
+                        </option>
+                        <option
+                                value="Đà Nẵng">
+                            Đà Nẵng
+                        </option>
+                        <option
+                                value="Huế">Huế
+                        </option>
+                        <option
+                                value="Hà Nội">Hà Nội
+                        </option>
+                    </select>
                         <span><i class="fa-solid fa-plane-departure"></i></span>
                         <input type="date" name="departure"  style="width: 20%;height: 30px;border-radius: 20px">
                         <span><i class="fa-solid fa-plane-arrival"></i></span>
