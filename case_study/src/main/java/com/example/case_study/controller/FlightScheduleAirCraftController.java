@@ -77,14 +77,25 @@ public class FlightScheduleAirCraftController {
         for (FlightScheduleAirCraft f : flightScheduleAirCraftList) {
             LocalDate localDateLoop = LocalDate.parse(f.getFlightSchedule().getDeparture().substring(0, 10));
             int dateLoop = localDateLoop.getDayOfYear();
-            if (  f.getIdAirCraft().equals(flightScheduleAirCraft.getIdAirCraft())
+            if (f.getIdAirCraft().equals(flightScheduleAirCraft.getIdAirCraft())
                     && dateCheck == dateLoop
                     && flightScheduleAirCraft.getFlightSchedule().getArrival().substring(11, 16).equals(f.getFlightSchedule().getArrival().substring(11, 16))
                     && flightScheduleAirCraft.getFlightSchedule().getDeparture().substring(11, 16).equals(f.getFlightSchedule().getDeparture().substring(11, 16))
-                    )
-             {
+            ) {
                 count++;
             }
+        }
+        int count1 = 0;
+        if (this.iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft().size() == 0) {
+            flightScheduleAirCraft.setCodeBooking("BK-" + 1);
+        } else {
+            for (FlightScheduleAirCraft fs : this.iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft()) {
+                String[] check = fs.getCodeBooking().split("-");
+                if (Integer.parseInt(check[check.length - 1]) > count1) {
+                    count1 = Integer.parseInt(check[check.length - 1]);
+                }
+            }
+            flightScheduleAirCraft.setCodeBooking("BK-" + (count1 + 1));
         }
         if (count != 0) {
             redirectAttributes.addFlashAttribute("msgErr", "Have in list can't create");
@@ -128,8 +139,11 @@ public class FlightScheduleAirCraftController {
                     && flightScheduleAirCraft.getFlightSchedule().getArrival().substring(11, 16).equals(f.getFlightSchedule().getArrival().substring(11, 16))
                     && flightScheduleAirCraft.getFlightSchedule().getDeparture().substring(11, 16).equals(f.getFlightSchedule().getDeparture().substring(11, 16))
                     && !(f.getId().equals(flightScheduleAirCraft.getId()))
-                    &&flightScheduleAirCraft.getIdAirCraft().getRoutes().get(0).getId()!=f.getIdAirCraft().getRoutes().get(0).getId()
+                    && flightScheduleAirCraft.getIdAirCraft().getRoutes().get(0).getId() != f.getIdAirCraft().getRoutes().get(0).getId()
             ) {
+                count++;
+            }
+            if (flightScheduleAirCraft.getCodeBooking().equals(f.getCodeBooking())&&!flightScheduleAirCraft.getId().equals(f.getId())){
                 count++;
             }
         }

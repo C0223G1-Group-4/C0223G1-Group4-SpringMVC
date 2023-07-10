@@ -25,6 +25,12 @@ public class AirCraftDto {
         this.capacity = capacity;
     }
 
+    public AirCraftDto(String numberAirCraft, Integer capacity, List<Route> routes) {
+        this.numberAirCraft = numberAirCraft;
+        this.capacity = capacity;
+        this.routes = routes;
+    }
+
     public AirCraftDto(Integer id, String numberAirCraft, Integer capacity, List<Route> routes) {
         this.id = id;
         this.numberAirCraft = numberAirCraft;

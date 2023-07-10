@@ -17,19 +17,42 @@
                 <center>
                 <h2>Search Ticket</h2>
                 <form th:action="@{/search}" th:method="get">
-                        <span>Destination</span>
-                        <select name="destination" class="form-select mt-3" required style="width: 20%;height: 30px;border-radius: 20px">
+                        <span>Air Port</span>
+                        <select name="airPort" class="form-select mt-3"  style="width: 20%;height: 30px;border-radius: 20px">
+                            <option value="" disabled selected hidden>Air Port</option>
                             <option
-                                    value="Sài Gòn">
-                                Sài Gòn
+                                    value="Sai Gon">
+                                Sai Gon
                             </option>
                             <option
-                                    value="Huế">Huế
+                                    value="Da Nang">
+                                Da Nang
                             </option>
                             <option
-                                    value="Hà Nội">Hà Nội
+                                    value="Hue">Hue
+                            </option>
+                            <option
+                                    value="Ha Noi">Ha Noi
                             </option>
                         </select>
+                    <span>Destination</span>
+                    <select name="destination" class="form-select mt-3"  style="width: 20%;height: 30px;border-radius: 20px">
+                        <option value="" disabled selected hidden>Destination</option>
+                        <option
+                                value="Sai Gon">
+                            Sai Gon
+                        </option>
+                        <option
+                                value="Da Nang">
+                            Da Nang
+                        </option>
+                        <option
+                                value="Hue">Hue
+                        </option>
+                        <option
+                                value="Ha Noi">Ha Noi
+                        </option>
+                    </select>
                         <span><i class="fa-solid fa-plane-departure"></i></span>
                         <input type="date" name="departure"  style="width: 20%;height: 30px;border-radius: 20px">
                         <span><i class="fa-solid fa-plane-arrival"></i></span>
@@ -55,8 +78,7 @@
 </center>
 </center>
 <div id="container" th:each="ticket :${listTicket}">
-
-    <div class="product-details">
+    <div class="product-details col-lg-6" style="float: left">
         <h1>Tian Flight</h1>
         <span class="information" th:text="${ticket.idAirCraft.routes.get(0).airPort}"></span> <i class="fa-solid fa-arrow-right"></i> <span class="information" th:text="${ticket.idAirCraft.routes.get(0).destination}"></span><br>
         <span class="information" th:text="${ticket.flightSchedule.departure.substring(11,16)}"></span><span> <i class="fa-solid fa-plane-departure"></i> </span>
@@ -80,5 +102,6 @@
 
     </div>
 </div>
+
 </body>
 </html>

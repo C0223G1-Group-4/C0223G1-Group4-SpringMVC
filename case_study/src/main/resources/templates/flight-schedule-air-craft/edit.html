@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/home/css/form-create-edit.css">
 </head>
 <body>
+
 <div class="form-body">
     <div class="row">
         <div class="form-holder">
@@ -15,6 +16,10 @@
                     <form th:action="@{/flight-schedule-air-craft/edit}" th:method="post"
                           th:object="${flightScheduleAirCraft}">
                         <input type="hidden" th:field="*{id}">
+                        <div class="col-md-12">
+                            <p>Code Booking</p>
+                            <input class="form-control" type="text" th:field="*{codeBooking}" placeholder="Code Booking" required>
+                        </div>
                         <div class="col-md-12">
                             <p>Air Craft</p>
                             <select th:field="*{idAirCraft}" class="form-select mt-3" required>

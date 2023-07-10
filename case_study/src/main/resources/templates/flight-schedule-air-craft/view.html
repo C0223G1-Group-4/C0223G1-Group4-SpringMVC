@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>List Flight Schedule Air Craft</title>
@@ -30,8 +30,10 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="/home/css/navbar.css">
 </head>
 <body>
+<div th:insert="header/navbar :: copy"></div>
 
 <div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${msg != null}"
      style="
@@ -65,13 +67,13 @@
         <table cellpadding="0" cellspacing="0" border="0">
             <thead>
             <tr>
-                <th>STT</th>
-                <th>Mã máy bay</th>
-                <th>Mã tuyến bay</th>
+                <th style="width: 50px"> STT</th>
+                <th>Code Booking</th>
+                <th>Code Air Craft</th>
+                <th>Code Flight Schedule</th>
                 <th>Code Route</th>
-                <th>Số lượng người</th>
-                <th>Ngày bay</th>
-                <th>Ngày đến</th>
+                <th>Departure</th>
+                <th>Arrival</th>
 
                 <th><a href="flight-schedule-air-craft/create">
                     <button class="button">
@@ -87,11 +89,11 @@
         <table cellpadding="0" cellspacing="0" border="0">
             <tbody>
             <tr th:each="flightScheduleAirCraftLoop,loop :${flightScheduleAirCraft}">
-                <td th:text="${loop.count}"></td>
+                <td style="width: 50px" th:text="${loop.count}"></td>
+                <td th:text="${flightScheduleAirCraftLoop.codeBooking}"></td>
                 <td th:text="${flightScheduleAirCraftLoop.idAirCraft.numberAirCraft}"></td>
                 <td th:text="${flightScheduleAirCraftLoop.flightSchedule.codeFlightSchedule}"></td>
                 <td th:text="${flightScheduleAirCraftLoop.idAirCraft.routes.get(0).codeRoute}"></td>
-                <td th:text="${flightScheduleAirCraftLoop.idAirCraft.capacity}"></td>
                 <td th:text="${#dates.format(dateMapDeparture.get(flightScheduleAirCraftLoop.id), 'dd-MM-yyyy HH:mm:ss')}"></td>
                 <td th:text="${#dates.format(dateMapArrival.get(flightScheduleAirCraftLoop.id), 'dd-MM-yyyy HH:mm:ss')}"></td>
                 <td>
@@ -148,14 +150,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="color: black">Do you want to delete?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <center>
-                    <span style="font-size: 120px;color: black"><i class="fa-solid fa-trash-can"></i></span>
+                    <span style="font-size: 100px;color: black"><i class="fa-solid fa-trash-can"></i></span>
                     <div>
-                        <p style="color: red">Bạn có muốn xóa lịch bay có </p>
+                        <p style="color: red">Do you want to delete ticket</p>
                         <span style="color:black;">Code Flight Schedule:  </span> <span style="color: black"
                                                                                         id="codeFlightSchedule"></span><br>
                         <span style="color:black;">Code Route: </span> <span style="color: black" id="codeRoute"></span><br>

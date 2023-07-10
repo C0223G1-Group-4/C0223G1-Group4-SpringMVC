@@ -11,7 +11,7 @@ public class RouteDto {
     private String airPort;
     @NotBlank(message = "Destination must not be left blank")
     private String destination;
-    @Pattern(regexp = "^(RT-)[0-9]{1,5}",message = "Code route format RT- and 1 to 5 number")
+    @Pattern(regexp = "^(R-)[0-9]{1,5}",message = "Code route format R- and 1 to 5 number")
     private String codeRoute;
     @Min(value = 1,message = "Fare greater than 1")
     private Float fare;
@@ -26,6 +26,13 @@ public class RouteDto {
         this.codeRoute = codeRoute;
         this.fare = fare;
 
+    }
+
+    public RouteDto(String airPort, String destination, String codeRoute, Float fare) {
+        this.airPort = airPort;
+        this.destination = destination;
+        this.codeRoute = codeRoute;
+        this.fare = fare;
     }
 
     public Integer getId() {

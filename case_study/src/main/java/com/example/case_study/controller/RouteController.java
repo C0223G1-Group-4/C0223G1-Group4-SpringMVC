@@ -41,25 +41,32 @@ public class RouteController {
     }
     // Tài
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute RouteDto routeDto, BindingResult bindingResult,@RequestParam String destination, RedirectAttributes redirectAttributes){
+    public String create(@Valid @ModelAttribute RouteDto routeDto, BindingResult bindingResult, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
             return "route/create";
         }
+        int count=0;
         Route route=new Route();
         BeanUtils.copyProperties(routeDto,route);
-        int codeRoute=0;
-
-        if (this.iRouteService.checkAllListRoute().size()==0){
-            codeRoute=1;
-        }else {
-            codeRoute= this.iRouteService.checkAllListRoute().get(this.iRouteService.checkAllListRoute().size()-1).getId()+1;
+        if (route.getDestination().equals(route.getAirPort())){
+            redirectAttributes.addFlashAttribute("msgErr","Destination and AirPort can't be the same");
+            return "redirect:/route";
         }
-        route.setDestination(destination);
-        route.setCodeRoute("CR-"+codeRoute);
+        if (this.iRouteService.checkAllListRoute().size()==0){
+            route.setCodeRoute("R-"+ 1);
+        }else {
+            for (Route r: this.iRouteService.checkAllListRoute()) {
+                String []check=r.getCodeRoute().split("-");
+                if (Integer.parseInt(check[check.length-1])>count){
+                    count=Integer.parseInt(check[check.length-1]);
+                }
+            }
+            route.setCodeRoute("R-"+ (count+1));
+        }
         if (this.iRouteService.createRoute(route)){
             redirectAttributes.addFlashAttribute("msg","Create success");
         }else {
-            redirectAttributes.addFlashAttribute("msg","Already exists");
+            redirectAttributes.addFlashAttribute("msgErr","Already exists");
         }
         return "redirect:/route";
     }
@@ -68,7 +75,9 @@ public class RouteController {
     public String edit(@PathVariable int id, Model model,RedirectAttributes redirectAttributes){
           if (this.iRouteService.findByIdRoute(id)!=null){
               model.addAttribute("number",this.iRouteService.findByIdRoute(id).getCodeRoute());
-              model.addAttribute("route",this.iRouteService.findByIdRoute(id));
+              RouteDto routeDto=new RouteDto();
+              BeanUtils.copyProperties(this.iRouteService.findByIdRoute(id),routeDto);
+              model.addAttribute("routeDto",routeDto);
               return "route/edit";
           }else {
               redirectAttributes.addFlashAttribute("msg","Not found");
@@ -83,6 +92,10 @@ public class RouteController {
         }
         Route route=new Route();
         BeanUtils.copyProperties(routeDto,route);
+        if (route.getDestination().equals(route.getAirPort())){
+            redirectAttributes.addFlashAttribute("msgErr","Destination and AirPort can't be the same");
+            return "redirect:/route";
+        }
         for (Route r: this.iRouteService.checkAllListRoute()) {
             if (r.getCodeRoute().equals(route.getCodeRoute())&&!r.getId().equals(id)&&!route.getCodeRoute().equals(number)){
                 redirectAttributes.addFlashAttribute("msgErr","Can't edit");

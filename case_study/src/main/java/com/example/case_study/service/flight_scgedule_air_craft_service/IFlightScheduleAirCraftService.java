@@ -17,5 +17,5 @@ public interface IFlightScheduleAirCraftService {
     void deleteFlightScheduleAirCraft(FlightScheduleAirCraft flightScheduleAirCraft);
 
     FlightScheduleAirCraft findByIdFlightScheduleAirCraft(int id);
-    List<FlightScheduleAirCraft> searchTicket(String departure,String arrival,String destination);
+    List<FlightScheduleAirCraft> searchTicket(String airPort,String departure,String arrival,String destination);
 }
