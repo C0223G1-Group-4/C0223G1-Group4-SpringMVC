@@ -49,7 +49,7 @@
         <div class="col-lg-6">
             <form th:action="@{/chair_flight/create}" th:method="post">
                 <input type="hidden" name="idCraftSchedule" th:value="${idCraftSchedule}">
-                    <h1>Danh sách ghế còn lại</h1>
+                    <h1>Chair List</h1>
                 <div class="row">
                     <div class="col-2" th:each="l:${list}">
             <span style="float: left" th:if="${l.statusChair==false}">

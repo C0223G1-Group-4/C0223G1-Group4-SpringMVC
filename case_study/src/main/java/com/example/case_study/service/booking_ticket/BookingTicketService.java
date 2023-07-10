@@ -23,4 +23,14 @@ public class BookingTicketService implements IBookingTicketService{
     public void save(BookingTicket bookingTicket) {
         iBookingTicketRepository.save(bookingTicket);
     }
+
+    @Override
+    public BookingTicket findByPassenger_Id(int id) {
+        return iBookingTicketRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public BookingTicket findById(int id) {
+        return iBookingTicketRepository.findById(id).orElse(null);
+    }
 }

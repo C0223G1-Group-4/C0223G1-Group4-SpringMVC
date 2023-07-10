@@ -13,6 +13,8 @@ public class BookingTicket {
 
     private int quantity;
 
+    private int total;
+
     private boolean type;
 
     @ManyToOne
@@ -24,15 +26,25 @@ public class BookingTicket {
     public BookingTicket() {
     }
 
-    public BookingTicket(int idBookingTicket, String bookingDate, int quantity, boolean type,
-                         Passengers passenger, Employees employee) {
+    public BookingTicket(int idBookingTicket, String bookingDate, int quantity, int total, boolean type, Passengers passenger, Employees employee) {
         this.idBookingTicket = idBookingTicket;
         this.bookingDate = bookingDate;
         this.quantity = quantity;
+        this.total = total;
         this.type = type;
         this.passenger = passenger;
         this.employee = employee;
     }
+
+//    public BookingTicket(int idBookingTicket, String bookingDate, int quantity, boolean type,
+//                         Passengers passenger, Employees employee) {
+//        this.idBookingTicket = idBookingTicket;
+//        this.bookingDate = bookingDate;
+//        this.quantity = quantity;
+//        this.type = type;
+//        this.passenger = passenger;
+//        this.employee = employee;
+//    }
 
     public int getIdBookingTicket() {
         return idBookingTicket;
@@ -80,5 +92,13 @@ public class BookingTicket {
 
     public void setEmployee(Employees employee) {
         this.employee = employee;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 }

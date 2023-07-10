@@ -21,6 +21,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         window.scrollTo(0, 1);
     } </script>
 
+
     <!-- For Testimonials slider -->
     <link rel="stylesheet" href="home/css/flexslider.css" type="text/css" media="all"/>
     <!-- //For Testimonials slider -->
@@ -41,8 +42,45 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link rel="stylesheet" href="home/css/search-ticket-booking.css">
     <!-- //googlefonts -->
 
+    <style>
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(calc(100%));
+
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+
+            }
+        }
+        div p{
+            color: black;
+
+        }
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+
+            }
+        }
+    </style>
+
 </head>
 <body>
+<div aria-atomic="true" aria-live="assertive" class="toast show"  role="alert" th:if="${message != null}"
+     style="
+    position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 2s forwards; // thời gian msg trượt
+    transition: all linear 0.3s;z-index: 9999999">
+    <div class="toast-header bg-success">
+        <strong class="me-auto">Notification</strong>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>
+    </div>
+    <div class="toast-body" >
+        <p th:text="${message}"></p>
+    </div>
+</div>
 <a class="login-trigger" href="#" data-target="#login" data-toggle="modal" style="position: fixed"><span
         class="inline-danger"><i class="fa-solid fa-magnifying-glass"></i></span></a>
 <!-- banner -->

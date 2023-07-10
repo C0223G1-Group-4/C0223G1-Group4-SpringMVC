@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
@@ -33,13 +34,18 @@ public class PaymentController {
     private IBookingTicketService bookingTicketService;
 
     @PostMapping("/create")
-    public ModelAndView create(@RequestParam int quantity, @RequestParam int total, @RequestParam int idPassenger) throws UnsupportedEncodingException {
+    public ModelAndView create(@RequestParam int quantity, @RequestParam int total, @RequestParam int idPassenger,
+                               @SessionAttribute List<ChairFlight> listChair) throws UnsupportedEncodingException {
         BookingTicket bookingTicket = new BookingTicket();
         Passengers passengers = passengersService.findByIdPassengers(idPassenger);
         bookingTicket.setPassenger(passengers);
         bookingTicket.setQuantity(quantity);
         bookingTicket.setBookingDate(String.valueOf(LocalDate.now()));
         bookingTicketService.save(bookingTicket);
+        for (ChairFlight c : listChair) {
+            c.setBookingTicket(bookingTicket);
+            this.chairFlightService.update(c);
+        }
         String orderType = "170000";
 //        long amount = Integer.parseInt(req.getParameter("amount"))*100;
 //        String bankCode = req.getParameter("bankCode");
@@ -120,19 +126,34 @@ public class PaymentController {
 
     @GetMapping("/return")
     public String showReturn(@RequestParam String vnp_Amount,
-                             @RequestParam String vnp_TmnCode, @RequestParam String vnp_ResponseCode
-            , Model model, @SessionAttribute List<ChairFlight> listChair) {
+                             @RequestParam String vnp_ResponseCode
+            , RedirectAttributes redirectAttributes, @SessionAttribute List<ChairFlight> listChair
+    ,HttpServletRequest request) {
         if(vnp_ResponseCode.equals("00")){
+//            String email = request.getUserPrincipal().getName();
+//            Passengers passengers = passengersService.findByEmail(email);
+//            BookingTicket bookingTicket = bookingTicketService.findByPassenger_Id(passengers.getId());
+            int idBooking = listChair.get(0).getBookingTicket().getIdBookingTicket();
+            BookingTicket bookingTicket = bookingTicketService.findById(idBooking);
+            bookingTicket.setTotal(Integer.parseInt(vnp_Amount));
+            bookingTicket.setType(true);
+            bookingTicketService.save(bookingTicket);
+
             for (ChairFlight c : listChair) {
                 c.setStatusChair(true);
+                c.setBookingTicket(bookingTicket);
                 this.chairFlightService.update(c);
-                model.addAttribute("message","Thanh toán thành công");
             }
+//            BookingTicket bookingTicket = bookingTicketService.findById(idBooking);
+//            bookingTicket.setTotal(Integer.parseInt(vnp_Amount));
+//            bookingTicket.setType(true);
+//            bookingTicketService.save(bookingTicket);
+            //tìm lại booking để set
+            redirectAttributes.addFlashAttribute("message","Payment Successfully");
         }else {
-            model.addAttribute("message","Thanh toán thất bại");
+            redirectAttributes.addFlashAttribute("message","Payment Failed");
         }
         listChair.clear();
-//        model.addAttribute("amount", vnp_Amount);
-        return "return";
+        return "redirect:/";
     }
 }
