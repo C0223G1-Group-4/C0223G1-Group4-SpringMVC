@@ -36,67 +36,67 @@ public class AirCraftController {
         return "air-craft/view";
     }
     // Tài
-    @GetMapping("create")
+    @GetMapping("/create")
     public String createAirCraft(Model model) {
         model.addAttribute("airCraftDto", new AirCraftDto());
         model.addAttribute("routeList",this.iRouteService.checkAllListRoute());
         return "air-craft/create";
     }
     // Tài
-    @PostMapping("create")
-    public String createAirCraft(@Valid @ModelAttribute AirCraftDto airCraftDto, BindingResult bindingResult,RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            return "air-craft/create";
-        }
-        AirCraft airCraft1 = new AirCraft();
-        BeanUtils.copyProperties(airCraftDto, airCraft1);
-//        List<Route> routes=new ArrayList<>();
-//        routes.add(this.iRouteService.findByIdRoute(idRoute));
-//        airCraft1.setRoutes(routes);
-        this.iAirCraftService.createAirCraft(airCraft1);
-        redirectAttributes.addFlashAttribute("msg", "Thêm mới thành công");
+    @PostMapping("/create")
+    public String createAirCraft(@ModelAttribute AirCraft airCraft, RedirectAttributes redirectAttributes) {
+       if (this.iAirCraftService.checkAllListAirCraft().size()==0){
+           airCraft.setNumberAirCraft("AC-"+1);
+           airCraft.setCapacity(60);
+       }else {
+           int numberAirCraft=this.iAirCraftService.checkAllListAirCraft().get(this.iAirCraftService.checkAllListAirCraft().size()-1).getId()+1;
+           airCraft.setNumberAirCraft("AC-"+(numberAirCraft));
+           airCraft.setCapacity(60);
+       }
+        this.iAirCraftService.createAirCraft(airCraft);
+        redirectAttributes.addFlashAttribute("msg", "Create success");
         return "redirect:/air-craft";
     }
     // Tài
-    @GetMapping("edit/{id}")
+    @GetMapping("/edit/{id}")
     public String editAirCraft(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
         if (!this.iAirCraftService.findByIdAirCraft(id).isFlag()&& this.iAirCraftService.findByIdAirCraft(id)!= null) {
+            model.addAttribute("number",this.iAirCraftService.findByIdAirCraft(id).getNumberAirCraft());
             model.addAttribute("airCraft", this.iAirCraftService.findByIdAirCraft(id));
             return "air-craft/edit";
         } else {
-            redirectAttributes.addAttribute("msg", "Không tìm thấy đối tượng này");
+            redirectAttributes.addAttribute("msg", "Not found");
             return "redirect:/air-craft";
         }
     }
     // Tài
-    @PostMapping("edit")
-    public String editAirCraft(@Valid @ModelAttribute AirCraftDto airCraftDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    @PostMapping("/edit")
+    public String editAirCraft(@Valid @ModelAttribute AirCraftDto airCraftDto, BindingResult bindingResult,@RequestParam String number,@RequestParam int id, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "air-craft/edit";
         }
-        if (this.iAirCraftService.findByIdAirCraft(airCraftDto.getId())!=null){
+
             AirCraft airCraft = new AirCraft();
             BeanUtils.copyProperties(airCraftDto, airCraft);
-            List<Route> routes=new ArrayList<>();
-            routes.add(this.iRouteService.findByIdRoute(airCraft.getRoutes().get(0).getId()));
-            airCraft.setRoutes(routes);
-            this.iAirCraftService.editAirCraft(airCraft);
-            redirectAttributes.addFlashAttribute("msg","Thay đổi thông tin máy bay thành công");
-        }else {
-            redirectAttributes.addFlashAttribute("msg","Không tìm thấy đối tượng này");
+        for (AirCraft a: this.iAirCraftService.checkAllListAirCraft()) {
+            if (airCraft.getNumberAirCraft().equals(a.getNumberAirCraft())&&!a.getId().equals(id)){
+                redirectAttributes.addFlashAttribute("msgErr","Number AirCraft have in list can't edit");
+                return "redirect:/air-craft";
+            }
         }
-
+            this.iAirCraftService.editAirCraft(airCraft);
+            redirectAttributes.addFlashAttribute("msg","Edit Success");
         return "redirect:/air-craft";
     }
     // Tài
-    @GetMapping("delete")
+    @GetMapping("/delete")
     public String deleteAirCraft(@RequestParam int deleteId,RedirectAttributes redirectAttributes){
             if (this.iAirCraftService.findByIdAirCraft(deleteId)!=null){
                 this.iAirCraftService.findByIdAirCraft(deleteId).setFlag(true);
                 this.iAirCraftService.deleteAirCraft(this.iAirCraftService.findByIdAirCraft(deleteId));
-                redirectAttributes.addFlashAttribute("msg","Xóa thành công");
+                redirectAttributes.addFlashAttribute("msg","Delete success");
             }else {
-                redirectAttributes.addFlashAttribute("msg","Không tồn tại đối tượng này");
+                redirectAttributes.addFlashAttribute("msg","Not found");
             }
 
         return "redirect:/air-craft";

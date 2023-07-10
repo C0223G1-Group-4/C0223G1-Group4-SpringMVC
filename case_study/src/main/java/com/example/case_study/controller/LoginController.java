@@ -8,6 +8,7 @@ import com.example.case_study.model.RoleUser;
 import com.example.case_study.service.account.IAccountService;
 import com.example.case_study.service.employees_service.IEmployeesService;
 import com.example.case_study.service.passengers_service.IPassengersService;
+import com.example.case_study.service.post_service.IPostService;
 import com.example.case_study.util.WebUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
@@ -28,15 +30,20 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Controller
-public class Login {
+public class LoginController {
     @Autowired
     private IAccountService accountService;
     @Autowired
     private IPassengersService passengersService;
     @Autowired
     private IEmployeesService employeesService;
+    @Autowired
+    private IPostService postService;
     @GetMapping("/login")
-    public String formLogin(Model model) {
+    public String formLogin(@RequestParam(value = "error", required = false) boolean error, Model model) {
+        if (error){
+            model.addAttribute("msg","* Email or password error *");
+        }
         model.addAttribute("accountDto", new AccountUserDto());
         model.addAttribute("passengerDto", new PassengerDto());
         return "loginPage";
@@ -52,6 +59,12 @@ public class Login {
         // Sau khi user login thanh cong se co principal
         String userName = principal.getName();
         AccountUser accountUser = accountService.findByEmail(principal.getName());
+        model.addAttribute("acc",accountUser);
+        model.addAttribute("post",postService.findAll());
+        if (accountUser.getRoleUser().getName().equals("ROLE_Customer")){
+            model.addAttribute("info",passengersService.findByIdAccount(accountUser.getId()));
+            return "home/index";
+        } else if(accountUser.getRoleUser().getName().equals("ROLE_Employee")){
         model.addAttribute("acc", accountUser);
         if (accountUser.getRoleUser().getName().equals("ROLE_Customer")) {
             if (! passengersService.findByEmail(accountUser.getEmail()).isEnabled()) {
@@ -69,6 +82,7 @@ public class Login {
 //            model.addAttribute("info",employeesService.findByIdAccount(accountUser.getId()));
             return "redirect:/employee";
         }
+
     }
 
     @GetMapping("/400")

@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Create Air Craft</title>
-    <link rel="stylesheet" href="/home/css/form-create-edit.css">
-
+  <meta charset="UTF-8">
+  <title>Edit Air Craft</title>
+  <link rel="stylesheet" href="/home/css/form-create-edit.css">
 </head>
 <body>
 <div class="form-body">
-    <div class="row">
-        <div class="form-holder">
-            <div class="form-content">
-                <div class="form-items">
-                    <center><h2>Create air craft</h2></center>
-                    <form th:action="@{/air-craft/create}" th:object="${airCraftDto}" th:method="post">
-                        <div class="col-md-12">
-                            <p>Capacity</p>
-                            <input type="number" th:field="*{capacity}" class="form-control" required placeholder="Capacity">
-                            <p style="color: red" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></p>
-                        </div>
-
-                        <div class="col-md-12">
-                            <p>Code Air Craft</p>
-                            <input class="form-control" type="text" th:field="*{numberAirCraft}" placeholder="Number Air Craft" required>
-                            <p style="color: red" th:if="${#fields.hasErrors('numberAirCraft')}" th:errors="*{numberAirCraft}"></p>
-                        </div>
-                        <center>
-                            <div class="form-button mt-3" style="padding-top: 30px">
-                                <button id="submit" type="submit" style="width: 130px;height: 40px;background: #3893cc;border-radius: 30px;color: whitesmoke" >Create</button>
-                            </div>
-                        </center>
-                    </form>
-                </div>
+  <div class="row">
+    <div class="form-holder">
+      <div class="form-content">
+        <div class="form-items">
+          <center><h2>Create air craft</h2></center>
+          <form th:action="@{/air-craft/create}" th:object="${airCraftDto}" th:method="post">
+            <input type="hidden" th:field="*{id}">
+            <div class="col-md-12">
+              <p>Capacity</p>
+              <input type="number" th:field="*{capacity}" th:value="${60}" class="form-control" required
+                     placeholder="60" readonly>
+              <p style="color: red" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></p>
             </div>
+            <div class="col-md-12">
+              <p>Route</p>
+              <select th:field="*{routes}" class="form-select mt-3" required>
+                <option th:each="route :${routeList}" th:value="${route.id}"
+                        th:text="${'Code Route: ' +route.codeRoute+', Air Port: '+route.airPort+', Destination: '+route.destination+', Fare: '+route.fare}"></option>
+              </select>
+            </div>
+            <center>
+              <div class="form-button mt-3" style="padding-top: 30px">
+                <button id="submit" type="submit"
+                        style="width: 130px;height: 40px;background: #3893cc;border-radius: 30px;color: whitesmoke">
+                  Edit
+                </button>
+              </div>
+            </center>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 </body>
 </html>

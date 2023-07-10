@@ -49,7 +49,7 @@
      style="
     position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 2s forwards;
     transition: all linear 0.3s;">
-    <div class="toast-header bg-warning">
+    <div class="toast-header bg-danger">
         <strong class="me-auto">Notification</strong>
         <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>
     </div>
@@ -86,7 +86,8 @@
                 <td th:text="${route.airPort}"></td>
                 <td th:text="${route.destination}"></td>
                 <td th:text="${route.codeRoute}"></td>
-                <td th:text="${route.fare}"></td>
+                <td> <span th:text="${#numbers.formatDecimal(route.fare, 2, 'COMMA', 0, 'POINT')}"></span> VNĐ</td>
+
                 <td>
                     <a th:href="@{route/edit/{id}(id=${route.id})}"><span style="font-size: 20px;color: whitesmoke"><i
                             class="fa-solid fa-pen-to-square"></i></span></a>
