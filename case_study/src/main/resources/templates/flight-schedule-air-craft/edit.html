@@ -14,11 +14,13 @@
                 <div class="form-items">
                     <center><h2>Create Booking Ticket</h2></center>
                     <form th:action="@{/flight-schedule-air-craft/edit}" th:method="post"
-                          th:object="${flightScheduleAirCraft}">
+                          th:object="${flightScheduleAirCraftDto}">
                         <input type="hidden" th:field="*{id}">
                         <div class="col-md-12">
                             <p>Code Booking</p>
                             <input class="form-control" type="text" th:field="*{codeBooking}" placeholder="Code Booking" required>
+                            <span style="color: red" th:if="${#fields.hasErrors('codeBooking')}" th:errors="*{codeBooking}"></span>
+
                         </div>
                         <div class="col-md-12">
                             <p>Air Craft</p>
