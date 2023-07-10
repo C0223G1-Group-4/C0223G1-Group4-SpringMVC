@@ -70,6 +70,7 @@ public class PostController {
         }
         Post post = new Post();
         BeanUtils.copyProperties(postDto,post);
+        postService.update(post);
         return "redirect:/post";
     }
     @GetMapping("/detail/{id}")
@@ -89,6 +90,6 @@ public class PostController {
         }
         redirectAttributes.addFlashAttribute("msg","Delete success");
         postService.delete(id);
-        return "redirect:?post";
+        return "redirect:/post";
     }
 }

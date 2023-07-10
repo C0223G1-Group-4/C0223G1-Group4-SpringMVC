@@ -87,6 +87,7 @@
                    class="btn btn-primary">Update</a>
                 <a th:if="${acc.roleUser.name != 'ROLE_Customer'}"
                    th:attr="onclick=|deletePost('${post.id}','${post.namePost}','${post.employees.nameEmployee}')|"
+                   href="#"
                    class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"> <span
                         style="padding-left: 5px;color: whitesmoke">
                     <i class="fa-solid fa-trash-can"></i>  Delete</span></a>
@@ -103,7 +104,7 @@
     function deletePost(id, namePost, employee) {
         document.getElementById("deletePost").value = id;
         document.getElementById("namePost").innerText = namePost;
-        document.getElementById("writer").innerText = employee;
+        document.getElementById("employ").innerText = employee;
 
     }
 </script>
@@ -122,7 +123,8 @@
                         <span style="color:black;">Post title: </span> <span style="color: red"
                                                                              id="namePost"></span><br>
                         <span style="color:black;">Written by: </span> <span style="color: black"
-                                                                             id="writer"></span><br>
+                                                                             id="employ"></span><br>
+                        <p style="color: red">This action cannot be undone</p>
 
                     </div>
                 </center>
