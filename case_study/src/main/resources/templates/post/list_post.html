@@ -70,7 +70,7 @@
 <h1>List Post </h1>
 <div class="row">
     <div class="col-12 col-md-3 col-lg-3 ">
-        <a th:if="${acc.roleUser.name != 'ROLE_Customer'}" href="/post/create" class="position-fixed">
+        <a th:if="${acc.roleUser.name != 'ROLE_Customer'}" href="/post/create" class="position-fixed z-1">
             <button class="btn btn-light">Create Post</button>
         </a>
     </div>
@@ -78,7 +78,7 @@
         <div class="card d-block "
              style=" width: 40em;margin: 20px 0"
              th:each="post : ${posts}">
-            <img th:src="${post.image}" class="card-img-top" alt="thanh son" height="200px">
+            <img th:src="${post.image}" class="card-img-top" alt="thanh son" height="400px">
             <div class="card-body">
                 <h4 class="card-title" th:text="${post.namePost}"></h4>
                 <h5 class="card-title" th:text="${post.heading}"></h5>
