@@ -47,7 +47,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         class="inline-danger"><i class="fa-solid fa-magnifying-glass"></i></span></a>
 <!-- banner -->
 
-<div id="login" class="modal fade" role="dialog">
+<div id="login" class="modal fade" role="dialog" style="margin-top: 200px">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
@@ -56,64 +56,68 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <h3 style="margin-top: 10px;color: whitesmoke;font-size: 30px">Search Ticket</h3>
                 </center>
                 <form th:action="@{/search}" th:method="get">
-                    <div class="col-md-12" style="margin-top: 20px">
-                        <p style="color:whitesmoke;">Air Port</p>
-                        <select name="airPort" class="form-select mt-3"
+                    <div class="row mt-2" >
+                    <div class="col-md-6" style="margin-top: 20px">
+<!--                        <span style="color:whitesmoke;height: 60px">Air Port</span>-->
+                        <select name="airPort" class="form-select "
                                 style="width: 100%;height: 30px;border-radius: 20px">
-                            <option value=""></option>
+                            <option value="" disabled selected hidden>Air Port</option>
                             <option
-                                    value="Sài Gòn">
-                                Sài Gòn
+                                    value="Sai Gon">
+                                Sai Gon
                             </option>
                             <option
-                                    value="Đà Nẵng">
-                                Đà Nẵng
+                                    value="Da Nang">
+                                Da Nang
                             </option>
                             <option
-                                    value="Huế">Huế
+                                    value="Hue">Hue
                             </option>
                             <option
-                                    value="Hà Nội">Hà Nội
+                                    value="Ha Noi">Ha Noi
                             </option>
                         </select>
                     </div>
-                    <div class="col-md-12" style="margin-top: 20px">
-                        <p style="color:whitesmoke;height: 60px">Destination</p>
-                        <select name="destination" class="form-select mt-3"
+                    <div class="col-md-6" style="margin-top: 20px">
+<!--                        <span style="color:whitesmoke;height: 60px">Destination</span>-->
+                        <select name="destination" class="form-select"
                                 style="width: 100%;height: 30px;border-radius: 20px">
-                            <option value=""></option>
+                            <option value="" disabled selected hidden>Destination</option>
                             <option
-                                    value="Sài Gòn">
-                                Sài Gòn
+                                    value="Sai Gon">
+                                Sai Gon
                             </option>
                             <option
-                                    value="Đà Nẵng">
-                                Đà Nẵng
+                                    value="Da Nang">
+                                Da Nang
                             </option>
                             <option
-                                    value="Huế">Huế
+                                    value="Hue">Hue
                             </option>
                             <option
-                                    value="Hà Nội">Hà Nội
+                                    value="Ha Noi">Ha Noi
                             </option>
                         </select>
                     </div>
-                    <div class="col-md-12">
-                        <p style="color:whitesmoke;">From</p>
+                    </div>
+                    <div class="row mt-2">
+                    <div class="col-md-6">
+                        <span style="color:whitesmoke;height: 60px">From</span>
                         <input type="date" name="departure" style="width: 100%;border-radius: 20px">
                     </div>
-                    <div class="col-md-12">
-                        <p style="color:whitesmoke;">To</p>
+                    <div class="col-md-6">
+                        <span style="color:whitesmoke;height: 60px">To</span>
                         <input type="date" name="arrival" style="width: 100%;border-radius: 20px">
                     </div>
                     <center>
                         <div class="form-button mt-3" style="padding-top: 30px">
                             <button id="submit" type="submit"
-                                    style="width: 130px;height: 40px;background: #3893cc;color: whitesmoke;border-radius: 30px;margin-top: 20px">
+                                    style="width: 130px;height: 40px;background: #5f7d8f;color: #7cc0d7;border-radius: 30px;margin-top: 20px">
                                 <span class="inline-danger"><i class="fa-solid fa-magnifying-glass"></i></span>
                             </button>
                         </div>
                     </center>
+                    </div>
                 </form>
             </div>
         </div>
