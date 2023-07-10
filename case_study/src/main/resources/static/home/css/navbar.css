@@ -40,6 +40,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: #435ada;
+    opacity: 0.8;
 }
 
 .navbar .logo {
@@ -85,7 +87,6 @@ header {
     display: none;
     position: absolute;
     top: 60px;
-    width: 300px;
     height: 0;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
