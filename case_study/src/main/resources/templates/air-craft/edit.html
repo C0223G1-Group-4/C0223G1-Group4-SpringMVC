@@ -23,6 +23,13 @@
                                th:errors="*{numberAirCraft}"></p>
                         </div>
                         <div class="col-md-12">
+                            <p>Route</p>
+                            <select th:field="*{routes}" class="form-select mt-3" required>
+                                <option th:each="route :${routeList}" th:text="${'Code Route: ' +route.codeRoute+', destination: '+route.airPort+', destination: '+route.airPort}"
+                                        th:value="${route.id}"></option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
                             <p>Capacity</p>
                             <input type="number" th:field="*{capacity}" class="form-control" required
                                    placeholder="Capacity">
