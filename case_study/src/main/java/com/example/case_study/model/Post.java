@@ -1,5 +1,7 @@
 package com.example.case_study.model;
 
+import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,9 +10,12 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String namePost;
+    @Column(columnDefinition = "LongText")
     private String content;
     private String image;
     private String datePost;
+    private String heading;
+
     @ManyToOne
     private Employees employees;
     @Column(columnDefinition = "bit default false")
@@ -18,13 +23,31 @@ public class Post {
     public Post() {
     }
 
-    public Post(Integer id, String namePost, String content, String image, String datePost, Employees employees) {
+    public Post(Integer id, String namePost, String content, String image, String datePost, String heading, Employees employees, boolean flagDelete) {
         this.id = id;
         this.namePost = namePost;
         this.content = content;
         this.image = image;
         this.datePost = datePost;
+        this.heading = heading;
         this.employees = employees;
+        this.flagDelete = flagDelete;
+    }
+
+    public String getHeading() {
+        return heading;
+    }
+
+    public void setHeading(String heading) {
+        this.heading = heading;
+    }
+
+    public boolean isFlagDelete() {
+        return flagDelete;
+    }
+
+    public void setFlagDelete(boolean flagDelete) {
+        this.flagDelete = flagDelete;
     }
 
     public Integer getId() {

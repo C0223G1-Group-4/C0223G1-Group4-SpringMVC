@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Lazy
 public class AccountServiceImpl implements IAccountService {
@@ -34,5 +36,10 @@ public class AccountServiceImpl implements IAccountService {
     @Override
     public void createAccount(AccountUser accountUser) {
         accountRepository.save(accountUser);
+    }
+
+    @Override
+    public List<AccountUser> findAll() {
+        return accountRepository.findAll();
     }
 }

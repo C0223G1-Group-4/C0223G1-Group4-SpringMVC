@@ -13,7 +13,7 @@ public class Employees {
 
     private String address;
     private String telephone;
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private AccountUser accountUser;
     @Column(columnDefinition = "bit default 0")
     private boolean flagDelete;
@@ -40,11 +40,12 @@ public class Employees {
         this.accountUser = accountUser;
     }
 
-    public Employees(String nameEmployee, String age, String address, String telephone) {
+    public Employees(String nameEmployee, String age, String address, String telephone, AccountUser accountUser) {
         this.nameEmployee = nameEmployee;
         this.age = age;
         this.address = address;
         this.telephone = telephone;
+        this.accountUser = accountUser;
     }
 
     public boolean isFlagDelete() {

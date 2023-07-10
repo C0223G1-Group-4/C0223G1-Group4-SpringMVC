@@ -16,16 +16,18 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailServiceImpl userDetailService;
     @Autowired
     private DataSource dataSource;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-      return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();
     }
+
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
     }
@@ -33,14 +35,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
     @Autowired
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.authorizeRequests().antMatchers( "/","/login").permitAll();
-        http.authorizeRequests().antMatchers("/passenger/edit/{id}","/passenger/update")
+        http.authorizeRequests().antMatchers("/", "/login").permitAll();
+        http.authorizeRequests().antMatchers("/passenger/edit/{id}", "/passenger/update", "/flight-schedule-air-craft/search", "/post", "/chair_flight/*")
                 .access("hasAnyRole('ROLE_Employee','ROLE_Customer','ROLE_Admin')");
-        http.authorizeRequests().antMatchers("/air-craft","/passenger","/passenger/*","/air-craft/*",
-                        "/flight-schedule-air-craft","/flight-schedule-air-craft/*","/flight-schedule",
-                        "/flight-schedule/*","/route","/route/*")
+        http.authorizeRequests().antMatchers("/air-craft", "/passenger", "/passenger/*", "/air-craft/*",
+                        "/flight-schedule-air-craft", "/flight-schedule-air-craft/*", "/flight-schedule",
+                        "/flight-schedule/*", "/route", "/route/*", "/post/*")
                 .access("hasAnyRole('ROLE_Employee','ROLE_Admin')");
-        http.authorizeRequests().antMatchers("/employee","/employee/*", "/passenger/delete")
+        http.authorizeRequests().antMatchers("/employee", "/employee/*", "/passenger/delete")
                 .access("hasRole('ROLE_Admin')");
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/400");
         http.authorizeRequests().and().formLogin()
