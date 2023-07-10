@@ -12,7 +12,7 @@
             <div class="form-content">
                 <div class="form-items">
                     <center><h2>Create air craft</h2></center>
-                    <form th:action="@{/air-craft/edit}" th:object="${airCraft}" th:method="post">
+                    <form th:action="@{/air-craft/edit}" th:object="${airCraftDto}" th:method="post">
                         <input type="hidden" th:field="*{id}">
                         <input type="hidden" th:value="${number}" th:name="number">
                         <div class="col-md-12">
