@@ -37,12 +37,97 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,vietnamese"
           rel="stylesheet">
+    <link rel="stylesheet" href="home/css/search-ticket-booking.css">
     <!-- //googlefonts -->
+
+    <style>
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(calc(100%));
+
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+
+            }
+        }
+        div p{
+            color: black;
+
+        }
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+
+            }
+        }
+    </style>
 
 </head>
 <body>
-
+<div aria-atomic="true" aria-live="assertive" class="toast show"  role="alert" th:if="${message != null}"
+     style="
+    position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 2s forwards; // thời gian msg trượt
+    transition: all linear 0.3s;z-index: 9999999">
+    <div class="toast-header bg-success">
+        <strong class="me-auto">Notification</strong>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>
+    </div>
+    <div class="toast-body" >
+        <p th:text="${message}"></p>
+    </div>
+</div>
+<a class="login-trigger" href="#" data-target="#login" data-toggle="modal" style="position: fixed"><span
+        class="inline-danger"><i class="fa-solid fa-magnifying-glass"></i></span></a>
 <!-- banner -->
+
+<div id="login" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button data-dismiss="modal" class="close">&times;</button>
+				<center>
+                <h3 style="margin-top: 10px;color: whitesmoke;font-size: 30px">Search Ticket</h3>
+				</center>
+                <form th:action="@{/search}" th:method="get">
+                    <div class="col-md-12" style="margin-top: 20px">
+                        <p style="color:whitesmoke;">Destination</p>
+                        <select name="destination" class="form-select mt-3" required style="width: 100%;height: 30px;border-radius: 20px">
+                            <option
+                                    value="Sài Gòn">
+                                Sài Gòn
+                            </option>
+                            <option
+                                    value="Huế">Huế
+                            </option>
+                            <option
+                                    value="Hà Nội">Hà Nội
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                        <p style="color:whitesmoke;">Departure</p>
+                        <input type="date" name="departure" style="width: 100%;border-radius: 20px">
+                    </div>
+                    <div class="col-md-12">
+                        <p style="color:whitesmoke;">Arrival</p>
+                        <input type="date" name="arrival" style="width: 100%;border-radius: 20px">
+                    </div>
+                    <center>
+                        <div class="form-button mt-3" style="padding-top: 30px">
+                            <button id="submit" type="submit"
+                                    style="width: 130px;height: 40px;background: #3893cc;color: whitesmoke;border-radius: 30px;margin-top: 20px">
+                                <span class="inline-danger"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            </button>
+                        </div>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Top-Bar -->
 <div class="top">
     <div class="container">
@@ -86,7 +171,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="index.html">Home</a></li>
                             <li><a href="about.html">About</a></li>
-                            <li><a href="booking.html">Booking</a></li>
+
                             <li><a href="gallery.html">Gallery</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-hover="Pages" data-toggle="dropdown"
@@ -127,6 +212,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </ul>
                             </li>
                         </ul>
+
                     </nav>
                 </div>
             </nav>

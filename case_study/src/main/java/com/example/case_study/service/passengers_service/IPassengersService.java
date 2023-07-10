@@ -20,5 +20,16 @@ public interface IPassengersService {
     Passengers findByEmail(String email);
     void sendVerificationEmail(Passengers passengers, String siteURL) throws MessagingException, UnsupportedEncodingException;
 
+    Passengers findByCode(String code);
+
+    boolean verify(String verificationCode);
+
+    void reset(Passengers passengers);
+
+    void sendVerificationReset(Passengers passengers,String siteURL) throws MessagingException, UnsupportedEncodingException;
+
+    boolean verifyReset(String verificationCode);
+
+    void reset_pw(Passengers passengers,String new_pw);
 
 }

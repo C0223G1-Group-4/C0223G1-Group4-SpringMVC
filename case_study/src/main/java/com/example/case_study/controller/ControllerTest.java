@@ -1,5 +1,6 @@
 package com.example.case_study.controller;
 
+import com.example.case_study.model.ChairFlight;
 import com.example.case_study.model.AccountUser;
 import com.example.case_study.service.account.IAccountService;
 import com.example.case_study.service.employees_service.IEmployeesService;
@@ -13,15 +14,26 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import java.security.Principal;
 
 @Controller
 @RequestMapping("")
+@SessionAttributes("listChair")
 public class ControllerTest {
     @Autowired
     private IPostService postService;
+
+    @ModelAttribute("listChair")
+    public List<ChairFlight> init(){
+        return new ArrayList<ChairFlight>();
+    }
     @Autowired
     private IAccountService accountService;
     @Autowired

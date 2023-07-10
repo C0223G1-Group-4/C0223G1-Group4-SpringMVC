@@ -18,17 +18,18 @@ import java.util.Date;
 public class PassengerDto implements Validator {
     private Integer id;
     @NotBlank(message = "Citizen ID cannot be left blank!")
+    @Size(min = 10,max = 12)
 //    @Pattern(regexp = "^[0-9]{12}$")
     private String citizenId;
     @NotBlank(message = "Customer name cannot be blank, minimum length is 2 and maximum is 45!")
     @Size(min = 2 , max = 45)
-//    @Pattern(regexp = "^[\\\\p{Lu}][\\\\p{Ll}]*([\\\\s][\\\\p{Lu}][\\\\p{Ll}]*)*$", message = "Sai định dạng")
+//    @Pattern(regexp = "^[\\\\p{Lu}][\\\\p{Ll}]*([\\\\s][\\\\p{Lu}][\\\\p{Ll}]*)*$")
     private String name;
     @NotBlank(message = "Address cannot be empty!")
     private String address;
     @NotBlank(message = "Phone number cannot be blank, minimum length is 10 and maximum is 12!")
     @Size(min = 10, max = 12)
-//    @Pattern(regexp = "^0\\\\d{10,12}$")
+//    @Pattern(regexp = "^0\\\\d{9}$")
     private String phoneNumber;
     @NotNull(message = "Age cannot be empty!")
     @DateTimeFormat(pattern = "yyyy-MM-dd")

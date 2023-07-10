@@ -15,6 +15,8 @@
                     <center><h2>Create Route</h2></center>
                     <form th:object="${route}" th:action="@{/route/edit}" th:method="post">
                         <input type="hidden" th:field="*{id}">
+                        <input type="hidden" th:value="${route.id}" th:name="id">
+                        <input type="hidden"th:value="${number}" th:name="number">
                         <div class="col-md-12">
                             <p> Air Port</p>
                             <input class="form-control" type="text" th:field="*{airPort}" placeholder="Air Port"

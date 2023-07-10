@@ -13,22 +13,24 @@
             <div class="form-content">
                 <div class="form-items">
                     <center><h2>Create flight schedule</h2></center>
-                    <form th:action="@{/flight-schedule/edit}" th:method="post" th:object="${flightSchedule}">
+                    <form th:action="@{/flight-schedule/edit}" th:method="post" th:object="${flightSchedule}" novalidate="novalidate">
                         <input type="hidden" th:field="*{id}">
+                        <input type="hidden" th:value="${flightSchedule.id}" th:name="id">
+                        <input type="hidden" th:value="${number}" th:name="number">
                         <div class="col-md-12">
                             <p>Code Flight Schedule</p>
-                            <input type="text" th:field="*{codeFlightSchedule}" class="form-control" required placeholder="Code Flight Schedule">
-                            <p style="color: red" th:if="${#fields.hasErrors('codeFlightSchedule')}" th:errors="*{codeFlightSchedule}"></p>
+                            <input type="text" th:field="*{codeFlightSchedule}" class="form-control" required placeholder="Code Flight Schedule" >
+                            <span style="color: red" th:if="${#fields.hasErrors('codeFlightSchedule')}" th:errors="*{codeFlightSchedule}"></span>
                         </div>
                         <div class="col-md-12">
                             <p>Departure</p>
                             <input class="form-control" type="datetime-local" th:field="*{departure}" placeholder="Departure" required>
-                            <p style="color: red" th:if="${#fields.hasErrors('departure')}" th:errors="*{departure}"></p>
+                            <span style="color: red" th:if="${#fields.hasErrors('departure')}" th:errors="*{departure}"></span>
                         </div>
                         <div class="col-md-12">
                             <p>Arrival</p>
                             <input class="form-control" type="datetime-local" th:field="*{arrival}" placeholder="Arrival" required>
-                            <p style="color: red" th:if="${#fields.hasErrors('arrival')}" th:errors="*{arrival}"></p>
+                            <span style="color: red" th:if="${#fields.hasErrors('arrival')}" th:errors="*{arrival}"></span>
                         </div>
                         <center>
                             <div class="form-button mt-3" style="padding-top: 30px">

@@ -33,22 +33,33 @@ public class RouteController {
     // Tài
     @GetMapping("/create")
     public String create(Model model){
-        model.addAttribute("routeDto",new RouteDto());
+        Route route=new Route();
+        route.setAirPort("Đà Nẵng");
+        model.addAttribute("routeDto",route);
         model.addAttribute("listAirCraft",this.iAirCraftService.checkAllListAirCraft());
         return "route/create";
     }
     // Tài
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute RouteDto routeDto, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String create(@Valid @ModelAttribute RouteDto routeDto, BindingResult bindingResult,@RequestParam String destination, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
-            return "route/view";
+            return "route/create";
         }
         Route route=new Route();
         BeanUtils.copyProperties(routeDto,route);
-        if (this.iRouteService.createRoute(route)){
-            redirectAttributes.addFlashAttribute("msg","Thêm mới thành công");
+        int codeRoute=0;
+
+        if (this.iRouteService.checkAllListRoute().size()==0){
+            codeRoute=1;
         }else {
-            redirectAttributes.addFlashAttribute("msg","Đối tượng này đã tồn tại");
+            codeRoute= this.iRouteService.checkAllListRoute().get(this.iRouteService.checkAllListRoute().size()-1).getId()+1;
+        }
+        route.setDestination(destination);
+        route.setCodeRoute("CR-"+codeRoute);
+        if (this.iRouteService.createRoute(route)){
+            redirectAttributes.addFlashAttribute("msg","Create success");
+        }else {
+            redirectAttributes.addFlashAttribute("msg","Already exists");
         }
         return "redirect:/route";
     }
@@ -56,25 +67,32 @@ public class RouteController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable int id, Model model,RedirectAttributes redirectAttributes){
           if (this.iRouteService.findByIdRoute(id)!=null){
+              model.addAttribute("number",this.iRouteService.findByIdRoute(id).getCodeRoute());
               model.addAttribute("route",this.iRouteService.findByIdRoute(id));
               return "route/edit";
           }else {
-              redirectAttributes.addFlashAttribute("msg","Không tìm thấy đối tượng này");
+              redirectAttributes.addFlashAttribute("msg","Not found");
               return "redirect:/route";
           }
     }
     // Tài
     @PostMapping("/edit")
-    public String edit(@Valid @ModelAttribute RouteDto routeDto,BindingResult bindingResult,RedirectAttributes redirectAttributes){
+    public String edit(@Valid @ModelAttribute RouteDto routeDto,BindingResult bindingResult,@RequestParam String number,@RequestParam int id, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
-            return "route/view";
+            return "route/edit";
         }
         Route route=new Route();
         BeanUtils.copyProperties(routeDto,route);
+        for (Route r: this.iRouteService.checkAllListRoute()) {
+            if (r.getCodeRoute().equals(route.getCodeRoute())&&!r.getId().equals(id)&&!route.getCodeRoute().equals(number)){
+                redirectAttributes.addFlashAttribute("msgErr","Can't edit");
+                return "redirect:/route";
+            }
+        }
         if (this.iRouteService.editRoute(route)){
-            redirectAttributes.addFlashAttribute("msg","Sửa thành công");
+            redirectAttributes.addFlashAttribute("msg","Edit success");
         }else {
-            redirectAttributes.addFlashAttribute("msg","Không tồn tại đối tượng này");
+            redirectAttributes.addFlashAttribute("msgErr","Not found");
         }
         return "redirect:/route";
     }
@@ -84,9 +102,9 @@ public class RouteController {
         if (this.iRouteService.findByIdRoute(deleteId)!=null){
             this.iRouteService.findByIdRoute(deleteId).setFlag(true);
             this.iRouteService.deleteRoute(this.iRouteService.findByIdRoute(deleteId));
-            redirectAttributes.addFlashAttribute("msg","Xóa thành công");
+            redirectAttributes.addFlashAttribute("msg","Delete success");
         }else {
-            redirectAttributes.addFlashAttribute("msg","Không tìm thấy đối tượng này");
+            redirectAttributes.addFlashAttribute("msgErr","Not found");
         }
         return "redirect:/route";
     }

@@ -2,6 +2,7 @@ package com.example.case_study.service.post_service;
 
 import com.example.case_study.model.Post;
 
+
 import java.util.List;
 
 public interface IPostService {

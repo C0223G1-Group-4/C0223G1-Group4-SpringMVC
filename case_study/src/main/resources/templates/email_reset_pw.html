@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TianFight</title>
+    <link rel="stylesheet"
+          href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" id="roboto-subset.css-css"
+          href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5"
+          type="text/css" media="all">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800">
+    <link rel="stylesheet" href="css/css_signup.css">
+    <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">-->
+
+</head>
+<body>
+<div class="container" id="container">zz
+    <div class="form-container sign-up-container">
+        <form action="/login" method="post">
+            <h1>Sign in</h1>
+            <div class="social-container">
+                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <div class="col-md-6 mb-2">
+            <div class="form-outline mb-4" style="height: 50px">
+                <input type="text" id="form2Example4" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px" />
+                <label class="form-label" for="form2Example4">Email</label>
+            </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-outline mb-4" style="height: 50px">
+                    <input type="password" id="form2Example5" class="form-control form-control-lg"
+                           style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+                    <label class="form-label" for="form2Example5">Password</label>
+                </div>
+            </div>
+
+            <button type="submit">Sign in</button>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form action="/confirm_email" method="post">
+            <h1>Confirm Email Address</h1>
+            <div class="social-container">
+                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <div class="form-outline mb-4" style="height: 50px;width: 70%">
+                <input name="email" type="text" id="form2Example8" class="form-control form-control-lg"
+                       style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+                <label class="form-label" for="form2Example8">Email</label>
+            </div>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Forgot Password</h1>
+                <p> We need to confirm that the email address associated with your account is valid.</p>
+                <button class="ghost" id="signIn">Email</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1> Welcome Back!</h1>
+                <p>To keep connected with us please log_in with your personal info</p>
+                <button class="ghost" id="signUp">Sign In</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script async="" src="https://www.clarity.ms/s/0.7.8/clarity.js"></script>
+<script async="" src="https://www.clarity.ms/tag/f1su1ssihh"></script>
+<script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script>
+<script type="text/javascript" async=""
+        src="https://www.googletagmanager.com/gtag/js?id=G-E9PS2EVWYS&amp;l=dataLayer&amp;cx=c"></script>
+<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script async="" src="//www.googletagmanager.com/gtm.js?id=GTM-W7MBMN"></script>
+<script type="text/javascript"
+        src="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/js/dist/mdb5/standard/core.min.js"></script>
+<script type="text/javascript"
+        src="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/js/dist/search/search.min.js"></script>
+<script src="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/js/dist/main.min.js"></script>
+<script>
+    const signUpButton = document.getElementById("signUp");
+    const signInButton = document.getElementById("signIn");
+    const container = document.getElementById("container");
+
+    signUpButton.addEventListener("click", () => {
+        container.classList.add("right-panel-active");
+    });
+
+    signInButton.addEventListener("click", () => {
+        container.classList.remove("right-panel-active");
+    });
+</script>
+</body>
+</html>
