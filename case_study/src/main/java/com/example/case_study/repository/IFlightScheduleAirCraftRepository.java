@@ -45,7 +45,5 @@ public interface IFlightScheduleAirCraftRepository extends JpaRepository< Flight
             "and ac.flag=false and r.flag=false and fs.flag=false ",nativeQuery = true)
     List<FlightScheduleAirCraft> searchTicket3(@Param("airPort")String airPort,@Param("departure") String departure
             ,@Param("arrival") String arrival,@Param("destination") String destination);
-    List<FlightScheduleAirCraft> searchTicket(@Param("departure") String departure,@Param("arrival") String arrival,@Param("destination") String destination);
-//@Query(value = "select * from flight_schedule_aircraft where id =:id",nativeQuery = true)
     FlightScheduleAirCraft findById(int id);
 }
