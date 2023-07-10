@@ -11,4 +11,6 @@ public interface IReceiveBookingService {
     ReceiveBookingDto findById(int id);
     void cancelBooking(int id);
 
+    void confirm(int id);
+
 }

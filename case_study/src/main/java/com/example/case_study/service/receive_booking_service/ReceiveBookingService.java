@@ -49,8 +49,11 @@ public class ReceiveBookingService implements IReceiveBookingService {
 
     @Override
     public void cancelBooking(int id) {
-        if (findById(id) != null) {
-            findById(id).setStatus(false);
-        }
+        receiveBookingRepo.findByIdBookingTicket(id).setStatus(true);
+    }
+
+    @Override
+    public void confirm(int id) {
+        receiveBookingRepo.findByIdBookingTicket(id).setStatus(true);
     }
 }

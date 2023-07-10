@@ -114,19 +114,15 @@
                 <td th:if="${l.status==true}">
                     Paid
                 </td>
-                <td th:if="${l.status==false}">
-                    UnPaid
-                </td>
                 <td>
 
                     <a th:href="@{/receive_booking/cancelStatus/{id}(id=${l.id})}" ><span th:value="${l.isStatus_receive()}" class="checkout-button"
                             style="font-size: 20px;color: whitesmoke " id="cancel"><i class="fa-solid fa-rectangle-list"></i></span></a>
-                    <a th:href=""><span
+                    <a th:href="@{/receive_booking/pay/{id}(id=${l.id})}"><span
                             style="font-size: 20px;color: whitesmoke"><i class="fa-solid fa-plane-slash"></i></span></a>
                     <a th:attr="onclick=|deleteFlightSchedule('${flightScheduleAirCraftLoop.id}','${flightScheduleAirCraftLoop.flightSchedule.codeFlightSchedule}'
                     ,'${flightScheduleAirCraftLoop.idAirCraft.routes.get(0).codeRoute}','${flightScheduleAirCraftLoop.idAirCraft.numberAirCraft}')|"
-                       href="#"
-                       data-bs-toggle="modal" data-bs-target="#exampleModal"> <span
+                       href="#" id="m1-c"> <span
                             style="font-size: 20px;padding-left: 20px;color: whitesmoke"><i class="fa-solid fa-circle-check"></i></span></a>
                 </td>
             </tr>
@@ -136,6 +132,95 @@
     </div>
 </section>
 
+
+
+<!--Modal-->
+<div class="box">
+    <div class="modal-container" id="m1-o" style="--m-background: transparent;">
+        <div class="modal">
+            <div class="form-container sign-up-container">
+                <!--sign_up-->
+                    <div class="row" style=" height: 70px">
+                        <div class="col-md-6 mb-2">
+                            <div class="form-outline mb-4" style="height: 50px">
+                                <input type="text" id="form2Example18"   class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+                                <span style="color: red"></span>
+                                <label class="form-label" for="form2Example18">Full Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-outline mb-4" style="height: 50px">
+                                <input type="text" id="form2Example19"   class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+                                <span style="color: red" ></span>
+                                <label class="form-label" for="form2Example19">Citizen ID</label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row" style=" height: 70px">
+                        <div class="col-md-6 mb-2">
+                            <div class="form-outline mb-4" style="height: 50px">
+                                <input type="date" id="form2Example20"   class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+                                <span style="color: red" ></span>
+                                <label class="form-label" for="form2Example20">Day of Birth</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-outline mb-4" style="height: 50px">
+                                <input type="text" id="form2Example2"   class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+                                <span style="color: red" ></span>
+                                <label class="form-label" for="form2Example2">Nationality</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-outline mb-4" style="height: 50px">
+                        <input type="text" id="form2Example1"   class="form-control form-control-lg"/>
+                        <span style="color: red"></span>
+                        <label class="form-label" for="form2Example1">Address</label>
+                    </div>
+
+                    <div class="form-outline mb-4" style="height: 50px">
+                        <input type="text" id="form2Example3"  class="form-control form-control-lg"/>
+                        <span style="color: red" ></span>
+                        <label class="form-label" for="form2Example3">Tel</label>
+                    </div>
+                    <div class="form-outline mb-4" style="height: 50px">
+                        <input type="text" id="form2Example4"   class="form-control form-control-lg"/>
+                        <span style="color: red"></span>
+                        <label class="form-label" for="form2Example4">Email</label>
+                    </div>
+                    <div class="row" style=" height: 70px">
+                        <div class="col-md-6 mb-2">
+                            <div class="form-outline mb-4" style="height: 50px">
+                                <input type="password" id="form2Example5" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+                                <span style="color: red" ></span>
+                                <label class="form-label" for="form2Example5">Password</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-outline mb-4" style="height: 50px">
+                                <input type="password" id="form2Example6" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+                                <span style="color: red" id="message"></span>
+                                <label class="form-label" for="form2Example6">Confirm Password</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="button" type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    function detail(){
+
+    }
+</script>
 <script>
     const status=document.getElementById("cancel").val();
     const button=document.getElementById("cancel");

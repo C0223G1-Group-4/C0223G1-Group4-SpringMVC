@@ -19,19 +19,38 @@ public class ReceiveBookingTicketController {
     private IReceiveBookingService receiveBookingService;
 
     @GetMapping("/receive")
-    public String receive(@PageableDefault(value = 6) Pageable pageable, Model model){
+    public String receive(@PageableDefault(value = 6) Pageable pageable, Model model) {
 //        receiveBookingService.cancelBookingStatus();
-        model.addAttribute("list",receiveBookingService.getReceiveBookingTicketList(pageable));
+        model.addAttribute("list", receiveBookingService.getReceiveBookingTicketList(pageable));
         return "receive_booking/booking_list";
     }
 
     @GetMapping("/cancelStatus/{id}")
-    public String cancelStatus(@PathVariable int id, RedirectAttributes redirectAttributes){
-        if(receiveBookingService.findById(id)!=null) {
+    public String cancelStatus(@PathVariable int id, RedirectAttributes redirectAttributes) {
+        if (receiveBookingService.findById(id) != null) {
             receiveBookingService.cancelBooking(id);
             redirectAttributes.addFlashAttribute("success", "Successfully canceled ticket");
-        }else{
+        } else {
             redirectAttributes.addFlashAttribute("fail", "This ticket code could not be found.");
+        }
+        return "receive_booking/booking_list";
+    }
+
+    @GetMapping("/pay/{id}")
+    public String pay(@PathVariable int id, RedirectAttributes redirectAttributes) {
+        if (receiveBookingService.findById(id) != null) {
+            receiveBookingService.confirm(id);
+            redirectAttributes.addFlashAttribute("success", "Successfully check_in ticket");
+        } else {
+            redirectAttributes.addFlashAttribute("fail", "This ticket code could not be found.");
+        }
+        return "receive_booking/booking_list";
+    }
+
+    @GetMapping("/detail/{id}")
+    public String detail(@PathVariable int id,Model model) {
+        if (receiveBookingService.findById(id) != null) {
+           model.addAttribute("receive",receiveBookingService.findById(id));
         }
         return "receive_booking/booking_list";
     }

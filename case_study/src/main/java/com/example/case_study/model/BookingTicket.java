@@ -17,6 +17,8 @@ public class BookingTicket {
 
     private boolean type;
 
+    private boolean status;
+
     @ManyToOne
     private Passengers passenger;
 
@@ -24,6 +26,17 @@ public class BookingTicket {
     private Employees employee;
 
     public BookingTicket() {
+    }
+
+    public BookingTicket(int idBookingTicket, String bookingDate, int quantity, int total, boolean type, boolean status, Passengers passenger, Employees employee) {
+        this.idBookingTicket = idBookingTicket;
+        this.bookingDate = bookingDate;
+        this.quantity = quantity;
+        this.total = total;
+        this.type = type;
+        this.status = status;
+        this.passenger = passenger;
+        this.employee = employee;
     }
 
     public BookingTicket(int idBookingTicket, String bookingDate, int quantity, int total, boolean type, Passengers passenger, Employees employee) {
@@ -100,5 +113,13 @@ public class BookingTicket {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
