@@ -41,7 +41,7 @@ public class FlightScheduleAirCraftService implements IFlightScheduleAirCraftSer
 
     @Override
     public FlightScheduleAirCraft findByIdFlightScheduleAirCraft(int id) {
-        return iFlightScheduleAirCraftRepository.findById(id);
+        return iFlightScheduleAirCraftRepository.findById(id).orElse(null);
     }
 
     @Override
