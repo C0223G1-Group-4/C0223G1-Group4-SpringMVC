@@ -3,6 +3,8 @@ package com.example.case_study.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Set;
+
 @Entity
 public class AccountUser {
     @Id
@@ -14,17 +16,21 @@ public class AccountUser {
     private String passwords;
     @ManyToOne
     private RoleUser roleUser;
+    @OneToMany(mappedBy = "accountUser")
+    private Set<Employees> employeesSet;
+
     @Column(columnDefinition = "bit default 0")
     private boolean flagDelete;
 
     public AccountUser() {
     }
 
-    public AccountUser(Integer id, String email, String passwords, RoleUser roleUser, boolean flagDelete) {
+    public AccountUser(Integer id, String email, String passwords, RoleUser roleUser, Set<Employees> employeesSet, boolean flagDelete) {
         this.id = id;
         this.email = email;
         this.passwords = passwords;
         this.roleUser = roleUser;
+        this.employeesSet = employeesSet;
         this.flagDelete = flagDelete;
     }
 
@@ -59,6 +65,15 @@ public class AccountUser {
     public void setRoleUser(RoleUser roleUser) {
         this.roleUser = roleUser;
     }
+
+    public Set<Employees> getEmployeesSet() {
+        return employeesSet;
+    }
+
+    public void setEmployeesSet(Set<Employees> employeesSet) {
+        this.employeesSet = employeesSet;
+    }
+
     public boolean isFlagDelete() {
         return flagDelete;
     }
@@ -66,5 +81,4 @@ public class AccountUser {
     public void setFlagDelete(boolean flagDelete) {
         this.flagDelete = flagDelete;
     }
-
 }

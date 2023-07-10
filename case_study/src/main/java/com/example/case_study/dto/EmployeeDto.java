@@ -21,7 +21,7 @@ public class EmployeeDto implements Validator {
     private String nameEmployee;
 //    @NotBlank(message = "Age cannot be empty!")
     @NotNull(message = "Age cannot be empty!")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private String age;
     @NotBlank(message = "Address cannot be empty!")
     private String address;
@@ -99,7 +99,7 @@ public class EmployeeDto implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         EmployeeDto employeesDto = (EmployeeDto) target;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         try {
             LocalDate age = LocalDate.parse(employeesDto.age, formatter);
             LocalDate now = LocalDate.now();
