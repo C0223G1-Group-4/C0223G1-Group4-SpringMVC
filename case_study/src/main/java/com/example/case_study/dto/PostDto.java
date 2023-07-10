@@ -6,32 +6,45 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class PostDto {
     private Integer id;
     @NotBlank
-    @Length(min = 10, max = 500)
+    @Size(max = 500, message = "Length must be from 10 to 500")
     private String namePost;
     @NotBlank
-    @Length(min = 20,max = 5000)
-    @Pattern(regexp = "^[\\\\w]+$", message = "Do not accept special characters")
+    @Size(max = 5000)
+    @Pattern(regexp = "^([\\w\\d\\s]+[,]*)+$", message = "Do not accept special characters")
     private String content;
     @NotBlank
-    @Length(max = 50000)
+    @Size(max = 50000)
     private String image;
     @NotNull(message = "Age cannot be empty!")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private String datePost;
+    @NotBlank
+    @Pattern(regexp = "^([\\w\\d\\s]+[,]*)+$", message = "Do not accept special characters")
+    private String heading;
 
     public PostDto() {
     }
 
-    public PostDto(Integer id, String namePost, String content, String image, String datePost) {
+    public PostDto(Integer id, String namePost, String content, String image, String datePost, String heading) {
         this.id = id;
         this.namePost = namePost;
         this.content = content;
         this.image = image;
         this.datePost = datePost;
+        this.heading = heading;
+    }
+
+    public String getHeading() {
+        return heading;
+    }
+
+    public void setHeading(String heading) {
+        this.heading = heading;
     }
 
     public Integer getId() {

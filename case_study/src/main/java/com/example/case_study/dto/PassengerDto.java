@@ -32,7 +32,7 @@ public class PassengerDto implements Validator {
 //    @Pattern(regexp = "^0\\\\d{9}$")
     private String phoneNumber;
     @NotNull(message = "Age cannot be empty!")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private String age;
     @NotBlank(message = "Nationality cannot be blank!")
     private String nationality;
@@ -180,7 +180,7 @@ public class PassengerDto implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         PassengerDto passengersDto = (PassengerDto) target;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         try {
             LocalDate dOB = LocalDate.parse(passengersDto.getAge(), formatter);
             LocalDate now = LocalDate.now();

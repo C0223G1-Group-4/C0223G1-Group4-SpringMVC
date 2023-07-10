@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PostServiceImpl implements IPostService{
+public class PostServiceImpl implements IPostService {
     @Autowired
     private IPostRepository postRepository;
+
     @Override
     public List<Post> findAll() {
         return postRepository.findByFlagDeleteFalse();
@@ -33,6 +34,7 @@ public class PostServiceImpl implements IPostService{
 
     @Override
     public Post findById(Integer id) {
-        return postRepository.findPostById(id);
+        return postRepository.findPostById(id).get();
+
     }
 }

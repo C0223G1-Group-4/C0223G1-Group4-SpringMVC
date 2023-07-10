@@ -1,8 +1,7 @@
 package com.example.case_study.service.post_service;
 
-import com.example.case_study.model.Employees;
 import com.example.case_study.model.Post;
-import javafx.geometry.Pos;
+
 
 import java.util.List;
 
