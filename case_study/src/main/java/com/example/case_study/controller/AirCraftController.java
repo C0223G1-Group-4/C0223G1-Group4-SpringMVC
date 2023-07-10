@@ -74,6 +74,7 @@ public class AirCraftController {
             model.addAttribute("number", this.iAirCraftService.findByIdAirCraft(id).getNumberAirCraft());
             AirCraftDto airCraftDto=new AirCraftDto();
             BeanUtils.copyProperties(this.iAirCraftService.findByIdAirCraft(id),airCraftDto);
+            model.addAttribute("routeList", this.iRouteService.checkAllListRoute());
             model.addAttribute("airCraftDto", airCraftDto);
             return "air-craft/edit";
         } else {

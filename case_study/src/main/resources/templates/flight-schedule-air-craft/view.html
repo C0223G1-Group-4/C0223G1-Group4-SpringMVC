@@ -51,7 +51,7 @@
      style="
     position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 2s forwards;
     transition: all linear 0.3s;">
-    <div class="toast-header bg-warning">
+    <div class="toast-header bg-danger">
         <strong class="me-auto">Notification</strong>
         <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>
     </div>
@@ -93,7 +93,7 @@
                 <td th:text="${flightScheduleAirCraftLoop.codeBooking}"></td>
                 <td th:text="${flightScheduleAirCraftLoop.idAirCraft.numberAirCraft}"></td>
                 <td th:text="${flightScheduleAirCraftLoop.flightSchedule.codeFlightSchedule}"></td>
-                <td th:text="${flightScheduleAirCraftLoop.idAirCraft.routes.get(0).codeRoute}"></td>
+                <td th:if="${flightScheduleAirCraftLoop.idAirCraft.routes.size()!=0}" th:text="${flightScheduleAirCraftLoop.idAirCraft.routes.get(0).codeRoute}"></td>
                 <td th:text="${#dates.format(dateMapDeparture.get(flightScheduleAirCraftLoop.id), 'dd-MM-yyyy HH:mm:ss')}"></td>
                 <td th:text="${#dates.format(dateMapArrival.get(flightScheduleAirCraftLoop.id), 'dd-MM-yyyy HH:mm:ss')}"></td>
                 <td>
