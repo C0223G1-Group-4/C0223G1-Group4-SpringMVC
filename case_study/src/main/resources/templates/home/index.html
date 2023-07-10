@@ -135,55 +135,55 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!-- //Top-Bar -->
 <!-- w3-banner -->
-<div class="banner">
-    <div class="banner-dott1">
-        <div class="w3-banner">
+<!--<div class="banner">-->
+<!--    <div class="banner-dott1">-->
+<!--        <div class="w3-banner">-->
 
-            <div class="callbacks_container">
-                <ul class="rslides" id="slider3">
-                    <li>
-                        <div class="banner-text">
+<!--            <div class="callbacks_container">-->
+<!--                <ul class="rslides" id="slider3">-->
+<!--                    <li>-->
+<!--                        <div class="banner-text">-->
 
-                            <h3>Enjoy Your Dream Vacation</h3>
-                            <p>Located in SEC 24, TWP 58 N., 101 W., in Park County, WY.
-                                A part of Record of Survey # 2008-3512 in Cabinet J, Page 19, Park
-                                County Records.</p>
-                            <a href="#" class="read-agileits" data-toggle="modal" data-target="#myModal">View
-                                Details</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="banner-text">
+<!--                            <h3>Enjoy Your Dream Vacation</h3>-->
+<!--                            <p>Located in SEC 24, TWP 58 N., 101 W., in Park County, WY.-->
+<!--                                A part of Record of Survey # 2008-3512 in Cabinet J, Page 19, Park-->
+<!--                                County Records.</p>-->
+<!--                            <a href="#" class="read-agileits" data-toggle="modal" data-target="#myModal">View-->
+<!--                                Details</a>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <div class="banner-text">-->
 
-                            <h3>Find Travel Perfection</h3>
-                            <p>Located in SEC 24, TWP 58 N., 101 W., in Park County, WY.
-                                A part of Record of Survey # 2008-3512 in Cabinet J, Page 19, Park
-                                County Records.</p>
-                            <a href="#" class="read-agileits" data-toggle="modal" data-target="#myModal">View
-                                Details</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="banner-text">
+<!--                            <h3>Find Travel Perfection</h3>-->
+<!--                            <p>Located in SEC 24, TWP 58 N., 101 W., in Park County, WY.-->
+<!--                                A part of Record of Survey # 2008-3512 in Cabinet J, Page 19, Park-->
+<!--                                County Records.</p>-->
+<!--                            <a href="#" class="read-agileits" data-toggle="modal" data-target="#myModal">View-->
+<!--                                Details</a>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <div class="banner-text">-->
 
-                            <h3>Safe Way To Travel</h3>
-                            <p>Located in SEC 24, TWP 58 N., 101 W., in Park County, WY.
-                                A part of Record of Survey # 2008-3512 in Cabinet J, Page 19, Park
-                                County Records.</p>
-                            <a href="#" class="read-agileits" data-toggle="modal" data-target="#myModal">View
-                                Details</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+<!--                            <h3>Safe Way To Travel</h3>-->
+<!--                            <p>Located in SEC 24, TWP 58 N., 101 W., in Park County, WY.-->
+<!--                                A part of Record of Survey # 2008-3512 in Cabinet J, Page 19, Park-->
+<!--                                County Records.</p>-->
+<!--                            <a href="#" class="read-agileits" data-toggle="modal" data-target="#myModal">View-->
+<!--                                Details</a>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
 
-        </div>
+<!--        </div>-->
 
-        <!-- //w3-banner -->
-    </div>
-</div>
+<!--        &lt;!&ndash; //w3-banner &ndash;&gt;-->
+<!--    </div>-->
+<!--</div>-->
 <!-- //banner -->
-<div class="">
+<div class="banner">
     <div class="banner-dott1">
         <div class="w3-banner">
 
@@ -191,12 +191,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul class="rslides" id="slider03">
                     <li th:each="posts : ${post}">
                         <div class="banner-text">
-
+                            <img style=" background:url(${posts.image}) no-repeat 0px 0px;
+    background-size:cover;
+    position: relative;" >
                             <h3 th:text="${posts.namePost}"></h3>
                             <p th:text="${posts.content}"></p>
                             <p th:text="${posts.datePost}"></p>
                             <a th:href="@{/post}" class="read-agileits" >
-                                Details</a>
+                                Article Homepage</a>
                         </div>
                     </li>
                 </ul>

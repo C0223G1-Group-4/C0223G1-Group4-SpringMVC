@@ -29,8 +29,8 @@ public class PostController {
     @Autowired
     private IEmployeesService employeesService;
     @GetMapping("")
-    public String listPost(@PageableDefault(value = 5) Pageable pageable,Principal principal, Model model){
-        model.addAttribute("posts",postService.findAll(pageable));
+    public String listPost(Principal principal, Model model){
+        model.addAttribute("posts",postService.findAll());
         model.addAttribute("acc",accountService.findByEmail(principal.getName()));
         return "post/list_post";
     }
@@ -40,7 +40,7 @@ public class PostController {
         return "/post/create_post";
     }
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute PostDto postDto, BindingResult bindingResult, Principal principal, Model model){
+    public String create(@Valid @ModelAttribute PostDto postDto, BindingResult bindingResult, Principal principal,RedirectAttributes redirectAttributes, Model model){
         if (bindingResult.hasErrors()){
             model.addAttribute("postDto",postDto);
             return "post/create_post";
@@ -51,6 +51,7 @@ public class PostController {
         post.setImage("/image-post/"+postDto.getImage());
         post.setEmployees(employeesService.findByIdAccount(accountUser.getId()));
         postService.create(post);
+        redirectAttributes.addFlashAttribute("msg","Create success");
         return "redirect:/post";
     }
     @GetMapping("/update/{id}")
@@ -69,7 +70,6 @@ public class PostController {
         }
         Post post = new Post();
         BeanUtils.copyProperties(postDto,post);
-
         return "redirect:/post";
     }
     @GetMapping("/detail/{id}")
@@ -81,8 +81,8 @@ public class PostController {
         model.addAttribute("postt",postService.findById(id));
         return "home/index";
     }
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes){
+    @PostMapping("/delete")
+    public String delete(@RequestParam(value = "deletePost",required = false) Integer id, RedirectAttributes redirectAttributes){
         if (postService.findById(id) == null){
             redirectAttributes.addFlashAttribute("msgErr","Post not found.");
             return "redirect:/post";

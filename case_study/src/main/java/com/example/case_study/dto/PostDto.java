@@ -21,10 +21,30 @@ public class PostDto {
     @Size(max = 50000)
     private String image;
     @NotNull(message = "Age cannot be empty!")
-    @DateTimeFormat(pattern = "dd/MM/YYYY")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private String datePost;
+    @NotBlank
+    @Pattern(regexp = "^([\\w\\d\\s]+[,]*)+$", message = "Do not accept special characters")
+    private String heading;
 
     public PostDto() {
+    }
+
+    public PostDto(Integer id, String namePost, String content, String image, String datePost, String heading) {
+        this.id = id;
+        this.namePost = namePost;
+        this.content = content;
+        this.image = image;
+        this.datePost = datePost;
+        this.heading = heading;
+    }
+
+    public String getHeading() {
+        return heading;
+    }
+
+    public void setHeading(String heading) {
+        this.heading = heading;
     }
 
     public Integer getId() {

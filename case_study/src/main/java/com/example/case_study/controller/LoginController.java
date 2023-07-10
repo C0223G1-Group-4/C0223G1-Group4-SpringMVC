@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +32,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Controller
-public class Login {
+public class LoginController {
     @Autowired
     private IAccountService accountService;
     @Autowired
@@ -42,7 +43,11 @@ public class Login {
     private IPostService postService;
 
     @GetMapping("/login")
-    public String formLogin(@RequestParam(value = "error", required = false) boolean error, Model model) {
+    public String formLogin(@RequestParam(value = "error", required = false) boolean error,Principal principal, Model model) {
+        String authentication = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (!"anonymousUser".equals(authentication)){
+            return "redirect:/";
+        }
         if (error) {
             model.addAttribute("msg", "* Email or password error *");
         }
@@ -63,7 +68,7 @@ public class Login {
         String userName = principal.getName();
         AccountUser accountUser = accountService.findByEmail(principal.getName());
         model.addAttribute("acc", accountUser);
-        model.addAttribute("post", postService.findAll(pageable));
+        model.addAttribute("post", postService.findAll());
         if (accountUser.getRoleUser().getName().equals("ROLE_Customer")) {
             model.addAttribute("info", passengersService.findByIdAccount(accountUser.getId()));
             return "home/index";

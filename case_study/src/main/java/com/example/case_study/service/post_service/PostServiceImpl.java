@@ -3,9 +3,9 @@ package com.example.case_study.service.post_service;
 import com.example.case_study.model.Post;
 import com.example.case_study.repository.IPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PostServiceImpl implements IPostService {
@@ -13,8 +13,8 @@ public class PostServiceImpl implements IPostService {
     private IPostRepository postRepository;
 
     @Override
-    public Page<Post> findAll(Pageable pageable) {
-        return postRepository.findByFlagDeleteFalse(pageable);
+    public List<Post> findAll() {
+        return postRepository.findByFlagDeleteFalse();
     }
 
     @Override

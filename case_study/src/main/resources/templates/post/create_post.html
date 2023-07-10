@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <title>Create </title>
 </head>
-<body>
+<body style="background-image: url(/image-post/bay_5.jpg) ">
 <h1 style="text-align: center">Create Post </h1>
 <div class="formbold-main-wrapper">
     <div class="formbold-form-wrapper">
-        <form action="/post/create" method="post" th:object="${postDto}">
+        <form action="/post/create" method="post" th:object="${postDto}" style=" opacity: 0.8;">
             <div class="formbold-mb-3">
-                <label class="formbold-form-label"> Name Post </label>
+                <label class="formbold-form-label"> Name Post <span style="color: red">*</span> </label>
                 <input
                         type="text"
                         class="formbold-form-input"
@@ -21,14 +21,23 @@
 
             <div class="formbold-mb-3">
                 <label for="dob" class="formbold-form-label">
-                    The day you wrote the post </label>
+                    The day you wrote the post <span style="color: red">*</span> </label>
                 <input type="date" name="dob" id="dob"  class="formbold-form-input" th:field="*{datePost}" />
                 <p style="color: red" th:if="${#fields.hasErrors('datePost')}" th:errors="*{datePost}"></p>
+            </div>
+            <div class="formbold-mb-3">
+                <label class="formbold-form-label"> Heading <span style="color: red">*</span> </label>
+                <input
+                        type="text"
+                        class="formbold-form-input"
+                        th:field="*{heading}"
+                />
+                <p style="color: red" th:if="${#fields.hasErrors('heading')}" th:errors="*{heading}"></p>
             </div>
 
             <div class="formbold-mb-3">
                 <label for="message" class="formbold-form-label">
-                    Content
+                    Content <span style="color: red">*</span>
                 </label>
                 <textarea
                         rows="6"
@@ -41,17 +50,20 @@
 
             <div class="formbold-form-file-flex">
                 <label for="upload" class="formbold-form-label">
-                    Upload image
+                    Upload image <span style="color: red">*</span>
                 </label>
                 <input
-                        type="file"
+                        type="text"
                         id="upload"
                         class="formbold-form-input"
                         th:field="*{image}"
                 />
             </div>
-
             <button class="formbold-btn" type="submit">Apply Now</button>
+            <div style="text-align: center">
+                <button  type="button" style="text-align: center"><a th:href="@{/post}">Back</a></button>
+            </div>
+
         </form>
     </div>
 </div>
@@ -80,7 +92,7 @@
         margin: 0 auto;
         max-width: 570px;
         width: 100%;
-        background: white;
+        background: rgba(255, 255, 255, 0.5);
         padding: 40px;
     }
 

@@ -4,31 +4,41 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
+<body style="background-image: url('/image-post/bay_3.jpg')">
 <h1 style="text-align: center">Update Post </h1>
 <div class="formbold-main-wrapper">
     <div class="formbold-form-wrapper">
         <form action="/post/update" method="POST" th:object="${post}">
             <input type="hidden" th:field="*{id}">
             <div class="formbold-mb-3">
-                <label for="age" class="formbold-form-label"> Name Post </label>
+                <label for="age" class="formbold-form-label"> Name Post <span style="color: red">*</span></label>
                 <input
                         type="text"
                         id="age"
                         class="formbold-form-input"
                         th:field="*{namePost}"
                 />
+                <p style="color: red" th:if="${#fields.hasErrors('namePost')}" th:errors="*{namePost}"></p>
             </div>
 
             <div class="formbold-mb-3">
                 <label for="dob" class="formbold-form-label">
-                    The day you wrote the post </label>
+                    The day you wrote the post <span style="color: red">*</span> </label>
                 <input type="date" name="dob" id="dob" class="formbold-form-input" th:field="*{datePost}" />
+                <p style="color: red" th:if="${#fields.hasErrors('datePost')}" th:errors="*{datePost}"></p>
             </div>
-
+            <div class="formbold-mb-3">
+                <label class="formbold-form-label"> Heading <span style="color: red">*</span></label>
+                <input
+                        type="text"
+                        class="formbold-form-input"
+                        th:field="*{heading}"
+                />
+                <p style="color: red" th:if="${#fields.hasErrors('heading')}" th:errors="*{heading}"></p>
+            </div>
             <div class="formbold-mb-3">
                 <label for="message" class="formbold-form-label">
-                    Content
+                    Content <span style="color: red">*</span>
                 </label>
                 <textarea
                         rows="6"
@@ -36,21 +46,24 @@
                         class="formbold-form-input"
                         th:field="*{content}"
                 ></textarea>
+                <p style="color: red" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p>
             </div>
 
             <div class="formbold-form-file-flex">
                 <label for="upload" class="formbold-form-label">
-                    Upload image
+                    Upload image <span style="color: red">*</span>
                 </label>
                 <input
-                        type="file"
+                        type="text"
                         id="upload"
                         class="formbold-form-file"
                         th:field="*{image}"
                 />
             </div>
-
             <button class="formbold-btn" type="submit">Apply Now</button>
+            <div style="text-align: center">
+                <button  type="button" style="text-align: center"><a th:href="@{/post}">Back</a></button>
+            </div>
         </form>
     </div>
 </div>
@@ -80,6 +93,7 @@
         max-width: 570px;
         width: 100%;
         background: white;
+        opacity: 0.7;
         padding: 40px;
     }
 
