@@ -48,23 +48,27 @@ public class Login {
     }
 
     @GetMapping(value = "/userInfo")
-    public String userInfo(Model model, Principal principal ) {
+    public String userInfo(Model model, Principal principal,RedirectAttributes redirectAttributes ) {
         // Sau khi user login thanh cong se co principal
         String userName = principal.getName();
         AccountUser accountUser = accountService.findByEmail(principal.getName());
-        model.addAttribute("acc",accountUser);
-        if (accountUser.getRoleUser().getName().equals("ROLE_Customer")){
-            model.addAttribute("info",passengersService.findByIdAccount(accountUser.getId()));
-            return "home/index";
-        } else if(accountUser.getRoleUser().getName().equals("ROLE_Employee")){
+        model.addAttribute("acc", accountUser);
+        if (accountUser.getRoleUser().getName().equals("ROLE_Customer")) {
+            if (! passengersService.findByEmail(accountUser.getEmail()).isEnabled()) {
+                redirectAttributes.addFlashAttribute("fail", "Sorry, we could not verify account. It maybe already verified, or verification code is incorrect.");
+                    return "redirect:/login";
+            } else {
+                model.addAttribute("info", passengersService.findByIdAccount(accountUser.getId()));
+                return "home/index";
+            }
+        } else if (accountUser.getRoleUser().getName().equals("ROLE_Employee")) {
 //            model.addAttribute("info",employeesService.findByIdAccount(accountUser.getId()));
             return "redirect:/passenger";
-        }else {
+        } else {
             System.out.println("User Name: " + userName);
 //            model.addAttribute("info",employeesService.findByIdAccount(accountUser.getId()));
             return "redirect:/employee";
         }
-
     }
 
     @GetMapping("/400")
@@ -130,7 +134,12 @@ public class Login {
 
     @PostMapping("/confirm_email")
     public String confirm_email(@RequestParam("email") String email, HttpServletRequest request,RedirectAttributes redirectAttributes) throws MessagingException, UnsupportedEncodingException{
+
         Passengers passengers = passengersService.findByEmail(email);
+        if(passengers==null){
+            redirectAttributes.addFlashAttribute("fail","Sorry, this email not found.");
+            return "redirect:/login";
+        }
         passengers.setExpiryDate(calculateExpiryDate());
         passengersService.reset(passengers);
         String siteURL = getSiteURL(request);
@@ -159,7 +168,7 @@ public class Login {
 //            redirectAttributes.addFlashAttribute("success", "Congratulations, your account has been verified.");
         } else {
             redirectAttributes.addFlashAttribute("fail", "Sorry, we could not verify account. It maybe already verified, or verification code is incorrect.");
-            return "redirect:/reset_pw";
+            return "redirect:/login";
         }
     }
 

@@ -5,5 +5,7 @@ import com.example.case_study.model.Chair;
 import java.util.List;
 
 public interface IChairService {
+
+    List<Chair> chairs();
     List<Chair> getList(int num);
 }
