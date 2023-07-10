@@ -41,8 +41,15 @@ public class ChairFlightController {
     }
 
     @PostMapping("/create")
-    public String create(@RequestParam("chair") List<ChairFlight> chairFlightList, @RequestParam int idCraftSchedule,
-                         RedirectAttributes redirectAttributes, @SessionAttribute List<ChairFlight> listChair) {
+    public String create(@RequestParam(value = "chair",required = false) List<ChairFlight> chairFlightList, @RequestParam int idCraftSchedule,
+                         RedirectAttributes redirectAttributes, @SessionAttribute List<ChairFlight> listChair,Model model) {
+        if (chairFlightList==null){
+            List<ChairFlight> list = chairFlightService.getList(idCraftSchedule);
+            model.addAttribute("idCraftSchedule", idCraftSchedule);
+            model.addAttribute("list", list);
+            model.addAttribute("message","Must choose more than one chair");
+            return "chair_flight/chair_flight";
+        }
         int quantity = chairFlightList.size();
         listChair.addAll(chairFlightList);
 //        for (ChairFlight c: chairFlightList
