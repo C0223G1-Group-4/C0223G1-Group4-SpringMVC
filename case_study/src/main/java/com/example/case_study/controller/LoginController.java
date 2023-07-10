@@ -63,7 +63,7 @@ public class LoginController {
     }
 
     @GetMapping(value = "/userInfo")
-    public String userInfo(@PageableDefault(size = 8) Pageable pageable, Model model, Principal principal) {
+    public String userInfo( Model model, Principal principal) {
         // Sau khi user login thanh cong se co principal
         String userName = principal.getName();
         AccountUser accountUser = accountService.findByEmail(principal.getName());

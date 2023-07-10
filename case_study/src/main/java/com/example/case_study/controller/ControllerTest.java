@@ -41,7 +41,7 @@ public class ControllerTest {
     @Autowired
     private IEmployeesService employeesService;
     @GetMapping("")
-    public String show(@PageableDefault(size = 3, sort = "datePost", direction = Sort.Direction.DESC) Pageable pageable,Principal principal, Model model){
+    public String show(Principal principal, Model model){
         model.addAttribute("post",postService.findAll());
         String authentication = SecurityContextHolder.getContext().getAuthentication().getName();
         if (principal != null){
