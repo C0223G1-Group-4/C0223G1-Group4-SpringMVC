@@ -12,7 +12,7 @@
             <div class="form-content">
                 <div class="form-items">
                     <center><h2>Create air craft</h2></center>
-                    <form th:action="@{/air-craft/edit}" th:object="${airCraft}" th:method="post">
+                    <form th:action="@{/air-craft/edit}" th:object="${airCraftDto}" th:method="post">
                         <input type="hidden" th:field="*{id}">
                         <input type="hidden" th:value="${number}" th:name="number">
                         <div class="col-md-12">
@@ -21,6 +21,13 @@
                                    placeholder="Number Air Craft" required>
                             <p style="color: red" th:if="${#fields.hasErrors('numberAirCraft')}"
                                th:errors="*{numberAirCraft}"></p>
+                        </div>
+                        <div class="col-md-12">
+                            <p>Route</p>
+                            <select th:field="*{routes}" class="form-select mt-3" required>
+                                <option th:each="route :${routeList}" th:text="${'Code Route: ' +route.codeRoute+', destination: '+route.airPort+', destination: '+route.airPort}"
+                                        th:value="${route.id}"></option>
+                            </select>
                         </div>
                         <div class="col-md-12">
                             <p>Capacity</p>
@@ -33,7 +40,7 @@
                             <div class="form-button mt-3" style="padding-top: 30px">
                                 <button id="submit" type="submit"
                                         style="width: 130px;height: 40px;background: #3893cc;border-radius: 30px;color: whitesmoke">
-                                    Edit
+                                    Submit
                                 </button>
                             </div>
                         </center>

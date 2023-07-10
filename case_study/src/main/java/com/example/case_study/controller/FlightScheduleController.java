@@ -56,6 +56,7 @@ public class FlightScheduleController {
     // Tài
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute FlightScheduleDto flightScheduleDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        new FlightScheduleDto().validate(flightScheduleDto, bindingResult);
         if (bindingResult.hasErrors()) {
             return "flight-schedule/create";
         }
@@ -120,7 +121,9 @@ public class FlightScheduleController {
     public String edit(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
         if (this.iFlightScheduleService.findByIdFlightSchedule(id) != null) {
             model.addAttribute("number",this.iFlightScheduleService.findByIdFlightSchedule(id).getCodeFlightSchedule());
-            model.addAttribute("flightSchedule", this.iFlightScheduleService.findByIdFlightSchedule(id));
+            FlightScheduleDto flightScheduleDto=new FlightScheduleDto();
+            BeanUtils.copyProperties(this.iFlightScheduleService.findByIdFlightSchedule(id),flightScheduleDto);
+            model.addAttribute("flightScheduleDto", flightScheduleDto);
             return "flight-schedule/edit";
         }
         redirectAttributes.addFlashAttribute("msg", "Not found");

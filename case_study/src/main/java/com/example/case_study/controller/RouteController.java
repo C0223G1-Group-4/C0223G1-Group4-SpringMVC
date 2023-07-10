@@ -75,7 +75,9 @@ public class RouteController {
     public String edit(@PathVariable int id, Model model,RedirectAttributes redirectAttributes){
           if (this.iRouteService.findByIdRoute(id)!=null){
               model.addAttribute("number",this.iRouteService.findByIdRoute(id).getCodeRoute());
-              model.addAttribute("route",this.iRouteService.findByIdRoute(id));
+              RouteDto routeDto=new RouteDto();
+              BeanUtils.copyProperties(this.iRouteService.findByIdRoute(id),routeDto);
+              model.addAttribute("routeDto",routeDto);
               return "route/edit";
           }else {
               redirectAttributes.addFlashAttribute("msg","Not found");

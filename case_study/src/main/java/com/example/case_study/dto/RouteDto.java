@@ -28,6 +28,13 @@ public class RouteDto {
 
     }
 
+    public RouteDto(String airPort, String destination, String codeRoute, Float fare) {
+        this.airPort = airPort;
+        this.destination = destination;
+        this.codeRoute = codeRoute;
+        this.fare = fare;
+    }
+
     public Integer getId() {
         return id;
     }

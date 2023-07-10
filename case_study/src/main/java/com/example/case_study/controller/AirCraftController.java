@@ -72,7 +72,10 @@ public class AirCraftController {
     public String editAirCraft(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
         if (!this.iAirCraftService.findByIdAirCraft(id).isFlag() && this.iAirCraftService.findByIdAirCraft(id) != null) {
             model.addAttribute("number", this.iAirCraftService.findByIdAirCraft(id).getNumberAirCraft());
-            model.addAttribute("airCraft", this.iAirCraftService.findByIdAirCraft(id));
+            AirCraftDto airCraftDto=new AirCraftDto();
+            BeanUtils.copyProperties(this.iAirCraftService.findByIdAirCraft(id),airCraftDto);
+            model.addAttribute("routeList", this.iRouteService.checkAllListRoute());
+            model.addAttribute("airCraftDto", airCraftDto);
             return "air-craft/edit";
         } else {
             redirectAttributes.addAttribute("msg", "Not found");

@@ -1,10 +1,13 @@
 package com.example.case_study.dto;
 
 
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-public class FlightScheduleDto {
+public class FlightScheduleDto implements Validator {
 
     private Integer id;
     @Pattern(regexp = "^(FS-)[0-9]{1,5}$",message = "Code Flight Schedule Format FS- and 1 to 5 number")
@@ -26,6 +29,13 @@ public class FlightScheduleDto {
         this.arrival = arrival;
         this.flag = flag;
 
+    }
+
+    public FlightScheduleDto(String codeFlightSchedule, String departure, String arrival, boolean flag) {
+        this.codeFlightSchedule = codeFlightSchedule;
+        this.departure = departure;
+        this.arrival = arrival;
+        this.flag = flag;
     }
 
     public FlightScheduleDto(Integer id, String codeFlightSchedule, String departure, String arrival, boolean flag) {
@@ -82,5 +92,15 @@ public class FlightScheduleDto {
 
     public void setCodeFlightSchedule(String codeFlightSchedule) {
         this.codeFlightSchedule = codeFlightSchedule;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }

@@ -78,8 +78,8 @@
 </center>
 </center>
 <div id="container" th:each="ticket :${listTicket}">
-
-    <div class="product-details">
+    <span class="price" th:text="${#numbers.formatDecimal(ticket.idAirCraft.routes.get(0).fare, 2, 'COMMA', 0, 'POINT')} + ' VND/people'"></span>
+        <div class="product-details col-lg-6" style="float: left">
         <h1>Tian Flight</h1>
         <span class="information" th:text="${ticket.idAirCraft.routes.get(0).airPort}"></span> <i class="fa-solid fa-arrow-right"></i> <span class="information" th:text="${ticket.idAirCraft.routes.get(0).destination}"></span><br>
         <span class="information" th:text="${ticket.flightSchedule.departure.substring(11,16)}"></span><span> <i class="fa-solid fa-plane-departure"></i> </span>
@@ -91,8 +91,6 @@
         <div class="control">
             <a th:href="@{/chair_flight/{id}(id=${ticket.id})}">
             <button class="btn">
-                <span class="price" th:text="${#numbers.formatDecimal(ticket.idAirCraft.routes.get(0).fare, 2, 'COMMA', 0, 'POINT')}"></span>
-                <span class="shopping-cart"><i class="fa fa-solid fa-ticket"></i></span>
                 <span class="buy">Booking now</span>
             </button>
                 </a>
@@ -103,5 +101,6 @@
 
     </div>
 </div>
+
 </body>
 </html>

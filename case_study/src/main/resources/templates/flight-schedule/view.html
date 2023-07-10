@@ -65,7 +65,7 @@
         <table cellpadding="0" cellspacing="0" border="0">
             <thead>
             <tr>
-                <th>STT</th>
+                <th style="width: 50px">STT</th>
                 <th>Mã lịch bay</th>
                 <th>Ngày bay</th>
                 <th>Ngày đến</th>
@@ -83,7 +83,7 @@
         <table cellpadding="0" cellspacing="0" border="0">
             <tbody>
             <tr th:each="flight,loop :${flightSchedule}">
-                <td th:text="${loop.count}"></td>
+                <td style="width: 50px" th:text="${loop.count}"></td>
                 <td th:text="${flight.codeFlightSchedule}"></td>
 <!--                <td th:text="${#dates.format(dateMapDeparture.get(flightScheduleAirCraftLoop.id), 'dd-MM-yyyy HH:mm:ss')}"></td>-->
 
@@ -136,14 +136,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="color: black">Do you want to delete?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <center>
-                    <span style="font-size: 120px;color: black"><i class="fa-solid fa-trash-can"></i></span>
+                    <span style="font-size: 100px;color: black"><i class="fa-solid fa-trash-can"></i></span>
                     <div>
-                        <p style="color: red">Bạn có muốn xóa lịch bay có </p>
+                        <p style="color: red">Do you want to delete flight schedule have  </p>
                      <span style="color:black;">Departure:</span>    <span style="color: black" id="departure"></span><br>
                     <span style="color:black;">Arrival: </span>     <span style="color: black" id="arrival"></span><br>
                     </div>
