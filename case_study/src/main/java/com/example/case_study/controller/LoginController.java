@@ -59,7 +59,7 @@ public class LoginController {
     @GetMapping("/logoutSuccessful")
     public String logout(Model model) {
 
-        return "home/index";
+        return "redirect:/";
     }
 
     @GetMapping(value = "/userInfo")
