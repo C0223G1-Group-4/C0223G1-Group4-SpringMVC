@@ -28,8 +28,10 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="/home/css/navbar.css">
 </head>
 <body>
+<div th:insert="header/navbar :: copy"></div>
 <div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${msg != null}"
      style="
     position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 2s forwards; // thời gian msg trượt

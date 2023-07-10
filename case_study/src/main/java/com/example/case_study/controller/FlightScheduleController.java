@@ -1,6 +1,7 @@
 package com.example.case_study.controller;
 
 import com.example.case_study.dto.FlightScheduleDto;
+import com.example.case_study.model.tai.AirCraft;
 import com.example.case_study.model.tai.FlightSchedule;
 import com.example.case_study.model.tai.FlightScheduleAirCraft;
 import com.example.case_study.model.tai.Route;
@@ -89,14 +90,18 @@ public class FlightScheduleController {
             }
         }
         if (count==0){
-            int codeFlightSchedule=0;
-            if (this.iFlightScheduleService.checkAllListFlightSchedule().size()==0){
-                codeFlightSchedule=1;
-            }else {
-             codeFlightSchedule =this.iFlightScheduleService.checkAllListFlightSchedule().get(this.iFlightScheduleService.checkAllListFlightSchedule().size()-1).getId()+1;
+            int count1 = 0;
+            if (this.iFlightScheduleService.checkAllListFlightSchedule().size() == 0) {
+                flightSchedule.setCodeFlightSchedule("FS-" + 1);
+            } else {
+                for (FlightSchedule a : this.iFlightScheduleService.checkAllListFlightSchedule()) {
+                    String[] check = a.getCodeFlightSchedule().split("-");
+                    if (Integer.parseInt(check[check.length-1])>count1){
+                        count1 = Integer.parseInt(check[check.length - 1]);
+                    }
+                }
+                flightSchedule.setCodeFlightSchedule("FS-"+ (count1+1));
             }
-
-            flightSchedule.setCodeFlightSchedule("FS-"+codeFlightSchedule);
           flightSchedule.setDeparture(flightSchedule.getDeparture().substring(0, 10).concat(" " +flightSchedule.getDeparture().substring(11, 16)));
           flightSchedule.setArrival(flightSchedule.getArrival().substring(0, 10).concat(" " +flightSchedule.getArrival().substring(11, 16)));
             if (this.iFlightScheduleService.createFlightSchedule(flightSchedule)) {

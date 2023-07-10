@@ -17,19 +17,42 @@
                 <center>
                 <h2>Search Ticket</h2>
                 <form th:action="@{/search}" th:method="get">
-                        <span>Destination</span>
-                        <select name="destination" class="form-select mt-3" required style="width: 20%;height: 30px;border-radius: 20px">
+                        <span>Air Port</span>
+                        <select name="airPort" class="form-select mt-3"  style="width: 20%;height: 30px;border-radius: 20px">
+                            <option value="" disabled selected hidden>Air Port</option>
                             <option
-                                    value="Sài Gòn">
-                                Sài Gòn
+                                    value="Sai Gon">
+                                Sai Gon
                             </option>
                             <option
-                                    value="Huế">Huế
+                                    value="Da Nang">
+                                Da Nang
                             </option>
                             <option
-                                    value="Hà Nội">Hà Nội
+                                    value="Hue">Hue
+                            </option>
+                            <option
+                                    value="Ha Noi">Ha Noi
                             </option>
                         </select>
+                    <span>Destination</span>
+                    <select name="destination" class="form-select mt-3"  style="width: 20%;height: 30px;border-radius: 20px">
+                        <option value="" disabled selected hidden>Destination</option>
+                        <option
+                                value="Sai Gon">
+                            Sai Gon
+                        </option>
+                        <option
+                                value="Da Nang">
+                            Da Nang
+                        </option>
+                        <option
+                                value="Hue">Hue
+                        </option>
+                        <option
+                                value="Ha Noi">Ha Noi
+                        </option>
+                    </select>
                         <span><i class="fa-solid fa-plane-departure"></i></span>
                         <input type="date" name="departure"  style="width: 20%;height: 30px;border-radius: 20px">
                         <span><i class="fa-solid fa-plane-arrival"></i></span>

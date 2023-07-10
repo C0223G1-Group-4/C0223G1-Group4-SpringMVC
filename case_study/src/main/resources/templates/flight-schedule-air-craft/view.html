@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>List Flight Schedule Air Craft</title>
@@ -30,8 +30,10 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="/home/css/navbar.css">
 </head>
 <body>
+<div th:insert="header/navbar :: copy"></div>
 
 <div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${msg != null}"
      style="
@@ -66,12 +68,12 @@
             <thead>
             <tr>
                 <th>STT</th>
-                <th>Mã máy bay</th>
-                <th>Mã tuyến bay</th>
+                <th>Code Booking</th>
+                <th>Code Air Craft</th>
+                <th>Code Flight Schedule</th>
                 <th>Code Route</th>
-                <th>Số lượng người</th>
-                <th>Ngày bay</th>
-                <th>Ngày đến</th>
+                <th>Departure</th>
+                <th>Arrival</th>
 
                 <th><a href="flight-schedule-air-craft/create">
                     <button class="button">
@@ -88,10 +90,10 @@
             <tbody>
             <tr th:each="flightScheduleAirCraftLoop,loop :${flightScheduleAirCraft}">
                 <td th:text="${loop.count}"></td>
-                                <td th:text="${flightScheduleAirCraftLoop.idAirCraft.numberAirCraft}"></td>
+                <td th:text="${flightScheduleAirCraftLoop.codeBooking}"></td>
+                <td th:text="${flightScheduleAirCraftLoop.idAirCraft.numberAirCraft}"></td>
                 <td th:text="${flightScheduleAirCraftLoop.flightSchedule.codeFlightSchedule}"></td>
                 <td th:text="${flightScheduleAirCraftLoop.idAirCraft.routes.get(0).codeRoute}"></td>
-                <td th:text="${flightScheduleAirCraftLoop.idAirCraft.capacity}"></td>
                 <td th:text="${#dates.format(dateMapDeparture.get(flightScheduleAirCraftLoop.id), 'dd-MM-yyyy HH:mm:ss')}"></td>
                 <td th:text="${#dates.format(dateMapArrival.get(flightScheduleAirCraftLoop.id), 'dd-MM-yyyy HH:mm:ss')}"></td>
                 <td>
