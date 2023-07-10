@@ -183,6 +183,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!-- //banner -->
+<div class="">
+    <div class="banner-dott1">
+        <div class="w3-banner">
+
+            <div class="callbacks_container">
+                <ul class="rslides" id="slider03">
+                    <li th:each="posts : ${post}">
+                        <div class="banner-text">
+
+                            <h3 th:text="${posts.namePost}"></h3>
+                            <p th:text="${posts.content}"></p>
+                            <p th:text="${posts.datePost}"></p>
+                            <a th:href="@{/post}" class="read-agileits" >
+                                Details</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- //w3-banner -->
+    </div>
+</div>
 <!-- advantages -->
 <div class="two-grids">
     <div class="container">
@@ -623,6 +647,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     $(function () {
         // Slideshow 4
         $("#slider3").responsiveSlides({
+            auto: true,
+            pager: false,
+            nav: true,
+            speed: 500,
+            namespace: "callbacks",
+            before: function () {
+                $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+                $('.events').append("<li>after event fired.</li>");
+            }
+        });
+    });
+    $(function () {
+        // Slideshow 4
+        $("#slider03").responsiveSlides({
             auto: true,
             pager: false,
             nav: true,

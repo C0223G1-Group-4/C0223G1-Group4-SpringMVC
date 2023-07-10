@@ -8,9 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PostServiceImpl implements IPostService{
+public class PostServiceImpl implements IPostService {
     @Autowired
     private IPostRepository postRepository;
+
     @Override
     public Page<Post> findAll(Pageable pageable) {
         return postRepository.findByFlagDeleteFalse(pageable);
@@ -33,11 +34,7 @@ public class PostServiceImpl implements IPostService{
 
     @Override
     public Post findById(Integer id) {
-        try{
-            return postRepository.findPostById(id);
-        }catch (Exception e){
-            return null;
-        }
+        return postRepository.findPostById(id).get();
 
     }
 }

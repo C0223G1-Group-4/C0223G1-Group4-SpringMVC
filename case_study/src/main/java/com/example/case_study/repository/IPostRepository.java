@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IPostRepository extends JpaRepository<Post,Integer> {
     Page<Post> findByFlagDeleteFalse(Pageable pageable);
-    Post findPostById(Integer id);
+    Optional<Post> findPostById(Integer id);
     @Query(value = "UPDATE from Post set flagDelete = true where Post.id = :id", nativeQuery = true)
     void updatePostFlagDelete( Integer id);
 }

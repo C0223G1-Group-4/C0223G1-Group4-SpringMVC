@@ -21,7 +21,7 @@ public class PostDto {
     @Size(max = 50000)
     private String image;
     @NotNull(message = "Age cannot be empty!")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd/MM/YYYY")
     private String datePost;
 
     public PostDto() {

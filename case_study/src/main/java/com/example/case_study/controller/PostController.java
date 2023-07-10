@@ -40,7 +40,7 @@ public class PostController {
         return "/post/create_post";
     }
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute PostDto postDto, Principal principal, BindingResult bindingResult, Model model){
+    public String create(@Valid @ModelAttribute PostDto postDto, BindingResult bindingResult, Principal principal, Model model){
         if (bindingResult.hasErrors()){
             model.addAttribute("postDto",postDto);
             return "post/create_post";
@@ -78,8 +78,8 @@ public class PostController {
             redirectAttributes.addFlashAttribute("msgErr","Post not found.");
             return "redirect:/post";
         }
-        model.addAttribute("post",postService.findById(id));
-        return "post/detail_post";
+        model.addAttribute("postt",postService.findById(id));
+        return "home/index";
     }
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes){

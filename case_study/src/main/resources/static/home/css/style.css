@@ -452,6 +452,12 @@ a.read-agileits:hover {
     -webkit-box-shadow: none;
     margin: 0 auto;
 }
+#slider03,#slider04,#slider05 {
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    margin: 0 auto;
+}
 .rslides_tabs {
     list-style: none;
     padding: 0;
@@ -553,9 +559,21 @@ a.read-agileits:hover {
 #slider3-pager a,#slider4-pager a ,#slider5-pager a  {
     display: inline-block;
 }
+#slider03-pager a,#slider04-pager a ,#slider05-pager a  {
+    display: inline-block;
+}
 #slider3-pager span,#slider4-pager span,#slider5-pager span{
 }
 #slider3-pager span,#slider4-pager span,#slider5-pager span{
+    width:100px;
+    height:15px;
+    background:#fff;
+    display:inline-block;
+    /*-- w3layouts --*/
+    border-radius:30em;
+    opacity:0.6;
+}
+#slider03-pager span,#slider04-pager span,#slider05-pager span{
     width:100px;
     height:15px;
     background:#fff;
@@ -569,10 +587,18 @@ a.read-agileits:hover {
     border-radius:30em;
     opacity:1;
 }
+#slider03-pager .rslides_here a ,#slider04-pager .rslides_here a,#slider05-pager .rslides_here a {
+    background: #FFF;
+    border-radius:30em;
+    opacity:1;
+}
 #slider3-pager a ,#slider4-pager a,#slider5-pager a  {
     padding: 0;
 }
 #slider3-pager li, #slider4-pager li, #slider5-pager li{
+    display:inline-block;
+}
+#slider03-pager li, #slider04-pager li, #slider05-pager li{
     display:inline-block;
 }
 .rslides {
