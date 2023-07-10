@@ -1,5 +1,6 @@
 package com.example.case_study.dto;
 
+import com.example.case_study.model.AccountUser;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -30,7 +31,7 @@ public class EmployeeDto implements Validator {
 //    @Pattern(regexp = "^0\\\\d{10,12}$")
     private String telephone;
 //    private boolean flagDelete;
-
+private AccountUser accountUser;
 
     public EmployeeDto() {
     }
@@ -43,11 +44,12 @@ public class EmployeeDto implements Validator {
         this.telephone = telephone;
     }
 
-    public EmployeeDto(String nameEmployee, String age, String address, String telephone) {
+    public EmployeeDto(String nameEmployee, String age, String address, String telephone, AccountUser accountUser) {
         this.nameEmployee = nameEmployee;
         this.age = age;
         this.address = address;
         this.telephone = telephone;
+        this.accountUser = accountUser;
     }
 
     public Integer getId() {
@@ -90,6 +92,13 @@ public class EmployeeDto implements Validator {
         this.telephone = telephone;
     }
 
+    public AccountUser getAccountUser() {
+        return accountUser;
+    }
+
+    public void setAccountUser(AccountUser accountUser) {
+        this.accountUser = accountUser;
+    }
 
     @Override
     public boolean supports(Class<?> clazz) {

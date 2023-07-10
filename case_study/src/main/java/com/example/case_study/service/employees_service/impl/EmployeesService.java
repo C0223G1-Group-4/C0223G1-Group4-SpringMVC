@@ -39,7 +39,7 @@ public class EmployeesService implements IEmployeesService {
 
     @Override
     public Employees findById(Integer id) {
-        return iEmployeeRepository.findById(id).get();
+        return iEmployeeRepository.findEmployeesById(id).get();
     }
 
     @Override

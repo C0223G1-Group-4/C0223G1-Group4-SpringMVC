@@ -34,6 +34,7 @@ public class AccountUser {
         this.flagDelete = flagDelete;
     }
 
+
     public Integer getId() {
         return id;
     }

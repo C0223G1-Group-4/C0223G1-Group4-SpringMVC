@@ -87,6 +87,7 @@
         <th>Age</th>
         <th>Name</th>
         <th>Telephone</th>
+<!--        <th>Email</th>-->
         <th>Detail</th>
         <th>Update</th>
         <th>Delete</th>
@@ -98,6 +99,7 @@
         <td th:text="${employees.age}"></td>
         <td th:text="${employees.nameEmployee}"></td>
         <td th:text="${employees.telephone}"></td>
+<!--        <td th:text="${employees.accountUser.email}"></td>-->
         <td><a th:href="@{/employee/info/__${employees.id}__}" class="btn btn-primary btn-outline-light">Detail</a></td>
         <td><a th:href="@{/employee/edit/__${employees.id}__}" class="btn btn-warning btn-outline-light">Update</a></td>
         <td>
@@ -111,10 +113,10 @@
 </table>
 
 <div>
-    <a th:href="@{'/employee/search-employee'(page=${employeeList.number - 1}, search=${name}, search=${email})}"
+    <a th:href="@{'/employee'(page=${employeeList.number - 1}, search=${name}, search=${email})}"
        th:if="${employeeList.hasPrevious()}">Previous</a>
     <span th:text="${employeeList.number + 1}"></span>/<span th:text="${employeeList.totalPages}"></span>
-    <a th:href="@{'/employee/search-employee'(page=${employeeList.number + 1}, search=${name}, search=${email})}" th:if="${employeeList.hasNext()}">Next</a>
+    <a th:href="@{'/employee'(page=${employeeList.number + 1}, search=${name}, search=${email})}" th:if="${employeeList.hasNext()}">Next</a>
 </div>
 
 <div class="modal fade" id="deleteEmployee" tabindex="-1" aria-labelledby="exampleModalLabel1"
@@ -158,3 +160,4 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
+

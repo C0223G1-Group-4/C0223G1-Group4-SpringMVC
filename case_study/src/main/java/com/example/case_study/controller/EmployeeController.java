@@ -30,13 +30,14 @@ public class EmployeeController {
     public String showListEmployee(@PageableDefault(value = 5, sort = "id", direction = Sort.Direction.DESC)
                                    Pageable pageable, Model model) {
         model.addAttribute("employeeList", iEmployeesService.findAll(pageable));
+        model.addAttribute("accountUser", iAccountService.findAll());
         return "/employees/list_employee";
     }
 
     @GetMapping("/create-form")
     public String formCreateEmployee(Model model) {
         model.addAttribute("employeeDto", new EmployeeDto());
-//        model.addAttribute("123",iEmployeesService.findAll());
+        model.addAttribute("accountUser", iAccountService.findAll());
         return "/employees/create_employee";
     }
 
@@ -44,6 +45,7 @@ public class EmployeeController {
     public String addEmployee(@Valid @ModelAttribute EmployeeDto employeeDto, BindingResult bindingResult,
                               Model model, RedirectAttributes redirectAttributes) {
         new EmployeeDto().validate(employeeDto, bindingResult);
+        model.addAttribute("accountUser", iAccountService.findAll());
         if (bindingResult.hasFieldErrors()) {
             return "/employees/create_employee";
         }
@@ -57,6 +59,7 @@ public class EmployeeController {
     @GetMapping("/info/{id}")
     public String detailForm(Model model, @PathVariable Integer id) {
         model.addAttribute("employeess", iEmployeesService.findById(id));
+//        model.addAttribute("accountUser", iAccountService.findAll());
         return "/employees/detail_employee";
     }
 
@@ -66,6 +69,7 @@ public class EmployeeController {
         EmployeeDto employeeDto = new EmployeeDto();
         BeanUtils.copyProperties(employees, employeeDto);
         model.addAttribute("employeeDto", employeeDto);
+        model.addAttribute("accountUser", iAccountService.findAll());
         return "/employees/update_employee";
     }
 
@@ -73,6 +77,7 @@ public class EmployeeController {
     public String update(@ModelAttribute @Validated EmployeeDto employeeDto,
                          BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("accountUser", iAccountService.findAll());
             return "/employees/update_employee";
         }
         Employees employees = new Employees();
@@ -94,6 +99,7 @@ public class EmployeeController {
                          @RequestParam("email") String email,
                          @RequestParam("name") String name,
                          Pageable pageable) {
+        model.addAttribute("accountUser", iAccountService.findAll());
         model.addAttribute("search", iEmployeesService.searchNameAndEmail(email,name,pageable));
         model.addAttribute("email", email);
         model.addAttribute("name", name);
