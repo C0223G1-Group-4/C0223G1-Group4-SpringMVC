@@ -4,14 +4,11 @@ import com.example.case_study.model.RoleUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 public class AccountUserDto {
     private Integer id;
-    @NotBlank
+    @NotNull
     @Email
     private String email;
     @NotBlank

@@ -28,26 +28,26 @@ public class EmployeeController {
 
     @GetMapping("")
     public String showListEmployee(@PageableDefault(value = 5, sort = "id", direction = Sort.Direction.DESC)
-                                   Pageable pageable, @RequestParam(value = "search", defaultValue = "")
-                                   String search, Model model) {
-        model.addAttribute("employeeList", iEmployeesService.findAll(search, pageable));
-        model.addAttribute("search", search);
-        return "/list_employee";
+                                   Pageable pageable, Model model) {
+        model.addAttribute("employeeList", iEmployeesService.findAll(pageable));
+        model.addAttribute("accountUser", iAccountService.findAll());
+        return "/employees/list_employee";
     }
 
     @GetMapping("/create-form")
     public String formCreateEmployee(Model model) {
         model.addAttribute("employeeDto", new EmployeeDto());
-//        model.addAttribute("123",iEmployeesService.findAll());
-        return "/create_employee";
+        model.addAttribute("accountUser", iAccountService.findAll());
+        return "/employees/create_employee";
     }
 
     @PostMapping("/add")
     public String addEmployee(@Valid @ModelAttribute EmployeeDto employeeDto, BindingResult bindingResult,
                               Model model, RedirectAttributes redirectAttributes) {
         new EmployeeDto().validate(employeeDto, bindingResult);
+        model.addAttribute("accountUser", iAccountService.findAll());
         if (bindingResult.hasFieldErrors()) {
-            return "/create_employee";
+            return "/employees/create_employee";
         }
         Employees employees = new Employees();
         BeanUtils.copyProperties(employeeDto, employees);
@@ -59,7 +59,8 @@ public class EmployeeController {
     @GetMapping("/info/{id}")
     public String detailForm(Model model, @PathVariable Integer id) {
         model.addAttribute("employeess", iEmployeesService.findById(id));
-        return "/detail_employee";
+//        model.addAttribute("accountUser", iAccountService.findAll());
+        return "/employees/detail_employee";
     }
 
     @GetMapping("/edit/{id}")
@@ -68,14 +69,16 @@ public class EmployeeController {
         EmployeeDto employeeDto = new EmployeeDto();
         BeanUtils.copyProperties(employees, employeeDto);
         model.addAttribute("employeeDto", employeeDto);
-        return "/update_employee";
+        model.addAttribute("accountUser", iAccountService.findAll());
+        return "/employees/update_employee";
     }
 
     @PostMapping("/update")
     public String update(@ModelAttribute @Validated EmployeeDto employeeDto,
                          BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasFieldErrors()) {
-            return "/update_employee";
+            model.addAttribute("accountUser", iAccountService.findAll());
+            return "/employees/update_employee";
         }
         Employees employees = new Employees();
         BeanUtils.copyProperties(employeeDto, employees);
@@ -91,9 +94,16 @@ public class EmployeeController {
         return "redirect:/employee";
     }
 
-    @GetMapping("/search")
-    public String search(Model model, @RequestParam("email") String email) {
-        model.addAttribute("search", iEmployeesService.findByAccount(email));
-        return "/list_employee";
+    @GetMapping("/search-employee")
+    public String search(@PageableDefault(value = 5, sort = "id", direction = Sort.Direction.DESC) Model model,
+                         @RequestParam("email") String email,
+                         @RequestParam("name") String name,
+                         Pageable pageable) {
+        model.addAttribute("accountUser", iAccountService.findAll());
+        model.addAttribute("search", iEmployeesService.searchNameAndEmail(email,name,pageable));
+        model.addAttribute("email", email);
+        model.addAttribute("name", name);
+        return "/employees/list_employee";
     }
+
 }

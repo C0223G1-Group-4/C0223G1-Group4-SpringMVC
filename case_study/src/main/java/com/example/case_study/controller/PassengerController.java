@@ -1,8 +1,6 @@
 package com.example.case_study.controller;
 
-import com.example.case_study.dto.EmployeeDto;
 import com.example.case_study.dto.PassengerDto;
-import com.example.case_study.model.Employees;
 import com.example.case_study.model.Passengers;
 import com.example.case_study.service.passengers_service.IPassengersService;
 import org.springframework.beans.BeanUtils;
@@ -17,8 +15,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
-
 @Controller
 @RequestMapping("/passenger")
 public class PassengerController {
@@ -31,7 +27,7 @@ public class PassengerController {
                                         String search, Model model){
         model.addAttribute("passenger", iPassengersService.findByPassengers(search, pageable));
         model.addAttribute("search", search);
-        return "/list_passenger";
+        return "/passengers/list_passenger";
     }
 //    @GetMapping("/create-form-passenger")
 //    public String formCreatePassenger(Model model){
@@ -54,7 +50,7 @@ public class PassengerController {
     @GetMapping("/info/{id}")
     public String detailPassenger(@PathVariable Integer id, Model model){
         model.addAttribute("passenger",iPassengersService.findByIdPassengers(id));
-        return "/detail_passenger";
+        return "/passengers/detail_passenger";
     }
     @GetMapping("/edit/{id}")
     public String formUpdate(@PathVariable Integer id, Model model) {
@@ -62,14 +58,14 @@ public class PassengerController {
         PassengerDto passengerDto = new PassengerDto();
         BeanUtils.copyProperties(passengers, passengerDto);
         model.addAttribute("passengerDto", passengerDto);
-        return "/update_passenger";
+        return "/passengers/update_passenger";
     }
 
     @PostMapping("/update")
     public String update(@ModelAttribute @Validated PassengerDto passengerDto,
                          BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasFieldErrors()) {
-            return "/update_passenger";
+            return "/passengers/update_passenger";
         }
         Passengers passengers = new Passengers();
         BeanUtils.copyProperties(passengerDto, passengers);
