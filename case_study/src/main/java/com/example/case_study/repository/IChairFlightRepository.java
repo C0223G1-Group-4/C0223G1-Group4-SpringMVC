@@ -11,3 +11,4 @@ public interface IChairFlightRepository extends JpaRepository<ChairFlight, Integ
         @Query(value = "select * from chair_flight where id_flight_schedule_aircraft = :num",nativeQuery = true)
         List<ChairFlight> getList(@Param("num") int num);
 }
+

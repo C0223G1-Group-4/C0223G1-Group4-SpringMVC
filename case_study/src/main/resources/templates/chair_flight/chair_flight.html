@@ -8,7 +8,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="chair/chair.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/chair/chair.css" rel="stylesheet" type="text/css" media="all">
 </head>
 <body>
 <div class="container">
@@ -48,7 +48,8 @@
         </div>
         <div class="col-lg-6">
             <form th:action="@{/chair_flight/create}" th:method="post">
-                    <h1>Danh sách ghế còn lại</h1>
+                <input type="hidden" name="idCraftSchedule" th:value="${idCraftSchedule}">
+                    <h1>Chair List</h1>
                 <div class="row">
                     <div class="col-2" th:each="l:${list}">
             <span style="float: left" th:if="${l.statusChair==false}">
@@ -66,6 +67,7 @@
         </div>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>

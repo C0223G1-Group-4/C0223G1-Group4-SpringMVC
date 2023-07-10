@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>List Flight Schedule Air Craft</title>
@@ -68,15 +68,14 @@
                 <th>STT</th>
                 <th>Mã máy bay</th>
                 <th>Mã tuyến bay</th>
+                <th>Code Route</th>
                 <th>Số lượng người</th>
                 <th>Ngày bay</th>
                 <th>Ngày đến</th>
-                <th>Code Route</th>
+
                 <th><a href="flight-schedule-air-craft/create">
                     <button class="button">
-                        <span class="button-text" style="font-size: 15px"><i class="fa-solid fa-plane"></i> <i
-                                class="fa-solid fa-calendar-days"></i> <i
-                                class="fa-solid fa-map-location-dot"></i></span>
+                        <span class="button-text" style="font-size: 15px"><i class="fa-solid fa-ticket"></i></span>
                         <div class="fill-container"></div>
                     </button>
                 </a></th>
@@ -91,16 +90,16 @@
                 <td th:text="${loop.count}"></td>
                                 <td th:text="${flightScheduleAirCraftLoop.idAirCraft.numberAirCraft}"></td>
                 <td th:text="${flightScheduleAirCraftLoop.flightSchedule.codeFlightSchedule}"></td>
-                <td th:text="${flightScheduleAirCraftLoop.idAirCraft.capacity}"></td>
-                <td th:text="${flightScheduleAirCraftLoop.flightSchedule.departure}"></td>
-                <td th:text="${flightScheduleAirCraftLoop.flightSchedule.arrival}"></td>
                 <td th:text="${flightScheduleAirCraftLoop.idAirCraft.routes.get(0).codeRoute}"></td>
+                <td th:text="${flightScheduleAirCraftLoop.idAirCraft.capacity}"></td>
+                <td th:text="${#dates.format(dateMapDeparture.get(flightScheduleAirCraftLoop.id), 'dd-MM-yyyy HH:mm:ss')}"></td>
+                <td th:text="${#dates.format(dateMapArrival.get(flightScheduleAirCraftLoop.id), 'dd-MM-yyyy HH:mm:ss')}"></td>
                 <td>
                     <a th:href="@{flight-schedule-air-craft/edit/{id}(id=${flightScheduleAirCraftLoop.id})}"><span
                             style="font-size: 20px;color: whitesmoke"><i
                             class="fa-solid fa-pen-to-square"></i></span></a>
                     <a th:attr="onclick=|deleteFlightSchedule('${flightScheduleAirCraftLoop.id}','${flightScheduleAirCraftLoop.flightSchedule.codeFlightSchedule}'
-                    ,'${flightScheduleAirCraftLoop.idAirCraft.routes.get(0).codeRoute}','${flightScheduleAirCraftLoop.idAirCraft.numberAirCraft}')|"
+                    ,'${flightScheduleAirCraftLoop.idAirCraft.numberAirCraft}')|"
                        href="#"
                        data-bs-toggle="modal" data-bs-target="#exampleModal"> <span
                             style="font-size: 20px;padding-left: 20px;color: whitesmoke"><i
@@ -111,7 +110,6 @@
         </table>
     </div>
 </section>
-
 <center>
     <p th:text="${flightScheduleAirCraft.getNumber()+1}"></p>
 </center>

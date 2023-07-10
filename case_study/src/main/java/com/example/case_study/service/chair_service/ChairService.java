@@ -11,6 +11,13 @@ import java.util.List;
 public class ChairService implements IChairService{
     @Autowired
     private IChairRepository chairRepository;
+
+
+    @Override
+    public List<Chair> chairs() {
+        return chairRepository.findAll();
+    }
+
     @Override
     public List<Chair> getList(int num) {
         return chairRepository.getChairByNum(num);

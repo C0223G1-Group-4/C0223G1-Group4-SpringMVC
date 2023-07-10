@@ -8,7 +8,7 @@
 
 
 
-
+<div class="container-fluid">
 <div class="form-body">
     <div class="row">
         <div class="form-holder">
@@ -16,11 +16,6 @@
                 <div class="form-items">
                     <center><h2>Create flight schedule</h2></center>
                     <form th:action="@{/flight-schedule/create}" th:method="post" th:object="${flightScheduleDto}">
-                        <div class="col-md-12">
-                            <p>Code Flight Schedule</p>
-                            <input type="text" th:field="*{codeFlightSchedule}" class="form-control" required placeholder="Code Flight Schedule">
-                            <p style="color: red" th:if="${#fields.hasErrors('codeFlightSchedule')}" th:errors="*{codeFlightSchedule}"></p>
-                        </div>
                         <div class="col-md-12">
                             <p>Departure</p>
                             <input class="form-control" type="datetime-local" th:field="*{departure}" placeholder="Departure" required>
@@ -41,6 +36,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
