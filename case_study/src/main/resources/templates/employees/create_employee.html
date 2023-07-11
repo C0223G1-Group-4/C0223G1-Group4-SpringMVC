@@ -80,10 +80,42 @@
                             <input type="date" th:field="*{age}"  class="form-control" required>
                             <p style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></p>
                         </div>
-                        <div class="col-md-12">
-                            <p>Address<span style="color: red">*</span></p>
-                            <input type="text" th:field="*{address}"  class="form-control" required>
-                            <p style="color: red; width: 95%" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+                        <div class="col-md-6">
+                            <label class="form-label">Address<span
+                                    style="color: red">*</span></label>
+                            <select th:field="*{address}">
+                                <option value="country"> --Choose Country--</option>
+                                <option value="Viet Nam"> Viet Nam</option>
+                                <option value="USA"> USA</option>
+                                <option value="Canada"> Canada</option>
+                                <option value="Australia"> Australia</option>
+                                <option value="Anh"> Anh</option>
+                                <option value="Japan"> Japan</option>
+                                <option value="china"> China</option>
+                                <option value="France"> France</option>
+                                <option value="Germany"> Germany</option>
+                                <option value="Spain"> Spain</option>
+                                <option value="Italia"> Italia</option>
+                                <option value="Brazil"> Brazil</option>
+                                <option value="Argentina"> Argentina</option>
+                                <option value="Russia"> Russia</option>
+                                <option value="Mexico"> Mexico</option>
+                                <option value="United States"> United States</option>
+                                <option value="India"> India</option>
+                                <option value="Korea"> Korea</option>
+                                <option value="Indonesia"> Indonesia</option>
+                                <option value="Thailand"> Thailand</option>
+                                <option value="Malaysia"> Malaysia</option>
+                                <option value="Philippines"> Philippines</option>
+                                <option value="Singapore"> Singapore</option>
+                                <option value="Poland"> Poland</option>
+                                <option value="Portugal"> Portugal</option>
+                                <option value="Sweden"> Sweden</option>
+                                <option value="Czech Republic"> Czech Republic</option>
+                                <option value="Belgium"> Belgium</option>
+                                <option value="Netherlands"> Netherlands</option>
+                                <option value="Switzerland"> Switzerland</option>
+                            </select>
                         </div>
                         <div class="col-md-12">
                             <p>Telephone<span style="color: red">*</span></p>
