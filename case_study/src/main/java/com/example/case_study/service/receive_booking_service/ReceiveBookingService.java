@@ -2,6 +2,7 @@ package com.example.case_study.service.receive_booking_service;
 
 import com.example.case_study.dto.ReceiveBookingDto;
 import com.example.case_study.model.ChairFlight;
+import com.example.case_study.repository.IBookingTicketRepository;
 import com.example.case_study.repository.IChairFlightRepository;
 import com.example.case_study.repository.IReceiveBookingRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class ReceiveBookingService implements IReceiveBookingService {
     private IReceiveBookingRepo receiveBookingRepo;
 
     @Autowired
+    private IBookingTicketRepository bookingTicketRepository;
+
+    @Autowired
     private IChairFlightRepository chairFlightRepository;
     @Override
     public Page<ReceiveBookingDto> getReceiveBookingTicketList(Pageable pageable) {
@@ -29,21 +33,22 @@ public class ReceiveBookingService implements IReceiveBookingService {
         return receiveBookingRepo.getReceiveBookingTicketList(pageable);
     }
 
-    @Override
-    public void cancelBookingStatus() {
-        List<ReceiveBookingDto> receiveBookingDtos = receiveBookingRepo.getReceiveBookingTickets();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime parsedDate ;
-        LocalDateTime cancel = LocalDateTime.now().minusDays(1);
-        for (ReceiveBookingDto rc : receiveBookingDtos) {
-            parsedDate = LocalDateTime.parse(rc.getDeparture().substring(0, 10).concat(" " + rc.getDeparture().substring(11, 16)), formatter);
-            if (parsedDate.isBefore(cancel)) {
-                rc.setStatus_receive(true);
-            } else {
-                rc.setStatus_receive(false);
-            }
-        }
-    }
+//    @Override
+//    public void cancelBookingStatus() {
+//        List<ReceiveBookingDto> receiveBookingDtos = receiveBookingRepo.getReceiveBookingTickets();
+////        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+////        LocalDateTime parsedDate ;
+////        LocalDateTime cancel = LocalDateTime.now().plusDays(1);
+////        for (ReceiveBookingDto rc : receiveBookingDtos) {
+////            parsedDate = LocalDateTime.parse(rc.getDeparture().substring(0, 10).concat(" " + rc.getDeparture().substring(11, 16)), formatter);
+////            if (cancel.isBefore(parsedDate)) {
+////                rc.setStatus_receive(true);
+////                System.out.println(rc);
+////            } else {
+////                rc.setStatus_receive(false);
+////            }
+////        }
+//    }
 
     @Override
     public ReceiveBookingDto findById(int id) {
@@ -57,17 +62,20 @@ public class ReceiveBookingService implements IReceiveBookingService {
 
     @Override
     public void cancelBooking(int id) {
-        receiveBookingRepo.findByIdBookingTicket(id).setStatus(true);
+        bookingTicketRepository.findByIdBookingTicket(id).setStatus(true);
+        bookingTicketRepository.save(bookingTicketRepository.findByIdBookingTicket(id));
+//        System.out.println( bookingTicketRepository.findByIdBookingTicket(id));
     }
 
     @Override
     public void confirm(int id) {
-        receiveBookingRepo.findByIdBookingTicket(id).setStatus(true);
+        bookingTicketRepository.findByIdBookingTicket(id).setStatus(true);
+        bookingTicketRepository.save(bookingTicketRepository.findByIdBookingTicket(id));
     }
 
     @Override
-    public List<ChairFlight> seats(int id) {
-        return chairFlightRepository.findByBookingTicket_IdBookingTicket(id);
+    public Page<ReceiveBookingDto> getHistory(String email, Pageable pageable) {
+        return receiveBookingRepo.getHistory(email,pageable);
     }
 
 

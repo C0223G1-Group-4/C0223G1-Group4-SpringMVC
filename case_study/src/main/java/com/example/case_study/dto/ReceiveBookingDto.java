@@ -14,8 +14,27 @@ public class ReceiveBookingDto {
     private Integer quantity;
     private Boolean status;
 
+    private String phone;
+    private String email;
+    private String bookingDate;
     private boolean status_receive;
 
+
+    public ReceiveBookingDto(Integer id, String passengerName, Integer total, String departure, String arrival, String numberAirCraft, String airport, String destination, Integer quantity, Boolean status, String phone, String email, String bookingDate) {
+        this.id = id;
+        this.passengerName = passengerName;
+        this.total = total;
+        this.departure = departure;
+        this.arrival = arrival;
+        this.numberAirCraft = numberAirCraft;
+        this.airport = airport;
+        this.destination = destination;
+        this.quantity = quantity;
+        this.status = status;
+        this.phone = phone;
+        this.email = email;
+        this.bookingDate = bookingDate;
+    }
 
     public ReceiveBookingDto(Integer id, String passengerName, Integer total, String departure, String arrival, String numberAirCraft, String airport, String destination, Integer quantity, Boolean status) {
         this.id = id;
@@ -46,6 +65,38 @@ public class ReceiveBookingDto {
 
     public ReceiveBookingDto() {
 
+    }
+
+    public String getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(String bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Integer getId() {
@@ -128,7 +179,7 @@ public class ReceiveBookingDto {
         this.status = status;
     }
 
-    public Boolean isStatus_receive() {
+    public boolean isStatus_receive() {
         return status_receive;
     }
 
