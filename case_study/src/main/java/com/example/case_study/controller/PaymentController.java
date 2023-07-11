@@ -128,7 +128,7 @@ public class PaymentController {
     public String showReturn(@RequestParam String vnp_Amount,
                              @RequestParam String vnp_ResponseCode
             , RedirectAttributes redirectAttributes, @SessionAttribute List<ChairFlight> listChair
-    ,HttpServletRequest request) {
+    ,HttpServletRequest request,Model model) {
         if(vnp_ResponseCode.equals("00")){
 //            String email = request.getUserPrincipal().getName();
 //            Passengers passengers = passengersService.findByEmail(email);
@@ -149,11 +149,11 @@ public class PaymentController {
 //            bookingTicket.setType(true);
 //            bookingTicketService.save(bookingTicket);
             //tìm lại booking để set
-            redirectAttributes.addFlashAttribute("message","Payment Successfully");
+            model.addAttribute("message","Payment Successfully");
         }else {
-            redirectAttributes.addFlashAttribute("message","Payment Failed");
+            model.addAttribute("message","Payment Failed");
         }
         listChair.clear();
-        return "redirect:/";
+        return "return";
     }
 }

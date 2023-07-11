@@ -59,7 +59,7 @@
       <div class="row" style=" height: 70px">
         <div class="col-md-6 mb-2">
           <div class="form-outline mb-4" style="height: 50px">
-            <input type="text" id="form2Example18"  th:field="*{name}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+            <input type="text" id="form2Example18"  th:field="*{name}" class="form-control" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
             <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
             <label class="form-label" for="form2Example18">Full Name</label>
           </div>
