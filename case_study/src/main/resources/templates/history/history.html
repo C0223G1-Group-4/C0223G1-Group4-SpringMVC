@@ -30,6 +30,10 @@
                 opacity: 0;
             }
         }
+        .disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
 
         th, td {
             font-size: 100%;
@@ -108,6 +112,12 @@
                             <i class="fa-solid fa-plane-slash"></i></span>
                         </a>
                     </div>
+                    <div th:if="${l.isStatus_receive()==false}">
+                        <a href="#">
+                        <span style="font-size: 20px;color: whitesmoke " class="disabled">
+                            <i class="fa-solid fa-plane-slash"></i></span>
+                        </a>
+                    </div>
                 </td>
             </tr>
             </tbody>
@@ -119,14 +129,14 @@
     <p th:text="${list.getNumber()+1}"></p>
 </center>
 <center>
-    <a th:if="${list.hasPrevious()}" th:href="@{receive_booking(page=${list.number -1})}">
+    <a th:if="${list.hasPrevious()}" th:href="@{history(page=${list.number -1})}">
         <button style=" width: 80px;height: 40px;background: #3893cc;border-radius: 30px">
         <span style="color: whitesmoke">
             <i class="fa-solid fa-angles-left"></i>
         </span>
         </button>
     </a>
-    <a th:if="${list.hasNext()}" th:href="@{receive_booking(page=${list.number +1})}">
+    <a th:if="${list.hasNext()}" th:href="@{history(page=${list.number +1})}">
         <button style="width: 80px;height: 40px;background: #3893cc;border-radius: 30px">
         <span style="color: whitesmoke">
            <i class="fa-solid fa-angles-right"></i>
