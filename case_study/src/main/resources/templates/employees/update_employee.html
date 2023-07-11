@@ -11,61 +11,7 @@
     <link rel="stylesheet" href="/home/css/form-create-edit.css">
 </head>
 <body>
-<!--<h2>Update Employee</h2>-->
-<!--<a href="/employee">Back to home</a>-->
 
-<!--<div>-->
-<!--    <form th:action="@{/employee/update}" th:object="${employeeDto}" method="post">-->
-<!--        <input type="hidden" th:field="*{id}" readonly/>-->
-
-<!--        <div class="form-group">-->
-<!--            <label for="name" class="h6">Name:</label>-->
-<!--            <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{nameEmployee}"></p>-->
-<!--            <div class="input-group">-->
-<!--                <input type="text" id="name" class="form-control" placeholder="Nhập tên sản phẩm.."-->
-<!--                       th:field="*{nameEmployee}"/>-->
-<!--                <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="form-group">-->
-<!--            <label for="name" class="h6">Address:</label>-->
-<!--            <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{address}"></p>-->
-<!--            <div class="input-group">-->
-<!--                <input type="text" id="address" class="form-control" placeholder="Nhập tên sản phẩm.."-->
-<!--                       th:field="*{address}"/>-->
-<!--                <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="form-group">-->
-<!--            <label for="name" class="h6">Age:</label>-->
-<!--            <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{age}"></p>-->
-<!--            <div class="input-group">-->
-<!--                <input type="text" id="age" class="form-control" placeholder="Nhập tên sản phẩm.."-->
-<!--                       th:field="*{age}"/>-->
-<!--                <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="form-group">-->
-<!--            <label for="name" class="h6">Phone Number:</label>-->
-<!--            <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{telephone}"></p>-->
-<!--            <div class="input-group">-->
-<!--                <input type="text" id="phone" class="form-control" placeholder="Nhập tên sản phẩm.."-->
-<!--                       th:field="*{telephone}"/>-->
-<!--                <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="mt-3 text-center">-->
-<!--            <button class="btn btn-info btn-outline-success btn-sm border border-2 border-success text-dark">-->
-<!--                &#45;&#45; Save <i class="fa-solid fa-floppy-disk"></i> &#45;&#45;-->
-<!--            </button>-->
-<!--        </div>-->
-
-<!--    </form>-->
-<!--</div>-->
 
 <div class="form-body">
     <div class="row">
@@ -75,7 +21,6 @@
                     <center><h2>Update air craft</h2></center>
                     <form th:action="@{/employee/update}" th:object="${employeeDto}" th:method="post">
                         <input type="hidden" th:field="*{id}">
-                        <input type="hidden" th:value="${number}" th:name="number">
                         <div class="col-md-12">
                             <p>Name</p>
                             <input class="form-control" type="text" th:field="*{nameEmployee}"

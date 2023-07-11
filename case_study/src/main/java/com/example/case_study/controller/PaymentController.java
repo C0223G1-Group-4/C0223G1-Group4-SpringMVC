@@ -153,6 +153,7 @@ public class PaymentController {
         }else {
             model.addAttribute("message","Payment Failed");
         }
+
         listChair.clear();
         return "return";
     }
