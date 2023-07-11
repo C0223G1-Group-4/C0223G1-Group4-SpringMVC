@@ -43,6 +43,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="/css/list_post.css">
 </head>
 
 <body>
@@ -76,7 +77,7 @@
 <div class="row container">
     <div class="col-12 col-md-3 col-lg-3 ">
         <a th:if="${acc.roleUser.name != 'ROLE_Customer'}" href="/post/create" class="position-fixed z-1">
-            <button class="btn btn-light">Create Post</button>
+            <button class='glowing-btn'><span class='glowing-txt'>C<span class='faulty-letter'>RE</span>ATE</span></button>
         </a>
     </div>
     <div class="col-12 col-md-8 col-lg-8">

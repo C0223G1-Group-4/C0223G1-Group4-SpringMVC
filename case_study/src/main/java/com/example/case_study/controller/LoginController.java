@@ -46,6 +46,15 @@ public class LoginController {
     public String formLogin(@RequestParam(value = "error", required = false) boolean error,Principal principal, Model model) {
         String authentication = SecurityContextHolder.getContext().getAuthentication().getName();
         if (!"anonymousUser".equals(authentication)){
+            AccountUser accountUser = accountService.findByEmail(principal.getName());
+            if (!passengersService.findByEmail(accountUser.getEmail()).isEnabled()) {
+                model.addAttribute("accountDto", new AccountUserDto());
+                model.addAttribute("passengerDto", new PassengerDto());
+                model.addAttribute("fail", "Sorry, we could not verify account. It maybe already verified, or verification code is incorrect.");
+                return "loginPage";
+            } else {
+                model.addAttribute("info", passengersService.findByIdAccount(accountUser.getId()));
+            }
             return "redirect:/";
         }
         if (error) {

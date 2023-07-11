@@ -27,7 +27,7 @@ public class EmployeeController {
     private IAccountService iAccountService;
 
     @GetMapping("")
-    public String showListEmployee(@PageableDefault(value = 5, sort = "id", direction = Sort.Direction.DESC)
+    public String showListEmployee(@PageableDefault(value = 4, sort = "id", direction = Sort.Direction.DESC)
                                    Pageable pageable, Model model) {
         model.addAttribute("employeeList", iEmployeesService.findAll(pageable));
         model.addAttribute("accountUser", iAccountService.findAll());
