@@ -153,6 +153,7 @@ public class PaymentController {
         }else {
             redirectAttributes.addFlashAttribute("message","Payment Failed");
         }
+
         listChair.clear();
         return "redirect:/";
     }
