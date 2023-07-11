@@ -76,13 +76,13 @@
 <div style="margin-top: 2% ; margin-left: 650px">
     <form class="row g-3 " action="/employee/search-employee">
         <div class="col-auto">
-            <label for="inputPassword1" class="visually-hidden">Email</label>
-            <input type="text" name="name" readonly class="form-control" id="inputPassword1"
+            <label for="name" class="visually-hidden">Name</label>
+            <input type="text" name="name" readonly class="form-control" id="name"
                    placeholder="Search by name...">
         </div>
         <div class="col-auto">
-            <label for="inputPassword2" class="visually-hidden">Password</label>
-            <input type="email" name="email" class="form-control" id="inputPassword2" placeholder="Search by email...">
+            <label for="email" class="visually-hidden">Email</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="Search by email...">
         </div>
         <div class="col-auto">
             <button type="submit" class="btn btn-primary mb-3">Confirm identity</button>
@@ -175,7 +175,7 @@
             </div>
 
             <form th:action="@{/employee/delete}">
-                <h3>Once you delete it, it can't be restored, are you sure?</h3>
+                <h4 style="color: red">Once you delete it, it can't be restored, are you sure?</h4>
                 <div class="modal-body">
                     <span class="h6">Name:</span><strong id="nameEmployeeDelete" class="text-danger ps-2"
                                                          th:text="${nameEmployee}"></strong>

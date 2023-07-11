@@ -73,10 +73,6 @@
                 <th>Name</th>
                 <th>Age</th>
                 <th>Nationality</th>
-<!--                <th>Email</th>-->
-<!--                <th>Address</th>-->
-<!--                <th>Telephone</th>-->
-<!--                <th>Citizen Id</th>-->
                 <th>Action</th>
             </tr>
             </thead>
@@ -90,10 +86,6 @@
                 <td th:text="${pa.name}"></td>
                 <td th:text="${pa.age}"></td>
                 <td th:text="${pa.nationality}"></td>
-<!--                <td th:text="${pa.address}"></td>-->
-<!--                <td th:text="${pa.phoneNumber}"></td>-->
-<!--                <td th:text="${pa.citizenId}"></td>-->
-<!--                <td th:text="${pa.accountUser.email}"></td>-->
 
                 <td><a th:href="@{/passenger/info/__${pa.id}__}"
                        class="btn btn-primary btn-outline-light">Detail</a></td>
