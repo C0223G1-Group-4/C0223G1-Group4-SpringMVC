@@ -48,7 +48,6 @@ public class PostController {
         AccountUser accountUser = accountService.findByEmail(principal.getName());
         Post post = new Post();
         BeanUtils.copyProperties(postDto,post);
-        post.setImage("/image-post/"+postDto.getImage());
         post.setEmployees(employeesService.findByIdAccount(accountUser.getId()));
         postService.create(post);
         redirectAttributes.addFlashAttribute("msg","Create success");

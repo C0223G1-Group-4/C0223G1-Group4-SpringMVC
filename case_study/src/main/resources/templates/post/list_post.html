@@ -43,9 +43,10 @@
         }
     </style>
 </head>
-<body>
 
+<body>
 <div th:insert="header/navbar :: copy" th:if="${acc.roleUser.name != 'ROLE_Customer'}"></div>
+
 <div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${msg != null}"
      style="
     position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 2s forwards; // thời gian msg trượt
@@ -71,7 +72,7 @@
     </div>
 </div>
 <h1 style="margin-top: 10px">List Post </h1>
-<div class="row">
+<div class="row container">
     <div class="col-12 col-md-3 col-lg-3 ">
         <a th:if="${acc.roleUser.name != 'ROLE_Customer'}" href="/post/create" class="position-fixed z-1">
             <button class="btn btn-light">Create Post</button>

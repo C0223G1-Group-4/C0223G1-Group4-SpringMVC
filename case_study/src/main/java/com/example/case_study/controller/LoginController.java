@@ -57,7 +57,12 @@ public class LoginController {
     }
 
     @GetMapping("/logoutSuccessful")
-    public String logout(Model model) {
+    public String logout(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null){
+            SecurityContextHolder.clearContext();
+            redirectAttributes.addFlashAttribute("message","successful logout");
+        }
         return "redirect:/";
     }
 
