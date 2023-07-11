@@ -61,7 +61,7 @@ public class PassengerController {
         return "/passengers/update_passenger";
     }
 
-    @PostMapping("/update")
+    @GetMapping("/update")
     public String update(@ModelAttribute @Validated PassengerDto passengerDto,
                          BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasFieldErrors()) {
