@@ -90,18 +90,18 @@
 				<div class="field-agileinfo-spc form-w3-agile-text1">
 					<label>Full Name</label>
 <!--					<span th:text="${booking.getPassenger().name}"></span>-->
-					<input type="text" name="Name" required="" th:value="${passengers.name}">
+					<input type="text" name="Name" required="" th:value="${passengers.name}" readonly>
 				</div>
 				<div class="field-agileinfo-spc form-w3-agile-text2">
 					<label>Phone Number</label>
 <!--					<span th:text="${booking.getPassenger().phoneNumber}"></span>-->
-					<input type="text" name="Phone no" required="" th:value="${passengers.phoneNumber}">
+					<input type="text" name="Phone no" required="" th:value="${passengers.phoneNumber}" readonly>
 				</div>
 			</div>
 			<div class="field-agileinfo-spc form-w3-agile-text">
 				<label>Email</label>
 <!--				<span  th:text="${booking.getPassenger().getAccountUser().email}"></span>-->
-				<input type="email" name="Email" required="" th:value="${passengers.getAccountUser().email}">
+				<input type="email" name="Email" required="" th:value="${passengers.getAccountUser().email}" readonly>
 			</div>
 			<input type="hidden" name="idPassenger" th:value="${passengers.id}">
 			<div class="clear"></div>

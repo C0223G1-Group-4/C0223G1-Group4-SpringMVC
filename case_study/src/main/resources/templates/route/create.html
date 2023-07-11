@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/home/css/form-create-edit.css">
 </head>
 <body>
+
 <div class="container-fluid">
     <div class="form-body">
         <div class="row">
@@ -15,24 +16,42 @@
                         <center><h2>Create Route</h2></center>
                         <form th:object="${routeDto}" th:action="@{/route/create}" th:method="post">
                             <div class="col-md-12">
-                                <p> Air Port</p>
-                                <input class="form-control" type="text" th:field="*{airPort}" placeholder="Đà Nẵng"
-                                       required readonly>
-                                <p style="color: red" th:if="${#fields.hasErrors('airPort')}"
-                                   th:errors="*{airPort}"></p>
+                                <p>Destination</p>
+                                <select th:field="*{destination}" class="form-select mt-3" required>
+                                    <option value="" disabled selected hidden>Destination</option>
+                                    <option
+                                            value="Sai Gon">
+                                        Sai Gon
+                                    </option>
+                                    <option
+                                            value="Da Nang">
+                                        Da Nang
+                                    </option>
+                                    <option
+                                            value="Hue">Hue
+                                    </option>
+                                    <option
+                                            value="Ha Noi">Ha Noi
+                                    </option>
+                                </select>
                             </div>
                             <div class="col-md-12">
-                                <p>Destination</p>
-                                <select name="destination" class="form-select mt-3" required>
+                                <p>Air Port</p>
+                                <select th:field="*{airPort}" class="form-select mt-3" required>
+                                    <option value="" disabled selected hidden>Destination</option>
                                     <option
-                                            value="Sài Gòn">
-                                        Sài Gòn
+                                            value="Sai Gon">
+                                        Sai Gon
                                     </option>
                                     <option
-                                            value="Huế">Huế
+                                            value="Da Nang">
+                                        Da Nang
                                     </option>
                                     <option
-                                            value="Hà Nội">Hà Nội
+                                            value="Hue">Hue
+                                    </option>
+                                    <option
+                                            value="Ha Noi">Ha Noi
                                     </option>
                                 </select>
                             </div>
@@ -47,7 +66,7 @@
                                 <div class="form-button mt-3" style="padding-top: 30px">
                                     <button id="submit" type="submit"
                                             style="width: 130px;height: 40px;background: #3893cc;color: whitesmoke;border-radius: 30px">
-                                        Create
+                                        Submit
                                     </button>
                                 </div>
                             </center>

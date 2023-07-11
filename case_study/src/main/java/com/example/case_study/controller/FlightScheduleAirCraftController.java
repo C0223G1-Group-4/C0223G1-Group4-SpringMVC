@@ -1,5 +1,6 @@
 package com.example.case_study.controller;
 
+import com.example.case_study.dto.FlightScheduleAirCraftDto;
 import com.example.case_study.dto.FlightScheduleDto;
 import com.example.case_study.model.tai.FlightSchedule;
 import com.example.case_study.model.tai.FlightScheduleAirCraft;
@@ -77,14 +78,25 @@ public class FlightScheduleAirCraftController {
         for (FlightScheduleAirCraft f : flightScheduleAirCraftList) {
             LocalDate localDateLoop = LocalDate.parse(f.getFlightSchedule().getDeparture().substring(0, 10));
             int dateLoop = localDateLoop.getDayOfYear();
-            if (  f.getIdAirCraft().equals(flightScheduleAirCraft.getIdAirCraft())
+            if (f.getIdAirCraft().equals(flightScheduleAirCraft.getIdAirCraft())
                     && dateCheck == dateLoop
                     && flightScheduleAirCraft.getFlightSchedule().getArrival().substring(11, 16).equals(f.getFlightSchedule().getArrival().substring(11, 16))
                     && flightScheduleAirCraft.getFlightSchedule().getDeparture().substring(11, 16).equals(f.getFlightSchedule().getDeparture().substring(11, 16))
-                    )
-             {
+            ) {
                 count++;
             }
+        }
+        int count1 = 0;
+        if (this.iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft().size() == 0) {
+            flightScheduleAirCraft.setCodeBooking("BK-" + 1);
+        } else {
+            for (FlightScheduleAirCraft fs : this.iFlightScheduleAirCraftService.checkAllListFlightScheduleAirCraft()) {
+                String[] check = fs.getCodeBooking().split("-");
+                if (Integer.parseInt(check[check.length - 1]) > count1) {
+                    count1 = Integer.parseInt(check[check.length - 1]);
+                }
+            }
+            flightScheduleAirCraft.setCodeBooking("BK-" + (count1 + 1));
         }
         if (count != 0) {
             redirectAttributes.addFlashAttribute("msgErr", "Have in list can't create");
@@ -100,7 +112,9 @@ public class FlightScheduleAirCraftController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
         if (this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(id) != null) {
-            model.addAttribute("flightScheduleAirCraft", this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(id));
+            FlightScheduleAirCraftDto flightScheduleAirCraftDto=new FlightScheduleAirCraftDto();
+            BeanUtils.copyProperties(this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(id),flightScheduleAirCraftDto);
+            model.addAttribute("flightScheduleAirCraftDto",flightScheduleAirCraftDto );
             model.addAttribute("route", this.iRouteService.findByIdRoute(this.iFlightScheduleAirCraftService.findByIdFlightScheduleAirCraft(id).getIdAirCraft().getRoutes().get(0).getId()));
             model.addAttribute("airCraftList", iAirCraftService.checkAllListAirCraft());
             model.addAttribute("routeList", iRouteService.checkAllListRoute());
@@ -113,7 +127,15 @@ public class FlightScheduleAirCraftController {
 
     // Tài
     @PostMapping("/edit")
-    public String edit(@ModelAttribute FlightScheduleAirCraft flightScheduleAirCraft, @RequestParam int idRoute, Model model, RedirectAttributes redirectAttributes) {
+    public String edit(@Valid @ModelAttribute FlightScheduleAirCraftDto flightScheduleAirCraftDto, BindingResult bindingResult,@RequestParam int idRoute, Model model, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()){
+            model.addAttribute("airCraftList", iAirCraftService.checkAllListAirCraft());
+            model.addAttribute("routeList", iRouteService.checkAllListRoute());
+            model.addAttribute("flightScheduleList", iFlightScheduleService.checkAllListFlightSchedule());
+            return "flight-schedule-air-craft/edit";
+        }
+        FlightScheduleAirCraft flightScheduleAirCraft=new FlightScheduleAirCraft();
+        BeanUtils.copyProperties(flightScheduleAirCraftDto,flightScheduleAirCraft);
         int count = 0;
         LocalDate localDate = LocalDate.parse((flightScheduleAirCraft.getFlightSchedule().getDeparture()).substring(0, 10));
         int dateCheck = localDate.getDayOfYear();
@@ -128,8 +150,11 @@ public class FlightScheduleAirCraftController {
                     && flightScheduleAirCraft.getFlightSchedule().getArrival().substring(11, 16).equals(f.getFlightSchedule().getArrival().substring(11, 16))
                     && flightScheduleAirCraft.getFlightSchedule().getDeparture().substring(11, 16).equals(f.getFlightSchedule().getDeparture().substring(11, 16))
                     && !(f.getId().equals(flightScheduleAirCraft.getId()))
-                    &&flightScheduleAirCraft.getIdAirCraft().getRoutes().get(0).getId()!=f.getIdAirCraft().getRoutes().get(0).getId()
+                    && flightScheduleAirCraft.getIdAirCraft().getRoutes().get(0).getId() != f.getIdAirCraft().getRoutes().get(0).getId()
             ) {
+                count++;
+            }
+            if (flightScheduleAirCraft.getCodeBooking().equals(f.getCodeBooking())&&!flightScheduleAirCraft.getId().equals(f.getId())){
                 count++;
             }
         }

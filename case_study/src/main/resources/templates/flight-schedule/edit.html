@@ -5,17 +5,20 @@
     <title>Edit Flight Schedule</title>
     <link rel="stylesheet" href="/home/css/form-create-edit.css">
 
+
 </head>
 <body>
+
+<link rel="stylesheet" href="/home/css/navbar.css">
 <div class="form-body">
     <div class="row">
         <div class="form-holder">
             <div class="form-content">
                 <div class="form-items">
                     <center><h2>Create flight schedule</h2></center>
-                    <form th:action="@{/flight-schedule/edit}" th:method="post" th:object="${flightSchedule}" novalidate="novalidate">
+                    <form th:action="@{/flight-schedule/edit}" th:method="post" th:object="${flightScheduleDto}" novalidate="novalidate">
                         <input type="hidden" th:field="*{id}">
-                        <input type="hidden" th:value="${flightSchedule.id}" th:name="id">
+                        <input type="hidden" th:value="${flightScheduleDto  .id}" th:name="id">
                         <input type="hidden" th:value="${number}" th:name="number">
                         <div class="col-md-12">
                             <p>Code Flight Schedule</p>
@@ -34,7 +37,7 @@
                         </div>
                         <center>
                             <div class="form-button mt-3" style="padding-top: 30px">
-                                <button id="submit" type="submit" style="width: 130px;height: 40px;background: #3893cc;border-radius: 30px;color: whitesmoke" >Create</button>
+                                <button id="submit" type="submit" style="width: 130px;height: 40px;background: #3893cc;border-radius: 30px;color: whitesmoke" >Submit</button>
                             </div>
                         </center>
                     </form>

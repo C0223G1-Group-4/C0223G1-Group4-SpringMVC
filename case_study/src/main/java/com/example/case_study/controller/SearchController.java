@@ -24,8 +24,8 @@ public class SearchController {
     private IFlightScheduleAirCraftService iFlightScheduleAirCraftService;
 
     @GetMapping("")
-    public String search(@RequestParam(defaultValue = "", required = false) String departure, @RequestParam(defaultValue = "", required = false) String arrival, @RequestParam String destination, Model model, RedirectAttributes redirectAttributes) throws ParseException {
-        List<FlightScheduleAirCraft> flightScheduleAirCrafts = this.iFlightScheduleAirCraftService.searchTicket(departure, arrival, destination);
+    public String search(@RequestParam(defaultValue = "",required = false) String airPort,@RequestParam(defaultValue = "", required = false) String departure, @RequestParam(defaultValue = "", required = false) String arrival, @RequestParam(defaultValue = "",required = false) String destination, Model model, RedirectAttributes redirectAttributes) throws ParseException {
+        List<FlightScheduleAirCraft> flightScheduleAirCrafts = this.iFlightScheduleAirCraftService.searchTicket(airPort,departure, arrival, destination);
         if (flightScheduleAirCrafts.size() == 0) {
             model.addAttribute("msgErr", "Not found ticket");
         }

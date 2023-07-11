@@ -64,7 +64,7 @@ public class LoginController {
     }
 
     @GetMapping(value = "/userInfo")
-    public String userInfo( Model model, Principal principal,RedirectAttributes redirectAttributes) {
+    public String userInfo(Model model, Principal principal, RedirectAttributes redirectAttributes) {
         // Sau khi user login thanh cong se co principal
         String userName = principal.getName();
         AccountUser accountUser = accountService.findByEmail(principal.getName());
@@ -79,11 +79,11 @@ public class LoginController {
                 return "home/index";
             }
         } else if (accountUser.getRoleUser().getName().equals("ROLE_Employee")) {
-            model.addAttribute("info", employeesService.findByIdAccount(accountUser.getId()));
+            model.addAttribute("info",employeesService.findByIdAccount(accountUser.getId()));
             return "home/index";
         } else {
             System.out.println("User Name: " + userName);
-            model.addAttribute("info", employeesService.findByIdAccount(accountUser.getId()));
+            model.addAttribute("info",employeesService.findByIdAccount(accountUser.getId()));
             return "home/index";
         }
 

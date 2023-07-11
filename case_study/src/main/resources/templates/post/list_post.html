@@ -9,6 +9,8 @@
     <!--          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="/home/css/navbar.css">
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
             crossorigin="anonymous"></script>
@@ -42,7 +44,7 @@
     </style>
 </head>
 <body>
-
+<div th:insert="header/navbar :: copy"></div>
 <div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${msg != null}"
      style="
     position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 2s forwards; // thời gian msg trượt
@@ -67,18 +69,17 @@
         <p th:text="${msgErr}"></p>
     </div>
 </div>
-<h1>List Post </h1>
+<h1 style="margin-top: 10px">List Post </h1>
 <div class="row">
     <div class="col-12 col-md-3 col-lg-3 ">
-        <a th:if="${acc.roleUser.name != 'ROLE_Customer'}" href="/post/create" class="position-fixed">
+        <a th:if="${acc.roleUser.name != 'ROLE_Customer'}" href="/post/create" class="position-fixed z-1">
             <button class="btn btn-light">Create Post</button>
         </a>
     </div>
     <div class="col-12 col-md-8 col-lg-8">
-        <div class="card d-block "
-             style=" width: 40em;margin: 20px 0"
+        <div class="card d-block " style=" width: 40em; margin: 20px 0"
              th:each="post : ${posts}">
-            <img th:src="${post.image}" class="card-img-top" alt="thanh son" height="200px">
+            <img th:src="${post.image}" class="card-img-top" alt="thanh son" height="400px">
             <div class="card-body">
                 <h4 class="card-title" th:text="${post.namePost}"></h4>
                 <h5 class="card-title" th:text="${post.heading}"></h5>
@@ -86,7 +87,8 @@
                 <a th:if="${acc.roleUser.name != 'ROLE_Customer'}" th:href="@{/post/update/{id}(id=${post.id})}"
                    class="btn btn-primary">Update</a>
                 <a th:if="${acc.roleUser.name != 'ROLE_Customer'}"
-                   th:attr="onclick=|deletePost('${post.id}','${post.namePost}','${post.employees.nameEmployee}')|"
+                   th:attr="onclick=|deletePost('${post.id}','${post.namePost}')|"
+                   href="#"
                    class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"> <span
                         style="padding-left: 5px;color: whitesmoke">
                     <i class="fa-solid fa-trash-can"></i>  Delete</span></a>
@@ -103,7 +105,6 @@
     function deletePost(id, namePost, employee) {
         document.getElementById("deletePost").value = id;
         document.getElementById("namePost").innerText = namePost;
-        document.getElementById("writer").innerText = employee;
 
     }
 </script>
@@ -121,8 +122,7 @@
                         <p style="color: red">Do you want to delete this post?</p>
                         <span style="color:black;">Post title: </span> <span style="color: red"
                                                                              id="namePost"></span><br>
-                        <span style="color:black;">Written by: </span> <span style="color: black"
-                                                                             id="writer"></span><br>
+                        <p style="color: red">This action cannot be undone</p>
 
                     </div>
                 </center>

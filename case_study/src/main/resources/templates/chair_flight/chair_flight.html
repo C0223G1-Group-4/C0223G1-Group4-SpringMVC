@@ -10,62 +10,54 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="/chair/chair.css" rel="stylesheet" type="text/css" media="all">
 </head>
-<body>
+<body style="background: url(/information_ticket/images/1.jpg)no-repeat center top;">
 <div class="container">
-    <h1 style="text-align: center;margin-bottom: 20px">BOOKING TICKET</h1>
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="plane">
-                <div class="cockpit">
-                    <h1>Vietnam Airline</h1>
-                </div>
-                <div class="exit exit--front fuselage">
-
-                </div>
-                <div class="row">
-                    <div class="col-2" th:each="l,loop:${list}" style="margin-bottom: 20px">
-                        <div th:if="${l.statusChair==true}">
-                            <button disabled type="button" class="btn btn-danger"
-                                    th:text="${l.getChair().nameChair}" th:id="${l.id}">
-                            </button>
-                        </div>
-                        <div th:if="${l.statusChair==false}">
-                            <button type="button" disabled class="btn btn-primary"
-                                    th:text="${l.getChair().nameChair}" th:id="${l.id}">
-                            </button>
-                        </div>
-
-                        <!--                    <li class="seat">-->
-                        <!--                        <input type="checkbox" th:id="${l.id}"/>-->
-                        <!--                        <label th:for="${l.id}" th:text="  ${l.getChair().nameChair}  "></label>-->
-                        <!--                    </li>-->
-                    </div>
-                </div>
-                <div class="exit exit--front fuselage">
-
-                </div>
+<h1 style="text-align: center;margin-bottom: 20px">BOOKING TICKET</h1>
+<h5 style="color: red;text-align: center" th:if="${message}" th:text="${message}"></h5>
+<div class="row">
+    <div class="col-5">
+        <div class="plane">
+            <div class="cockpit">
+                <h1>Vietnam Airline</h1>
             </div>
-        </div>
-        <div class="col-lg-6">
             <form th:action="@{/chair_flight/create}" th:method="post">
-                <input type="hidden" name="idCraftSchedule" th:value="${idCraftSchedule}">
-                    <h1>Chair List</h1>
-                <div class="row">
-                    <div class="col-2" th:each="l:${list}">
-            <span style="float: left" th:if="${l.statusChair==false}">
-                <input type="checkbox" th:value="${l.id}" name="chair"/>
-                <label th:for="${l.id}" th:text="${l.getChair().nameChair}"></label>
-            </span>
-                        <span style="float: left" th:if="${l.statusChair==true}">
-                <input disabled type="checkbox" th:value="${l.id}"/>
-                <label th:for="${l.id}" th:text="  ${l.getChair().nameChair}"></label>
-            </span>
+            <div class="exit exit--front fuselage">
+
+            </div>
+
+            <div class="row cabin fuselage">
+
+                <div class="col-2 seats" th:each="l,loop:${list}" style="margin-bottom: 20px">
+
+                        <input type="hidden" name="idCraftSchedule" th:value="${idCraftSchedule}">
+                    <div th:if="${l.statusChair==true}">
+                        <button disabled type="button" class="btn btn-secondary"
+                                th:text="${l.getChair().nameChair}" th:id="${l.id}">
+                        </button>
                     </div>
+                    <div class="seat" style="float: left" th:if="${l.statusChair==false}">
+                <input type="checkbox" th:id="${l.id}" th:value="${l.id}"  name="chair"/>
+                <label th:for="${l.id}" th:text="${l.getChair().nameChair}"></label>
+            </div>
                 </div>
-                <button class="btn btn-primary" type="submit">submit</button>
+
+            </div>
+
+            <div class="exit exit--front fuselage">
+
+            </div>
+                <button class="btn btn-primary" type="submit" style="float: right">Submit</button>
             </form>
         </div>
     </div>
+    <div class="col-3"></div>
+    <div class="col-4">
+        <div class="row" style="margin-bottom: 15px"><img src="/information_ticket/images/a1.png" width="100%"></div>
+        <div class="row" style="margin-bottom: 15px"><img src="/information_ticket/images/a2.png" width="100%"></div>
+        <div class="row" style="margin-bottom: 15px"><img src="/information_ticket/images/a3.png" width="100%"></div>
+        <div class="row" style="margin-bottom: 15px"><img src="/information_ticket/images/a4.png" width="100%"></div>
+    </div>
+</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
