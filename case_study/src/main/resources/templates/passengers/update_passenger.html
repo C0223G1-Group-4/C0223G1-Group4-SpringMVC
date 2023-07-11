@@ -13,7 +13,7 @@
 <h2>Update Passenger</h2>
 <a href="/passenger">Back to home</a>
 
-<div>
+<div class="container">
   <form th:action="@{/passenger/update}" th:object="${passengerDto}" method="post">
     <input type="hidden" th:field="*{id}" readonly/>
 
@@ -21,7 +21,7 @@
       <label for="name" class="h6">Name:</label>
       <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{name}"></p>
       <div class="input-group">
-        <input type="text" id="name" class="form-control" placeholder="Nhập tên sản phẩm.."
+        <input type="text" id="name" class="form-control" placeholder="Enter name"
                th:field="*{name}"/>
         <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
       </div>
@@ -31,7 +31,7 @@
       <label for="name" class="h6">Address:</label>
       <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{address}"></p>
       <div class="input-group">
-        <input type="text" id="address" class="form-control" placeholder="Nhập tên sản phẩm.."
+        <input type="text" id="address" class="form-control" placeholder="Enter address"
                th:field="*{address}"/>
         <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
       </div>
@@ -41,7 +41,7 @@
       <label for="name" class="h6">Age:</label>
       <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{age}"></p>
       <div class="input-group">
-        <input type="text" id="age" class="form-control" placeholder="Nhập tên sản phẩm.."
+        <input type="date" id="age" class="form-control" placeholder="Enter age"
                th:field="*{age}"/>
         <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
       </div>
@@ -51,7 +51,7 @@
       <label for="name" class="h6">Phone Number:</label>
       <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{phoneNumber}"></p>
       <div class="input-group">
-        <input type="text" id="phone" class="form-control" placeholder="Nhập tên sản phẩm.."
+        <input type="number" id="phone" class="form-control" placeholder="Enter phone number"
                th:field="*{phoneNumber}"/>
         <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
       </div>
@@ -61,7 +61,7 @@
       <label for="name" class="h6">Citizen Id:</label>
       <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{citizenId}"></p>
       <div class="input-group">
-        <input type="text" id="citizen" class="form-control" placeholder="Nhập tên sản phẩm.."
+        <input type="number" id="citizen" class="form-control" placeholder="Enter citizen id"
                th:field="*{citizenId}"/>
         <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
       </div>
@@ -71,7 +71,7 @@
       <label for="name" class="h6">Nationality:</label>
       <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{nationality}"></p>
       <div class="input-group">
-        <input type="text" id="nationality" class="form-control" placeholder="Nhập tên sản phẩm.."
+        <input type="text" id="nationality" class="form-control" placeholder="Enter nationality"
                th:field="*{nationality}"/>
         <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
       </div>
