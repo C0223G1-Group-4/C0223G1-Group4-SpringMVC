@@ -11,27 +11,25 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface IReceiveBookingRepo extends JpaRepository<BookingTicket,Integer> {
-    @Query(value = "select new com.example.case_study.dto.ReceiveBookingDto(BK.id_booking_ticket,P.name_passengers ,BK.total,fs.departure,fs.arrival,AC.number_air_craft,R.air_port,R.destination,BK.quantity,BK.type)\n" +
-            "from booking_ticket as BK \n" +
-            "left  OUTER join chair_flight CF on (BK.id_booking_ticket=CF.id_bk)\n" +
-            "left OUTER JOIN chair Ch on (CF.id_chair=Ch.id)\n" +
-            "left OUTER JOIN flight_schedule_aircraft FLC on (FLC.id=CF.id_flight_schedule_aircraft)\n" +
-            "left outer join flight_schedule FS on FLC.flight_schedule_id = FS.id\n" +
-            "left outer join air_craft AC on FLC.air_craft_id = AC.id\n" +
-            "left outer join route_air_craft RAC on AC.id = RAC.air_craft_id\n" +
-            "left outer join route R on RAC.route_id = R.id\n" +
-            "left outer join passengers P on BK.passenger_id = P.id where BK.type=true and BK.status=false ",nativeQuery = true)
+    @Query("select new com.example.case_study.dto.ReceiveBookingDto(BK.idBookingTicket,P.name ,BK.total,FS.departure,FS.arrival,AC.numberAirCraft,R.airPort,R.destination,BK.quantity,BK.type)\n" +
+            "from ChairFlight CF \n" +
+            "LEFT JOIN CF.bookingTicket BK \n" +
+            "LEFT JOIN CF.chair Ch\n" +
+            "LEFT JOIN CF.flightScheduleAirCraft FLC \n" +
+            "LEFT JOIN FLC.flightSchedule FS\n" +
+            "LEFT JOIN FLC.idAirCraft AC \n" +
+            "LEFT JOIN AC.routes R\n" +
+            "LEFT JOIN BK.passenger P where BK.status=false")
     Page<ReceiveBookingDto> getReceiveBookingTicketList(Pageable pageable);
-    @Query(value = "select new com.example.case_study.dto.ReceiveBookingDto(BK.id_booking_ticket,P.name_passengers ,BK.total,fs.departure,fs.arrival,AC.number_air_craft,R.air_port,R.destination,BK.quantity,BK.type)\n" +
-            "from booking_ticket as BK\n" +
-            "left  OUTER join chair_flight CF on (BK.id_booking_ticket=CF.id_bk)\n" +
-            "left OUTER JOIN chair C on (CF.id_chair=C.id)\n" +
-            "left OUTER JOIN flight_schedule_aircraft FLC on (FLC.id=CF.id_flight_schedule_aircraft)\n" +
-            "left outer join flight_schedule FS on FLC.flight_schedule_id = FS.id\n" +
-            "left outer join air_craft AC on FLC.air_craft_id = AC.id\n" +
-            "left outer join route_air_craft RAC on AC.id = RAC.air_craft_id\n" +
-            "left outer join route R on RAC.route_id = R.id\n" +
-            "left outer join passengers P on BK.passenger_id = P.id where BK.type=true and BK.status=false",nativeQuery = true)
+    @Query("select new com.example.case_study.dto.ReceiveBookingDto(BK.idBookingTicket,P.name ,BK.total,FS.departure,FS.arrival,AC.numberAirCraft,R.airPort,R.destination,BK.quantity,BK.type)\n" +
+            "from ChairFlight CF \n" +
+            "LEFT JOIN CF.bookingTicket BK \n" +
+            "LEFT JOIN CF.chair Ch\n" +
+            "LEFT JOIN CF.flightScheduleAirCraft FLC \n" +
+            "LEFT JOIN FLC.flightSchedule FS\n" +
+            "LEFT JOIN FLC.idAirCraft AC \n" +
+            "LEFT JOIN AC.routes R\n" +
+            "LEFT JOIN BK.passenger P where BK.status=false")
     List<ReceiveBookingDto> getReceiveBookingTickets();
 
     BookingTicket findByIdBookingTicket(int id);

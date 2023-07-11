@@ -25,7 +25,7 @@ public class ReceiveBookingService implements IReceiveBookingService {
     private IChairFlightRepository chairFlightRepository;
     @Override
     public Page<ReceiveBookingDto> getReceiveBookingTicketList(Pageable pageable) {
-        cancelBookingStatus();
+//        cancelBookingStatus();
         return receiveBookingRepo.getReceiveBookingTicketList(pageable);
     }
 
@@ -37,7 +37,11 @@ public class ReceiveBookingService implements IReceiveBookingService {
         LocalDateTime cancel = LocalDateTime.now().minusDays(1);
         for (ReceiveBookingDto rc : receiveBookingDtos) {
             parsedDate = LocalDateTime.parse(rc.getDeparture().substring(0, 10).concat(" " + rc.getDeparture().substring(11, 16)), formatter);
-            rc.setStatus_receive(parsedDate.isBefore(cancel));
+            if (parsedDate.isBefore(cancel)) {
+                rc.setStatus_receive(true);
+            } else {
+                rc.setStatus_receive(false);
+            }
         }
     }
 

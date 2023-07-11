@@ -9,22 +9,6 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="/home/css/button-of-tai.css">
     <style>
-        .checkout-button {
-            width: 130px;
-            height: 35px;
-            background: #333;
-            border: none;
-            vertical-align: top;
-            margin-left: 35px;
-            cursor: pointer;
-            color: #fff;
-        }
-
-        .checkout-button:disabled {
-            background: #999;
-            color: #555;
-            cursor: not-allowed;
-        }
 
         @keyframes slideInRight {
             from {
@@ -117,14 +101,18 @@
                 </td>
                 <td>
 
-                    <a th:href="@{/receive_booking/cancelStatus/{id}(id=${l.id})}" ><span th:value="${l.isStatus_receive()}" class="checkout-button"
+                    <a th:href="@{/receive_booking/cancelStatus/{id}(id=${l.id})}" ><span  th:if="${l.isStatus_receive()}"
                             style="font-size: 20px;color: whitesmoke " id="cancel"><i class="fa-solid fa-rectangle-list"></i></span></a>
+                    <a href="#" ><span  th:if="${l.isStatus_receive()==false}"
+                            style="font-size: 20px;color: whitesmoke " ><i class="fa-solid fa-plane-slash"></i></span></a>
+
                     <a th:href="@{/receive_booking/pay/{id}(id=${l.id})}"><span
-                            style="font-size: 20px;color: whitesmoke"><i class="fa-solid fa-plane-slash"></i></span></a>
-                    <a th:attr="onclick=|detail('${l.id}','${l.passengerName}'
+                            style="font-size: 20px;color: whitesmoke"><i class="fa-solid fa-circle-check"></i></span></a>
+
+                        <a th:attr="onclick=|detail('${l.id}','${l.passengerName}'
                     ,'${l.departure}','${l.arrival}','${l.numberAirCraft}','${l.airport}','${l.destination}','${l.quantity}','${l.total}','${seats}')|"
-                       href="#" id="m1-c"> <span
-                            style="font-size: 20px;padding-left: 20px;color: whitesmoke"><i class="fa-solid fa-circle-check"></i></span></a>
+                           href="#" > <span data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size: 20px;padding-left: 20px;color: whitesmoke"><i class="fa-solid fa-rectangle-list"></i></span></a>
+
                 </td>
             </tr>
 
@@ -134,98 +122,110 @@
 </section>
 
 
+
+
 <!--Modal-->
-<div class="box">
-    <div class="modal-container" id="m1-o" style="--m-background: transparent;">
-        <div class="modal">
-            <div class="form-container sign-up-container">
-                <!--sign_up-->
-                    <div class="row" style=" height: 70px">
-                        <div class="col-md-6 mb-2">
-                            <div class="form-outline mb-4" style="height: 50px">
-                                <input type="text" id="form2Example18"   class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
-                                <span style="color: red"></span>
-                                <label class="form-label" for="form2Example18">Full Name</label>
+<!-- Scrollable modal -->
+<div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 style="color: black" class="modal-title" id="exampleModalLabel">Booking Ticket Detail</h5>
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                </div>
+                <div class="modal-body">
+                    <div class="form-container sign-up-container">
+                        <!--sign_up-->
+                        <div class="row" style=" height: 70px">
+                            <div class="col-md-6 mb-2">
+                                <div style="height: 50px">
+                                    <label style="color: black" for="form2Example18" >Booking Code</label>
+                                    <input  class="form-control form-control-lg" id="form2Example18" style="color: black; padding-right: 10px;padding-left: 10px" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div style="height: 50px">
+                                    <label style="color: black" class="form-label" for="form2Example19">Passenger</label>
+                                    <input type="text" id="form2Example19" disabled name="name" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px"/>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="form-outline mb-4" style="height: 50px">
-                                <input type="text" id="form2Example19"   class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
-                                <span style="color: red" ></span>
-                                <label class="form-label" for="form2Example19">Citizen ID</label>
+                        <div class="row" style=" height: 70px">
+                            <div class="col-md-6 mb-2">
+                                <div class="form-outline mb-4" style="height: 50px">
+                                    <label style="color: black" class="form-label" for="form2Example20">Departure</label>
+                                    <input id="form2Example20" disabled  class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px"/>
+                                </div>
                             </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline mb-4" style="height: 50px">
+                                    <label style="color: black" class="form-label" for="form2Example2">Arrival</label>
+                                    <input type="text" id="form2Example2" disabled  class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px"/>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="form-outline mb-4" style="height: 50px">
+                            <label style="color: black" class="form-label" for="form2Example1">Number Air Craft</label>
+                            <input type="text" id="form2Example1"  disabled class="form-control form-control-lg"/>
                         </div>
-                    </div>
-                    <div class="row" style=" height: 70px">
-                        <div class="col-md-6 mb-2">
-                            <div class="form-outline mb-4" style="height: 50px">
-                                <input type="date" id="form2Example20"   class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
-                                <span style="color: red" ></span>
-                                <label class="form-label" for="form2Example20">Day of Birth</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="form-outline mb-4" style="height: 50px">
-                                <input type="text" id="form2Example2"   class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
-                                <span style="color: red" ></span>
-                                <label class="form-label" for="form2Example2">Nationality</label>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="form-outline mb-4" style="height: 50px">
-                        <input type="text" id="form2Example1"   class="form-control form-control-lg"/>
-                        <span style="color: red"></span>
-                        <label class="form-label" for="form2Example1">Address</label>
-                    </div>
-
-                    <div class="form-outline mb-4" style="height: 50px">
-                        <input type="text" id="form2Example3"  class="form-control form-control-lg"/>
-                        <span style="color: red" ></span>
-                        <label class="form-label" for="form2Example3">Tel</label>
-                    </div>
-                    <div class="form-outline mb-4" style="height: 50px">
-                        <input type="text" id="form2Example4"   class="form-control form-control-lg"/>
-                        <span style="color: red"></span>
-                        <label class="form-label" for="form2Example4">Email</label>
-                    </div>
-                    <div class="row" style=" height: 70px">
-                        <div class="col-md-6 mb-2">
-                            <div class="form-outline mb-4" style="height: 50px">
-                                <input type="password" id="form2Example5" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
-                                <span style="color: red" ></span>
-                                <label class="form-label" for="form2Example5">Password</label>
+                        <div class="form-outline mb-4" style="height: 50px">
+                            <label style="color: black" class="form-label" for="form2Example3">Airport</label>
+                            <input type="text" id="form2Example3" disabled  class="form-control form-control-lg"/>
+                        </div>
+                        <div class="form-outline mb-4" style="height: 50px">
+                            <label style="color: black" class="form-label" for="form2Example4">Destination</label>
+                            <input type="text" id="form2Example4" disabled  class="form-control form-control-lg"/>
+                        </div>
+                        <div class="row" style=" height: 70px">
+                            <div class="col-md-6 mb-2">
+                                <div class="form-outline mb-4" style="height: 50px">
+                                    <label style="color: black" class="form-label" for="form2Example5">Quantity</label>
+                                    <input  id="form2Example5" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline mb-4" style="height: 50px">
+                                    <label style="color: black" class="form-label" for="form2Example6">Total</label>
+                                    <input  id="form2Example6" disabled class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px"/>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="form-outline mb-4" style="height: 50px">
-                                <input type="password" id="form2Example6" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
-                                <span style="color: red" id="message"></span>
-                                <label class="form-label" for="form2Example6">Confirm Password</label>
-                            </div>
+                        <div class="form-outline mb-4" style="height: 50px">
+                            <label style="color: black" class="form-label" for="form2Example3">Seats</label>
+                            <input type="text" id="form2Example43" disabled class="form-control form-control-lg"/>
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
-
 <script>
-    function detail(id,name,departure,arrival,numberAirCraft,airport,destination,quantity,total,seats){
-        let  seat="";
+    function detail(id,name,departure,arrival,numberAirCraft,airport,destination,quantity,total,seats) {
+        let seat = "";
         for (const s of seats) {
-            seat+=s
+            seat += s
         }
 
+        document.getElementById("form2Example18").value=id;
+        document.getElementById("form2Example19").value=name;
+        document.getElementById("form2Example20").value=departure;
+        document.getElementById("form2Example2").value=arrival;
+        document.getElementById("form2Example1").value=numberAirCraft;
+        document.getElementById("form2Example3").value=airport;
+        document.getElementById("form2Example4").value=destination;
+        document.getElementById("form2Example5").value=quantity;
+        document.getElementById("form2Example6").value=total;
+        // document.getElementById("form2Example43").value=seat;
+
     }
-</script>
-<script>
-    const status=document.getElementById("cancel").val();
-    const button=document.getElementById("cancel");
-    if (!status)button.disable()
 </script>
 
 <center>

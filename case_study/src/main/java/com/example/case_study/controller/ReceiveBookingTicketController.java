@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -18,9 +19,14 @@ public class ReceiveBookingTicketController {
     @Autowired
     private IReceiveBookingService receiveBookingService;
 
-    @GetMapping("/receive")
+//    @GetMapping("")
+//    public String rc(){
+//        return "/receive_booking/booking_list";
+//    }
+
+    @GetMapping("")
     public String receive(@PageableDefault(value = 6) Pageable pageable, Model model) {
-//        receiveBookingService.cancelBookingStatus();
+        receiveBookingService.cancelBookingStatus();
         model.addAttribute("list", receiveBookingService.getReceiveBookingTicketList(pageable));
         return "receive_booking/booking_list";
     }
@@ -33,7 +39,7 @@ public class ReceiveBookingTicketController {
         } else {
             redirectAttributes.addFlashAttribute("fail", "This ticket code could not be found.");
         }
-        return "redirect:/receive_booking/booking_list";
+        return "redirect:/receive_booking";
     }
 
     @GetMapping("/pay/{id}")
@@ -44,11 +50,11 @@ public class ReceiveBookingTicketController {
         } else {
             redirectAttributes.addFlashAttribute("fail", "This ticket code could not be found.");
         }
-        return "redirect:/receive_booking/booking_list";
+        return "redirect:/receive_booking";
     }
 
     @GetMapping("/detail/{id}")
-    public String detail(@PathVariable int id,Model model) {
+    public String detail(@PathVariable int id, Model model) {
         if (receiveBookingService.findById(id) != null) {
            model.addAttribute("receive",receiveBookingService.findById(id));
            model.addAttribute("seats",receiveBookingService.seats(id));

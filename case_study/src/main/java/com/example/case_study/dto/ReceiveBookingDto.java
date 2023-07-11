@@ -3,21 +3,21 @@ package com.example.case_study.dto;
 
 public class ReceiveBookingDto {
 
-    private int id;
+    private Integer id;
     private String passengerName;
-    private int total;
+    private Integer total;
     private String departure;
     private String arrival;
     private String numberAirCraft;
     private String airport;
     private String destination;
-    private int quantity;
-    private boolean status;
+    private Integer quantity;
+    private Boolean status;
 
     private boolean status_receive;
 
 
-    public ReceiveBookingDto(int id, String passengerName, int total, String departure, String arrival, String numberAirCraft, String airport, String destination, int quantity, boolean status) {
+    public ReceiveBookingDto(Integer id, String passengerName, Integer total, String departure, String arrival, String numberAirCraft, String airport, String destination, Integer quantity, Boolean status) {
         this.id = id;
         this.passengerName = passengerName;
         this.total = total;
@@ -30,7 +30,7 @@ public class ReceiveBookingDto {
         this.status = status;
     }
 
-    public ReceiveBookingDto(int id, String passengerName, int total, String departure, String arrival, String numberAirCraft, String airport, String destination, int quantity, boolean status, boolean status_receive) {
+    public ReceiveBookingDto(Integer id, String passengerName, Integer total, String departure, String arrival, String numberAirCraft, String airport, String destination, Integer quantity, Boolean status, Boolean status_receive) {
         this.id = id;
         this.passengerName = passengerName;
         this.total = total;
@@ -48,11 +48,11 @@ public class ReceiveBookingDto {
 
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -64,11 +64,11 @@ public class ReceiveBookingDto {
         this.passengerName = passengerName;
     }
 
-    public int getTotal() {
+    public Integer getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(Integer total) {
         this.total = total;
     }
 
@@ -112,15 +112,15 @@ public class ReceiveBookingDto {
         this.destination = destination;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
-    public boolean isStatus() {
+    public Boolean isStatus() {
         return status;
     }
 
@@ -128,7 +128,7 @@ public class ReceiveBookingDto {
         this.status = status;
     }
 
-    public boolean isStatus_receive() {
+    public Boolean isStatus_receive() {
         return status_receive;
     }
 

@@ -154,7 +154,7 @@ public class PassengersServiceImpl implements IPassengersService {
                 "flex-direction: column;\n" +
                 "font-family: 'Montserrat', sans-serif;\n" +
                 "height: 50vh;\n" +
-                "width: 100%;\"><p>Dear "+passengers.getName() + ",</p><br>"
+                "width: 100%;\"><div ><p>Dear "+passengers.getName() + ",</p><br>"
                 + "We have received a request to reset the password associated with your account. In order to proceed with " +
                 "the password reset process, we need to confirm that the email address associated with your account is valid.<br>" +
                 "Please click on the following link to confirm your email address:<br>";
@@ -173,7 +173,7 @@ public class PassengersServiceImpl implements IPassengersService {
         content+= "<br><br>If you did not request a password reset, please disregard this message. " +
                 "If you believe that your account has been compromised, please contact our customer support team immediately.<br>" +
                 "Thank you,<br>" +
-                "TianFlight </body>";
+                "TianFlight </div></body>";
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
