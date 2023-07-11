@@ -12,56 +12,6 @@
 </head>
 <body>
 
-<!--<h2>Create Employee</h2>-->
-
-<!--<a th:href="@{/employee}">Back to list</a>-->
-
-
-<!--    <form action="/employee/add" method="post" th:object="${employeeDto}">-->
-<!--        <table>-->
-
-<!--            <div class="form-outline mb-4">-->
-<!--                <label class="form-label" for="form3Example7">Name<span-->
-<!--                        style="color: red">*</span></label>-->
-<!--                <input type="text" id="form3Example7" class="form-control form-control-lg"-->
-<!--                       th:field="*{nameEmployee}"/>-->
-<!--                <span th:if="${#fields.hasErrors('nameEmployee')}" th:errors="*{nameEmployee}"-->
-<!--                      style="color: red"></span>-->
-<!--            </div>-->
-
-<!--            <div class="form-outline mb-4">-->
-<!--                <label class="form-label" for="form4Example7">Age<span-->
-<!--                        style="color: red">*</span></label>-->
-<!--                <input type="date" id="form4Example7" class="form-control form-control-lg"-->
-<!--                       th:field="*{age}"/>-->
-<!--                <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"-->
-<!--                      style="color: red"></span>-->
-<!--            </div>-->
-
-<!--            <div class="form-outline mb-4">-->
-<!--                <label class="form-label" for="form5Example7">Address<span-->
-<!--                        style="color: red">*</span></label>-->
-<!--                <input type="text" id="form5Example7" class="form-control form-control-lg"-->
-<!--                       th:field="*{address}"/>-->
-<!--                <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"-->
-<!--                      style="color: red"></span>-->
-<!--            </div>-->
-
-<!--            <div class="form-outline mb-4">-->
-<!--                <label class="form-label" for="form6Example7">Telephone<span-->
-<!--                        style="color: red">*</span></label>-->
-<!--                <input type="number" id="form6Example7" class="form-control form-control-lg"-->
-<!--                       th:field="*{telephone}"/>-->
-<!--                <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"-->
-<!--                      style="color: red"></span>-->
-<!--            </div>-->
-
-<!--            <div class="d-flex justify-content-end pt-3">-->
-<!--                <button type="submit" class="btn btn-warning btn-lg ms-2">Submit</button>-->
-<!--            </div>-->
-<!--        </table>-->
-<!--    </form>-->
-
 <div class="form-body">
     <div class="row">
         <div class="form-holder">
@@ -80,10 +30,42 @@
                             <input type="date" th:field="*{age}"  class="form-control" required>
                             <p style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></p>
                         </div>
-                        <div class="col-md-12">
-                            <p>Address<span style="color: red">*</span></p>
-                            <input type="text" th:field="*{address}"  class="form-control" required>
-                            <p style="color: red; width: 95%" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+                        <div class="col-md-6">
+                            <label class="form-label">Address<span
+                                    style="color: red">*</span></label>
+                            <select th:field="*{address}">
+                                <option value="country"> --Choose Country--</option>
+                                <option value="Viet Nam"> Viet Nam</option>
+                                <option value="USA"> USA</option>
+                                <option value="Canada"> Canada</option>
+                                <option value="Australia"> Australia</option>
+                                <option value="Anh"> Anh</option>
+                                <option value="Japan"> Japan</option>
+                                <option value="china"> China</option>
+                                <option value="France"> France</option>
+                                <option value="Germany"> Germany</option>
+                                <option value="Spain"> Spain</option>
+                                <option value="Italia"> Italia</option>
+                                <option value="Brazil"> Brazil</option>
+                                <option value="Argentina"> Argentina</option>
+                                <option value="Russia"> Russia</option>
+                                <option value="Mexico"> Mexico</option>
+                                <option value="United States"> United States</option>
+                                <option value="India"> India</option>
+                                <option value="Korea"> Korea</option>
+                                <option value="Indonesia"> Indonesia</option>
+                                <option value="Thailand"> Thailand</option>
+                                <option value="Malaysia"> Malaysia</option>
+                                <option value="Philippines"> Philippines</option>
+                                <option value="Singapore"> Singapore</option>
+                                <option value="Poland"> Poland</option>
+                                <option value="Portugal"> Portugal</option>
+                                <option value="Sweden"> Sweden</option>
+                                <option value="Czech Republic"> Czech Republic</option>
+                                <option value="Belgium"> Belgium</option>
+                                <option value="Netherlands"> Netherlands</option>
+                                <option value="Switzerland"> Switzerland</option>
+                            </select>
                         </div>
                         <div class="col-md-12">
                             <p>Telephone<span style="color: red">*</span></p>

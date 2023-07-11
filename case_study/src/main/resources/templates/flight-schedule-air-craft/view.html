@@ -102,7 +102,7 @@
                     <a th:href="@{flight-schedule-air-craft/edit/{id}(id=${flightScheduleAirCraftLoop.id})}"><span
                             style="font-size: 20px;color: whitesmoke"><i
                             class="fa-solid fa-pen-to-square"></i></span></a>
-                    <a th:attr="onclick=|deleteFlightSchedule('${flightScheduleAirCraftLoop.id}','${flightScheduleAirCraftLoop.flightSchedule.codeFlightSchedule}'
+                    <a th:attr="onclick=|deleteFlightSchedule('${flightScheduleAirCraftLoop.id}','${flightScheduleAirCraftLoop.flightSchedule.codeFlightSchedule}','${flightScheduleAirCraftLoop.idAirCraft.routes.get(0).codeRoute}'
                     ,'${flightScheduleAirCraftLoop.idAirCraft.numberAirCraft}')|"
                        href="#"
                        data-bs-toggle="modal" data-bs-target="#exampleModal"> <span
@@ -155,7 +155,12 @@
                 <h5 class="modal-title" id="exampleModalLabel" style="color: black">Do you want to delete?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
             <div class="modal-body">
+
+                <center>
+                    <small  style="color: red">(*)This operation cannot be undone</small>
+                </center>
                 <center>
                     <span style="font-size: 100px;color: black"><i class="fa-solid fa-trash-can"></i></span>
                     <div>

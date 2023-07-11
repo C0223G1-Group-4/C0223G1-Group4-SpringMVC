@@ -58,7 +58,7 @@ public class LoginController {
             return "redirect:/";
         }
         if (error) {
-            model.addAttribute("msg", "* Email or password error *");
+            model.addAttribute("fail", "Email or password error");
         }
         model.addAttribute("accountDto", new AccountUserDto());
         model.addAttribute("passengerDto", new PassengerDto());
@@ -70,7 +70,7 @@ public class LoginController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null){
             SecurityContextHolder.clearContext();
-            redirectAttributes.addFlashAttribute("message","successful logout");
+//            redirectAttributes.addFlashAttribute("message","successful logout");
         }
         return "redirect:/";
     }

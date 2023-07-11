@@ -35,10 +35,9 @@ public class PaymentController {
     @Autowired
     private IBookingTicketService bookingTicketService;
 
-
     @PostMapping("/create")
     public ModelAndView create(@RequestParam int quantity, @RequestParam int total, @RequestParam int idPassenger,
-                               @SessionAttribute List<ChairFlight> listChair) throws UnsupportedEncodingException, MessagingException, UnsupportedEncodingException {
+                               @SessionAttribute List<ChairFlight> listChair) throws UnsupportedEncodingException {
         BookingTicket bookingTicket = new BookingTicket();
         Passengers passengers = passengersService.findByIdPassengers(idPassenger);
         bookingTicket.setPassenger(passengers);
@@ -124,7 +123,6 @@ public class PaymentController {
 //        paymentResDto.setStatus("OK");
 //        paymentResDto.setMessage("SUCCESSFULLY");
 //        paymentResDto.setURL(paymentUrl);
-
         return new ModelAndView("redirect:" + paymentUrl);
     }
 
@@ -132,7 +130,7 @@ public class PaymentController {
     public String showReturn(@RequestParam String vnp_Amount,
                              @RequestParam String vnp_ResponseCode
             , RedirectAttributes redirectAttributes, @SessionAttribute List<ChairFlight> listChair
-            , HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+            , HttpServletRequest request,Model model) throws MessagingException, UnsupportedEncodingException {
         if (vnp_ResponseCode.equals("00")) {
 //            String email = request.getUserPrincipal().getName();
 //            Passengers passengers = passengersService.findByEmail(email);
@@ -160,7 +158,7 @@ public class PaymentController {
             redirectAttributes.addFlashAttribute("message", "Payment Failed");
         }
         listChair.clear();
-        return "redirect:/";
+        return "return";
     }
 
     private String getSiteURL(HttpServletRequest request) {
