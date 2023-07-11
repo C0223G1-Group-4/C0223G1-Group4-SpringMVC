@@ -3,7 +3,6 @@ package com.example.case_study.controller;
 import com.example.case_study.dto.ReceiveBookingDto;
 import com.example.case_study.service.receive_booking_service.IReceiveBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -17,26 +16,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @Controller
-@RequestMapping("/receive_booking")
-public class ReceiveBookingTicketController {
+@RequestMapping("/history")
+public class HistoryController {
     @Autowired
     private IReceiveBookingService receiveBookingService;
-
-//    @GetMapping("")
-//    public String rc(){
-//        return "/receive_booking/booking_list";
-//    }
-
-    @GetMapping("")
-    public String receive(@PageableDefault(value = 4) Pageable pageable, Model model) {
-        Page<ReceiveBookingDto> receiveBookingDtos = receiveBookingService.getReceiveBookingTicketList(pageable);
+    @GetMapping("{email}")
+    public String history(@PathVariable String email, @PageableDefault(value = 4) Pageable pageable, Model model) {
+        Page<ReceiveBookingDto> histories=receiveBookingService.getHistory(email,pageable);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime parsedDate;
+        LocalDateTime parsedDate ;
         LocalDateTime cancel = LocalDateTime.now().plusDays(1);
-        for (ReceiveBookingDto rc : receiveBookingDtos) {
+        for (ReceiveBookingDto rc : histories) {
             parsedDate = LocalDateTime.parse(rc.getDeparture().substring(0, 10).concat(" " + rc.getDeparture().substring(11, 16)), formatter);
             if (cancel.isBefore(parsedDate)) {
                 rc.setStatus_receive(true);
@@ -45,8 +37,8 @@ public class ReceiveBookingTicketController {
                 rc.setStatus_receive(false);
             }
         }
-        model.addAttribute("list", receiveBookingDtos);
-        return "receive_booking/booking_list";
+        model.addAttribute("list", histories);
+        return "history/history";
     }
 
     @GetMapping("/cancelStatus")
@@ -57,17 +49,6 @@ public class ReceiveBookingTicketController {
         } else {
             redirectAttributes.addFlashAttribute("fail", "This ticket code could not be found.");
         }
-        return "redirect:/receive_booking";
-    }
-
-    @GetMapping("/pay")
-    public String pay(@RequestParam int cf0, RedirectAttributes redirectAttributes) {
-        if (receiveBookingService.findById(cf0) != null) {
-            receiveBookingService.confirm(cf0);
-            redirectAttributes.addFlashAttribute("success", "Successfully check_in ticket");
-        } else {
-            redirectAttributes.addFlashAttribute("fail", "This ticket code could not be found.");
-        }
-        return "redirect:/receive_booking";
+        return "redirect:/history";
     }
 }

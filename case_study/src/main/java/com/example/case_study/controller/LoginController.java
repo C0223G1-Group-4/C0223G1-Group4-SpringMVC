@@ -42,13 +42,6 @@ public class LoginController {
     @Autowired
     private IPostService postService;
 
-//    @GetMapping("/login/fail")
-//    public String loginFail(Model model){
-//        model.addAttribute("accountDto", new AccountUserDto());
-//        model.addAttribute("passengerDto", new PassengerDto());
-//        return "loginPage";
-//    }
-
     @GetMapping("/login")
     public String formLogin(@RequestParam(value = "error", required = false) boolean error,Principal principal, Model model) {
         String authentication = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -105,7 +98,6 @@ public class LoginController {
             model.addAttribute("info",employeesService.findByIdAccount(accountUser.getId()));
             return "home/index";
         }
-
     }
 
     @GetMapping("/400")

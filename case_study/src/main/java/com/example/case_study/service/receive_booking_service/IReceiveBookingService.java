@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface IReceiveBookingService {
     Page<ReceiveBookingDto> getReceiveBookingTicketList(Pageable pageable);
-    void cancelBookingStatus();
+//    void cancelBookingStatus();
 
     ReceiveBookingDto findById(int id);
     void cancelBooking(int id);
 
     void confirm(int id);
 
-    List<ChairFlight> seats(int id);
+    Page<ReceiveBookingDto> getHistory(String email,Pageable pageable);
 
 }
