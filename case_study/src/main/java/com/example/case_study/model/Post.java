@@ -12,6 +12,7 @@ public class Post {
     private String namePost;
     @Column(columnDefinition = "LongText")
     private String content;
+    @Column(columnDefinition = "LongText")
     private String image;
     private String datePost;
     private String heading;

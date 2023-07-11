@@ -42,11 +42,19 @@ public class LoginController {
     @Autowired
     private IPostService postService;
 
-
     @GetMapping("/login")
     public String formLogin(@RequestParam(value = "error", required = false) boolean error,Principal principal, Model model) {
         String authentication = SecurityContextHolder.getContext().getAuthentication().getName();
         if (!"anonymousUser".equals(authentication)){
+            AccountUser accountUser = accountService.findByEmail(principal.getName());
+            if (!passengersService.findByEmail(accountUser.getEmail()).isEnabled()) {
+                model.addAttribute("accountDto", new AccountUserDto());
+                model.addAttribute("passengerDto", new PassengerDto());
+                model.addAttribute("fail", "Sorry, we could not verify account. It maybe already verified, or verification code is incorrect.");
+                return "loginPage";
+            } else {
+                model.addAttribute("info", passengersService.findByIdAccount(accountUser.getId()));
+            }
             return "redirect:/";
         }
         if (error) {
@@ -58,8 +66,12 @@ public class LoginController {
     }
 
     @GetMapping("/logoutSuccessful")
-    public String logout(Model model) {
-
+    public String logout(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null){
+            SecurityContextHolder.clearContext();
+            redirectAttributes.addFlashAttribute("message","successful logout");
+        }
         return "redirect:/";
     }
 
@@ -86,7 +98,6 @@ public class LoginController {
             model.addAttribute("info",employeesService.findByIdAccount(accountUser.getId()));
             return "home/index";
         }
-
     }
 
     @GetMapping("/400")

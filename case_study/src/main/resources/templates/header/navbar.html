@@ -19,7 +19,7 @@
 <body>
 <div id="header-wrap" th:fragment="copy">
 <header th:fragment="header">
-  <div class="navbar">
+  <div class="navbar ">
 <!--    <div class="logo"><a href="#">Treval</a></div>-->
     <ul class="links">
       <li><a th:href="@{/route}">Route</a></li>
@@ -27,7 +27,10 @@
       <li><a th:href="@{/flight-schedule}">Flight Schedule</a></li>
       <li><a th:href="@{/flight-schedule-air-craft}">Flight</a></li>
       <li><a th:href="@{/post}">Post</a></li>
+      <li><a th:href="@{/employee}">Employee</a></li>
+      <li><a th:href="@{/passenger}">Passenger</a></li>
     </ul>
+
 <!--    <a href="" class="action-btn">Get Started</a>-->
     <div class="toggle-btn">
       <i class="fa-solid fa-bars"></i>
@@ -35,11 +38,13 @@
   </div>
 
   <div class="dropdown-menu">
-    <li><a href="">Air Craft</a></li>
-    <li><a href="">Flight Schedule</a></li>
-    <li><a href="">Flight Schedule Air Craft</a></li>
-    <li><a href="">Post</a></li>
-    <li><a href="">Route</a></li>
+    <li><a th:href="@{/route}">Route</a></li>
+    <li><a th:href="@{/air-craft}">Air Craft</a></li>
+    <li><a th:href="@{/flight-schedule}">Flight Schedule</a></li>
+    <li><a th:href="@{/flight-schedule-air-craft}">Ticket</a></li>
+    <li><a th:href="@{/post}">Post</a></li>
+    <li><a th:href="@{/employee}">Employee</a></li>
+    <li><a th:href="@{/passenger}">Passenger</a></li>
 <!--    <li><a href="" class="action-btn">Get Started</a></li>-->
   </div>
 </header>
