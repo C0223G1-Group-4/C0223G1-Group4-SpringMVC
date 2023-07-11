@@ -47,9 +47,9 @@ public class FlightScheduleAirCraftService implements IFlightScheduleAirCraftSer
     @Override
     public List<FlightScheduleAirCraft> searchTicket(String airPort,String departure, String arrival, String destination) {
         if (departure.equals("") && arrival.equals("")) {
-            return this.iFlightScheduleAirCraftRepository.searchTicket(airPort, departure, arrival, destination);
+            return this.iFlightScheduleAirCraftRepository.searchTicket(airPort, arrival, destination);
         } else if (!arrival.equals("") && departure.equals("")) {
-            return this.iFlightScheduleAirCraftRepository.searchTicket1(airPort, departure, arrival, destination);
+            return this.iFlightScheduleAirCraftRepository.searchTicket1(airPort, arrival, destination);
         } else if (arrival.equals("")&&!departure.equals("")){
             return this.iFlightScheduleAirCraftRepository.searchTicket2(airPort, departure, arrival, destination);
         }else {
