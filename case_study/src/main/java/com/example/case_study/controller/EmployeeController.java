@@ -37,7 +37,7 @@ public class EmployeeController {
     @GetMapping("/create-form")
     public String formCreateEmployee(Model model) {
         model.addAttribute("employeeDto", new EmployeeDto());
-        model.addAttribute("accountUser", iAccountService.findAll());
+//        model.addAttribute("accountUser", iAccountService.findAll());
         return "/employees/create_employee";
     }
 
@@ -45,7 +45,7 @@ public class EmployeeController {
     public String addEmployee(@Valid @ModelAttribute EmployeeDto employeeDto, BindingResult bindingResult,
                               Model model, RedirectAttributes redirectAttributes) {
         new EmployeeDto().validate(employeeDto, bindingResult);
-        model.addAttribute("accountUser", iAccountService.findAll());
+//        model.addAttribute("accountUser", iAccountService.findAll());
         if (bindingResult.hasFieldErrors()) {
             return "/employees/create_employee";
         }
