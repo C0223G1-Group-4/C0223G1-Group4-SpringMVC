@@ -79,7 +79,7 @@ public class LoginController {
             SecurityContextHolder.clearContext();
 //            redirectAttributes.addFlashAttribute("message","successful logout");
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping(value = "/userInfo")

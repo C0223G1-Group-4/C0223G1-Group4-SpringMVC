@@ -35,29 +35,7 @@ public class BookingTicketController {
     public String showTicket(HttpServletRequest request, Model model,@SessionAttribute List<ChairFlight> listChair){
         String email = request.getUserPrincipal().getName();
         Passengers passengers = passengersService.findByEmail(email);
-
-        //mới comment
-//        BookingTicket bookingTicket = new BookingTicket();
-//        bookingTicket.setPassenger(passengers);
-//        bookingTicketService.createAuto(bookingTicket);
-//        for (ChairFlight c : listChair) {
-//            c.setBookingTicket(bookingTicket);
-//            this.chairFlightService.update(c);
-//        }
         model.addAttribute("passengers",passengers);
-//        model.addAttribute("booking",bookingTicket);
         return "information_ticket/information_ticket";
     }
-
-//    @PostMapping("")
-//    public String createTransaction(@RequestParam int quantity,@RequestParam int total,@RequestParam int idPassenger){
-//        BookingTicket bookingTicket = new BookingTicket();
-//        Passengers passengers = passengersService.findByIdPassengers(idPassenger);
-//        bookingTicket.setPassenger(passengers);
-//        bookingTicket.setQuantity(quantity);
-//        bookingTicket.setBookingDate(String.valueOf(LocalDate.now()));
-//        bookingTicketService.save(bookingTicket);
-//        return "";
-//    }
-
 }
