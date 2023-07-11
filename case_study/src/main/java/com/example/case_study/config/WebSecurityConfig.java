@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .access("hasAnyRole('ROLE_Employee','ROLE_Admin')");
         http.authorizeRequests().antMatchers("/employee", "/employee/*", "/passenger/delete")
                 .access("hasRole('ROLE_Admin')");
-        http.authorizeRequests().antMatchers( "/chair_flight/*").hasRole("/ROLE_Customer");
+        http.authorizeRequests().antMatchers( "/chair_flight/*").access("hasRole('ROLE_Customer')");
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/400");
         http.authorizeRequests().and().formLogin()
                 .loginProcessingUrl("/j_spring_security_check") // submit url
