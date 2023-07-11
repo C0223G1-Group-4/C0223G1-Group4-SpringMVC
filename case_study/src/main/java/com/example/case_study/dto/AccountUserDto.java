@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 
 public class AccountUserDto {
     private Integer id;
-    @NotNull
+    @NotBlank
     @Email
     private String email;
     @NotBlank

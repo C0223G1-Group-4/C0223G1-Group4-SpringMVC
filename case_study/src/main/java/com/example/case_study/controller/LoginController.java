@@ -59,6 +59,11 @@ public class LoginController {
         }
         if (error) {
             model.addAttribute("msg", "* Email or password error *");
+//            if (bindingResult.hasErrors()){
+//                model.addAttribute("accountDto", accountUserDto);
+//                model.addAttribute("passengerDto", new PassengerDto());
+//                return "loginPage";
+//            }
         }
         model.addAttribute("accountDto", new AccountUserDto());
         model.addAttribute("passengerDto", new PassengerDto());

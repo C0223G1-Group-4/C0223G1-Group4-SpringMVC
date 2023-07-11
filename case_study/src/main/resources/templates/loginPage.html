@@ -154,13 +154,16 @@
       <!--      Sign in-->
 
       <div class="form-outline mb-4" style="height: 50px;width: 70%">
-        <input type="text" id="form2Example8" th:field="*{email}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+        <input type="email" required id="form2Example8" th:field="*{email}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
         <label class="form-label" for="form2Example8">Email</label>
       </div>
+      <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+
       <div class="form-outline mb-4" style="height: 50px;width: 70%">
-        <input type="password" id="form2Example7"  th:field="*{passwords}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+        <input type="password" required  id="form2Example7"  th:field="*{passwords}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
         <label class="form-label" for="form2Example7">Password</label>
       </div>
+      <p th:if="${#fields.hasErrors('passwords')}" th:errors="*{passwords}"></p>
       <a href="/email">Forgot your password?</a>
       <button type="submit">Sign In</button>
     </form>
