@@ -84,13 +84,12 @@ public class PassengersServiceImpl implements IPassengersService {
                 "<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" style=\"border-collapse: collapse\">\n" +
                 "  <tr>\n" +
                 "    <td  style=\" background: #5cb1e7; \">\n" +
-                "      <img src=\"static/home/images/image (1).png\" style=\"height: 100px;width: 120px\" />\n" +
                 "    </td>\n" +
                 "  </tr>\n" +
                 "  <tr>\n" +
                 "    <td bgcolor=\"#eaeaea\" style=\"padding: 30px 20px 40px 30px;background: url('https://cafebiz.cafebizcdn.vn/thumb_w/600/162123310254002176/2022/6/7/photo1654573349126-16545733492221043829261.jpg') no-repeat center center;background-size: cover;\">\n" +
                 "\n" +
-                "      <p>Dear<span style=\"color: #0db9e0;font-size: 14px;font-weight: bold;\"> \""+passengers.getName() +"\" </span></p>\n" +
+                "      <p>Dear<span style=\"color: #0db9e0;font-size: 14px;font-weight: bold;\"> "+passengers.getName() +"</span></p>\n" +
                 "      <p >\n" +
                 "        We have received a request to reset the password associated with your account. In order to proceed with\n" +
                 "        the password reset process, we need to confirm that the email address associated with your account is valid.<br>\n" +
@@ -108,7 +107,7 @@ public class PassengersServiceImpl implements IPassengersService {
                 "  margin: 4px 2px;\n" +
                 "  justify-content: center;\n" +
                 "  transition-duration: 0.4s;\n" +
-                "  cursor: pointer; border-radius: 20px\"><a href=\"" + verifyURL + "\">Confirm Your Email Address</a></button>";
+                "  cursor: pointer; border-radius: 20px\"><span style='color: #ffffff'><a href=\"" + verifyURL + "\">Confirm Your Email Address</a></span></button>";
         content+=  "  <tr>\n" +
                 "    <td style=\"padding: 10px 20px; color: #FFFFFF;background: #5cb1e7\">\n" +
                 "      <p>If you did not create an account with us, please ignore this email.\n" +
@@ -170,7 +169,6 @@ public class PassengersServiceImpl implements IPassengersService {
                 "<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" style=\"border-collapse: collapse\">\n" +
                 "  <tr>\n" +
                 "    <td  style=\" background: #5cb1e7; \">\n" +
-                "      <img src=\"static/home/images/image (1).png\" style=\"height: 100px;width: 120px\" />\n" +
                 "    </td>\n" +
                 "  </tr>\n" +
                 "  <tr>\n" +
@@ -194,7 +192,7 @@ public class PassengersServiceImpl implements IPassengersService {
                 "  margin: 4px 2px;\n" +
                 "  justify-content: center;\n" +
                 "  transition-duration: 0.4s;\n" +
-                "  cursor: pointer; border-radius: 20px\"><a href=\"" + verifyURL + "\">Confirm Your Email Address</a></button>";
+                "  cursor: pointer; border-radius: 20px\"><span style='color: #ffffff'><a href=\"" + verifyURL + "\">Confirm Your Email Address</a><span></button>";
         content+= "  <tr>\n" +
                 "    <td style=\"padding: 10px 20px; color: #FFFFFF;background: #5cb1e7\">\n" +
                 "      <p>If you did not request a password reset, please disregard this message.\n" +

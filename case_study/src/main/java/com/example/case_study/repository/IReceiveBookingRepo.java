@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface IReceiveBookingRepo extends JpaRepository<BookingTicket,Integer> {
-    @Query("select new com.example.case_study.dto.ReceiveBookingDto(BK.idBookingTicket,P.name ,BK.total,FS.departure,FS.arrival,AC.numberAirCraft,R.airPort,R.destination,BK.quantity,BK.type,P.phoneNumber,P.accountUser.email,BK.bookingDate)\n" +
+    @Query("select DISTINCT new com.example.case_study.dto.ReceiveBookingDto(BK.idBookingTicket,P.name ,BK.total,FS.departure,FS.arrival,AC.numberAirCraft,R.airPort,R.destination,BK.quantity,BK.type,P.phoneNumber,P.accountUser.email,BK.bookingDate)\n" +
             "from ChairFlight CF \n" +
             "LEFT JOIN CF.bookingTicket BK \n" +
             "LEFT JOIN CF.chair Ch\n" +
@@ -19,9 +19,9 @@ public interface IReceiveBookingRepo extends JpaRepository<BookingTicket,Integer
             "LEFT JOIN FLC.flightSchedule FS\n" +
             "LEFT JOIN FLC.idAirCraft AC \n" +
             "LEFT JOIN AC.routes R\n" +
-            "LEFT JOIN BK.passenger P where BK.status=false")
+            "LEFT JOIN BK.passenger P where BK.status=false and BK.type=true")
     Page<ReceiveBookingDto> getReceiveBookingTicketList(Pageable pageable);
-    @Query("select new com.example.case_study.dto.ReceiveBookingDto(BK.idBookingTicket,P.name ,BK.total,FS.departure,FS.arrival,AC.numberAirCraft,R.airPort,R.destination,BK.quantity,BK.type,P.phoneNumber,P.accountUser.email,BK.bookingDate)\n" +
+    @Query("select DISTINCT  new com.example.case_study.dto.ReceiveBookingDto(BK.idBookingTicket,P.name ,BK.total,FS.departure,FS.arrival,AC.numberAirCraft,R.airPort,R.destination,BK.quantity,BK.type,P.phoneNumber,P.accountUser.email,BK.bookingDate)\n" +
             "from ChairFlight CF \n" +
             "LEFT JOIN CF.bookingTicket BK \n" +
             "LEFT JOIN CF.chair Ch\n" +
@@ -29,9 +29,9 @@ public interface IReceiveBookingRepo extends JpaRepository<BookingTicket,Integer
             "LEFT JOIN FLC.flightSchedule FS\n" +
             "LEFT JOIN FLC.idAirCraft AC \n" +
             "LEFT JOIN AC.routes R\n" +
-            "LEFT JOIN BK.passenger P where BK.idBookingTicket= :id")
+            "LEFT JOIN BK.passenger P where BK.idBookingTicket= :id and BK.type=true")
    ReceiveBookingDto getBookingTicket(int id);
-    @Query("select new com.example.case_study.dto.ReceiveBookingDto(BK.idBookingTicket,P.name ,BK.total,FS.departure,FS.arrival,AC.numberAirCraft,R.airPort,R.destination,BK.quantity,BK.type,P.phoneNumber,P.accountUser.email,BK.bookingDate)\n" +
+    @Query("select DISTINCT  new com.example.case_study.dto.ReceiveBookingDto(BK.idBookingTicket,P.name ,BK.total,FS.departure,FS.arrival,AC.numberAirCraft,R.airPort,R.destination,BK.quantity,BK.type,P.phoneNumber,P.accountUser.email,BK.bookingDate)\n" +
             "from ChairFlight CF \n" +
             "LEFT JOIN CF.bookingTicket BK \n" +
             "LEFT JOIN CF.chair Ch\n" +
@@ -39,7 +39,7 @@ public interface IReceiveBookingRepo extends JpaRepository<BookingTicket,Integer
             "LEFT JOIN FLC.flightSchedule FS\n" +
             "LEFT JOIN FLC.idAirCraft AC \n" +
             "LEFT JOIN AC.routes R\n" +
-            "LEFT JOIN BK.passenger P where BK.status=false and P.accountUser.email like concat('%',:email,'%')")
+            "LEFT JOIN BK.passenger P where BK.status=false and BK.type=true and P.accountUser.email like concat('%',:email,'%')")
     Page<ReceiveBookingDto> getHistory(String email,Pageable pageable);
     @Query("select new com.example.case_study.dto.ReceiveBookingDto(BK.idBookingTicket,P.name ,BK.total,FS.departure,FS.arrival,AC.numberAirCraft,R.airPort,R.destination,BK.quantity,BK.type,P.phoneNumber,P.accountUser.email,BK.bookingDate)\n" +
             "from ChairFlight CF \n" +
@@ -49,7 +49,7 @@ public interface IReceiveBookingRepo extends JpaRepository<BookingTicket,Integer
             "LEFT JOIN FLC.flightSchedule FS\n" +
             "LEFT JOIN FLC.idAirCraft AC \n" +
             "LEFT JOIN AC.routes R\n" +
-            "LEFT JOIN BK.passenger P where BK.status=false")
+            "LEFT JOIN BK.passenger P where BK.status=false and BK.type=true")
     List<ReceiveBookingDto> getReceiveBookingTickets();
 
 //    BookingTicket findByIdBookingTicket(int id);
