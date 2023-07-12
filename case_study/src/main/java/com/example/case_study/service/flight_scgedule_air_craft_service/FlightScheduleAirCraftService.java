@@ -61,7 +61,10 @@ public class FlightScheduleAirCraftService implements IFlightScheduleAirCraftSer
             int a= Integer.parseInt(departure.substring(8, 10));
             int month=date.getMonth()+1;
             int year=date.getYear()+1900;
-            if (a <day &&Integer.parseInt(departure.substring(5,7))==month&&departure.substring(0,4).equals(String.valueOf(year))){
+            if (a <day &&Integer.parseInt(departure.substring(5,7))<=month&&Integer.parseInt(departure.substring(0,4))<=year
+                    || a>day &&Integer.parseInt(departure.substring(5,7))<month&&Integer.parseInt(departure.substring(0,4))<=year
+            || Integer.parseInt(departure.substring(5,7))<=month&&Integer.parseInt(departure.substring(0,4))<year
+            || Integer.parseInt(departure.substring(5,7))>month&&Integer.parseInt(departure.substring(0,4))<year){
                 return this.iFlightScheduleAirCraftRepository.searchTicket4(airPort, arrival, destination);
             }
             return this.iFlightScheduleAirCraftRepository.searchTicket2(airPort, departure, arrival, destination);
@@ -69,5 +72,4 @@ public class FlightScheduleAirCraftService implements IFlightScheduleAirCraftSer
             return this.iFlightScheduleAirCraftRepository.searchTicket3(airPort, departure, arrival, destination);
         }
     }
-
 }

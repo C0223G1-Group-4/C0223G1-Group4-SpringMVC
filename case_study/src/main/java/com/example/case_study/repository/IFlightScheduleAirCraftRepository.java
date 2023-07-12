@@ -30,9 +30,6 @@ public interface IFlightScheduleAirCraftRepository extends JpaRepository< Flight
     List<FlightScheduleAirCraft> searchTicket(@Param("airPort")String airPort
             ,@Param("arrival") String arrival,@Param("destination") String destination);
 
-
-
-
     @Query(value = "  SELECT * FROM flight_schedule_aircraft fsa JOIN flight_schedule fs ON fsa.flight_schedule_id = fs.id\n" +
             " JOIN air_craft ac ON fsa.air_craft_id = ac.id JOIN route_air_craft rac ON ac.id = rac.air_craft_id \n" +
             " JOIN route r ON rac.route_id = r.id \n" +
