@@ -75,7 +75,7 @@ public class LoginController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null){
             SecurityContextHolder.clearContext();
-            redirectAttributes.addFlashAttribute("message","successful logout");
+//            redirectAttributes.addFlashAttribute("message","successful logout");
         }
         return "redirect:/";
     }

@@ -74,14 +74,14 @@
     </div>
 </div>
 <h1 style="margin-top: 10px; color: whitesmoke">List Post </h1>
-<div class="row container">
+<div class="row container ">
     <div class="col-12 col-md-3 col-lg-3 ">
         <a th:if="${acc.roleUser.name != 'ROLE_Customer'}" href="/post/create" class="position-fixed z-1">
             <button class='glowing-btn'><span class='glowing-txt'>C<span class='faulty-letter'>RE</span>ATE</span></button>
         </a>
     </div>
     <div class="col-12 col-md-8 col-lg-8">
-        <div class="card d-block " style=" width: 40em; margin: 20px 0"
+        <div class="card d-block " style=" width: 40em; margin-top: 20px"
              th:each="post : ${posts}">
             <img th:src="${post.image}" class="card-img-top" alt="thanh son" height="400px">
             <div class="card-body">
@@ -99,6 +99,7 @@
             </div>
         </div>
     </div>
+    <div class="col-12 col-md-3 col-lg-3 "></div>
 </div>
 
 
@@ -124,9 +125,9 @@
                     <span style="font-size: 120px;color: black"><i class="fa-solid fa-trash-can"></i></span>
                     <div>
                         <p style="color: red">Do you want to delete this post?</p>
-                        <span style="color:black;">Post title: </span> <span style="color: red"
+                        <span style="color:black;">Post title: </span> <span style="color: black"
                                                                              id="namePost"></span><br>
-                        <p style="color: red">This action cannot be undone</p>
+                        <p style="color: red">* This action cannot be undone *</p>
 
                     </div>
                 </center>
