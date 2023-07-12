@@ -121,8 +121,9 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public String signup(@Valid @ModelAttribute PassengerDto passengerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+    public String signup(@Valid @ModelAttribute PassengerDto passengerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest request, Model model) throws MessagingException, UnsupportedEncodingException {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("accountDto",new AccountUserDto());
             return "loginPage";
         }
         if (passengersService.findByEmail(passengerDto.getAccountUserDto().getEmail()) != null) {

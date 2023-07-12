@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/flight-schedule-air-craft", "/flight-schedule-air-craft/*", "/flight-schedule",
                         "/flight-schedule/*", "/route","/employee", "/route/*", "/post/*")
                 .access("hasAnyRole('ROLE_Employee','ROLE_Admin')");
-        http.authorizeRequests().antMatchers( "/employee/*", "/passenger/delete")
+        http.authorizeRequests().antMatchers( "/employee/*")
                 .access("hasRole('ROLE_Admin')");
         http.authorizeRequests().antMatchers( "/chair_flight/*").access("hasRole('ROLE_Customer')");
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/400");
