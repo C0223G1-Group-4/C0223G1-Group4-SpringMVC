@@ -43,7 +43,7 @@ public interface IFlightScheduleAirCraftRepository extends JpaRepository< Flight
     @Query(value = "select * from flight_schedule_aircraft fsa join flight_schedule fs " +
             "on fsa.flight_schedule_id=fs.id join air_craft ac on fsa.air_craft_id=ac.id " +
             "join route_air_craft rac on ac.id=rac.air_craft_id join route r on rac.route_id=r.id where  fs.arrival " +
-            "like concat('%',:arrival, '%') and STR_TO_DATE(fs.departure, '%Y-%m-%d') > STR_TO_DATE(:departure, '%Y-%m-%d') and month(fs.departure) >= month(current_date()) and year(fs.departure)=year(current_date())" +
+            "like concat('%',:arrival, '%') and STR_TO_DATE(fs.departure, '%Y-%m-%d') >= STR_TO_DATE(:departure, '%Y-%m-%d') and month(fs.departure) >= month(current_date()) and year(fs.departure)=year(current_date())" +
             " and r.destination like concat('%', :destination, '%') and r.air_port like concat('%',:airPort, '%')" +
             "and ac.flag=false and r.flag=false and fs.flag=false ",nativeQuery = true)
     List<FlightScheduleAirCraft> searchTicket2(@Param("airPort")String airPort,@Param("departure") String departure
