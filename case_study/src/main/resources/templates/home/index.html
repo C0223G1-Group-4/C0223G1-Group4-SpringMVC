@@ -81,6 +81,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <p th:text="${message}"></p>
     </div>
 </div>
+
 <a class="login-trigger" href="#" data-target="#login" data-toggle="modal" style="position: fixed"><span
         class="inline-danger"><i class="fa-solid fa-magnifying-glass"></i></span></a>
 <!-- banner -->
@@ -222,6 +223,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                    th:if="${info.name != null}"></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/passenger/update">Update personal info</a></li>
+                                    <li><a th:href="@{/history/{email}(email=${info.getAccountUser().getEmail()})}">History</a></li>
                                     <li><a href="/logout">Logout</a></li>
                                 </ul>
                             </li>

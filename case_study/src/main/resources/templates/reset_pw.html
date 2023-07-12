@@ -5,7 +5,7 @@
     <title>reset_pw</title>
 <style>
   body {
-    background-color: #f45b69;
+    background-color: #5bb9f4;
     font-family: "Asap", sans-serif;
   }
 
@@ -78,13 +78,13 @@
     margin-top: 10px;
     margin-left: -5px;
     border-radius: 5px;
-    background-color: #f45b69;
+    background-color: #5ba2f4;
     -webkit-transition: background-color 300ms;
     -moz-transition: background-color 300ms;
     transition: background-color 300ms;
   }
   .login > button:hover {
-    background-color: #f24353;
+    background-color: #43a9f2;
   }
 
   @-webkit-keyframes wawes {
@@ -135,9 +135,32 @@
     <h3 th:text="${passengers.getAccountUser().email}" ></h3>
     <input type="hidden" th:field="*{accountUser.email}">
     <input type="hidden" th:field="*{id}">
-  <input name="new_pw" type="password" placeholder="Enter Your New Password">
-  <input type="password" placeholder="Confirm Password">
-  <button type="submit">Login</button>
+  <input  id="form2Example5" name="new_pw" type="password" placeholder="Enter Your New Password">
+  <input  id="form2Example6" type="password" placeholder="Confirm Password">
+    <span style="color: red" id="message"></span>
+    <button type="submit">Confirm</button>
 </form>
+
+<script>
+    function checkRPW(){
+        let pw=document.getElementById("form2Example5").value;
+        let rpw=document.getElementById("form2Example6").value;
+        let message=document.getElementById("message");
+        if(pw.length>=6){
+            if(pw===rpw){
+                message.textContent="";
+                document.getElementById('button').style.display='block';
+            }else{
+                message.textContent="Password not match.";
+                message.style.color="#C71010FF"
+                document.getElementById('button').style.display='none';
+            }
+        }else{
+            message.textContent="Password must be at least 6 characters";
+            message.style.color="#C71010FF";
+            document.getElementById('button').style.display='none';
+
+        }
+</script>
 </body>
 </html>

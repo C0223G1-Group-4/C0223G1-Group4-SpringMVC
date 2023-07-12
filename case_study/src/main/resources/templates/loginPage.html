@@ -14,29 +14,12 @@
   <link rel="stylesheet" href="css/css_signup.css">
   <!--  <link rel="stylesheet" href="../static/css_signup.css">-->
   <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">-->
-  <style>
-    @keyframes slideInRight {
-      from{
-        opacity: 0;
-        transform: translateX(calc(100%) );
-      }
-      to{
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    @keyframes fadeOut {
-      to{
-        opacity: 0;
-      }
-    }
-  </style>
 </head>
 <body>
 <!--toast-->
 <div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${success != null}"
      style="
-    position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 5s forwards; // thời gian msg trượt
+    position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 4s forwards; // thời gian msg trượt
             transition: all linear 0.3s;z-index: 999999">
   <div class="toast-header bg-success">
     <strong class="me-auto">Notification</strong>
@@ -48,7 +31,7 @@
 </div>
 <div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${fail != null}"
      style="
-    position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 5s forwards; // thời gian msg trượt
+    position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 4s forwards; // thời gian msg trượt
             transition: all linear 0.3s;z-index: 999999">
   <div class="toast-header bg-danger">
     <strong class="me-auto">Notification</strong>
@@ -61,7 +44,7 @@
 
 
 
-<div class="container" id="container">zz
+<div class="container" id="container">
   <div class="form-container sign-up-container">
     <!--sign_up-->
 
@@ -74,16 +57,16 @@
       </div>
 
       <div class="row" style=" height: 70px">
-        <div class="col-md-6 mb-2">
-          <div class="form-outline mb-4" style="height: 50px">
-            <input type="text" id="form2Example18"  th:field="*{name}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+        <div class="col-md-6 mb-2 col-6">
+          <div class="form-outline mb-4" style="height: 50px;width: 250px">
+            <input required type="text" id="form2Example18"  th:field="*{name}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 100%"/>
             <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
             <label class="form-label" for="form2Example18">Full Name</label>
           </div>
         </div>
         <div class="col-md-6 mb-4">
-          <div class="form-outline mb-4" style="height: 50px">
-            <input type="text" id="form2Example19"  th:field="*{citizenId}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+          <div class="form-outline mb-4" style="height: 50px ;width: 250px">
+            <input required type="text" id="form2Example19"  th:field="*{citizenId}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 100%"/>
             <span style="color: red" th:if="${#fields.hasErrors('citizenId')}" th:errors="*{citizenId}"></span>
             <label class="form-label" for="form2Example19">Citizen ID</label>
           </div>
@@ -92,15 +75,15 @@
       </div>
       <div class="row" style=" height: 70px">
         <div class="col-md-6 mb-2">
-          <div class="form-outline mb-4" style="height: 50px">
-            <input type="date" id="form2Example20"  th:field="*{age}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+          <div class="form-outline mb-4" style="height: 50px;width: 250px">
+            <input required type="date" id="form2Example20"  th:field="*{age}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 100%"/>
             <span style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
             <label class="form-label" for="form2Example20">Day of Birth</label>
           </div>
         </div>
         <div class="col-md-6 mb-4">
-          <div class="form-outline mb-4" style="height: 50px">
-            <input type="text" id="form2Example2"  th:field="*{nationality}"  class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+          <div class="form-outline mb-4" style="height: 50px;width: 250px">
+            <input required type="text" id="form2Example2"  th:field="*{nationality}"  class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 100%"/>
             <span style="color: red" th:if="${#fields.hasErrors('nationality')}" th:errors="*{nationality}"></span>
             <label class="form-label" for="form2Example2">Nationality</label>
           </div>
@@ -108,32 +91,32 @@
       </div>
 
       <div class="form-outline mb-4" style="height: 50px">
-        <input type="text" id="form2Example1"  th:field="*{address}" class="form-control form-control-lg"/>
+        <input required type="text" id="form2Example1" style="width: 100%" th:field="*{address}" class="form-control form-control-lg"/>
         <span style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
         <label class="form-label" for="form2Example1">Address</label>
       </div>
 
       <div class="form-outline mb-4" style="height: 50px">
-        <input type="text" id="form2Example3"  th:field="*{phoneNumber}" class="form-control form-control-lg"/>
+        <input required type="text" id="form2Example3" style="width: 100%"  th:field="*{phoneNumber}" class="form-control form-control-lg"/>
         <span style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
         <label class="form-label" for="form2Example3">Tel</label>
       </div>
       <div class="form-outline mb-4" style="height: 50px">
-        <input type="text" id="form2Example4"  th:field="*{accountUserDto.email}" class="form-control form-control-lg"/>
+        <input required type="text" id="form2Example4" style="width: 100%" th:field="*{accountUserDto.email}" class="form-control form-control-lg"/>
         <span style="color: red" th:if="${#fields.hasErrors('accountUserDto.email')}" th:errors="*{accountUserDto.email}"></span>
         <label class="form-label" for="form2Example4">Email</label>
       </div>
       <div class="row" style=" height: 70px">
         <div class="col-md-6 mb-2">
-          <div class="form-outline mb-4" style="height: 50px">
-            <input type="password" id="form2Example5"  th:field="*{accountUserDto.passwords}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+          <div class="form-outline mb-4" style="height: 50px;width: 250px">
+            <input required type="password" id="form2Example5"  th:field="*{accountUserDto.passwords}" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 100%"/>
             <span style="color: red" th:if="${#fields.hasErrors('accountUserDto.passwords')}" th:errors="*{accountUserDto.passwords}"></span>
             <label class="form-label" for="form2Example5">Password</label>
           </div>
         </div>
         <div class="col-md-6 mb-4">
-          <div class="form-outline mb-4" style="height: 50px">
-            <input type="password" id="form2Example6"  onkeyup="checkRPW()" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 250px"/>
+          <div class="form-outline mb-4" style="height: 50px;width: 250px">
+            <input required type="password" id="form2Example6"  onkeyup="checkRPW()" class="form-control form-control-lg" style="padding-right: 10px;padding-left: 10px;width: 100%"/>
             <span style="color: red" id="message"></span>
             <label class="form-label" for="form2Example6">Confirm Password</label>
           </div>

@@ -80,26 +80,45 @@ public class PassengersServiceImpl implements IPassengersService {
         String fromAddress = "lsyh31@gmail.com";
         String senderName = "Tian flight";
         String subject = "Confirm your email address";
-        String content = "<p>Dear "+passengers.getName() + ",</p><br>"
-                + "Thank you for creating an account with TianFlight. To complete the registration process, " +
-                "we need you to confirm your email address by clicking on the link below:<br>";
+        String content = "<body  style=\"margin: 0; padding: 0\">\n" +
+                "<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" style=\"border-collapse: collapse\">\n" +
+                "  <tr>\n" +
+                "    <td  style=\" background: #5cb1e7; \">\n" +
+                "    </td>\n" +
+                "  </tr>\n" +
+                "  <tr>\n" +
+                "    <td bgcolor=\"#eaeaea\" style=\"padding: 30px 20px 40px 30px;background: url('https://cafebiz.cafebizcdn.vn/thumb_w/600/162123310254002176/2022/6/7/photo1654573349126-16545733492221043829261.jpg') no-repeat center center;background-size: cover;\">\n" +
+                "\n" +
+                "      <p>Dear<span style=\"color: #0db9e0;font-size: 14px;font-weight: bold;\"> "+passengers.getName() +"</span></p>\n" +
+                "      <p >\n" +
+                "        We have received a request to reset the password associated with your account. In order to proceed with\n" +
+                "        the password reset process, we need to confirm that the email address associated with your account is valid.<br>\n" +
+                "        Please click on the following link to confirm your email address:<br>\n" +
+                "      </p>";
         String verifyURL= siteURL+ "/verify?code="+passengers.getVerificationCode();
-        content+= "<button style='background-color: #a0a7a0; \n" +
-                "  border: none; \n" +
-                "  color: black; \n" +
-                "  padding: 12px 24px;\n" +
+        content+= "      <button style=\"background-color: #2093c7; \n" +
+                "   border: none;\n" +
+                "  color: #ffffff;\n" +
+                "  padding: 16px 32px;\n" +
                 "  text-align: center;\n" +
                 "  text-decoration: none;\n" +
                 "  display: inline-block;\n" +
-                "  font-size: 16px; \n" +
-                "  margin: 4px 2px; \n" +
-                "  cursor: pointer; \n" +
-                "  border-radius: 8px;'><a href=\"" + verifyURL + "\">Confirm Your Email Address</a></button>";
-        content+= "<br><br>If you did not create an account with us, please ignore this email.\n" +
-                "\n" +
-                "Thank you for choosing TianFlight. We look forward to serving you! <br><br>\n" +
-                "\n" +
-                "Best regards!<br>";
+                "  font-size: 16px;\n" +
+                "  margin: 4px 2px;\n" +
+                "  justify-content: center;\n" +
+                "  transition-duration: 0.4s;\n" +
+                "  cursor: pointer; border-radius: 20px\"><span style='color: #ffffff'><a href=\"" + verifyURL + "\">Confirm Your Email Address</a></span></button>";
+        content+=  "  <tr>\n" +
+                "    <td style=\"padding: 10px 20px; color: #FFFFFF;background: #5cb1e7\">\n" +
+                "      <p>If you did not create an account with us, please ignore this email.\n" +
+                "        <br>\n" +
+                "        Thank you for choosing TianFlight. We look forward to serving you!<br>\n" +
+                "        Best regards!<br></div></p>\n" +
+                "    </td>\n" +
+                "  </tr>\n" +
+                "</table>\n" +
+                "</body>";
+
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -146,26 +165,44 @@ public class PassengersServiceImpl implements IPassengersService {
         String fromAddress = "lsyh31@gmail.com";
         String senderName = "Tian flight";
         String subject = "Confirm your email address";
-        String content = "<p>Dear "+passengers.getName() + ",</p><br>"
-                + "We have received a request to reset the password associated with your account. In order to proceed with " +
-                "the password reset process, we need to confirm that the email address associated with your account is valid.<br>" +
-                "Please click on the following link to confirm your email address:<br>";
+        String content = "<body  style=\"margin: 0; padding: 0\">\n" +
+                "<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" style=\"border-collapse: collapse\">\n" +
+                "  <tr>\n" +
+                "    <td  style=\" background: #5cb1e7; \">\n" +
+                "    </td>\n" +
+                "  </tr>\n" +
+                "  <tr>\n" +
+                "    <td bgcolor=\"#eaeaea\" style=\"padding: 30px 20px 40px 30px;background: url('https://cafebiz.cafebizcdn.vn/thumb_w/600/162123310254002176/2022/6/7/photo1654573349126-16545733492221043829261.jpg') no-repeat center center;background-size: cover;\">\n" +
+                "\n" +
+                "      <p>Dear<span style=\"color: #0db9e0;font-size: 14px;font-weight: bold;\"> \""+passengers.getName() +"\" </span></p>\n" +
+                "      <p >\n" +
+                "        We have received a request to reset the password associated with your account. In order to proceed with\n" +
+                "        the password reset process, we need to confirm that the email address associated with your account is valid.<br>\n" +
+                "        Please click on the following link to confirm your email address:<br>\n" +
+                "      </p>";
         String verifyURL= siteURL+ "/verify_reset?code="+passengers.getVerificationCode();
-        content+= "<button style='background-color: #a0a7a0; \n" +
-                "  border: none; \n" +
-                "  color: black; \n" +
-                "  padding: 12px 24px;\n" +
+        content+= "      <button style=\"background-color: #2093c7; \n" +
+                "   border: none;\n" +
+                "  color: #ffffff;\n" +
+                "  padding: 16px 32px;\n" +
                 "  text-align: center;\n" +
                 "  text-decoration: none;\n" +
                 "  display: inline-block;\n" +
-                "  font-size: 16px; \n" +
-                "  margin: 4px 2px; \n" +
-                "  cursor: pointer; \n" +
-                "  border-radius: 8px;'><a href=\"" + verifyURL + "\">Confirm Your Email Address</a></button>";
-        content+= "<br><br>If you did not request a password reset, please disregard this message. " +
-                "If you believe that your account has been compromised, please contact our customer support team immediately.<br>" +
-                "Thank you,<br>" +
-                "TianFlight";
+                "  font-size: 16px;\n" +
+                "  margin: 4px 2px;\n" +
+                "  justify-content: center;\n" +
+                "  transition-duration: 0.4s;\n" +
+                "  cursor: pointer; border-radius: 20px\"><span style='color: #ffffff'><a href=\"" + verifyURL + "\">Confirm Your Email Address</a><span></button>";
+        content+= "  <tr>\n" +
+                "    <td style=\"padding: 10px 20px; color: #FFFFFF;background: #5cb1e7\">\n" +
+                "      <p>If you did not request a password reset, please disregard this message.\n" +
+                "        <br>\n" +
+                "        If you believe that your account has been compromised, please contact our customer support team immediately.<br>\n" +
+                "        Thank you,<br></div></p>\n" +
+                "    </td>\n" +
+                "  </tr>\n" +
+                "</table>\n" +
+                "</body>";
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -196,6 +233,11 @@ public class PassengersServiceImpl implements IPassengersService {
         Passengers passenger=iPassengerRepository.findByAccountUser_Email(passengers.getAccountUser().getEmail());
         passenger.getAccountUser().setPasswords(encodedPassword);
         iPassengerRepository.save(passenger);
+    }
+
+    @Override
+    public Passengers findById(int id) {
+        return iPassengerRepository.findById(id);
     }
 
 }

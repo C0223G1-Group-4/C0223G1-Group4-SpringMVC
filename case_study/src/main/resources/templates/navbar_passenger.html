@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/home/css/flexslider.css" type="text/css" media="all"/>
+    <!-- //For Testimonials slider -->
+    <!-- //custom-theme files-->
     <link href="/home/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="/home/css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <!-- //custom-theme files-->
@@ -18,7 +21,8 @@
           rel="stylesheet">
     <link rel="stylesheet" href="/home/css/search-ticket-booking.css">
 </head>
-<body style="background: url(/information_ticket/images/1.jpg)no-repeat center top;height: 100vh">
+<body>
+<div id="header-wrap" th:fragment="copy1">
 <div class="top">
     <div class="container">
 
@@ -59,9 +63,9 @@
                 <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                     <nav class="cl-effect-15" id="cl-effect-15">
                         <ul class="nav navbar-nav">
-<!--                            <li class="active"><a href="/">Home</a></li>-->
-<!--                            <li><a href="/air-craft">Admin Page</a></li>-->
-<!--                            <li><a href="/search">Booking Ticket</a></li>-->
+                            <li class="active"><a href="/">Home</a></li>
+                            <li><a href="/air-craft">Admin Page</a></li>
+                            <li><a href="/search">Booking Ticket</a></li>
                             <!--                            <li class="dropdown">-->
                             <!--                                <a href="#" class="dropdown-toggle" data-hover="Pages" data-toggle="dropdown"-->
                             <!--                                   role="button" aria-haspopup="true" aria-expanded="false">Pages <span-->
@@ -72,34 +76,34 @@
                             <!--                                </ul>-->
                             <!--                            </li>-->
 
-<!--                            <li th:if="${acc == null}"><a href="/login">Log in</a></li>-->
-<!--                            <li th:if="${acc != null && acc.roleUser.name == 'ROLE_Customer'}" class="dropdown">-->
-<!--                                <a href="#" class="dropdown-toggle" data-hover="" data-toggle="dropdown"-->
-<!--                                   role="button" aria-haspopup="true" aria-expanded="false" th:text="${info.name}"-->
-<!--                                   th:if="${info.name != null}"></a>-->
-<!--                                <ul class="dropdown-menu">-->
-<!--                                    <li><a href="/passenger/update">Update personal info</a></li>-->
-<!--                                    <li><a href="/logout">Logout</a></li>-->
-<!--                                </ul>-->
-<!--                            </li>-->
-<!--                            <li th:if="${acc != null && acc.roleUser.name == 'ROLE_Employee'}" class="dropdown">-->
-<!--                                <a href="#" class="dropdown-toggle" data-hover="" data-toggle="dropdown"-->
-<!--                                   role="button" aria-haspopup="true" aria-expanded="false" th:text="${info.nameEmployee}"-->
-<!--                                   th:if="${info.nameEmployee != null}"></a>-->
-<!--                                <ul class="dropdown-menu">-->
-<!--                                    <li><a href="/employee/update">Update personal info</a></li>-->
-<!--                                    <li><a href="/logout">Logout</a></li>-->
-<!--                                </ul>-->
-<!--                            </li>-->
-<!--                            <li th:if="${acc != null && acc.roleUser.name == 'ROLE_Admin'}" class="dropdown">-->
-<!--                                <a href="#" class="dropdown-toggle" data-hover="" data-toggle="dropdown"-->
-<!--                                   role="button" aria-haspopup="true" aria-expanded="false" th:text="${info.nameEmployee}"-->
-<!--                                   th:if="${info.nameEmployee != null}"></a>-->
-<!--                                <ul class="dropdown-menu">-->
-<!--                                    <li><a href="/employee/update">Update personal info</a></li>-->
-<!--                                    <li><a href="/logout">Logout</a></li>-->
-<!--                                </ul>-->
-<!--                            </li>-->
+                            <li th:if="${acc == null}"><a href="/login">Log in</a></li>
+                            <li th:if="${acc != null && acc.roleUser.name == 'ROLE_Customer'}" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-hover="" data-toggle="dropdown"
+                                   role="button" aria-haspopup="true" aria-expanded="false" th:text="${info.name}"
+                                   th:if="${info.name != null}"></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/passenger/update">Update personal info</a></li>
+                                    <li><a href="/logout">Logout</a></li>
+                                </ul>
+                            </li>
+                            <li th:if="${acc != null && acc.roleUser.name == 'ROLE_Employee'}" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-hover="" data-toggle="dropdown"
+                                   role="button" aria-haspopup="true" aria-expanded="false" th:text="${info.nameEmployee}"
+                                   th:if="${info.nameEmployee != null}"></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/employee/update">Update personal info</a></li>
+                                    <li><a href="/logout">Logout</a></li>
+                                </ul>
+                            </li>
+                            <li th:if="${acc != null && acc.roleUser.name == 'ROLE_Admin'}" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-hover="" data-toggle="dropdown"
+                                   role="button" aria-haspopup="true" aria-expanded="false" th:text="${info.nameEmployee}"
+                                   th:if="${info.nameEmployee != null}"></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/employee/update">Update personal info</a></li>
+                                    <li><a href="/logout">Logout</a></li>
+                                </ul>
+                            </li>
                         </ul>
 
                     </nav>
@@ -108,11 +112,6 @@
         </div>
     </div>
 </div>
-
-<h1 th:text="${message}" style="text-align: center;margin-bottom: 50px;margin-top: 50px;font-size: xxx-large; color: red"></h1>
-<div style="text-align: center">
-    <a href="/"><button  class="btn btn-primary">Back to Home</button></a>
 </div>
-
 </body>
 </html>

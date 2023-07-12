@@ -99,7 +99,7 @@ public class FlightScheduleAirCraftController {
             flightScheduleAirCraft.setCodeBooking("BK-" + (count1 + 1));
         }
         if (count != 0) {
-            redirectAttributes.addFlashAttribute("msgErr", "Have in list can't create");
+            redirectAttributes.addFlashAttribute("msgErr", "Have in list can't create ");
             return "redirect:/flight-schedule-air-craft";
         } else {
             this.iFlightScheduleAirCraftService.createFlightScheduleAirCraft(flightScheduleAirCraft);

@@ -32,4 +32,6 @@ public interface IPassengersService {
 
     void reset_pw(Passengers passengers,String new_pw);
 
+    Passengers findById(int id);
+
 }

@@ -5,6 +5,7 @@ import com.example.case_study.config.PaymentConfig;
 import com.example.case_study.model.BookingTicket;
 import com.example.case_study.model.ChairFlight;
 import com.example.case_study.model.Passengers;
+import com.example.case_study.repository.IPassengerRepository;
 import com.example.case_study.service.booking_ticket.IBookingTicketService;
 import com.example.case_study.service.chairflight_service.IChairFlightService;
 import com.example.case_study.service.passengers_service.IPassengersService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -128,8 +130,8 @@ public class PaymentController {
     public String showReturn(@RequestParam String vnp_Amount,
                              @RequestParam String vnp_ResponseCode
             , RedirectAttributes redirectAttributes, @SessionAttribute List<ChairFlight> listChair
-    ,HttpServletRequest request) {
-        if(vnp_ResponseCode.equals("00")){
+            , HttpServletRequest request,Model model) throws MessagingException, UnsupportedEncodingException {
+        if (vnp_ResponseCode.equals("00")) {
 //            String email = request.getUserPrincipal().getName();
 //            Passengers passengers = passengersService.findByEmail(email);
 //            BookingTicket bookingTicket = bookingTicketService.findByPassenger_Id(passengers.getId());
@@ -149,12 +151,18 @@ public class PaymentController {
 //            bookingTicket.setType(true);
 //            bookingTicketService.save(bookingTicket);
             //tìm lại booking để set
-            redirectAttributes.addFlashAttribute("message","Payment Successfully");
-        }else {
-            redirectAttributes.addFlashAttribute("message","Payment Failed");
+            String siteURL = getSiteURL(request);
+            bookingTicketService.sendEmail(passengersService.findById(bookingTicket.getPassenger().getId()),siteURL);
+            redirectAttributes.addFlashAttribute("message", "Payment Successfully");
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Payment Failed");
         }
-
         listChair.clear();
-        return "redirect:/";
+        return "return";
+    }
+
+    private String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "");
     }
 }

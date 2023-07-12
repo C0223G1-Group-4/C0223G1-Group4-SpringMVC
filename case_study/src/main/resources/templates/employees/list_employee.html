@@ -35,7 +35,6 @@
 </head>
 <body>
 <div th:insert="header/navbar :: copy"></div>
-
 <div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${msg3 != null}"
      style="
     position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 2s forwards; // thời gian msg trượt
@@ -96,15 +95,12 @@
         <table cellpadding="0" cellspacing="0" border="0" class="container">
             <thead>
             <tr>
-                <th>#</th>
+                <th>STT</th>
                 <th>Address</th>
                 <th>Age</th>
                 <th>Name</th>
                 <th>Telephone</th>
-                <!--                <th>Detail</th>-->
-                <!--                <th>Update</th>-->
-                <!--                <th>Delete</th>-->
-                <th colspan="3" >
+                <th >
                     <form style="margin-left: 8rem" th:action="@{/employee/create-form}" method="get">
                         <a href="/employee/create-form">
                             <button class="button">

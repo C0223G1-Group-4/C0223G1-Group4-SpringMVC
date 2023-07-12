@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking List</title>
+    <link rel="stylesheet" href="/home/css/style-of-tai.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/home/css/button-of-tai.css">
+    <style>
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(calc(100%));
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        div p {
+            color: black;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+            }
+        }
+        .disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        th, td {
+            font-size: 100%;
+            text-align: center;
+        }
+    </style>
+    <link rel="stylesheet" href="home/css/navbar.css">
+</head>
+<body>
+<div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${success != null}"
+     style="
+    position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 4s forwards; // thời gian msg trượt
+            transition: all linear 0.3s;z-index: 999999">
+    <div class="toast-header bg-success">
+        <strong class="me-auto">Notification</strong>
+        <small>1 second ago</small>
+        <!--    <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>-->
+    </div>
+    <div class="toast-body" th:text="${success}">
+    </div>
+</div>
+<div aria-atomic="true" aria-live="assertive" class="toast show" role="alert" th:if="${fail != null}"
+     style="
+    position: fixed;right: 10px;top: 100px; animation: slideInRight ease 1s, fadeOut linear 1s 4s forwards; // thời gian msg trượt
+            transition: all linear 0.3s;z-index: 999999">
+    <div class="toast-header bg-danger">
+        <strong class="me-auto">Notification</strong>
+        <small>1 second ago</small>
+        <!--    <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>-->
+    </div>
+    <div class="toast-body" th:text="${fail}">
+    </div>
+</div>
+
+<section>
+    <!--for demo wrap-->
+    <h1>Management Booking Ticket</h1>
+    <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th>Booking Ticket ID</th>
+                <th>Booking Date</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Air Craft</th>
+                <th>Airport</th>
+                <th>Destination</th>
+                <th>Quantity</th>
+                <th>Total (VND)</th>
+                <th></th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <!--            <td th:object="${seats}"></td>-->
+            <tr th:each="l,loop :${list}">
+                <td th:text="${l.id}"></td>
+                <td th:text="${l.bookingDate}"></td>
+                <td th:text="${l.departure}"></td>
+                <td th:text="${l.arrival}"></td>
+                <td th:text="${l.numberAirCraft}"></td>
+                <td th:text="${l.airport}"></td>
+                <td th:text="${l.destination}"></td>
+                <td th:text="${l.quantity}"></td>
+                <td th:text="${l.total}"></td>
+                <td>
+                    <div th:if="${l.isStatus_receive()==true}">
+                        <a th:attr="onclick=|cancel('${l.id}','${l.passengerName}'
+                    ,'${l.departure}','${l.arrival}','${l.numberAirCraft}')|" href="#" data-bs-toggle="modal"
+                           data-bs-target="#exampleModal1">
+                        <span style="font-size: 20px;color: whitesmoke " id="cancel">
+                            <i class="fa-solid fa-plane-slash"></i></span>
+                        </a>
+                    </div>
+                    <div th:if="${l.isStatus_receive()==false}">
+                        <a href="#">
+                        <span style="font-size: 20px;color: whitesmoke " class="disabled">
+                            <i class="fa-solid fa-plane-slash"></i></span>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<center>
+    <p th:text="${list.getNumber()+1}"></p>
+</center>
+<center>
+    <a th:if="${list.hasPrevious()}" th:href="@{history(page=${list.number -1})}">
+        <button style=" width: 80px;height: 40px;background: #3893cc;border-radius: 30px">
+        <span style="color: whitesmoke">
+            <i class="fa-solid fa-angles-left"></i>
+        </span>
+        </button>
+    </a>
+    <a th:if="${list.hasNext()}" th:href="@{history(page=${list.number +1})}">
+        <button style="width: 80px;height: 40px;background: #3893cc;border-radius: 30px">
+        <span style="color: whitesmoke">
+           <i class="fa-solid fa-angles-right"></i>
+        </span>
+        </button>
+    </a>
+</center>
+
+<script>
+    // function detail(id, name, departure, arrival, numberAirCraft, airport, destination, email, phone) {
+    //     document.getElementById("form2Example18").value = id;
+    //     document.getElementById("form2Example19").value = name;
+    //     document.getElementById("form2Example20").value = departure;
+    //     document.getElementById("form2Example2").value = arrival;
+    //     document.getElementById("form2Example1").value = numberAirCraft;
+    //     document.getElementById("form2Example3").value = airport;
+    //     document.getElementById("form2Example4").value = destination;
+    //     document.getElementById("form2Example5").value = email;
+    //     document.getElementById("form2Example6").value = phone;
+    // }
+    function cancel(id, name, departure, arrival, numberAirCraft,) {
+        document.getElementById("cancel1").value = +id;
+        document.getElementById("cancel2").innerText = id;
+        document.getElementById("name").innerText = name;
+        document.getElementById("departure").innerText = departure;
+        document.getElementById("arrival").innerText = arrival;
+        document.getElementById("numberAirCraft").innerText = numberAirCraft;
+    }
+</script>
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel1" style="color: black">DELETE</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <center>
+                    <span style="font-size: 100px;color: black"><i class="fa-solid fa-trash-can"></i></span>
+                    <div>
+                        <h4 style="color: red">Do you want to cancel Plane Ticket have </h4>
+                        <span style="color:black;">Booking code:</span> <span style="color: red"
+                                                                              id="cancel2"></span><br>
+                        <span style="color:black;">Passenger: </span> <span style="color: red" id="name"></span><br>
+                        <span style="color:black;">Departure: </span> <span style="color: red"
+                                                                            id="departure"></span><br>
+                        <span style="color:black;">Arrival: </span> <span style="color: red" id="arrival"></span><br>
+                        <span style="color:black;">AirCraft: </span> <span style="color: red"
+                                                                           id="numberAirCraft"></span><br>
+                    </div>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <form th:action="@{/history/cancelStatus}">
+                    <input type="hidden" id="cancel1" name="cancel1">
+                    <button type="submit" class="btn btn-primary">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
