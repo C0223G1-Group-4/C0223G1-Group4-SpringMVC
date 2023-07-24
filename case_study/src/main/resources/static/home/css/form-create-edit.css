@@ -9,8 +9,9 @@
 }
 
 html ,body{
-    background-size: cover;
-    background: url("https://giupban.com.vn/wp-content/uploads/Hinh-nen-may-bay-dep-full-hd-Ohaylam.com-14.jpg") no-repeat center center;
+
+    background: -webkit-linear-gradient(left, #336dc2, #15919b);
+    background: linear-gradient(to right, #336dc2, #15919b);
     display: flex;
     justify-content: center;
     align-items: center;
