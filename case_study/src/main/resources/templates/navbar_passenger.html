@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -82,7 +82,7 @@
                                    role="button" aria-haspopup="true" aria-expanded="false" th:text="${info.name}"
                                    th:if="${info.name != null}"></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/passenger/update">Update personal info</a></li>
+                                    <li><a th:href="@{/passenger/edit/__${info.id}__}">Update personal info</a></li>
                                     <li><a href="/logout">Logout</a></li>
                                 </ul>
                             </li>
@@ -91,7 +91,7 @@
                                    role="button" aria-haspopup="true" aria-expanded="false" th:text="${info.nameEmployee}"
                                    th:if="${info.nameEmployee != null}"></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/employee/update">Update personal info</a></li>
+                                    <li><a th:href="@{/employee/edit/__${info.id}__}">Update personal info</a></li>
                                     <li><a href="/logout">Logout</a></li>
                                 </ul>
                             </li>
@@ -100,7 +100,7 @@
                                    role="button" aria-haspopup="true" aria-expanded="false" th:text="${info.nameEmployee}"
                                    th:if="${info.nameEmployee != null}"></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/employee/update">Update personal info</a></li>
+                                    <li><a th:href="@{/employee/edit/__${info.id}__}">Update personal info</a></li>
                                     <li><a href="/logout">Logout</a></li>
                                 </ul>
                             </li>
